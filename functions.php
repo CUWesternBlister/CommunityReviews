@@ -71,6 +71,12 @@ add_shortcode('display_community_reviews', 'bcr_display_reviews');
  */
 function bcr_store_review($record, $ajax_handler) {
 
+    $form_name = $record->get_form_settings( 'form_name' );
+
+    if('Example Product Review' !== $form_name) {
+        return;
+    }
+
     $raw_fields = $record->get('fields');
 
     $fields = [];
@@ -81,40 +87,38 @@ function bcr_store_review($record, $ajax_handler) {
 
     global $wpdb;
 
-    //if('Example Product Review' == $form_name) {
-        $reviews_table_name = $wpdb->prefix . "bcr_reviews";
-        $answers_table_name = $wpdb->prefix . "bcr_answers";
-        $questions_table_name = $wpdb->prefix . "bcr_questions";
-        $know_thyself_table_name = $wpdb->prefix . "bcr_know_thyself";
-        $know_thyself_answers_table_name = $wpdb->prefix . "bcr_know_thyself_answers";
-        $reviews_answers_table_name = $wpdb->prefix . "bcr_reviews_answers";
+    $reviews_table_name = $wpdb->prefix . "bcr_reviews";
+    $answers_table_name = $wpdb->prefix . "bcr_answers";
+    $questions_table_name = $wpdb->prefix . "bcr_questions";
+    $know_thyself_table_name = $wpdb->prefix . "bcr_know_thyself";
+    $know_thyself_answers_table_name = $wpdb->prefix . "bcr_know_thyself_answers";
+    $reviews_answers_table_name = $wpdb->prefix . "bcr_reviews_answers";
 
-        $num_entries = 0;
-        foreach($fields as $questionID => $answer) {
-            /*$sql = $wpdb->prepare("SELECT questionID FROM $questions_table_name WHERE (questionContent = %s)", $questionContent);
-            $questionID = reset($wpdb->query($sql))->questionID;*/
+    $num_entries = 0;
+    foreach($fields as $questionID => $answer) {
+        /*$sql = $wpdb->prepare("SELECT questionID FROM $questions_table_name WHERE (questionContent = %s)", $questionContent);
+        $questionID = reset($wpdb->query($sql))->questionID;*/
 
-            $result = $wpdb->insert($answers_table_name, array('answerContent' => $answer, 'questionID'=> $questionID));
-            if($result != false){
-                $num_entries += $result;
-            }
+        $result = $wpdb->insert($answers_table_name, array('answerContent' => $answer, 'questionID'=> $questionID));
+        if($result != false){
+            $num_entries += $result;
         }
+    }
 
-        $last_answer_id = $wpdb->get_var("SELECT answerID FROM $answers_table_name ORDER BY answerID DESC LIMIT 1", 0, 0);
+    $last_answer_id = $wpdb->get_var("SELECT answerID FROM $answers_table_name ORDER BY answerID DESC LIMIT 1", 0, 0);
 
-        $wpdb->insert($know_thyself_table_name, array('userID' => 0, 'knowThyselfFormID' => 1));
-        $knowThyselfID = $wpdb->get_var("SELECT knowThyselfID FROM $know_thyself_table_name ORDER BY knowThyselfID DESC LIMIT 1", 0, 0);
+    $wpdb->insert($know_thyself_table_name, array('userID' => 0, 'knowThyselfFormID' => 1));
+    $knowThyselfID = $wpdb->get_var("SELECT knowThyselfID FROM $know_thyself_table_name ORDER BY knowThyselfID DESC LIMIT 1", 0, 0);
 
-        $wpdb->insert($reviews_table_name, array('userID' => 0, 'knowThyselfID' => $knowThyselfID, 'reviewFormID' => 1));
-        $reviewID = $wpdb->get_var("SELECT reviewID FROM $reviews_table_name ORDER BY reviewID DESC LIMIT 1", 0, 0);
+    $wpdb->insert($reviews_table_name, array('userID' => 0, 'knowThyselfID' => $knowThyselfID, 'reviewFormID' => 1));
+    $reviewID = $wpdb->get_var("SELECT reviewID FROM $reviews_table_name ORDER BY reviewID DESC LIMIT 1", 0, 0);
 
-        $wpdb->insert($know_thyself_answers_table_name, array('knowThyselfID' => $knowThyselfID, 'answerID' => ($last_answer_id+1-$num_entries)));
-        $num_entries--;
+    $wpdb->insert($know_thyself_answers_table_name, array('knowThyselfID' => $knowThyselfID, 'answerID' => ($last_answer_id+1-$num_entries)));
+    $num_entries--;
 
-        for($i = $last_answer_id+1-$num_entries; $i <= $last_answer_id; $i++) {
-            $wpdb->insert($reviews_answers_table_name, array('reviewID' => $reviewID, 'answerID' => $i));
-        }
-    //}
+    for($i = $last_answer_id+1-$num_entries; $i <= $last_answer_id; $i++) {
+        $wpdb->insert($reviews_answers_table_name, array('reviewID' => $reviewID, 'answerID' => $i));
+    }
 }
 
 add_action( 'elementor_pro/forms/new_record', 'bcr_store_review', 10, 2);
@@ -144,4 +148,100 @@ function bcr_read_question_content($atts = [], $content = null) {
 }
 
 add_shortcode('read_question', 'bcr_read_question_content');
+
+//BASIC INITIAL KNOW THYSELF POST
+
+function know_thy_self_skiing_init() {
+    $args = array(
+        'label' => 'Skiing Know Thy Self',
+        'public' => true,
+        'show_ui' => true,
+        'capability_type' => 'post',
+        'hierarchical' => false,
+        'rewrite' => array('slug' => 'know-thy-self-skiing'),
+        'query_var' => true,
+        'has_archive' => true,
+        'menu_icon' => 'dashicons-video-alt',
+        'delete_with_user' => false,
+        'supports' => array(
+            'title',
+            'editor',
+            'excerpt',
+            'trackbacks',
+            'custom-fields',
+            'comments',
+            'revisions',
+            'thumbnail',
+            'author',
+            'page-attributes',)
+    );
+    register_post_type( 'know-thy-self-skiing', $args );
+}
+add_action( 'init', 'know_thy_self_skiing_init' );
+
+// READ AND WRITE BASIC
+
+// READ AND DISPLAY -> SHORTCODE CURRENTLY USED ON KNOW THY SELF SKIING PAGE
+// FUNCTION UTILIZES MY CUSTOM KNOWTHYSELF. THIS CAN BE USED ONLY FOR REFERENCE.
+
+function get_record_from_form_submissions($atts) {
+    $atts = shortcode_atts(
+
+        array(
+            'name'=>''
+        ),
+        $atts,
+        'form_submissions'
+    );
+    global $wpdb;
+    $name = $atts['name'];
+    $nameget = $wpdb->prepare('SELECT * FROM KnowThySelfSkiing LIMIT 1');
+    $nameresults = $wpdb->get_results($nameget);
+    if ( $nameresults ) {
+        $skiingStyle_subs = array_map(
+            function( $form_sub_object ) {
+                return $form_sub_object->skiingStyle;
+            },
+            $nameresults
+        );
+        $confidenceIcyGroomer_subs = array_map(
+            function( $form_sub_object ) {
+                return $form_sub_object->confidenceIcyGroomer;
+                
+            },
+            $nameresults
+        );
+        $confidenceSoftGroomer_subs = array_map(
+            function( $form_sub_object ) {
+                return $form_sub_object->confidenceSoftGroomer;
+            },
+            $nameresults
+        );
+        return "Skiing Style: ".implode( ', ', $skiingStyle_subs)."<br><br>Confidence in Icy Groomers: ".implode(', ', $confidenceIcyGroomer_subs)."<br><br>Confidence in Soft Groomers: ".implode(', ', $confidenceSoftGroomer_subs);
+    }
+    return '';
+}
+add_shortcode( 'form_submissions', 'get_record_from_form_submissions' );
+
+// WRITING KNOW THY SELF FORM TO KNOWTHYSELF TABLE. THIS CAN BE USED ONLY FOR REFERENCE.
+
+    function capstone_write_to_table($record, $ajax_handler) {
+        $raw_fields = $record->get('fields');
+
+        $fields = [];
+
+        foreach($raw_fields as $id => $field) {
+            $fields[$id] = $field['value'];
+        }
+
+        global $wpdb;
+
+        $table_name = 'KnowThySelfSkiing';
+        
+        $output['success'] = $wpdb->insert($table_name, $fields);
+        
+        $ajax_handler->add_response_data( true, $output);
+    }
+
+    add_action( 'elementor_pro/forms/new_record', 'capstone_write_to_table', 10, 2);
 ?>
