@@ -12,6 +12,71 @@ register_activation_hook(__FILE__, 'bcr_activation');
 register_deactivation_hook(__FILE__, 'bcr_deactivation');
 add_action( 'plugins_loaded', 'bcr_include');
 
+function get_record_from_knowthyself($atts) {
+    $atts = shortcode_atts(
+
+        array(
+            'name'=>''
+        ),
+        $atts,
+        'form_submissions'
+    );
+    global $wpdb;
+    $name = $atts['name'];
+    $nameget = $wpdb->prepare('SELECT * FROM KnowThySelfSkiing LIMIT 1');
+    $nameresults = $wpdb->get_results($nameget);
+    if ( $nameresults ) {
+        $skiingStyle_subs = array_map(
+            function( $form_sub_object ) {
+                return $form_sub_object->skiingStyle;
+            },
+            $nameresults
+        );
+        $confidenceIcyGroomer_subs = array_map(
+            function( $form_sub_object ) {
+                return $form_sub_object->confidenceIcyGroomer;
+                
+            },
+            $nameresults
+        );
+        $confidenceSoftGroomer_subs = array_map(
+            function( $form_sub_object ) {
+                return $form_sub_object->confidenceSoftGroomer;
+            },
+            $nameresults
+        );
+        return "Skiing Style: ".implode( ', ', $skiingStyle_subs)."<br><br>Confidence in Icy Groomers: ".implode(', ', $confidenceIcyGroomer_subs)."<br><br>Confidence in Soft Groomers: ".implode(', ', $confidenceSoftGroomer_subs);
+    }
+    return '';
+}
+add_shortcode( 'form_submissions', 'get_record_from_knowthyself' );
+
+// WRITING KNOW THY SELF FORM TO KNOWTHYSELF TABLE. THIS CAN BE USED ONLY FOR REFERENCE.
+
+    function knowthyself_write_to_table($record, $ajax_handler) {
+        $form_name = $record->get_form_settings( 'form_name' );
+        
+        if($form_name == 'Know_Thyself_Form'){
+        
+            $raw_fields = $record->get('fields');
+
+            $fields = [];
+
+            foreach($raw_fields as $id => $field) {
+                $fields[$id] = $field['value'];
+            }
+
+            global $wpdb;
+
+            $table_name = 'KnowThySelfSkiing';
+            
+            $output['success'] = $wpdb->insert($table_name, $fields);
+            
+            $ajax_handler->add_response_data( true, $output);
+        }
+    }
+
+    add_action( 'elementor_pro/forms/new_record', 'knowthyself_write_to_table', 10, 2);
 
 /**
  * Load Blister Community Reviews activation functions
