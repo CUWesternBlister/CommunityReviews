@@ -2,43 +2,15 @@
 /**
  * Plugin Name: Blister Community Reviews
  * Description: A plugin to facilitate Blister community created reviews.
- * Author: Gunnar Marquardt, Jayden Omi, Izak Litte, Jacob Vogel
+ * Author: Gunnar Marquardt, Jayden Omi, Izak Litte, Jacob Vogel, Tristan Riggan
  */
 
-//BASIC INITIAL KNOW THYSELF POST
+// Exit if accessed directily
+if (!defined('ABSPATH')) exit;
 
-function know_thy_self_skiing_init() {
-    $args = array(
-        'label' => 'Skiing Know Thy Self',
-        'public' => true,
-        'show_ui' => true,
-        'capability_type' => 'post',
-        'hierarchical' => false,
-        'rewrite' => array('slug' => 'know-thy-self-skiing'),
-        'query_var' => true,
-        'has_archive' => true,
-        'menu_icon' => 'dashicons-video-alt',
-        'delete_with_user' => false,
-        'supports' => array(
-            'title',
-            'editor',
-            'excerpt',
-            'trackbacks',
-            'custom-fields',
-            'comments',
-            'revisions',
-            'thumbnail',
-            'author',
-            'page-attributes',)
-    );
-    register_post_type( 'know-thy-self-skiing', $args );
-}
-add_action( 'init', 'know_thy_self_skiing_init' );
-
-// READ AND WRITE BASIC
-
-// READ AND DISPLAY -> SHORTCODE CURRENTLY USED ON KNOW THY SELF SKIING PAGE
-// FUNCTION UTILIZES MY CUSTOM KNOWTHYSELF. THIS CAN BE USED ONLY FOR REFERENCE.
+register_activation_hook(__FILE__, 'bcr_activation');
+register_deactivation_hook(__FILE__, 'bcr_deactivation');
+add_action( 'plugins_loaded', 'bcr_include');
 
 function get_record_from_knowthyself($atts) {
     $atts = shortcode_atts(
@@ -105,5 +77,25 @@ add_shortcode( 'form_submissions', 'get_record_from_knowthyself' );
     }
 
     add_action( 'elementor_pro/forms/new_record', 'knowthyself_write_to_table', 10, 2);
-?>
 
+/**
+ * Load Blister Community Reviews activation functions
+ * 
+ * @return void
+ */
+function bcr_activation() {
+    require_once( plugin_dir_path( __FILE__ ) . '/admin/activation.php');
+}
+
+/**
+ * Load Blister Community Reviews deactivation functions
+ * 
+ * @return void
+ */
+function bcr_deactivation() {
+    require_once( plugin_dir_path( __FILE__ ) . '/admin/deactivation.php');
+}
+
+function bcr_include() {
+    require_once( plugin_dir_path( __FILE__ ) . 'functions.php');
+}
