@@ -81,24 +81,29 @@ add_shortcode( 'form_submissions', 'get_record_from_form_submissions' );
 
 // WRITING KNOW THY SELF FORM TO KNOWTHYSELF TABLE. THIS CAN BE USED ONLY FOR REFERENCE.
 
-    function capstone_write_to_table($record, $ajax_handler) {
-        $raw_fields = $record->get('fields');
+    function knowthyself_write_to_table($record, $ajax_handler) {
+        $form_name = $record->get_form_settings( 'form_name' );
+        
+        if($form_name == 'Know_Thyself_Form'){
+        
+            $raw_fields = $record->get('fields');
 
-        $fields = [];
+            $fields = [];
 
-        foreach($raw_fields as $id => $field) {
-            $fields[$id] = $field['value'];
+            foreach($raw_fields as $id => $field) {
+                $fields[$id] = $field['value'];
+            }
+
+            global $wpdb;
+
+            $table_name = 'KnowThySelfSkiing';
+            
+            $output['success'] = $wpdb->insert($table_name, $fields);
+            
+            $ajax_handler->add_response_data( true, $output);
         }
-
-        global $wpdb;
-
-        $table_name = 'KnowThySelfSkiing';
-        
-        $output['success'] = $wpdb->insert($table_name, $fields);
-        
-        $ajax_handler->add_response_data( true, $output);
     }
 
-    add_action( 'elementor_pro/forms/new_record', 'capstone_write_to_table', 10, 2);
+    add_action( 'elementor_pro/forms/new_record', 'knowthyself_write_to_table', 10, 2);
 ?>
 
