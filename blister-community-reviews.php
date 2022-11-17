@@ -40,7 +40,7 @@ add_action( 'init', 'know_thy_self_skiing_init' );
 // READ AND DISPLAY -> SHORTCODE CURRENTLY USED ON KNOW THY SELF SKIING PAGE
 // FUNCTION UTILIZES MY CUSTOM KNOWTHYSELF. THIS CAN BE USED ONLY FOR REFERENCE.
 
-function get_record_from_form_submissions($atts) {
+function get_record_from_knowthyself($atts) {
     $atts = shortcode_atts(
 
         array(
@@ -77,7 +77,7 @@ function get_record_from_form_submissions($atts) {
     }
     return '';
 }
-add_shortcode( 'form_submissions', 'get_record_from_form_submissions' );
+add_shortcode( 'form_submissions', 'get_record_from_knowthyself' );
 
 // WRITING KNOW THY SELF FORM TO KNOWTHYSELF TABLE. THIS CAN BE USED ONLY FOR REFERENCE.
 
