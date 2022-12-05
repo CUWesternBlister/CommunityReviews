@@ -6,7 +6,6 @@ function summit_review_from_sub( $record, $ajax_handler ) {
     if($form_name == 'Summit Review Form'){
         global $wpdb;
         $answer_table = $wpdb->prefix . "bcr_answers";
-        $review_answer_table = $wpdb->prefix . "bcr_reviews_answers";
         $answer_ids = []; //used for when inserting into reviews answers
         //$question_ids = [];//manually entered into elementor form, until we can make a form dynamically 
         $raw_fields = $record->get( 'fields' );
@@ -14,23 +13,37 @@ function summit_review_from_sub( $record, $ajax_handler ) {
         $output = [];
         foreach ( $raw_fields as $id => $field ) {
             $fields_answers['questionID'] = $id;
-            $fields['answerContent'] = $field['value'];
-            $$output['success'] = wpdb->insert($answer_table, $fields);
+            $fields_answers['answerContent'] = $field['value'];
+            $output['success'] = wpdb->insert($answer_table, $fields_answers);
             //if($output == success){
 
             //}
-            $lastid = $wpdb->insert_id;//answer id generated upon entering into table
-            array_push($answer_ids, $lastid);
-            //array_push($question_ids,$id);
+            $last_answer_id = $wpdb->insert_id;//answer id generated upon entering into table
+            array_push($answer_ids, $last_answer_id);//---------------------------could be susceptible to collisions with mulitple users
         }
-        //$review_table = $wpdb->prefix . "bcr_reviews";
-        //$fields_review = [];
-        //$fields_review['userID'] = 1;
-        //$fields_review['knowThyselfID'] = 1;/////////////////////////////////////////////////////////////////
-        //$review_answer_table = $wpdb->prefix . "bcr_reviews_answers";
-        //$str_q_ids = array_to_string($question_ids);
-        //$str_a_ids = array_to_string($answer_ids);
-        //$output['success'] = $wpdb->insert($table_name, $fields);
+
+        //insert review 
+        $review_table = $wpdb->prefix . "bcr_reviews";
+        $fields_review = [];
+        $fields_review['userID'] = 1;//retrieve userID ()
+        $fields_review['knowThyselfID'] = 1;//retrieve Knowhyself id using userid
+        $fields_review['reviewFromID'] = 1;//some how get reveiw formid uopon submission, could first step id in form
+        $review_answer_table = $wpdb->prefix . "bcr_reviews_answers";
+        $output['success'] = wpdb->insert($review_answer_table, $fields_review);
+        $last_review_id = $wpdb->insert_id;
+
+        //insert answer ids int review answer table
+        $review_answer_table = $wpdb->prefix . "bcr_reviews_answers";
+        $fields_review_answers = [];
+        foreach($answer_ids as $id){
+            $fields_review_answers['reviewID'] = $last_review_id;
+            $fields_review_answers['answerID'] = $id;
+            $output['success'] = wpdb->insert($answer_table, $fields_answers);
+            //if($output == success){
+
+            //}
+        }
+
         $ajax_handler->add_response_data( true, $output );
     }
 }
