@@ -93,7 +93,7 @@ function bcr_setup_tables() {
         PRIMARY KEY  (knowThyselfFormID),
         FOREIGN KEY  (sportID) REFERENCES $sports_table_name(sportID)
         ) $charset_collate;";
-//questionIDs TEXT NOT NULL,
+
     dbDelta($sql);
 
     //Create Know Thyself Form Questions association table
@@ -119,7 +119,7 @@ function bcr_setup_tables() {
         PRIMARY KEY  (knowThyselfID),
         FOREIGN KEY  (knowThyselfFormID) REFERENCES $know_thyself_forms_table_name(knowThyselfFormID)
         ) $charset_collate;";
-#answerIDs TEXT NOT NULL,
+
     dbDelta($sql);
 
     //Create Know Thyself Answers association table
@@ -145,7 +145,9 @@ function bcr_setup_tables() {
         PRIMARY KEY  (reviewFormID),
         FOREIGN KEY  (productID) REFERENCES $products_table_name(productID)
         ) $charset_collate;";
-#questionIDs TEXT NOT NULL,
+
+
+>>>>>>> 05803e6f336981f1c93198c4bda299aa669b8463
     dbDelta($sql);
 
     //Create Review Form Questions association table
@@ -173,7 +175,9 @@ function bcr_setup_tables() {
         FOREIGN KEY  (knowThyselfID) REFERENCES $know_thyself_table_name(knowThyselfID),
         FOREIGN KEY  (reviewFormID) REFERENCES $review_forms_table_name(reviewFormID)
         ) $charset_collate;";
-//answerIDs TEXT NOT NULL,
+
+
+>>>>>>> 05803e6f336981f1c93198c4bda299aa669b8463
     dbDelta($sql);
 
     //Create Review Answers association table

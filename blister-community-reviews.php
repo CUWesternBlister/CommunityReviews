@@ -2,14 +2,22 @@
 /**
  * Plugin Name: Blister Community Reviews
  * Description: A plugin to facilitate Blister community created reviews.
+<<<<<<< HEAD
  * Author: Gunnar Marquardt, Jayden Omi, Izak Litte, Jacob Vogel
  */
+=======
+ * Author: Gunnar Marquardt, Jayden Omi, Izak Litte, Jacob Vogel, Tristan Riggan
+ */
+
+// Exit if accessed directily
+>>>>>>> 05803e6f336981f1c93198c4bda299aa669b8463
 if (!defined('ABSPATH')) exit;
 
 register_activation_hook(__FILE__, 'bcr_activation');
 register_deactivation_hook(__FILE__, 'bcr_deactivation');
 add_action( 'plugins_loaded', 'bcr_include');
 
+<<<<<<< HEAD
 function admin_menu_option()
 {
     add_menu_page('Question Table Admin Page','Question Table Admin Page','manage_options','admin-menu','admin_page_question_table','',200);//name, display name, permssion to edit, slug, call back to what page looks like
@@ -86,6 +94,9 @@ function bcr_include() {
 
 /*
 function get_record_from_form_submissions($atts) {
+=======
+function get_record_from_knowthyself($atts) {
+>>>>>>> 05803e6f336981f1c93198c4bda299aa669b8463
     $atts = shortcode_atts(
 
         array(
@@ -96,6 +107,7 @@ function get_record_from_form_submissions($atts) {
     );
     global $wpdb;
     $name = $atts['name'];
+<<<<<<< HEAD
     $nameget = $wpdb->prepare('SELECT * FROM form_submissions WHERE name = %s limit 1', $name);
     $nameresults = $wpdb->get_results($nameget);
     if ( $nameresults ) {
@@ -108,10 +120,25 @@ function get_record_from_form_submissions($atts) {
         $email_subs = array_map(
             function( $form_sub_object ) {
                 return $form_sub_object->email;
+=======
+    $nameget = $wpdb->prepare('SELECT * FROM KnowThySelfSkiing LIMIT 1');
+    $nameresults = $wpdb->get_results($nameget);
+    if ( $nameresults ) {
+        $skiingStyle_subs = array_map(
+            function( $form_sub_object ) {
+                return $form_sub_object->skiingStyle;
+            },
+            $nameresults
+        );
+        $confidenceIcyGroomer_subs = array_map(
+            function( $form_sub_object ) {
+                return $form_sub_object->confidenceIcyGroomer;
+>>>>>>> 05803e6f336981f1c93198c4bda299aa669b8463
                 
             },
             $nameresults
         );
+<<<<<<< HEAD
         $message_subs = array_map(
             function( $form_sub_object ) {
                 return $form_sub_object->message;
@@ -126,6 +153,23 @@ add_shortcode( 'form_submissions', 'get_record_from_form_submissions' );
 */
 /*
  function knowthyself_write_to_table($record, $ajax_handler) {
+=======
+        $confidenceSoftGroomer_subs = array_map(
+            function( $form_sub_object ) {
+                return $form_sub_object->confidenceSoftGroomer;
+            },
+            $nameresults
+        );
+        return "Skiing Style: ".implode( ', ', $skiingStyle_subs)."<br><br>Confidence in Icy Groomers: ".implode(', ', $confidenceIcyGroomer_subs)."<br><br>Confidence in Soft Groomers: ".implode(', ', $confidenceSoftGroomer_subs);
+    }
+    return '';
+}
+add_shortcode( 'form_submissions', 'get_record_from_knowthyself' );
+
+// WRITING KNOW THY SELF FORM TO KNOWTHYSELF TABLE. THIS CAN BE USED ONLY FOR REFERENCE.
+
+    function knowthyself_write_to_table($record, $ajax_handler) {
+>>>>>>> 05803e6f336981f1c93198c4bda299aa669b8463
         $form_name = $record->get_form_settings( 'form_name' );
         
         if($form_name == 'Know_Thyself_Form'){
@@ -149,6 +193,31 @@ add_shortcode( 'form_submissions', 'get_record_from_form_submissions' );
     }
 
     add_action( 'elementor_pro/forms/new_record', 'knowthyself_write_to_table', 10, 2);
+<<<<<<< HEAD
 */
 ?>
 
+=======
+
+/**
+ * Load Blister Community Reviews activation functions
+ * 
+ * @return void
+ */
+function bcr_activation() {
+    require_once( plugin_dir_path( __FILE__ ) . '/admin/activation.php');
+}
+
+/**
+ * Load Blister Community Reviews deactivation functions
+ * 
+ * @return void
+ */
+function bcr_deactivation() {
+    require_once( plugin_dir_path( __FILE__ ) . '/admin/deactivation.php');
+}
+
+function bcr_include() {
+    require_once( plugin_dir_path( __FILE__ ) . 'functions.php');
+}
+>>>>>>> 05803e6f336981f1c93198c4bda299aa669b8463
