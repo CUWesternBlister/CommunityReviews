@@ -28,7 +28,7 @@ function summit_review_from_sub( $record, $ajax_handler ) {
         $ajax_handler->add_response_data( true, $output );
 
         $id = summit_insert_into_review_table($ajax_handler);
-        //summit_insert_into_review_answer_table($id, $ajax_handler)
+        //summit_insert_into_review_answer_table($id, $answer_ids, $ajax_handler)
     }
 }
 function summit_insert_into_review_table($ajax_handler){
@@ -47,13 +47,13 @@ function summit_insert_into_review_table($ajax_handler){
         return $last_review_id;
 }
 
-function summit_insert_into_review_answer_table($id, $ajax_handler){
+function summit_insert_into_review_answer_table($review_id, $answer_ids $ajax_handler){
     //insert answer ids int review answer table
         global $wpdb;
         $review_answer_table = $wpdb->prefix . "bcr_reviews_answers";
         $fields_review_answers = [];
         foreach($answer_ids as $id){
-            $fields_review_answers['reviewID'] = $last_review_id;
+            $fields_review_answers['reviewID'] = $review_id;
             $fields_review_answers['answerID'] = $id;
             $output['success'] = $wpdb->insert($answer_table, $fields_answers);
             //if($output == success){
