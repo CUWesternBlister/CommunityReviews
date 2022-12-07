@@ -146,8 +146,6 @@ function bcr_setup_tables() {
         FOREIGN KEY  (productID) REFERENCES $products_table_name(productID)
         ) $charset_collate;";
 
-
->>>>>>> 05803e6f336981f1c93198c4bda299aa669b8463
     dbDelta($sql);
 
     //Create Review Form Questions association table
@@ -176,8 +174,6 @@ function bcr_setup_tables() {
         FOREIGN KEY  (reviewFormID) REFERENCES $review_forms_table_name(reviewFormID)
         ) $charset_collate;";
 
-
->>>>>>> 05803e6f336981f1c93198c4bda299aa669b8463
     dbDelta($sql);
 
     //Create Review Answers association table

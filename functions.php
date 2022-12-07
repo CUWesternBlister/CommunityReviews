@@ -179,8 +179,6 @@ function know_thy_self_skiing_init() {
 }
 add_action( 'init', 'know_thy_self_skiing_init' );
 
-<<<<<<< HEAD
-=======
 // READ AND WRITE BASIC
 
 // READ AND DISPLAY -> SHORTCODE CURRENTLY USED ON KNOW THY SELF SKIING PAGE
@@ -246,5 +244,4 @@ add_shortcode( 'form_submissions', 'get_record_from_form_submissions' );
     }
 
     add_action( 'elementor_pro/forms/new_record', 'capstone_write_to_table', 10, 2);
->>>>>>> 05803e6f336981f1c93198c4bda299aa669b8463
 ?>
