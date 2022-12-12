@@ -98,4 +98,5 @@ function bcr_deactivation() {
 
 function bcr_include() {
     require_once( plugin_dir_path( __FILE__ ) . 'functions.php');
+    require_once( plugin_dir_path( __FILE__ ) . 'ski_reviews_custom_post.php');
 }
