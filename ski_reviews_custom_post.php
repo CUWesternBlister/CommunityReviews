@@ -3,7 +3,7 @@
  * Plugin Name: Ski Review Custom Post
  * Author: Jacob Vogel and Jayden Omi
  * Description: Create Ski Review Custom Post from SQL database
- * Version: 0.1.0
+ * Version: 0.1.1
  * text-domain: prefix-plugin-name
 */
 function create_ski_review() {
@@ -13,29 +13,29 @@ function create_ski_review() {
         'singular_name' => _x( 'Ski Review', 'Post Type Singular Name', 'Ski Review' ),
         'menu_name' => _x( 'Ski Reviews', 'Admin Menu text', 'Ski Reviews' ),
         'name_admin_bar' => _x( 'Ski Reviews', 'Add New on Toolbar', 'Ski Reviews' ),
-        'archives' => __( 'Archivi Ski Reviews', 'Ski Reviews' ),
-        'attributes' => __( 'Attributi delle Ski Reviews', 'Ski Reviews' ),
-        'parent_item_colon' => __( 'Genitori Ski Reviews:', 'Ski Reviews' ),
-        'all_items' => __( 'Tutti le Ski Reviews', 'Ski Reviews' ),
-        'add_new_item' => __( 'Aggiungi nuova Ski Reviews', 'Ski Reviews' ),
-        'add_new' => __( 'Nuovo', 'Ski Reviews' ),
-        'new_item' => __( 'Ski Reviews redigere', 'Ski Reviews' ),
-        'edit_item' => __( 'Modifica Ski Reviews', 'Ski Reviews' ),
-        'update_item' => __( 'Aggiorna Ski Reviews', 'Ski Reviews' ),
-        'view_item' => __( 'Visualizza Ski Reviews', 'Ski Reviews' ),
-        'view_items' => __( 'Visualizza le Ski Reviews', 'Ski Reviews' ),
-        'search_items' => __( 'Cerca Ski Reviews', 'Ski Reviews' ),
-        'not_found' => __( 'Nessun Ski Reviews trovato.', 'Ski Reviews' ),
-        'not_found_in_trash' => __( 'Nessun Ski Reviews trovato nel cestino.', 'Ski Reviews' ),
-        'featured_image' => __( 'Immagine in evidenza', 'Ski Reviews' ),
-        'set_featured_image' => __( 'Imposta immagine in evidenza', 'Ski Reviews' ),
-        'remove_featured_image' => __( 'Rimuovi immagine in evidenza', 'Ski Reviews' ),
-        'use_featured_image' => __( 'Usa come immagine in evidenza', 'Ski Reviews' ),
-        'insert_into_item' => __( 'Inserisci nelle Ski Reviews', 'Ski Reviews' ),
-        'uploaded_to_this_item' => __( 'Caricato in questo Ski Reviews', 'Ski Reviews' ),
-        'items_list' => __( 'Elenco degli Ski Reviews', 'Ski Reviews' ),
-        'items_list_navigation' => __( 'Navigazione elenco Ski Reviews', 'Ski Reviews' ),
-        'filter_items_list' => __( 'Filtra elenco Ski Reviews', 'Ski Reviews' ),
+        'archives' => __( 'Ski Reviews Archives', 'Ski Reviews' ),
+        'attributes' => __( 'Ski Review Attributes', 'Ski Reviews' ),
+        'parent_item_colon' => __( 'Parent Ski Reviews:', 'Ski Reviews' ),
+        'all_items' => __( 'All Ski Reviews', 'Ski Reviews' ),
+        'add_new_item' => __( 'Add New Ski Reviews', 'Ski Reviews' ),
+        'add_new' => __( 'New', 'Ski Reviews' ),
+        'new_item' => __( 'Create New Ski Review', 'Ski Reviews' ),
+        'edit_item' => __( 'Modify Ski Review', 'Ski Reviews' ),
+        'update_item' => __( 'Update Ski Review', 'Ski Reviews' ),
+        'view_item' => __( 'View Ski Review', 'Ski Reviews' ),
+        'view_items' => __( 'View Ski Reviews', 'Ski Reviews' ),
+        'search_items' => __( 'Search Ski Reviews', 'Ski Reviews' ),
+        'not_found' => __( 'No Ski Reviews found.', 'Ski Reviews' ),
+        'not_found_in_trash' => __( 'No Ski Reviews found in the trash.', 'Ski Reviews' ),
+        'featured_image' => __( 'Featured Image', 'Ski Reviews' ),
+        'set_featured_image' => __( 'Set Featured Image', 'Ski Reviews' ),
+        'remove_featured_image' => __( 'Remove Featured Image', 'Ski Reviews' ),
+        'use_featured_image' => __( 'Use Featured Image', 'Ski Reviews' ),
+        'insert_into_item' => __( 'Insert into Ski Review', 'Ski Reviews' ),
+        'uploaded_to_this_item' => __( 'Uploaded to Ski Review', 'Ski Reviews' ),
+        'items_list' => __( 'List Ski Reviews', 'Ski Reviews' ),
+        'items_list_navigation' => __( 'List Navigation for Ski Reviews', 'Ski Reviews' ),
+        'filter_items_list' => __( 'Filter Ski Reviews', 'Ski Reviews' ),
     );
     $args = array(
         'label' => __( 'Ski Reviews', 'Ski Reviews' ),
@@ -87,21 +87,19 @@ function display_ski_review_meta_box() {
             <td style="width: 50%">Product Tested</td>
             <td><input type="text" size="40" name="garage" value="<?php echo get_post_meta( get_the_ID(), 'product_tested', true ); ?>" readonly /></td>
         </tr>
-        <tr>
+        /*<tr>
             <td style="width: 50%">Brand Tested</td>
             <td><input type="text" size="40" name="garage" value="<?php echo get_post_meta( get_the_ID(), 'brand_tested', true ); ?>" readonly /></td>
         </tr>
         <tr>
             <td style="width: 50%">Length Tested</td>
             <td><input type="text" size="40" name="garage" value="<?php echo get_post_meta( get_the_ID(), 'length_tested', true ); ?>" readonly /></td>
-        </tr>
+        </tr>*/
     </table>
     <?php
 }
 
 add_action( 'wp', 'insert_into_ski_review' );
-
-// NEED TO EDIT BELOW HERE
 
 function ski_reviews_check_for_similar_meta_ids() {
     $id_arrays_in_cpt = array();
@@ -120,43 +118,98 @@ function ski_reviews_check_for_similar_meta_ids() {
     return $id_arrays_in_cpt;
 }
 
-function ski_reviews_query_garage_table( $car_available_in_cpt_array ) {
+function ski_reviews_query_database( $ski_review_available_in_cpt_array ) {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'garage';
-
-    if ( NULL === $car_available_in_cpt_array || 0 === $car_available_in_cpt_array || '0' === $car_available_in_cpt_array || empty( $car_available_in_cpt_array ) ) {
-        $results = $wpdb->get_results("SELECT * FROM $table_name");
+    
+    $reviews_table_name = $wpdb->prefix . "bcr_reviews";
+    $products_table_name = $wpdb->prefix . "bcr_products";
+    $review_forms_table_name = $wpdb->prefix . "bcr_review_forms";
+    $questions_table_name = $wpdb->prefix . "bcr_questions";
+    $reviews_answers_table_name = $wpdb->prefix . "bcr_reviews_answers";
+    $answers_table_name = $wpdb->prefix . "bcr_answers";
+    //$know_thyself_answers_table_name = $wpdb->prefix . "bcr_know_thyself_answers";
+    
+    
+    //$sql .= ';';*/
+    if ( NULL === $ski_review_available_in_cpt_array || 0 === $ski_review_available_in_cpt_array || '0' === $ski_review_available_in_cpt_array || empty( $ski_review_available_in_cpt_array ) ) {
+        $reviewsSql = "SELECT reviewID, productName
+                          FROM wp_bcr_reviews AS reviews
+                          INNER JOIN
+                          wp_bcr_review_forms AS reviewForms
+                          ON reviews.reviewFormID=reviewForms.reviewFormID
+                          INNER JOIN
+                          wp_bcr_products AS products
+                          ON reviewForms.productID=products.productID;";
+        $results = $wpdb->get_results($reviewsSql);
         return $results;
+        
+        //$output = "<table><tr><th>Blister Community Reviews</th></tr>";
+        /*foreach($rows as $row){
+         $productID_sql = $wpdb->prepare("SELECT productID FROM $review_forms_table_name WHERE (reviewFormID = %s) LIMIT 1;", $row->reviewFormID);
+         $productID = $wpdb->get_var($productID_sql, 0, 0);
+         $productName_sql = $wpdb->prepare("SELECT productName FROM $products_table_name WHERE (productID = %s) LIMIT 1;", $productID);
+         $productName = $wpdb->get_var($productName_sql, 0, 0);
+         $reviewID = $row->reviewID;
+         }*/
     } else {
-        $ids = implode( ",", $car_available_in_cpt_array );
-        $sql = "SELECT * FROM $table_name WHERE id NOT IN ( $ids )";
-        $results = $wpdb->get_results( $sql );
+        $ids = implode( ",", $ski_review_available_in_cpt_array );
+        $reviewsSql = "SELECT reviewID, productName
+                           FROM wp_bcr_reviews AS reviews
+                           INNER JOIN
+                           wp_bcr_review_forms AS reviewForms
+                           ON reviews.reviewFormID=reviewForms.reviewFormID
+                           INNER JOIN
+                           wp_bcr_products AS products
+                           ON reviewForms.productID=products.productID
+                           WHERE id NOT IN ( $ids );";
+        $results = $wpdb->get_results($reviewsSql);
         return $results;
+        
+        //$output = "<table><tr><th>Blister Community Reviews</th></tr>";
+        /*
+         foreach($rows as $row){
+         $productID_sql = $wpdb->prepare("SELECT productID FROM $review_forms_table_name WHERE (reviewFormID = %s) LIMIT 1;", $row->reviewFormID);
+         $productID = $wpdb->get_var($productID_sql, 0, 0);
+         $productName_sql = $wpdb->prepare("SELECT productName FROM $products_table_name WHERE (productID = %s) LIMIT 1;", $productID);
+         $productName = $wpdb->get_var($productName_sql, 0, 0);
+         $reviewID = $row->reviewID;
+         }
+         }
+         
+         if ( NULL === $ski_review_available_in_cpt_array || 0 === $ski_review_available_in_cpt_array || '0' === $ski_review_available_in_cpt_array || empty( $ski_review_available_in_cpt_array ) ) {
+         $results = $wpdb->get_results("SELECT * FROM $table_name");
+         return $results;
+         } else {
+         $ids = implode( ",", $car_available_in_cpt_array );
+         $sql = "SELECT * FROM $table_name WHERE id NOT IN ( $ids )";
+         $results = $wpdb->get_results( $sql );
+         return $results;*/
+         }
     }
-}
-
-function ski_reviews_insert_into_auto_cpt() {
-
-    $car_available_in_cpt_array = ski_reviews_check_for_similar_meta_ids();
-    $database_results = ski_reviews_query_garage_table( $car_available_in_cpt_array );
-
-    if ( NULL === $database_results || 0 === $database_results || '0' === $database_results || empty( $database_results ) ) {
-        return;
+    
+    function insert_into_ski_review() {
+        
+        $ski_review_available_in_cpt_array = ski_reviews_check_for_similar_meta_ids();
+        $database_results = ski_reviews_query_database( $ski_review_available_in_cpt_array );
+        
+        if ( NULL === $database_results || 0 === $database_results || '0' === $database_results || empty( $database_results ) ) {
+            return;
+        }
+        
+        foreach ( $database_results as $result ) {
+            $ski_review = array(
+                                'post_title' => wp_strip_all_tags( $result->productName . ' ' . $result->reviewID ),
+                                'meta_input' => array(
+                                                      'id'        => $result->reviewID,
+                                                      'product_tested'        => $result->productName,
+                                                      //'model'        => $result->Model,
+                                                      //'color'        => $result->Color,
+                                                      //'km'           => $result->Km,
+                                                      ),
+                                'post_type'   => 'Ski Reviews',
+                                'post_status' => 'publish',
+                                );
+            wp_insert_post( $ski_review );
+        }
     }
-
-    foreach ( $database_results as $result ) {
-        $car_model = array(
-            'post_title' => wp_strip_all_tags( $result->Brand . ' ' . $result->Model . ' ' . $result->Km ),
-            'meta_input' => array(
-                'id'        => $result->id,
-                'brand'        => $result->Brand,
-                'model'        => $result->Model,
-                'color'        => $result->Color,
-                'km'           => $result->Km,
-            ),
-            'post_type'   => 'auto',
-            'post_status' => 'publish',
-        );
-        wp_insert_post( $car_model );
-    }
-}
+?>
