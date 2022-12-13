@@ -170,6 +170,7 @@ function bcr_setup_tables() {
         userID int(9) NOT NULL,
         knowThyselfID int(9) NOT NULL,
         reviewFormID int(9) NOT NULL,
+        isShown BOOLEAN NOT NULL DEFAULT 1,
         PRIMARY KEY  (reviewID),
         FOREIGN KEY  (knowThyselfID) REFERENCES $know_thyself_table_name(knowThyselfID),
         FOREIGN KEY  (reviewFormID) REFERENCES $review_forms_table_name(reviewFormID)
