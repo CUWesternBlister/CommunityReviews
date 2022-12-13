@@ -1,5 +1,6 @@
 <?php
 function summit_review_from_sub( $record, $ajax_handler ) {
+    echo "here";
     $form_name = $record->get_form_settings( 'form_name' );
     if($form_name == 'Summit Review Form'){
         $raw_fields = $record->get( 'fields' );

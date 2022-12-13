@@ -22,13 +22,13 @@ function bcr_setup_tables() {
     $charset_collate = $wpdb->get_charset_collate();
 
     //Create User table
-    $questions_table_name = $wpdb->prefix . "bcr_users";
+    $user_table_name = $wpdb->prefix . "bcr_users";
 
-    $sql = "CREATE TABLE $questions_table_name (
-        userID int(9) NOT NULL AUTO_INCREMENT,
-        heightFeet int(9) DEFAULT '' NOT NULL,
-        heightInches int(9) DEFAULT '' NOT NULL,
-        weight int(9) DEFAULT '' NOT NULL,
+    $sql = "CREATE TABLE $user_table_name (
+        userID int(9) NOT NULL,
+        heightFeet int(9) NOT NULL,
+        heightInches int(9) NOT NULL,
+        weight int(9) NOT NULL,
         skiAbility varchar(512) DEFAULT '' NOT NULL,
         PRIMARY KEY  (userID)
         ) $charset_collate;";
