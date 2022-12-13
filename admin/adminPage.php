@@ -19,6 +19,12 @@ function bcr_admin_page() {
  * HTML for rendering the admin page
  */
 function bcr_admin_page_html() {   
-    echo bcr_display_reviews();
+    ?>
+    <div>
+        <?php
+            echo bcr_display_reviews();
+        ?>
+    </div>
+    <?php
 }
 ?>
