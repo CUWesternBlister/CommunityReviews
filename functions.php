@@ -28,6 +28,9 @@ function bcr_display_reviews($admin) {
     $output = "<table><tr><th>Blister Community Reviews</th></tr>";
 
     foreach ($rows as $row) {
+        if($row->isShown == false) {
+            continue;
+        }
         $productID_sql = $wpdb->prepare("SELECT productID FROM $review_forms_table_name WHERE (reviewFormID = %s) LIMIT 1;", $row->reviewFormID);
         $productID = $wpdb->get_var($productID_sql, 0, 0);
         $productName_sql = $wpdb->prepare("SELECT productName FROM $products_table_name WHERE (productID = %s) LIMIT 1;", $productID);
