@@ -22,7 +22,7 @@ function bcr_admin_page_html() {
     ?>
     <div>
         <?php
-            echo bcr_display_reviews();
+            echo bcr_display_reviews(true);
         ?>
     </div>
     <?php

@@ -28,7 +28,7 @@ function bcr_display_reviews($admin) {
     $output = "<table><tr><th>Blister Community Reviews</th></tr>";
 
     foreach ($rows as $row) {
-        if($row->isShown == false) {
+        if($row->isShown == false && !$admin) {
             continue;
         }
         $productID_sql = $wpdb->prepare("SELECT productID FROM $review_forms_table_name WHERE (reviewFormID = %s) LIMIT 1;", $row->reviewFormID);
@@ -54,6 +54,13 @@ function bcr_display_reviews($admin) {
             $question_sql = $wpdb->prepare("SELECT questionContent FROM $questions_table_name WHERE (questionID = %s) LIMIT 1;", $questionID);
             $question = $wpdb->get_var($question_sql, 0, 0);
             $output .= "<br>" . esc_html($question) . "     " . esc_html($answer->answerContent);
+        }
+        if($admin) {
+            $output .= '<input type ="checkbox" id="hide" name = "hide" value="hide"';
+            if($row->isShown == false) {
+                $output .= " checked";
+            }
+            $output .= '><label for "hide"> Hide </label>';
         }
         $output .= "</td></tr>";
     }
