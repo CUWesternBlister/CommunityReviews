@@ -81,20 +81,12 @@ function display_ski_review_meta_box() {
     <table>
         <tr>
             <td style="width: 50%">ReviewID</td>
-            <td><input type="text" size="40" name="garage" value="<?php echo get_post_meta( get_the_ID(), 'reviewID', true ); ?>" readonly /></td>
+            <td><input type="text" size="40" name="ski_review" value="<?php echo get_post_meta( get_the_ID(), 'reviewID', true ); ?>" readonly /></td>
         </tr>
         <tr>
             <td style="width: 50%">Product Tested</td>
-            <td><input type="text" size="40" name="garage" value="<?php echo get_post_meta( get_the_ID(), 'product_tested', true ); ?>" readonly /></td>
+            <td><input type="text" size="40" name="ski_review" value="<?php echo get_post_meta( get_the_ID(), 'product_tested', true ); ?>" readonly /></td>
         </tr>
-        /*<tr>
-            <td style="width: 50%">Brand Tested</td>
-            <td><input type="text" size="40" name="garage" value="<?php echo get_post_meta( get_the_ID(), 'brand_tested', true ); ?>" readonly /></td>
-        </tr>
-        <tr>
-            <td style="width: 50%">Length Tested</td>
-            <td><input type="text" size="40" name="garage" value="<?php echo get_post_meta( get_the_ID(), 'length_tested', true ); ?>" readonly /></td>
-        </tr>*/
     </table>
     <?php
 }
@@ -121,16 +113,6 @@ function ski_reviews_check_for_similar_meta_ids() {
 function ski_reviews_query_database( $ski_review_available_in_cpt_array ) {
     global $wpdb;
     
-    $reviews_table_name = $wpdb->prefix . "bcr_reviews";
-    $products_table_name = $wpdb->prefix . "bcr_products";
-    $review_forms_table_name = $wpdb->prefix . "bcr_review_forms";
-    $questions_table_name = $wpdb->prefix . "bcr_questions";
-    $reviews_answers_table_name = $wpdb->prefix . "bcr_reviews_answers";
-    $answers_table_name = $wpdb->prefix . "bcr_answers";
-    //$know_thyself_answers_table_name = $wpdb->prefix . "bcr_know_thyself_answers";
-    
-    
-    //$sql .= ';';*/
     if ( NULL === $ski_review_available_in_cpt_array || 0 === $ski_review_available_in_cpt_array || '0' === $ski_review_available_in_cpt_array || empty( $ski_review_available_in_cpt_array ) ) {
         $reviewsSql = "SELECT reviewID, productName
                           FROM wp_bcr_reviews AS reviews
@@ -143,14 +125,6 @@ function ski_reviews_query_database( $ski_review_available_in_cpt_array ) {
         $results = $wpdb->get_results($reviewsSql);
         return $results;
         
-        //$output = "<table><tr><th>Blister Community Reviews</th></tr>";
-        /*foreach($rows as $row){
-         $productID_sql = $wpdb->prepare("SELECT productID FROM $review_forms_table_name WHERE (reviewFormID = %s) LIMIT 1;", $row->reviewFormID);
-         $productID = $wpdb->get_var($productID_sql, 0, 0);
-         $productName_sql = $wpdb->prepare("SELECT productName FROM $products_table_name WHERE (productID = %s) LIMIT 1;", $productID);
-         $productName = $wpdb->get_var($productName_sql, 0, 0);
-         $reviewID = $row->reviewID;
-         }*/
     } else {
         $ids = implode( ",", $ski_review_available_in_cpt_array );
         $reviewsSql = "SELECT reviewID, productName
@@ -164,27 +138,7 @@ function ski_reviews_query_database( $ski_review_available_in_cpt_array ) {
                            WHERE id NOT IN ( $ids );";
         $results = $wpdb->get_results($reviewsSql);
         return $results;
-        
-        //$output = "<table><tr><th>Blister Community Reviews</th></tr>";
-        /*
-         foreach($rows as $row){
-         $productID_sql = $wpdb->prepare("SELECT productID FROM $review_forms_table_name WHERE (reviewFormID = %s) LIMIT 1;", $row->reviewFormID);
-         $productID = $wpdb->get_var($productID_sql, 0, 0);
-         $productName_sql = $wpdb->prepare("SELECT productName FROM $products_table_name WHERE (productID = %s) LIMIT 1;", $productID);
-         $productName = $wpdb->get_var($productName_sql, 0, 0);
-         $reviewID = $row->reviewID;
-         }
-         }
-         
-         if ( NULL === $ski_review_available_in_cpt_array || 0 === $ski_review_available_in_cpt_array || '0' === $ski_review_available_in_cpt_array || empty( $ski_review_available_in_cpt_array ) ) {
-         $results = $wpdb->get_results("SELECT * FROM $table_name");
-         return $results;
-         } else {
-         $ids = implode( ",", $car_available_in_cpt_array );
-         $sql = "SELECT * FROM $table_name WHERE id NOT IN ( $ids )";
-         $results = $wpdb->get_results( $sql );
-         return $results;*/
-         }
+        }
     }
     
     function insert_into_ski_review() {
