@@ -1,13 +1,12 @@
 <?php
 /**
- * Display excerpts of reviews to a shortcode call
+ * Display excerpts of all review
  * 
- * @param string[]  $atts       Shortcode attributes
- * @param string    $content    Content wrapped by shortcode
+ * @param boolean   admin   Controls if admin options are displayed
  * 
- * @return string   Shortcode output
+ * @return String   HTML Format reviews table
  */
-function bcr_display_reviews() {
+function bcr_display_reviews($admin) {
     global $wpdb;
 
     $reviews_table_name = $wpdb->prefix . "bcr_reviews";
@@ -61,7 +60,16 @@ function bcr_display_reviews() {
     return $output;
 }
 
-add_shortcode('display_community_reviews', 'bcr_display_reviews');
+add_shortcode('display_community_reviews', 'bcr_display_reviews_shortcode');
+
+/**
+ * Shortcode for calling display reviews
+ * 
+ * @return String   shortcode output
+ */
+function bcr_display_reviews_shortcode($atts = [], $content = null) {
+    return bcr_display_reviews(false);
+}
 
 /**
  * Write contents of Elementor forms with a specific name to database
