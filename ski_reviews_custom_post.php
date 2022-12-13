@@ -42,7 +42,7 @@ function create_ski_review() {
         'description' => __( 'Ski Reviews', 'Ski Reviews' ),
         'labels' => $labels,
         'menu_icon' => 'dashicons-admin-tools',
-        'supports' => array(),
+        'supports' => array('title','editor','revisions','trackbacks','author','excerpt','custom-fields', 'post-formats'),
         'taxonomies' => array(),
         'public' => true,
         'show_ui' => true,
@@ -56,12 +56,15 @@ function create_ski_review() {
         'exclude_from_search' => false,
         'show_in_rest' => true,
         'publicly_queryable' => true,
+        'query_var' => true,
         'capability_type' => 'post',
     );
     register_post_type( 'Ski Reviews', $args );
 
 }
 add_action( 'init', 'create_ski_review', 0 );
+
+
 
 add_action( 'admin_init', 'my_admin' );
 
@@ -91,7 +94,11 @@ function display_ski_review_meta_box() {
     <?php
 }
 
+
+
 add_action( 'wp', 'insert_into_ski_review' );
+
+
 
 function ski_reviews_check_for_similar_meta_ids() {
     $id_arrays_in_cpt = array();
@@ -100,11 +107,16 @@ function ski_reviews_check_for_similar_meta_ids() {
         'post_type'      => 'Ski Reviews',
         'posts_per_page' => -1,
     );
+    
+    
 
     $loop = new WP_Query($args);
-    while( $loop->have_posts() ) {
-        $loop->the_post();
-        $id_arrays_in_cpt[] = get_post_meta( get_the_ID(), 'id', true );
+    
+    if( $loop->have_posts){
+        while( $loop->have_posts() ) {
+            $loop->the_post();
+            $id_arrays_in_cpt[] = get_post_meta( get_the_ID(), 'id', true );
+        }
     }
 
     return $id_arrays_in_cpt;
@@ -140,8 +152,10 @@ function ski_reviews_query_database( $ski_review_available_in_cpt_array ) {
         return $results;
         }
     }
+ 
     
     function insert_into_ski_review() {
+        global $wpdb;
         
         $ski_review_available_in_cpt_array = ski_reviews_check_for_similar_meta_ids();
         $database_results = ski_reviews_query_database( $ski_review_available_in_cpt_array );
@@ -156,9 +170,6 @@ function ski_reviews_query_database( $ski_review_available_in_cpt_array ) {
                                 'meta_input' => array(
                                                       'id'        => $result->reviewID,
                                                       'product_tested'        => $result->productName,
-                                                      //'model'        => $result->Model,
-                                                      //'color'        => $result->Color,
-                                                      //'km'           => $result->Km,
                                                       ),
                                 'post_type'   => 'Ski Reviews',
                                 'post_status' => 'publish',
