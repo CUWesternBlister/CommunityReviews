@@ -1,5 +1,5 @@
 <?php
-    add_action('admin_post_bcr_admin_form_response', 'bcr_admin_form_submit');
+    add_action('wp_ajax_bcr_admin_form_response', 'bcr_admin_form_submit');
 
     /**
      * Update tables acording to parameters set in the admin form
