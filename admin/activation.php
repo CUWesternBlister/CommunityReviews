@@ -22,13 +22,38 @@ function bcr_setup_tables() {
 
     $charset_collate = $wpdb->get_charset_collate();
 
+    //Create Ski Lengths table
+    $ski_lengths_table_name = $wpdb->prefix . "bcr_ski_lengths";
+
+    $sql = "CREATE TABLE $ski_lengths_table_name (
+        skiLength int(9) NOT NULL,
+        PRIMARY KEY  (skiLength)
+        ) $charset_collate;";
+
+    dbDelta($sql);
+
     //Create Question table
     $questions_table_name = $wpdb->prefix . "bcr_questions";
 
     $sql = "CREATE TABLE $questions_table_name (
         questionID int(9) NOT NULL AUTO_INCREMENT,
         questionContent varchar(512) DEFAULT '' NOT NULL,
+        questionType varchar(512) NOT NULL,
         PRIMARY KEY  (questionID)
+        ) $charset_collate;";
+
+    dbDelta($sql);
+
+    //Create User table
+    $users_table_name = $wpdb->prefix . "bcr_users";
+
+    $sql = "CREATE TABLE $users_table_name (
+        userID int(9) NOT NULL UNIQUE,
+        dateOfBirth DATE DEFAULT NULL,
+        heightIN int(9) DEFAULT NULL,
+        weightLBS int(9) DEFAULT NULL,
+        skiAbility varchar(512) DEFAULT 'beginner' NOT NULL,
+        PRIMARY KEY  (userID)
         ) $charset_collate;";
 
     dbDelta($sql);
@@ -40,12 +65,25 @@ function bcr_setup_tables() {
         answerID int(9) NOT NULL AUTO_INCREMENT,
         answerContent varchar(512) DEFAULT '' NOT NULL,
         questionID int(9) NOT NULL,
+        preDefinedAnswer int(1),
         PRIMARY KEY  (answerID),
         FOREIGN KEY  (questionID) REFERENCES $questions_table_name(questionID)
         ) $charset_collate;";
 
     dbDelta($sql);
+/*
+    $q_w_a_table_name = $wpdb->prefix . "bcr_questions_with_answers";
 
+    $sql = "CREATE TABLE $q_w_a_table_name (
+        answerID int(9) NOT NULL AUTO_INCREMENT,
+        answerContent varchar(512) DEFAULT '' NOT NULL,
+        questionID int(9) NOT NULL,
+        PRIMARY KEY  (answerID),
+        FOREIGN KEY  (questionID) REFERENCES $questions_table_name(questionID)
+        ) $charset_collate;";
+
+    dbDelta($sql);
+*/
     //Create Sport table
     $sports_table_name = $wpdb->prefix . "bcr_sports";
 
@@ -70,6 +108,31 @@ function bcr_setup_tables() {
         ) $charset_collate;";
 
     dbDelta($sql);
+    /* self referencing key?????????
+    ,
+        FOREIGN KEY  (categoryID) REFERENCES $categories_table_name(categoryID),
+        FOREIGN KEY (prduct_id) REFERENCES employee(employee_id)
+    */
+    $brand_table_name = $wpdb->prefix . "bcr_brands";
+
+    $sql = "CREATE TABLE $products_table_name (
+        brandID int(9) NOT NULL AUTO_INCREMENT,
+        brandName varchar(512) DEFAULT '' NOT NULL,
+        PRIMARY KEY  (brandID),
+        ) $charset_collate;";
+
+    dbDelta($sql);
+
+    //Create Brand table
+    $brand_table_name = $wpdb->prefix . "bcr_brands";
+
+    $sql = "CREATE TABLE $brands_table_name (
+        brandID int(9) NOT NULL AUTO_INCREMENT,
+        brandName varchar(512) DEFAULT '' NOT NULL,
+        PRIMARY KEY  (brandID)
+        ) $charset_collate;";
+
+    dbDelta($sql);
 
     //Create Product table
     $products_table_name = $wpdb->prefix . "bcr_products";
@@ -77,9 +140,11 @@ function bcr_setup_tables() {
     $sql = "CREATE TABLE $products_table_name (
         productID int(9) NOT NULL AUTO_INCREMENT,
         categoryID int(9) NOT NULL,
+        brandID int(9) NOT NULL,
         productName varchar(512) DEFAULT '' NOT NULL,
         PRIMARY KEY  (productID),
-        FOREIGN KEY  (categoryID) REFERENCES $categories_table_name(categoryID)
+        FOREIGN KEY  (categoryID) REFERENCES $categories_table_name(categoryID),
+        FOREIGN KEY  (brandID) REFERENCES $brands_table_name(brandID)
         ) $charset_collate;";
 
     dbDelta($sql);
@@ -118,7 +183,8 @@ function bcr_setup_tables() {
         userID int(9) NOT NULL,
         knowThyselfFormID int(9) NOT NULL,
         PRIMARY KEY  (knowThyselfID),
-        FOREIGN KEY  (knowThyselfFormID) REFERENCES $know_thyself_forms_table_name(knowThyselfFormID)
+        FOREIGN KEY  (knowThyselfFormID) REFERENCES $know_thyself_forms_table_name(knowThyselfFormID),
+        FOREIGN KEY  (userID) REFERENCES $users_table_name(userID)
         ) $charset_collate;";
 
     dbDelta($sql);
@@ -168,15 +234,17 @@ function bcr_setup_tables() {
     $sql = "CREATE TABLE $reviews_table_name (
         reviewID int(9) NOT NULL AUTO_INCREMENT,
         userID int(9) NOT NULL,
-        knowThyselfID int(9) NOT NULL,
         reviewFormID int(9) NOT NULL,
         isShown BOOLEAN NOT NULL DEFAULT 1,
         PRIMARY KEY  (reviewID),
-        FOREIGN KEY  (knowThyselfID) REFERENCES $know_thyself_table_name(knowThyselfID),
-        FOREIGN KEY  (reviewFormID) REFERENCES $review_forms_table_name(reviewFormID)
+        FOREIGN KEY  (reviewFormID) REFERENCES $review_forms_table_name(reviewFormID),
+        FOREIGN KEY  (userID) REFERENCES $users_table_name(userID)
         ) $charset_collate;";
 
     dbDelta($sql);
+
+    //knowThyselfID int(9) NOT NULL,
+    //FOREIGN KEY  (knowThyselfID) REFERENCES $know_thyself_table_name(knowThyselfID),
 
     //Create Review Answers association table
     $review_answers_table_name = $wpdb->prefix . "bcr_reviews_answers";

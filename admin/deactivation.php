@@ -57,6 +57,12 @@ function bcr_remove_tables() {
     $sql = "DROP TABLE IF EXISTS $know_thyself_forms_table_name";
     $wpdb->query($sql);
 
+    //Remove Brand table
+    $brands_table_name = $wpdb->prefix . "bcr_brands";
+    $sql = "DROP TABLE IF EXISTS $brands_table_name";
+    $wpdb->query($sql);
+
+
     //Remove Product table
     $products_table_name = $wpdb->prefix . "bcr_products";
     $sql = "DROP TABLE IF EXISTS $products_table_name";
@@ -77,9 +83,19 @@ function bcr_remove_tables() {
     $sql = "DROP TABLE IF EXISTS $answers_table_name";
     $wpdb->query($sql);
 
+    //Remove User table
+    $users_table_name = $wpdb->prefix . "bcr_users";
+    $sql = "DROP TABLE IF EXISTS $users_table_name";
+    $wpdb->query($sql);
+
     //Remove Question table
     $questions_table_name = $wpdb->prefix . "bcr_questions";
     $sql = "DROP TABLE IF EXISTS $questions_table_name";
+    $wpdb->query($sql);
+
+    //Remove Ski Lengths table
+    $ski_lengths_table_name = $wpdb->prefix . "bcr_ski_lengths";
+    $sql = "DROP TABLE IF EXISTS $ski_lengths_table_name";
     $wpdb->query($sql);
 }
 

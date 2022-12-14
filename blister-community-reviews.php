@@ -11,11 +11,11 @@ if (!defined('ABSPATH')) exit;
 register_activation_hook(__FILE__, 'bcr_activation');
 register_deactivation_hook(__FILE__, 'bcr_deactivation');
 add_action( 'plugins_loaded', 'bcr_include');
-
+add_action( 'plugins_loaded', 'bcr_include_table_write_functions');
 define( 'BCR_PATH', plugin_dir_path( __FILE__ ));
-
 require_once( BCR_PATH . 'admin/adminInclude.php');
 
+/*
 function get_record_from_knowthyself($atts) {
     $atts = shortcode_atts(
 
@@ -81,6 +81,7 @@ add_shortcode( 'form_submissions', 'get_record_from_knowthyself' );
     }
 
     add_action( 'elementor_pro/forms/new_record', 'knowthyself_write_to_table', 10, 2);
+*/
 
 /**
  * Load Blister Community Reviews activation functions
@@ -96,6 +97,7 @@ function bcr_activation() {
  * 
  * @return void
  */
+
 function bcr_deactivation() {
     require_once( plugin_dir_path( __FILE__ ) . '/admin/deactivation.php');
 }
@@ -103,3 +105,13 @@ function bcr_deactivation() {
 function bcr_include() {
     require_once( plugin_dir_path( __FILE__ ) . 'functions.php');
 }
+function bcr_include_table_write_functions() {
+    require_once( plugin_dir_path( __FILE__ ) . 'table_writing_functions.php');
+}
+function bcr_include_validation_functions() {
+    require_once( plugin_dir_path( __FILE__ ) . 'page_upon_opening_validation.php');
+}
+add_action('init', 'get_current_userID');//so that get_current_user_id() is not called before the init hook (maybe i can do this check right before calling then call init if needed)
+add_action( 'elementor_pro/forms/new_record', 'summit_review_from_sub', 10, 2);
+//add_action( 'elementor_pro/forms/new_record', 'profile_info_sub', 10, 2);
+//add_action( 'template_redirect', 'Summit_Review_Validation');
