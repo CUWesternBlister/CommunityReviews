@@ -122,59 +122,122 @@ function ski_reviews_check_for_similar_meta_ids() {
     return $id_arrays_in_cpt;
 }
 
-function ski_reviews_query_database( $ski_review_available_in_cpt_array ) {
+function ski_reviews_query_database_header( $ski_review_available_in_cpt_array ) {
     global $wpdb;
     
     if ( NULL === $ski_review_available_in_cpt_array || 0 === $ski_review_available_in_cpt_array || '0' === $ski_review_available_in_cpt_array || empty( $ski_review_available_in_cpt_array ) ) {
-        $reviewsSql = "SELECT reviewID, productName
-                          FROM wp_bcr_reviews AS reviews
-                          INNER JOIN
-                          wp_bcr_review_forms AS reviewForms
-                          ON reviews.reviewFormID=reviewForms.reviewFormID
-                          INNER JOIN
-                          wp_bcr_products AS products
-                          ON reviewForms.productID=products.productID;";
-        $results = $wpdb->get_results($reviewsSql);
-        return $results;
+        $headerSql = "SELECT reviewID, userID, productName, categoryName, sportName
+                            FROM wp_bcr_reviews AS reviews
+                            INNER JOIN
+                            wp_bcr_review_forms AS reviewForms
+                            ON reviews.reviewFormID=reviewForms.reviewFormID
+                            INNER JOIN
+                            wp_bcr_products AS products
+                            ON reviewForms.productID=products.productID
+                            INNER JOIN
+                            wp_bcr_categories AS categories
+                            ON categories.categoryID=products.categoryID
+                            INNER JOIN
+                            wp_bcr_sports AS sports
+                            ON sports.sportID=categories.sportID";
+        $header = $wpdb->get_results($headerSql);
+        return $header;
+    } else {
+        $ids = implode( ",", $ski_review_available_in_cpt_array );
+        $headerSql = "SELECT reviewID, userID, productName, categoryName, sportName
+                            FROM wp_bcr_reviews AS reviews
+                            INNER JOIN
+                            wp_bcr_review_forms AS reviewForms
+                            ON reviews.reviewFormID=reviewForms.reviewFormID
+                            INNER JOIN
+                            wp_bcr_products AS products
+                            ON reviewForms.productID=products.productID
+                            INNER JOIN
+                            wp_bcr_categories AS categories
+                            ON categories.categoryID=products.categoryID
+                            INNER JOIN
+                            wp_bcr_sports AS sports
+                            ON sports.sportID=categories.sportID
+                            WHERE id NOT IN ( $ids )";
+        $header = $wpdb->get_results($headerSql);
+        return $header;
+        }
+    }
+
+function ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array ) {
+    global $wpdb;
+    
+    if ( NULL === $ski_review_available_in_cpt_array || 0 === $ski_review_available_in_cpt_array || '0' === $ski_review_available_in_cpt_array || empty( $ski_review_available_in_cpt_array ) ) {
+        $answerSql = "SELECT questionContent, answerContent
+                            FROM wp_bcr_reviews AS reviews
+                            INNER JOIN
+                            wp_bcr_reviews_answers as reviewAnswers
+                            ON reviewAnswers.reviewID=reviews.reviewID
+                            INNER JOIN
+                            wp_bcr_answers as answers
+                            ON answers.answerID=reviewAnswers.answerID
+                            INNER JOIN
+                            wp_bcr_questions as questions
+                            ON questions.questionID=answers.questionID";
+        $answers = $wpdb->get_results($answerSql);
+        return $answers;
         
     } else {
         $ids = implode( ",", $ski_review_available_in_cpt_array );
-        $reviewsSql = "SELECT reviewID, productName
-                           FROM wp_bcr_reviews AS reviews
-                           INNER JOIN
-                           wp_bcr_review_forms AS reviewForms
-                           ON reviews.reviewFormID=reviewForms.reviewFormID
-                           INNER JOIN
-                           wp_bcr_products AS products
-                           ON reviewForms.productID=products.productID
-                           WHERE id NOT IN ( $ids );";
-        $results = $wpdb->get_results($reviewsSql);
-        return $results;
-        }
+        $answerSql = "SELECT questionContent, answerContent
+                            FROM wp_bcr_reviews AS reviews
+                            INNER JOIN
+                            wp_bcr_reviews_answers as reviewAnswers
+                            ON reviewAnswers.reviewID=reviews.reviewID
+                            INNER JOIN
+                            wp_bcr_answers as answers
+                            ON answers.answerID=reviewAnswers.answerID
+                            INNER JOIN
+                            wp_bcr_questions as questions
+                            ON questions.questionID=answers.questionID
+                            WHERE id NOT IN ( $ids )";
+        $answers = $wpdb->get_results($answerSql);
+        return $answers;
     }
- 
+    
+}
     
     function insert_into_ski_review() {
         global $wpdb;
         
-        $ski_review_available_in_cpt_array = ski_reviews_check_for_similar_meta_ids();
-        $database_results = ski_reviews_query_database( $ski_review_available_in_cpt_array );
+        $ski_review_available_in_cpt_array_1 = ski_reviews_check_for_similar_meta_ids();
+        $ski_review_available_in_cpt_array_2 = $ski_review_available_in_cpt_array_1;
         
-        if ( NULL === $database_results || 0 === $database_results || '0' === $database_results || empty( $database_results ) ) {
+        $header = ski_reviews_query_database_header( $ski_review_available_in_cpt_array_1 );
+        
+        if ( NULL === $header || 0 === $header || '0' === $header || empty( $header ) ) {
             return;
         }
         
-        foreach ( $database_results as $result ) {
+        $QnA = ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array_2 );
+        
+        $filePath = '/Users/jacobvogel/Local Sites/communityreviews-knowthyself/app/public/wp-content/plugins/CommunityReviews/testfile.txt';
+        $myfile = fopen($filePath, 'a') or die('fopen failed');
+        fwrite($myfile,"questionContent: ".$QnA->questionContent[1]."\n");
+        
+        foreach ( $header as $header ) {
+            $meta_input = array(
+                               'id'        => $header->reviewID,
+                               'product_tested'        => $header->productName,
+                               'category'           => $header->categoryName,
+                               'sport'          => $header->sportName,
+                               'questions'          => $QnA->$questionContent,
+                               'answers'           => $QnA->$answerContent
+                               );
             $ski_review = array(
-                                'post_title' => wp_strip_all_tags( $result->productName . ' ' . $result->reviewID ),
-                                'meta_input' => array(
-                                                      'id'        => $result->reviewID,
-                                                      'product_tested'        => $result->productName,
-                                                      ),
+                                'post_title' => wp_strip_all_tags( $QnA->answerContent[1] . ' ' . $header->productName . ' ' . $QnA->answerContent[2]),
+                                //'post_content' => wp_strip_all_tags( $QnA->questionContent . ' ' . $QnA->answerContent),
+                                'meta_input' => $meta_input,
                                 'post_type'   => 'Ski Reviews',
                                 'post_status' => 'publish',
                                 );
             wp_insert_post( $ski_review );
         }
+        fclose($myfile);
     }
 ?>
