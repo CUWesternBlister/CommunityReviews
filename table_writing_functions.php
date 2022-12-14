@@ -87,15 +87,25 @@ function summit_insert_into_review_table($RF_id, $file){
         $output2 = [];
         $review_table = $wpdb->prefix . "bcr_reviews";
         $fields_review = [];
-        $current_userID = get_current_userID();
+
+
+
+        $current_userID = get_current_userID($file);
         if(strcmp(gettype($current_userID),"string")){
             fwrite($file,$current_userID."\n");
             die("user not found"); //should be a redirct to another page
         }
         fwrite($file,"userID = ".strval($current_userID)."\n");
         $fields_review['userID'] = current_userID;
-        $KTSid = get_knowthyself_id($current_userID);
+        
+
+
+        //$KTSid = get_knowthyself_id($current_userID);
         $fields_review['knowThyselfID'] = 4;//get this id from bcr_know_thyself using userid HAS TO EXIST BEFORE SUBMISSION
+        
+
+
+
         $fields_review['reviewFormID'] = $RF_id;//some how get review form id upon submission, could first step id in form HAS TO EXIST BEFORE SUBMISSION
         fwrite($file, "fields_review: ".implode(", ",$fields_review)."\n");
         $output2['success'] = $wpdb->insert($review_table, $fields_review);
@@ -107,40 +117,44 @@ function summit_insert_into_review_table($RF_id, $file){
         return $last_review_id;
 }
 
-function get_current_userID(){
+function get_current_userID($file){
     global $wpdb;
+    $start = "          SUMMIT get user id \n";
+    fwrite($file, $start);
     if ( ! function_exists( 'get_current_user_id' ) ) {
         return 0;
     }
-    $userID = get_current_user_id();
-    if($user == 0){
+    $cur_userID = get_current_user_id();
+    $str = "-------- " . strval($cur_userID) . " ----------\n";
+    fwrite($file, $str);
+    if($cur_userID == 0){
         //then not logged in
         //we should check this field when they click to start a review form.
         return "userID does not exist, or user is not logged in";
     }
     $user_table = $wpdb->prefix . "bcr_users";
-    $q = $wpdb->prepare("SELECT TOP 1 %s FROM %s WHERE %s = %d;", array("userID", $user_table, "userID", $userID));
+    $q = "SELECT 1 userID FROM $user_table WHERE userID = $cur_userID;";
     $res = $wpdb->query($q);
     if($res == false){
         //should not be allowed to start a form untill they are in bcr users
         return "userID does not exist in bcr user table, has not registerd";
     }
     //check if user in wp bcr users
-    return $userID;
+    return $cur_userID;
 }
 
 function get_knowthyself_id($userID){
     global $wpdb;
     $KTS_table = $wpdb->prefix . "bcr_know_thyself";
-    $q = $wpdb->prepare("SELECT * FROM %s WHERE %s = %d;", array($KTS_table, "userID", $userID));
+    $q = "SELECT * FROM $KTS_table WHERE %s = %d;";/////////start here with SELECT * FROM wp_bcr_know_thyself WHERE userID = 1;
     $res = $wpdb->get_results($q);
-
+    return $res->knowThyselfID;
 }
 
 function summit_insert_into_review_answer_table($review_id, $answer_ids,$file){
     //insert answer ids int review answer table
         global $wpdb;
-        $start = "\n\n SUMMIT INSERT INTO REVIEW TABLE \n";
+        $start = "\n\n SUMMIT INSERT INTO REVIEW ANSWER TABLE \n";
         fwrite($file, $start);
         $review_answer_table = $wpdb->prefix . "bcr_reviews_answers";
         $fields_review_answers = [];
