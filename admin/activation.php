@@ -65,12 +65,25 @@ function bcr_setup_tables() {
         answerID int(9) NOT NULL AUTO_INCREMENT,
         answerContent varchar(512) DEFAULT '' NOT NULL,
         questionID int(9) NOT NULL,
+        preDefinedAnswer int(1),
         PRIMARY KEY  (answerID),
         FOREIGN KEY  (questionID) REFERENCES $questions_table_name(questionID)
         ) $charset_collate;";
 
     dbDelta($sql);
+/*
+    $q_w_a_table_name = $wpdb->prefix . "bcr_questions_with_answers";
 
+    $sql = "CREATE TABLE $q_w_a_table_name (
+        answerID int(9) NOT NULL AUTO_INCREMENT,
+        answerContent varchar(512) DEFAULT '' NOT NULL,
+        questionID int(9) NOT NULL,
+        PRIMARY KEY  (answerID),
+        FOREIGN KEY  (questionID) REFERENCES $questions_table_name(questionID)
+        ) $charset_collate;";
+
+    dbDelta($sql);
+*/
     //Create Sport table
     $sports_table_name = $wpdb->prefix . "bcr_sports";
 
@@ -92,6 +105,20 @@ function bcr_setup_tables() {
         categoryName varchar(512) DEFAULT '' NOT NULL,
         PRIMARY KEY  (categoryID),
         FOREIGN KEY  (sportID) REFERENCES $sports_table_name(sportID)
+        ) $charset_collate;";
+
+    dbDelta($sql);
+    /* self referencing key?????????
+    ,
+        FOREIGN KEY  (categoryID) REFERENCES $categories_table_name(categoryID),
+        FOREIGN KEY (prduct_id) REFERENCES employee(employee_id)
+    */
+    $brand_table_name = $wpdb->prefix . "bcr_brands";
+
+    $sql = "CREATE TABLE $products_table_name (
+        brandID int(9) NOT NULL AUTO_INCREMENT,
+        brandName varchar(512) DEFAULT '' NOT NULL,
+        PRIMARY KEY  (brandID),
         ) $charset_collate;";
 
     dbDelta($sql);
@@ -207,7 +234,6 @@ function bcr_setup_tables() {
     $sql = "CREATE TABLE $reviews_table_name (
         reviewID int(9) NOT NULL AUTO_INCREMENT,
         userID int(9) NOT NULL,
-        knowThyselfID int(9) NOT NULL,
         reviewFormID int(9) NOT NULL,
         isShown BOOLEAN NOT NULL DEFAULT 1,
         PRIMARY KEY  (reviewID),
@@ -216,6 +242,9 @@ function bcr_setup_tables() {
         ) $charset_collate;";
 
     dbDelta($sql);
+
+    //knowThyselfID int(9) NOT NULL,
+    //FOREIGN KEY  (knowThyselfID) REFERENCES $know_thyself_table_name(knowThyselfID),
 
     //Create Review Answers association table
     $review_answers_table_name = $wpdb->prefix . "bcr_reviews_answers";
