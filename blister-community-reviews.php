@@ -104,3 +104,4 @@ function bcr_include_table_write_functions() {
     require_once( plugin_dir_path( __FILE__ ) . 'table_writing_functions.php');
 }
 add_action( 'elementor_pro/forms/new_record', 'summit_review_from_sub', 10, 2);
+add_action( 'elementor_pro/forms/new_record', 'profile_info_sub', 10, 2);

@@ -3,17 +3,31 @@
 function profile_info_sub( $record, $ajax_handler ){
     global $wpdb;
     $user_table_name = $wpdb->prefix . "bcr_users";
-    $form_name = $record->get_form_settings( 'form_name' ); // this may be a way to get the form id!!!!!!
+    $form_name = $record->get_form_settings( 'form_name' );
+    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
+    $myfile = fopen($file_path, "a") or die('fopen failed');
+    $fields = [];
     if($form_name == 'Profile Builder') {
-        $fields = [];
-        $fields['userID'] = 1;//get_current_userID();
-        $fields['heightFeet	'] = $record["height_feet"];
-        $fields['heightInches'] = $record["height_inches"];
-        $fields['weight'] = $record["weight"];
-        $fields['skiAbility'] = $record["user_experience"];
-        $output['success'] = $wpdb->insert($user_table_name, $fields);
+        $userID = get_current_userID();
+        $fields['userID'] = $userID;
+        $raw_fields = $record->get('fields');
+        $fields['heightFeet'] = $raw_fields["height_feet"]['value'];
+        $fields['heightInches'] = $raw_fields["height_inches"]['value'];
+        $fields['weight'] = $raw_fields["weight"]['value'];
+        $fields['skiAbility'] = $raw_fields["user_experience"]['value'];
+
+        $q = $wpdb->prepare("SELECT * %s FROM %s WHERE %s = %d;", array("userID", $user_table_name, "userID", $userID));
+        $res = $wpdb->query($q);
+
+        if($res){
+            fwrite($myfile,"update attempted");
+            $output['success'] = $wpdb->update($user_table_name, $fields, array("userID"=>$userID));
+        }else {
+            $output['success'] = $wpdb->insert($user_table_name, $fields);
+        }
         $ajax_handler->add_response_data(true, $output);
     }
+    fclose($myfile);
 }
 function summit_review_from_sub( $record, $ajax_handler ) {
     global $wpdb;
@@ -105,13 +119,13 @@ function summit_insert_into_review_table($RF_id, $file){
             die("user not found"); //should be a redirct to another page
         }
         fwrite($file,"userID = ".strval($current_userID)."\n");
-        $fields_review['userID'] = current_userID;
+        $fields_review['userID'] = $current_userID;
         $KTSid = get_knowthyself_id($current_userID);
         $fields_review['knowThyselfID'] = 4;//get this id from bcr_know_thyself using userid HAS TO EXIST BEFORE SUBMISSION
         $fields_review['reviewFormID'] = $RF_id;//some how get review form id upon submission, could first step id in form HAS TO EXIST BEFORE SUBMISSION
         fwrite($file, "fields_review: ".implode(", ",$fields_review)."\n");
         $output2['success'] = $wpdb->insert($review_table, $fields_review);
-        $str = "number of rows inserted: ".strval($output['success'])." ||| did not work if false\n";
+        $str = "number of rows inserted: ".strval($output2['success'])." ||| did not work if false\n";
         fwrite($file, $str);
         //echo strval(output['success'])."<br>";
         //$ajax_handler->add_response_data( true, $output );
@@ -125,13 +139,13 @@ function get_current_userID(){
         return 0;
     }
     $userID = get_current_user_id();
-    if($user == 0){
+    if($userID == 0){
         //then not logged in
         //we should check this field when they click to start a review form.
         return "userID does not exist, or user is not logged in";
     }
     $user_table = $wpdb->prefix . "bcr_users";
-    $q = $wpdb->prepare("SELECT TOP 1 %s FROM %s WHERE %s = %d;", array("userID", $user_table, "userID", $userID));
+    $q = $wpdb->prepare("SELECT * %s FROM %s WHERE %s = %d;", array("userID", $user_table, "userID", $userID));
     $res = $wpdb->query($q);
     if($res == false){
         //should not be allowed to start a form untill they are in bcr users
