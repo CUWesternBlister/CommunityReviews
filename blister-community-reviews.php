@@ -103,4 +103,10 @@ function bcr_include() {
 function bcr_include_table_write_functions() {
     require_once( plugin_dir_path( __FILE__ ) . 'table_writing_functions.php');
 }
+function bcr_include_validation_functions() {
+    require_once( plugin_dir_path( __FILE__ ) . 'page_upon_opening_validation.php');
+}
+add_action('init', 'get_current_userID');//so that get_current_user_id() is not called before the init hook (maybe i can do this check right before calling then call init if needed)
 add_action( 'elementor_pro/forms/new_record', 'summit_review_from_sub', 10, 2);
+//add_action( 'elementor_pro/forms/new_record', 'profile_info_sub', 10, 2);
+//add_action( 'template_redirect', 'Summit_Review_Validation');
