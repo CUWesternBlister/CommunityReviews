@@ -338,3 +338,64 @@ current form id: Profile_Builder
 
 -------------------------------------------
 
+
+
+ SUMMIT get all form names 
+form names: Array
+current form name: Profile Builder
+current form id: Profile_Builder
+
+
+-------------------------------------------
+
+1
+
+ SUMMIT get all form names 
+form names: Array
+current form name: Profile Builder
+current form id: Profile_Builder
+
+
+-------------------------------------------
+
+1
+
+ SUMMIT get all form names 
+form names: Array
+current form name: Profile Builder
+current form id: Profile_Builder
+
+
+-------------------------------------------
+
+1
+
+ SUMMIT get all form names 
+form names: Array
+current form name: Profile Builder
+current form id: Profile_Builder
+
+
+-------------------------------------------
+
+
+
+ SUMMIT get all form names 
+form names: Array
+current form name: Profile Builder
+current form id: Profile_Builder
+
+
+-------------------------------------------
+
+1
+
+ SUMMIT get all form names 
+form names: Array
+current form name: Profile Builder
+current form id: Profile_Builder
+
+
+-------------------------------------------
+
+1fail

@@ -16,7 +16,7 @@ function profile_info_sub( $record, $ajax_handler ){
         $fields['weight'] = $raw_fields["weight"]['value'];
         $fields['skiAbility'] = $raw_fields["user_experience"]['value'];
 
-        $q = $wpdb->prepare("SELECT * %s FROM %s WHERE %s = %d;", array("userID", $user_table_name, "userID", $userID));
+        $q = $wpdb->prepare("SELECT %s FROM %s WHERE %s = %d;", array("userID", $user_table_name, "userID", $userID));
         $res = $wpdb->query($q);
 
         if($res){
@@ -138,6 +138,8 @@ function get_current_userID(){
     if ( ! function_exists( 'get_current_user_id' ) ) {
         return 0;
     }
+    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
+    $myfile = fopen($file_path, "a") or die('fopen failed');
     $userID = get_current_user_id();
     if($userID == 0){
         //then not logged in
@@ -145,13 +147,16 @@ function get_current_userID(){
         return "userID does not exist, or user is not logged in";
     }
     $user_table = $wpdb->prefix . "bcr_users";
-    $q = $wpdb->prepare("SELECT * %s FROM %s WHERE %s = %d;", array("userID", $user_table, "userID", $userID));
+    $q = $wpdb->prepare("SELECT * FROM %s WHERE %s = %d;", array($user_table, "userID", $userID));
     $res = $wpdb->query($q);
     if($res == false){
+        fwrite($myfile, $userID . "fail");
         //should not be allowed to start a form untill they are in bcr users
         return "userID does not exist in bcr user table, has not registerd";
     }
     //check if user in wp bcr users
+    fwrite($myfile, $userID);
+    fclose($myfile);
     return $userID;
 }
 
