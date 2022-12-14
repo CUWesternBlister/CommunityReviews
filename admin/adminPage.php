@@ -22,25 +22,10 @@ function bcr_admin_page_html() {
     ?>
     <head>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-        <script src="<?php echo BCR_PATH . "admin/adminForms.js"?>"></script>
-        <script type="text/javascript">
-            jQuery(document).ready(function($) {
-                $('#reviews_form').submit(function (event) {
-                    var form = $(this);
-                    var url = form.attr('action');
-
-                    $.ajax({
-                        type: "post",
-                        url: url,
-                        data: form.serialize()
-                    });
-                });
-            });
-        </script>
     </head>
     <?php echo BCR_PATH . "admin/adminForms.js"?>
     <div>
-        <form id="reviews_form" action="<?php echo esc_url(admin_url('admin-ajax.php'));?>" method="post">
+        <form id="reviews_form" onSubmit="return false;">
             <input type="hidden" name="action" value="bcr_admin_form_response">
             <?php
                 echo bcr_display_reviews(true);
@@ -48,6 +33,20 @@ function bcr_admin_page_html() {
             <input type="submit" value="Submit Changes">
         </form>
     </div>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $("#reviews_form").submit(function (event) {
+                var form = $(this);
+                var url = "<?php echo esc_url(admin_url('admin-ajax.php'));?>";
+
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    data: form.serialize()
+                });
+            });
+        });
+</script>
 
     <?php
 }
