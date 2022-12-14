@@ -4,14 +4,13 @@ function profile_info_sub( $record, $ajax_handler ){
     global $wpdb;
     $user_table_name = $wpdb->prefix . "bcr_users";
     $form_name = $record->get_form_settings( 'form_name' ); // this may be a way to get the form id!!!!!!
-    if($form_name == 'Profile_Builder') {
-        echo "prof builder";
+    if($form_name == 'Profile Builder') {
         $fields = [];
         $fields['userID'] = 1;//get_current_userID();
-        $fields['heightFeet'] = $record['height_feet'];
-        $fields['heightInches'] = $record['height_inches'];
-        $fields['weight'] = $record['weight'];
-        $fields['skiAbility'] = $record['user_experience'];
+        $fields['heightFeet	'] = $record["height_feet"];
+        $fields['heightInches'] = $record["height_inches"];
+        $fields['weight'] = $record["weight"];
+        $fields['skiAbility'] = $record["user_experience"];
         $output['success'] = $wpdb->insert($user_table_name, $fields);
         $ajax_handler->add_response_data(true, $output);
     }
