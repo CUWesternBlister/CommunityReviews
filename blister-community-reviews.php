@@ -12,6 +12,9 @@ register_activation_hook(__FILE__, 'bcr_activation');
 register_deactivation_hook(__FILE__, 'bcr_deactivation');
 add_action( 'plugins_loaded', 'bcr_include');
 add_action( 'plugins_loaded', 'bcr_include_table_write_functions');
+define( 'BCR_PATH', plugin_dir_path( __FILE__ ));
+require_once( BCR_PATH . 'admin/adminInclude.php');
+
 /*
 function get_record_from_knowthyself($atts) {
     $atts = shortcode_atts(
@@ -79,6 +82,7 @@ add_shortcode( 'form_submissions', 'get_record_from_knowthyself' );
 
     add_action( 'elementor_pro/forms/new_record', 'knowthyself_write_to_table', 10, 2);
 */
+
 /**
  * Load Blister Community Reviews activation functions
  * 
@@ -93,6 +97,7 @@ function bcr_activation() {
  * 
  * @return void
  */
+
 function bcr_deactivation() {
     require_once( plugin_dir_path( __FILE__ ) . '/admin/deactivation.php');
 }

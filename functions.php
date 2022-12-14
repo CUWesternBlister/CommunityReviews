@@ -1,13 +1,12 @@
 <?php
 /**
- * Display excerpts of reviews to a shortcode call
+ * Display excerpts of all review
  * 
- * @param string[]  $atts       Shortcode attributes
- * @param string    $content    Content wrapped by shortcode
+ * @param boolean   admin   Controls if admin options are displayed
  * 
- * @return string   Shortcode output
+ * @return String   HTML Format reviews table
  */
-function bcr_display_reviews() {
+function bcr_display_reviews($admin) {
     global $wpdb;
 
     $reviews_table_name = $wpdb->prefix . "bcr_reviews";
@@ -29,6 +28,9 @@ function bcr_display_reviews() {
     $output = "<table><tr><th>Blister Community Reviews</th></tr>";
 
     foreach ($rows as $row) {
+        if($row->isShown == false && !$admin) {
+            continue;
+        }
         $productID_sql = $wpdb->prepare("SELECT productID FROM $review_forms_table_name WHERE (reviewFormID = %s) LIMIT 1;", $row->reviewFormID);
         $productID = $wpdb->get_var($productID_sql, 0, 0);
         $productName_sql = $wpdb->prepare("SELECT productName FROM $products_table_name WHERE (productID = %s) LIMIT 1;", $productID);
@@ -53,6 +55,14 @@ function bcr_display_reviews() {
             $question = $wpdb->get_var($question_sql, 0, 0);
             $output .= "<br>" . esc_html($question) . "     " . esc_html($answer->answerContent);
         }
+        if($admin) {
+            $output .= '<input type="hidden" name="' . $row->reviewID . '" value="false" />';
+            $output .= '<input type ="checkbox" id="hide" name = "' . $row->reviewID . '" value="true"';
+            if($row->isShown == false) {
+                $output .= " checked";
+            }
+            $output .= '><label for "hide"> Hide </label>';
+        }
         $output .= "</td></tr>";
     }
 
@@ -61,7 +71,16 @@ function bcr_display_reviews() {
     return $output;
 }
 
-add_shortcode('display_community_reviews', 'bcr_display_reviews');
+add_shortcode('display_community_reviews', 'bcr_display_reviews_shortcode');
+
+/**
+ * Shortcode for calling display reviews
+ * 
+ * @return String   shortcode output
+ */
+function bcr_display_reviews_shortcode($atts = [], $content = null) {
+    return bcr_display_reviews(false);
+}
 
 /**
  * Write contents of Elementor forms with a specific name to database

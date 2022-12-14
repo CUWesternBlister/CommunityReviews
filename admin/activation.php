@@ -6,6 +6,7 @@
  */
 function bcr_activate() {
     bcr_setup_tables();
+    bcr_create_test_requirements();
 }
 
 /**
@@ -211,6 +212,7 @@ function bcr_setup_tables() {
         reviewID int(9) NOT NULL AUTO_INCREMENT,
         userID int(9) NOT NULL,
         reviewFormID int(9) NOT NULL,
+        isShown BOOLEAN NOT NULL DEFAULT 1,
         PRIMARY KEY  (reviewID),
         FOREIGN KEY  (reviewFormID) REFERENCES $review_forms_table_name(reviewFormID)
         ) $charset_collate;";
@@ -232,6 +234,36 @@ function bcr_setup_tables() {
         ) $charset_collate;";
 
     dbDelta($sql);
+}
+
+/**
+ * Create infrastructure for test reviews
+ */
+function bcr_create_test_requirements() {
+    global $wpdb;
+
+    $sports_table_name = $wpdb->prefix . "bcr_sports";
+    $categories_table_name = $wpdb->prefix . "bcr_categories";
+    $products_table_name = $wpdb->prefix . "bcr_products";
+    $know_thyself_forms_table_name = $wpdb->prefix . "bcr_know_thyself_forms";
+    $review_forms_table_name = $wpdb->prefix . "bcr_review_forms";
+    $questions_table_name = $wpdb->prefix . "bcr_questions";
+    $know_thyself_forms_questions_table_name = $wpdb->prefix . "bcr_know_thyself_forms_questions";
+    $review_forms_questions_table_name = $wpdb->prefix . "bcr_review_forms_questions";
+
+    $wpdb->insert($sports_table_name, array('sportName' => "Test Sport"));
+    $wpdb->insert($categories_table_name, array('sportID' => 1, 'categoryName' => "Test Category"));
+    $wpdb->insert($products_table_name, array('categoryID' => 1, 'productName' => "Test Product"));
+    $wpdb->insert($know_thyself_forms_table_name, array('knowThyselfFormName' => 'Test Sport Know Thyself', 'sportID' => 1));
+    $wpdb->insert($review_forms_table_name, array('reviewFormName' => "Test Product Review", 'productID' => 1));
+    $wpdb->insert($questions_table_name, array('questionContent' => "How good are you at Test Sport?"));
+    $wpdb->insert($know_thyself_forms_questions_table_name, array('knowThyselfFormID' => 1, 'questionID' => 1));
+    $wpdb->insert($questions_table_name, array('questionContent' => "How do you like Test Product?"));
+    $wpdb->insert($questions_table_name, array('questionContent' => "Would you recommend Test Product?"));
+    $wpdb->insert($questions_table_name, array('questionContent' => "Any final thoughts?"));
+    $wpdb->insert($review_forms_questions_table_name, array('reviewFormID' => 1, 'questionID' => 2));
+    $wpdb->insert($review_forms_questions_table_name, array('reviewFormID' => 1, 'questionID' => 3));
+    $wpdb->insert($review_forms_questions_table_name, array('reviewFormID' => 1, 'questionID' => 4));
 }
 
 //Execute activation
