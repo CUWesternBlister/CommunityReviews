@@ -56,7 +56,8 @@ function bcr_display_reviews($admin) {
             $output .= "<br>" . esc_html($question) . "     " . esc_html($answer->answerContent);
         }
         if($admin) {
-            $output .= '<input type ="checkbox" id="hide" name = "hide" value="hide"';
+            $output .= '<input type="hidden" name="' . $row->reviewID . '" value="false" />';
+            $output .= '<input type ="checkbox" id="hide" name = "' . $row->reviewID . '" value="true"';
             if($row->isShown == false) {
                 $output .= " checked";
             }

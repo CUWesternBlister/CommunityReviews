@@ -20,11 +20,18 @@ function bcr_admin_page() {
  */
 function bcr_admin_page_html() {   
     ?>
+    <head>
+    </head>
     <div>
-        <?php
-            echo bcr_display_reviews(true);
-        ?>
+        <form action="<?php echo esc_url(admin_url('admin-post.php'));?>" method="post">
+            <input type="hidden" name="action" value="bcr_admin_form_response">
+            <?php
+                echo bcr_display_reviews(true);
+            ?>
+            <input type="submit" value="Submit Changes">
+        </form>
     </div>
+
     <?php
 }
 ?>
