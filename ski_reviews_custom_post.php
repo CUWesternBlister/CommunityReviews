@@ -6,7 +6,15 @@
  * Version: 0.1.1
  * text-domain: prefix-plugin-name
 */
+
+$filePath = '/Users/jacobvogel/Local Sites/communityreviews-knowthyself/app/public/wp-content/plugins/CommunityReviews/testfile.txt';
+$myfile = fopen($filePath, 'a') or die('fopen failed');
+
 function create_ski_review() {
+    
+    global $myfile;
+    
+    fwrite($myfile, "Function create_ski_review starting\n");
 
     $labels = array(
         'name' => _x( 'Ski Reviews', 'Post Type General Name', 'Ski Reviews' ),
@@ -60,6 +68,8 @@ function create_ski_review() {
         'capability_type' => 'post',
     );
     register_post_type( 'Ski Reviews', $args );
+    
+    fwrite($myfile, "Function create_ski_review finished\n");
 
 }
 add_action( 'init', 'create_ski_review', 0 );
@@ -69,6 +79,11 @@ add_action( 'init', 'create_ski_review', 0 );
 add_action( 'admin_init', 'my_admin' );
 
 function my_admin() {
+    
+    global $myfile;
+    
+    fwrite($myfile, "Function my_admin starting\n");
+    
     add_meta_box(
         'ski_review_meta_box',
         'Ski Reviews Information',
@@ -77,9 +92,15 @@ function my_admin() {
         'normal',
         'high'
     );
+    fwrite($myfile, "Function my_admin ending\n");
 }
 
 function display_ski_review_meta_box() {
+    
+    global $myfile;
+    
+    fwrite($myfile, "display_ski_review_meta_box starting\n");
+    
     ?>
     <table>
         <tr>
@@ -90,8 +111,14 @@ function display_ski_review_meta_box() {
             <td style="width: 50%">Product Tested</td>
             <td><input type="text" size="40" name="ski_review" value="<?php echo get_post_meta( get_the_ID(), 'product_tested', true ); ?>" readonly /></td>
         </tr>
+    /*
+    <tr>
+        <td style="width: 50%">Questions</td>
+        <td><input type="text" size="40" name="ski_review" value="<?php echo get_post_meta( get_the_ID(), 'questions', true ); ?>" readonly /></td>
+    </tr>*/
     </table>
     <?php
+    fwrite($myfile, "display_ski_review_meta_box ending\n");
 }
 
 
@@ -101,6 +128,10 @@ add_action( 'wp', 'insert_into_ski_review' );
 
 
 function ski_reviews_check_for_similar_meta_ids() {
+    
+    global $myfile;
+    
+    fwrite($myfile, "ski_reviews_check_for_similar_meta_ids starting\n");
     $id_arrays_in_cpt = array();
 
     $args = array(
@@ -118,16 +149,22 @@ function ski_reviews_check_for_similar_meta_ids() {
             $id_arrays_in_cpt[] = get_post_meta( get_the_ID(), 'id', true );
         }
     }
+    
+    fwrite($myfile, "ski_reviews_check_for_similar_meta_ids returning\n");
 
     return $id_arrays_in_cpt;
 }
 
 function ski_reviews_query_database_header( $ski_review_available_in_cpt_array ) {
     global $wpdb;
+    global $myfile;
     //$filePath = '/Users/jacobvogel/Local Sites/communityreviews-knowthyself/app/public/wp-content/plugins/CommunityReviews/testfile.txt';
     //$myfile = fopen($filePath, 'a') or die('fopen failed');
     
+    fwrite($myfile, "ski_reviews_query_database_header starting\n");
+    
     if ( NULL === $ski_review_available_in_cpt_array || 0 === $ski_review_available_in_cpt_array || '0' === $ski_review_available_in_cpt_array || empty( $ski_review_available_in_cpt_array ) ) {
+        fwrite($myfile, "ski_reviews_query_database_header running header query\n");
         $headerSql = "SELECT reviewID, userID, productName, categoryName, sportName
                             FROM wp_bcr_reviews AS reviews
                             INNER JOIN
@@ -156,8 +193,9 @@ function ski_reviews_query_database_header( $ski_review_available_in_cpt_array )
                             ON questions.questionID=answers.questionID
                             LIMIT 1";
         $answers = $wpdb->get_results($answerSql);
-        $returnArray = array($header,$answers);
-        return $returnArray;
+        //$returnArray = array($header,$answers);
+        fwrite($myfile, "ski_reviews_query_database_header returning\n");
+        return $header;
         /*$productName = $header->productName;
         fwrite($myfile,"productName: ". $productName ."\n");
         fclose($myfile);*/
@@ -182,14 +220,18 @@ function ski_reviews_query_database_header( $ski_review_available_in_cpt_array )
         $header = $wpdb->get_results($headerSql);
         /*fwrite($myfile,"header2: ".$header."\n");
         fclose($myfile);*/
+        fwrite($myfile, "ski_reviews_query_database_header returning\n");
         return $header;
         }
     }
 
 function ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array ) {
     global $wpdb;
+    global $myfile;
     //$filePath = '/Users/jacobvogel/Local Sites/communityreviews-knowthyself/app/public/wp-content/plugins/CommunityReviews/testfile.txt';
     //$myfile = fopen($filePath, 'a') or die('fopen failed');
+    
+    fwrite($myfile, "ski_reviews_query_database_QnA starting\n");
     
     if ( NULL === $ski_review_available_in_cpt_array || 0 === $ski_review_available_in_cpt_array || '0' === $ski_review_available_in_cpt_array || empty( $ski_review_available_in_cpt_array ) ) {
         $answerSql = "SELECT answerContent, questionContent
@@ -206,6 +248,8 @@ function ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array ) {
         $answers = $wpdb->get_results($answerSql);
         /*fwrite($myfile,"answers1: ".$answers->answerContent."\n");
         fclose($myfile);*/
+        
+        fwrite($myfile, "ski_reviews_query_database_header returning\n");
         return $answers;
         
     } else {
@@ -226,52 +270,60 @@ function ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array ) {
         
         /*fwrite($myfile,"answers2: ".$answers."\n");
         fclose($myfile);*/
+        fwrite($myfile, "ski_reviews_query_database_header returning\n");
         return $answers;
     }
     
 }
     
-    function insert_into_ski_review() {
+function insert_into_ski_review() {
         global $wpdb;
+        global $myfile;
+    
+        fwrite($myfile, "insert_into_ski_review() starting\n");
         
         $ski_review_available_in_cpt_array_1 = ski_reviews_check_for_similar_meta_ids();
         $ski_review_available_in_cpt_array_2 = $ski_review_available_in_cpt_array_1;
         
-        $results = ski_reviews_query_database_header( $ski_review_available_in_cpt_array_1 );
+        $header = ski_reviews_query_database_header( $ski_review_available_in_cpt_array_1 );
         
-        if ( NULL === $results || 0 === $results || '0' === $results || empty( $results ) ) {
+        if ( NULL === $header || 0 === $header || '0' === $header || empty( $header ) ) {
             return;
         }
         
-        $header = $results[0];
-        $QnA = $results[1];
+        //$header = $results[0];
+        //$QnA = $results[1];
         
         //$QnA = ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array_2 );
         
         //$answerContent = $QnA->answerContent;
         
-        //$filePath = '/Users/jacobvogel/Local Sites/communityreviews-knowthyself/app/public/wp-content/plugins/CommunityReviews/testfile.txt';
-        //$myfile = fopen($filePath, 'a') or die('fopen failed');
-        //fwrite($myfile,"productName: " . $header->productName . "\n");
         
-        foreach ( $header as $header ) {
-            $meta_input = array(
-                               'id'        => $header->reviewID,
-                               'product_tested'        => $header->productName,
-                               'category'           => $header->categoryName,
-                               'sport'          => $header->sportName,
-                               'questions'          => $QnA->$questionContent,
-                               'answers'           => $QnA->$answerContent
-                               );
-            $ski_review = array(
-                                'post_title' => wp_strip_all_tags( $QnA->answerContent . ' ' . $header->productName . ' ' . $QnA->answerContent),
-                                'post_content' => wp_strip_all_tags( $QnA->$answerContent),
-                                'meta_input' => $meta_input,
-                                'post_type'   => 'Ski Reviews',
-                                'post_status' => 'publish',
-                                );
-            wp_insert_post( $ski_review );
-        }
-        //fclose($myfile);
+        fwrite($myfile,"productName: " . $header->productName . "\n");
+        fwrite($myfile,"header: " . $header . "\n");
+        fwrite($myfile,"header: " . $header . "\n");
+        fwrite($myfile,"\n\n");
+        
+        //foreach ( $header as $header ) {
+        //$meta_input =
+        $ski_review = array(
+                            'post_title' => wp_strip_all_tags( /*$QnA->answerContent . ' ' .*/ $header->productName /*. ' ' . $QnA->answerContent*/),
+                            //'post_content' => wp_strip_all_tags( $QnA->$answerContent),
+                            'meta_input' => array(
+                                                  'id'        => $header->reviewID,
+                                                  'product_tested'        => $header->productName,
+                                                  'category'           => $header->categoryName,
+                                                  'sport'          => $header->sportName,
+                                                  //'questions'          => $QnA->questionContent,
+                                                  //'answers'           => $QnA->answerContent
+                                                  ),
+                            'post_type'   => 'Ski Reviews',
+                            'post_status' => 'publish',
+                            );
+        fwrite($myfile, "insert_into_ski_review() inserting post\n");
+        wp_insert_post( $ski_review );
+        fwrite($myfile, "post inserted??\n\n");
+        //}
+        
     }
 ?>
