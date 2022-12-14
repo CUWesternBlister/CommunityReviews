@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Ski Review Custom Post
- * Author: Jacob Vogel and Jayden Omi
+ * Author: Jacob Vogel
  * Description: Create Ski Review Custom Post from SQL database
  * Version: 0.1.1
  * text-domain: prefix-plugin-name
@@ -124,6 +124,8 @@ function ski_reviews_check_for_similar_meta_ids() {
 
 function ski_reviews_query_database_header( $ski_review_available_in_cpt_array ) {
     global $wpdb;
+    //$filePath = '/Users/jacobvogel/Local Sites/communityreviews-knowthyself/app/public/wp-content/plugins/CommunityReviews/testfile.txt';
+    //$myfile = fopen($filePath, 'a') or die('fopen failed');
     
     if ( NULL === $ski_review_available_in_cpt_array || 0 === $ski_review_available_in_cpt_array || '0' === $ski_review_available_in_cpt_array || empty( $ski_review_available_in_cpt_array ) ) {
         $headerSql = "SELECT reviewID, userID, productName, categoryName, sportName
@@ -141,7 +143,25 @@ function ski_reviews_query_database_header( $ski_review_available_in_cpt_array )
                             wp_bcr_sports AS sports
                             ON sports.sportID=categories.sportID";
         $header = $wpdb->get_results($headerSql);
-        return $header;
+        $answerSql = "SELECT answerContent, questionContent
+                            FROM wp_bcr_reviews AS reviews
+                            INNER JOIN
+                            wp_bcr_reviews_answers as reviewAnswers
+                            ON reviewAnswers.reviewID=reviews.reviewID
+                            INNER JOIN
+                            wp_bcr_answers as answers
+                            ON answers.answerID=reviewAnswers.answerID
+                            INNER JOIN
+                            wp_bcr_questions as questions
+                            ON questions.questionID=answers.questionID
+                            LIMIT 1";
+        $answers = $wpdb->get_results($answerSql);
+        $returnArray = array($header,$answers);
+        return $returnArray;
+        /*$productName = $header->productName;
+        fwrite($myfile,"productName: ". $productName ."\n");
+        fclose($myfile);*/
+        //return $header;
     } else {
         $ids = implode( ",", $ski_review_available_in_cpt_array );
         $headerSql = "SELECT reviewID, userID, productName, categoryName, sportName
@@ -160,15 +180,19 @@ function ski_reviews_query_database_header( $ski_review_available_in_cpt_array )
                             ON sports.sportID=categories.sportID
                             WHERE id NOT IN ( $ids )";
         $header = $wpdb->get_results($headerSql);
+        /*fwrite($myfile,"header2: ".$header."\n");
+        fclose($myfile);*/
         return $header;
         }
     }
 
 function ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array ) {
     global $wpdb;
+    //$filePath = '/Users/jacobvogel/Local Sites/communityreviews-knowthyself/app/public/wp-content/plugins/CommunityReviews/testfile.txt';
+    //$myfile = fopen($filePath, 'a') or die('fopen failed');
     
     if ( NULL === $ski_review_available_in_cpt_array || 0 === $ski_review_available_in_cpt_array || '0' === $ski_review_available_in_cpt_array || empty( $ski_review_available_in_cpt_array ) ) {
-        $answerSql = "SELECT questionContent, answerContent
+        $answerSql = "SELECT answerContent, questionContent
                             FROM wp_bcr_reviews AS reviews
                             INNER JOIN
                             wp_bcr_reviews_answers as reviewAnswers
@@ -180,6 +204,8 @@ function ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array ) {
                             wp_bcr_questions as questions
                             ON questions.questionID=answers.questionID";
         $answers = $wpdb->get_results($answerSql);
+        /*fwrite($myfile,"answers1: ".$answers->answerContent."\n");
+        fclose($myfile);*/
         return $answers;
         
     } else {
@@ -197,6 +223,9 @@ function ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array ) {
                             ON questions.questionID=answers.questionID
                             WHERE id NOT IN ( $ids )";
         $answers = $wpdb->get_results($answerSql);
+        
+        /*fwrite($myfile,"answers2: ".$answers."\n");
+        fclose($myfile);*/
         return $answers;
     }
     
@@ -208,17 +237,22 @@ function ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array ) {
         $ski_review_available_in_cpt_array_1 = ski_reviews_check_for_similar_meta_ids();
         $ski_review_available_in_cpt_array_2 = $ski_review_available_in_cpt_array_1;
         
-        $header = ski_reviews_query_database_header( $ski_review_available_in_cpt_array_1 );
+        $results = ski_reviews_query_database_header( $ski_review_available_in_cpt_array_1 );
         
-        if ( NULL === $header || 0 === $header || '0' === $header || empty( $header ) ) {
+        if ( NULL === $results || 0 === $results || '0' === $results || empty( $results ) ) {
             return;
         }
         
-        $QnA = ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array_2 );
+        $header = $results[0];
+        $QnA = $results[1];
         
-        $filePath = '/Users/jacobvogel/Local Sites/communityreviews-knowthyself/app/public/wp-content/plugins/CommunityReviews/testfile.txt';
-        $myfile = fopen($filePath, 'a') or die('fopen failed');
-        fwrite($myfile,"questionContent: ".$QnA->questionContent[1]."\n");
+        //$QnA = ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array_2 );
+        
+        //$answerContent = $QnA->answerContent;
+        
+        //$filePath = '/Users/jacobvogel/Local Sites/communityreviews-knowthyself/app/public/wp-content/plugins/CommunityReviews/testfile.txt';
+        //$myfile = fopen($filePath, 'a') or die('fopen failed');
+        //fwrite($myfile,"productName: " . $header->productName . "\n");
         
         foreach ( $header as $header ) {
             $meta_input = array(
@@ -230,14 +264,14 @@ function ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array ) {
                                'answers'           => $QnA->$answerContent
                                );
             $ski_review = array(
-                                'post_title' => wp_strip_all_tags( $QnA->answerContent[1] . ' ' . $header->productName . ' ' . $QnA->answerContent[2]),
-                                //'post_content' => wp_strip_all_tags( $QnA->questionContent . ' ' . $QnA->answerContent),
+                                'post_title' => wp_strip_all_tags( $QnA->answerContent . ' ' . $header->productName . ' ' . $QnA->answerContent),
+                                'post_content' => wp_strip_all_tags( $QnA->$answerContent),
                                 'meta_input' => $meta_input,
                                 'post_type'   => 'Ski Reviews',
                                 'post_status' => 'publish',
                                 );
             wp_insert_post( $ski_review );
         }
-        fclose($myfile);
+        //fclose($myfile);
     }
 ?>
