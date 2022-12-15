@@ -76,11 +76,12 @@ function bcr_remove_tables() {
     $answers_table_name = $wpdb->prefix . "bcr_answers";
     $sql = "DROP TABLE IF EXISTS $answers_table_name";
     $wpdb->query($sql);
-
+    /*
     //Remove Question table
     $questions_table_name = $wpdb->prefix . "bcr_questions";
     $sql = "DROP TABLE IF EXISTS $questions_table_name";
     $wpdb->query($sql);
+    */
 }
 
 //Execute deactivation

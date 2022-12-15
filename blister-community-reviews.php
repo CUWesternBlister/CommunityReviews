@@ -11,6 +11,8 @@ if (!defined('ABSPATH')) exit;
 register_activation_hook(__FILE__, 'bcr_activation');
 register_deactivation_hook(__FILE__, 'bcr_deactivation');
 add_action( 'plugins_loaded', 'bcr_include');
+add_action( 'plugins_loaded', 'bcr_include_table_write_functions');
+/*
 
 require_once( plugin_dir_path( __FILE__ ) . '/admin/adminPage.php');
 
@@ -81,7 +83,7 @@ add_shortcode( 'form_submissions', 'get_record_from_knowthyself' );
     }
 
     add_action( 'elementor_pro/forms/new_record', 'knowthyself_write_to_table', 10, 2);
-
+*/
 /**
  * Load Blister Community Reviews activation functions
  * 
@@ -103,3 +105,8 @@ function bcr_deactivation() {
 function bcr_include() {
     require_once( plugin_dir_path( __FILE__ ) . 'functions.php');
 }
+function bcr_include_table_write_functions() {
+    require_once( plugin_dir_path( __FILE__ ) . 'table_writing_functions.php');
+}
+add_action( 'elementor_pro/forms/new_record', 'summit_review_from_sub', 10, 2);
+add_action( 'elementor_pro/forms/new_record', 'profile_info_sub', 10, 2);
