@@ -13,6 +13,11 @@ register_deactivation_hook(__FILE__, 'bcr_deactivation');
 add_action( 'plugins_loaded', 'bcr_include');
 add_action( 'plugins_loaded', 'bcr_include_table_write_functions');
 /*
+require_once( plugin_dir_path( __FILE__ ) . '/admin/adminPage.php');
+
+define( 'BCR_PATH', plugin_dir_path( __FILE__ ));
+
+>>>>>>> e54edb7dd5873f64a6655547feec7a94dc8f77d9
 function get_record_from_knowthyself($atts) {
     $atts = shortcode_atts(
 
