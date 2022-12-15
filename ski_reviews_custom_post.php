@@ -7,14 +7,7 @@
  * text-domain: prefix-plugin-name
 */
 
-//$filePath = 'C:/Users/user/Local Sites/blister-capstone-project/app/public/wp-content/plugins/blister-community-reviews/testfile.txt';
-//$myfile = fopen($filePath, 'a') or die('fopen failed');
-
 function create_ski_review() {
-    
-    //global $myfile;
-    
-    //fwrite($myfile, "Function create_ski_review starting\n");
 
     $labels = array(
         'name' => _x( 'Ski Reviews', 'Post Type General Name', 'Ski Reviews' ),
@@ -68,21 +61,13 @@ function create_ski_review() {
         'capability_type' => 'post',
     );
     register_post_type( 'Ski Reviews', $args );
-    
-    //fwrite($myfile, "Function create_ski_review finished\n");
 
 }
 add_action( 'init', 'create_ski_review', 0 );
 
-
-
 add_action( 'admin_init', 'my_admin' );
 
 function my_admin() {
-    
-    //global $myfile;
-    
-    //fwrite($myfile, "Function my_admin starting\n");
     
     add_meta_box(
         'ski_review_meta_box',
@@ -92,15 +77,9 @@ function my_admin() {
         'normal',
         'high'
     );
-    //fwrite($myfile, "Function my_admin ending\n");
 }
 
 function display_ski_review_meta_box() {
-    
-    //global $myfile;
-    
-    //fwrite($myfile, "display_ski_review_meta_box starting\n");
-    
     ?>
     <table>
         <tr>
@@ -111,14 +90,8 @@ function display_ski_review_meta_box() {
             <td style="width: 50%">Product Tested</td>
             <td><input type="text" size="40" name="ski_review" value="<?php echo get_post_meta( get_the_ID(), 'product_tested', true ); ?>" readonly /></td>
         </tr>
-    /*
-    <tr>
-        <td style="width: 50%">Questions</td>
-        <td><input type="text" size="40" name="ski_review" value="<?php echo get_post_meta( get_the_ID(), 'questions', true ); ?>" readonly /></td>
-    </tr>*/
     </table>
     <?php
-    //fwrite($myfile, "display_ski_review_meta_box ending\n");
 }
 
 
@@ -127,7 +100,7 @@ add_action( 'wp', 'insert_into_ski_review' );
 
 
 
-function ski_reviews_check_for_similar_meta_ids() {
+/*function ski_reviews_check_for_similar_meta_ids() {
     
     //global $myfile;
     
@@ -153,9 +126,9 @@ function ski_reviews_check_for_similar_meta_ids() {
     //fwrite($myfile, "ski_reviews_check_for_similar_meta_ids returning\n");
 
     return $id_arrays_in_cpt;
-}
+}*/
 
-function ski_reviews_query_database_header( $ski_review_available_in_cpt_array ) {
+/*function ski_reviews_query_database_header( $ski_review_available_in_cpt_array ) {
     global $wpdb;
     global $myfile;
     //$filePath = '/Users/jacobvogel/Local Sites/communityreviews-knowthyself/app/public/wp-content/plugins/CommunityReviews/testfile.txt';
@@ -200,6 +173,7 @@ function ski_reviews_query_database_header( $ski_review_available_in_cpt_array )
         fwrite($myfile,"productName: ". $productName ."\n");
         fclose($myfile);*/
         //return $header;
+/*
     } else {
         $ids = implode( ",", $ski_review_available_in_cpt_array );
         $headerSql = "SELECT reviewID, userID, productName, categoryName, sportName
@@ -223,8 +197,8 @@ function ski_reviews_query_database_header( $ski_review_available_in_cpt_array )
         //fwrite($myfile, "ski_reviews_query_database_header returning\n");
         return $header;
         }
-    }
-
+    }*/
+/*
 function ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array ) {
     global $wpdb;
     global $myfile;
@@ -250,7 +224,7 @@ function ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array ) {
         fclose($myfile);*/
         
         //fwrite($myfile, "ski_reviews_query_database_header returning\n");
-        return $answers;
+  /*      return $answers;
         
     } else {
         $ids = implode( ",", $ski_review_available_in_cpt_array );
@@ -271,12 +245,12 @@ function ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array ) {
         /*fwrite($myfile,"answers2: ".$answers."\n");
         fclose($myfile);*/
         //fwrite($myfile, "ski_reviews_query_database_header returning\n");
-        return $answers;
+        /*return $answers;
     }
     
-}
+}*/
     
-function insert_into_ski_review() {
+/*function insert_into_ski_review() {
         global $wpdb;
         global $myfile;
     
@@ -291,26 +265,12 @@ function insert_into_ski_review() {
             return;
         }
         
-        //$header = $results[0];
-        //$QnA = $results[1];
-        
-        //$QnA = ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array_2 );
-        
-        //$answerContent = $QnA->answerContent;
-        
-        
-        //fwrite($myfile,"productName: " . $header->productName . "\n");
-        //fwrite($myfile,"header: " . $header . "\n");
-        //fwrite($myfile,"header: " . $header . "\n");
-        //fwrite($myfile,"\n\n");
-        
-        //foreach ( $header as $header ) {
-        //$meta_input =
         $ski_review = array(
                             'post_title' => wp_strip_all_tags( /*$QnA->answerContent . ' ' .*/ $header->productName /*. ' ' . $QnA->answerContent*/),
                             //'post_content' => wp_strip_all_tags( $QnA->$answerContent),
-                            'meta_input' => array(
+                           /* 'meta_input' => array(
                                                   'id'        => $header->reviewID,
+                                                  'userID'          => 
                                                   'product_tested'        => $header->productName,
                                                   'category'           => $header->categoryName,
                                                   'sport'          => $header->sportName,
@@ -320,10 +280,8 @@ function insert_into_ski_review() {
                             'post_type'   => 'Ski Reviews',
                             'post_status' => 'publish',
                             );
-        //fwrite($myfile, "insert_into_ski_review() inserting post\n");
         wp_insert_post( $ski_review );
-        //fwrite($myfile, "post inserted??\n\n");
         //}
         
-    }
+    }*/
 ?>
