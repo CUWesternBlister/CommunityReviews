@@ -136,36 +136,13 @@ function ski_reviews_check_for_similar_meta_ids() {
     return $id_arrays_in_cpt;
 }
 
-function insert_into_ski_review() {
+function insert_into_ski_review($header) {
         global $wpdb;
-        //global $myfile;
-    
-        //fwrite($myfile, "insert_into_ski_review() starting\n");
-        
-        $ski_review_available_in_cpt_array_1 = ski_reviews_check_for_similar_meta_ids();
-        $ski_review_available_in_cpt_array_2 = $ski_review_available_in_cpt_array_1;
-        
-        $header = ski_reviews_query_database_header( $ski_review_available_in_cpt_array_1 );
         
         if ( NULL === $header || 0 === $header || '0' === $header || empty( $header ) ) {
             return;
         }
         
-        //$header = $results[0];
-        //$QnA = $results[1];
-        
-        //$QnA = ski_reviews_query_database_QnA( $ski_review_available_in_cpt_array_2 );
-        
-        //$answerContent = $QnA->answerContent;
-        
-        
-        //fwrite($myfile,"productName: " . $header->productName . "\n");
-        //fwrite($myfile,"header: " . $header . "\n");
-        //fwrite($myfile,"header: " . $header . "\n");
-        //fwrite($myfile,"\n\n");
-        
-        //foreach ( $header as $header ) {
-        //$meta_input =
         $ski_review = array(
                             'post_title' => wp_strip_all_tags( /*$QnA->answerContent . ' ' .*/ $header->productName /*. ' ' . $QnA->answerContent*/),
                             //'post_content' => wp_strip_all_tags( $QnA->$answerContent),
@@ -176,6 +153,8 @@ function insert_into_ski_review() {
                                                   'sport'          => $header->sportName,
                                                   //'questions'          => $QnA->questionContent,
                                                   //'answers'           => $QnA->answerContent
+                                                  //userID
+                                                  //user
                                                   ),
                             'post_type'   => 'Ski Reviews',
                             'post_status' => 'publish',
@@ -203,7 +182,7 @@ function summit_review_from_sub( $record, $ajax_handler ) {
     fwrite($myfile,"current form id: ".$current_form_id."\n"); 
 
     if(in_array($current_form_name, $existing_form_names)){
-        
+    	//-----------------write to tables-----------------------------
         $answer_ids = summit_insert_into_answer_table($record, $myfile);
         fwrite($myfile, "write to answer table ids:\n") or die('fwrite 1 failed');
         $res1 = implode(", ", $answer_ids)."\n";
@@ -218,11 +197,24 @@ function summit_review_from_sub( $record, $ajax_handler ) {
         
 
         summit_insert_into_review_answer_table($id, $answer_ids,$myfile);
-        //$ajax_handler->add_response_data( true, "this is  another test" );
-    }
-    fwrite($myfile, "\n\n-------------------------------------------\n\n") or die('fwrite 1 failed');
-    fclose($myfile);
+
+        //---------------create custom post-----------------------------------
+        $header = [];
+        $header['reviewID'] = $id;
+        $product_info = get_product_info($current_form_id);
+        $header['productName'] = $product_info['productName'];
+        $category_info = get_category_info($product_info->categoryID);
+        $header['categoryName'] = $category_info['categoryName'];
+        $sport_info = get_sport_info($category_info['sportID']); 
+        $header['sportName'] = $sport_info['sportName'];
+        $q_and_a_content = get_answer_and_question_content($record,$myfile);
+        $header['questionContent'] = $q_and_a_content['question_content'];
+        $header['answerContent']= $q_and_a_content['answer_content'];
+    	insert_into_ski_review($header);
+	}
 }
+
+//-----------------------------usefull functions------------------------------------
 
 function get_all_form_names($file){
     global $wpdb;
@@ -240,23 +232,45 @@ function get_all_form_names($file){
     return $ret_arr;
 }
 
-function summit_answer_array($record,$file){
-    //global $wpdb;
+function get_current_userID($file){
+    global $wpdb;
+    $start = "          SUMMIT get user id \n";
+    fwrite($file, $start);
+    if ( ! function_exists( 'get_current_user_id' ) ) {
+        return 0;
+    }
+    $cur_userID = get_current_user_id();
+    $str = "-------- " . strval($cur_userID) . " ----------\n";
+    fwrite($file, $str);
+    if($cur_userID == 0){
+        //then not logged in
+        //we should check this field when they click to start a review form.
+        return "userID does not exist, or user is not logged in";
+    }
+    $user_table = $wpdb->prefix . "bcr_users";
+    $q = "SELECT userID FROM $user_table WHERE userID = $cur_userID;";
+    $res = $wpdb->query($q);
+    if($res == false){
+        //should not be allowed to start a form untill they are in bcr users
+        return "userID does not exist in bcr user table, has not registerd";
+    }
+    //check if user in wp bcr users
+    return intval($cur_userID->userID);
+}
+
+//------------------------------tabel writing stuff-----------------------------------
+
+function summit_insert_into_answer_table($record,$file){
+    global $wpdb;
     $start = "\n\n SUMMIT INSERT INTO ANSWER TABLE \n";
     fwrite($file, $start);
-
-    $return_array = [];
-    //$answer_table = $wpdb->prefix . "bcr_answers";
-    //$answer_ids = []; //used for when inserting into reviews answers
-    $answer_content = [];
-    $question_ids = [];//manually entered into elementor form, until we can make a form dynamically 
-    
-
+    $answer_table = $wpdb->prefix . "bcr_answers";
+    $answer_ids = []; //used for when inserting into reviews answers
+    //$question_ids = [];//manually entered into elementor form, until we can make a form dynamically 
     $raw_fields = $record->get( 'fields' );
     $output = [];
     foreach ( $raw_fields as $id => $field ) {
         if($id != "step"){
-            /*
             $fields_answers = [];
             $fields_answers['questionID'] = $id;
             $fields_answers['answerContent'] = $field['value'];
@@ -264,16 +278,14 @@ function summit_answer_array($record,$file){
             //if($output == success){
 
             //}
-            //$last_answer_id = $wpdb->insert_id;//answer id generated upon entering into table
+            $last_answer_id = $wpdb->insert_id;//answer id generated upon entering into table
                                                 //!!!!!!may be susceptible to collisions with mulitple users
-            array_push($answer_content, $field['value'];);
-            array_push($question_ids, $id)
+            array_push($answer_ids, $last_answer_id);
         }
     }
     //$ajax_handler->add_response_data( true, $output );
     return $answer_ids;
 }
-
 function summit_insert_into_review_table($RF_id, $file){
        //insert review 
         //echo "in review table functions!<br>";
@@ -315,33 +327,6 @@ function summit_insert_into_review_table($RF_id, $file){
         $last_review_id = $wpdb->insert_id;
         return $last_review_id;
 }
-
-function get_current_userID($file){
-    global $wpdb;
-    $start = "          SUMMIT get user id \n";
-    fwrite($file, $start);
-    if ( ! function_exists( 'get_current_user_id' ) ) {
-        return 0;
-    }
-    $cur_userID = get_current_user_id();
-    $str = "-------- " . strval($cur_userID) . " ----------\n";
-    fwrite($file, $str);
-    if($cur_userID == 0){
-        //then not logged in
-        //we should check this field when they click to start a review form.
-        return "userID does not exist, or user is not logged in";
-    }
-    $user_table = $wpdb->prefix . "bcr_users";
-    $q = "SELECT 1 userID FROM $user_table WHERE userID = $cur_userID;";
-    $res = $wpdb->query($q);
-    if($res == false){
-        //should not be allowed to start a form untill they are in bcr users
-        return "userID does not exist in bcr user table, has not registerd";
-    }
-    //check if user in wp bcr users
-    return intval($cur_userID);
-}
-
 function get_knowthyself_id($userID){
     global $wpdb;
     $KTS_table = $wpdb->prefix . "bcr_know_thyself";
@@ -349,7 +334,6 @@ function get_knowthyself_id($userID){
     $res = $wpdb->get_results($q);
     return $res->knowThyselfID;
 }
-
 function summit_insert_into_review_answer_table($review_id, $answer_ids,$file){
     //insert answer ids int review answer table
         global $wpdb;
@@ -366,6 +350,78 @@ function summit_insert_into_review_answer_table($review_id, $answer_ids,$file){
 
             //}
         }
+}
+
+//------------------------------custom post  stuff-------------------------------------
+function get_answer_and_question_content($record,$file){
+    global $wpdb;
+    $start = "\n\n SUMMIT INSERT INTO ANSWER TABLE \n";
+    fwrite($file, $start);
+
+    $return_array = [];
+    //$answer_ids = []; //used for when inserting into reviews answers
+    $answer_content = [];
+    $question_ids = [];//manually entered into elementor form, until we can make a form dynamically 
+    
+    $raw_fields = $record->get( 'fields' );
+    $output = [];
+    foreach ( $raw_fields as $id => $field ) {
+        if($id != "step"){
+            array_push($answer_content, $field['value'];);
+            array_push($question_ids, $id)
+        }
+    }
+    $question_table = $wpdb->prefix . "bcr_questions";
+    $question_content = [];
+    foreach($question_ids as $id){
+    	$q = "SELECT questionContent FROM $question_table WHERE questionID = $id;";
+    	$q_content = $wpdb->get_results($q);
+    	array_push($question_content, $q_content->questionContent);
+    }
+    $return_array['question_content'] = $question_content;
+    $return_array['answer_content'] = $answer_content;
+   
+    return $return_array;
+}
+
+function get_product_info($form_id){
+	global $wpdb;
+	$form_table = $wpdb->prefix . "bcr_review_forms";
+	$q1 = 'SELECT productID FROM $form_table WHERE reviewFormID = $form_id;';
+	$res1 = $wpdb->get_results($q1);
+	$product_id = $res1->productID;
+	$product_table = $wpdb->prefix . "bcr_products";
+	$q2 = 'SELECT * FROM $product_table WHERE productID = $product_id;';
+	$res2 = $wpdb->get_results($q2);
+	$return_array = [];
+	$return_array['productID'] = $res2->productID;
+	$return_array['productName'] = $res2->productName;
+	$return_array['categoryID'] = $res2->categoryID;
+	return $return_array;
+}
+
+function get_category_info($category_id){
+	global $wpdb;
+	$category_table = $wpdb->prefix . "bcr_categories";
+	$q = 'SELECT * FROM $category_table WHERE categoryID = $category_id;';
+	$res = $wpdb->get_results($q);
+	$return_array = [];
+	$return_array['categoryID'] = $category_id;
+	$return_array['categoryName'] = $res->categoryName;
+	$return_array['parentID'] = $res->parentID;
+	$return_array['sportID'] = $res->sportID;
+	return $return_array;
+}
+
+function get_sport_info($sport_id){
+	global $wpdb;
+	$sports_table = $wpdb->prefix . "bcr_sports";
+	$q = 'SELECT * FROM $sports_table WHERE sportID = $sport_id;';
+	$res = $wpdb->get_results($q);
+	$return_array = [];
+	$return_array['sportID'] = $sport_id;
+	$return_array['sportName'] = $res->sportName;
+	retrun $return_array;
 }
 
 ?>
