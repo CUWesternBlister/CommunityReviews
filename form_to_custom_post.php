@@ -1,12 +1,9 @@
 <?php
 
-function insert_into_ski_review() {
+function insert_into_ski_review( $header, $questions, $answers ) {
         global $wpdb;
-        
-        $ski_review_available_in_cpt_array_1 = ski_reviews_check_for_similar_meta_ids();
-        $ski_review_available_in_cpt_array_2 = $ski_review_available_in_cpt_array_1;
-        
-        $header = ski_reviews_query_database_header( $ski_review_available_in_cpt_array_1 );
+    
+        $header->userWeight;
         
         if ( NULL === $header || 0 === $header || '0' === $header || empty( $header ) ) {
             return;
@@ -16,13 +13,17 @@ function insert_into_ski_review() {
                             'post_title' => wp_strip_all_tags( /*$QnA->answerContent . ' ' .*/ $header->productName /*. ' ' . $QnA->answerContent*/),
                             //'post_content' => wp_strip_all_tags( $QnA->$answerContent),
                             'meta_input' => array(
-                                                  'id'        => $header->reviewID,
-                                                  'userID'          =>
+                                                  'reviewID'        => $header->reviewID,
+                                                  'userID'          => $header->userID,
+                                                  'heightFeet'          => $header->heightFeet,
+                                                  'heightInches'            => $header->heightInches,
+                                                  'weight'          => $header->weight,
+                                                  'skiAbility'          => $header->skiAbility,
                                                   'product_tested'        => $header->productName,
                                                   'category'           => $header->categoryName,
                                                   'sport'          => $header->sportName,
-                                                  //'questions'          => $QnA->questionContent,
-                                                  //'answers'           => $QnA->answerContent
+                                                  'questions'          => $questions,
+                                                  'answers'           => $answers
                                                   ),
                             'post_type'   => 'Ski Reviews',
                             'post_status' => 'publish',
@@ -30,6 +31,19 @@ function insert_into_ski_review() {
         wp_insert_post( $ski_review );
         
     }
+
+function get_user_information(){
+    global $wpdb;
+    
+    $userID = get_current_userID();
+    
+    $user_table_name = $wpdb->prefix . "bcr_users";
+    
+    $queryString = 'SELECT userID, heightFeet, heightInches, weight, skiAbility FROM $user_table_name WHERE userID=$userID';
+    
+    $userInformation = wpdb->get_results(queryString);
+    return userInformation;
+}
 
 function summit_review_from_sub( $record, $ajax_handler ) {
     global $wpdb;
