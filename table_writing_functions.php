@@ -1,5 +1,34 @@
 <?php
 //require 'table_utils.php';
+function profile_info_sub( $record, $ajax_handler ){
+    global $wpdb;
+    $user_table_name = $wpdb->prefix . "bcr_users";
+    $form_name = $record->get_form_settings( 'form_name' );
+    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
+    $myfile = fopen($file_path, "a") or die('fopen failed');
+    $fields = [];
+    if($form_name == 'Profile Builder') {
+        $userID = get_current_userID($myfile);
+        fwrite($myfile,$userID);
+        $fields['userID'] = $userID;
+        $raw_fields = $record->get('fields');
+        $fields['heightFeet'] = $raw_fields["height_feet"]['value'];
+        $fields['heightInches'] = $raw_fields["height_inches"]['value'];
+        $fields['weight'] = $raw_fields["weight"]['value'];
+        $fields['skiAbility'] = $raw_fields["user_experience"]['value'];
+
+        $q = "SELECT userID FROM $user_table_name WHERE userID = $userID;";
+        $res = $wpdb->query($q);
+
+        if($res){
+            $output['success'] = $wpdb->update($user_table_name, $fields, array("userID"=>$userID));
+        }else {
+            $output['success'] = $wpdb->insert($user_table_name, $fields);
+        }
+        $ajax_handler->add_response_data(true, $output);
+    }
+    fclose($myfile);
+}
 /*
 function summit_review_from_sub( $record, $ajax_handler ) {
     global $wpdb;
@@ -86,8 +115,6 @@ function summit_insert_into_review_table($RF_id, $file){
         $review_table = $wpdb->prefix . "bcr_reviews";
         $fields_review = [];
 
-
-
         $current_userID = get_current_userID($file);
         if(gettype($current_userID)=="string"){
             fwrite($file,"user id grab failed: ".$current_userID."\n");
@@ -95,10 +122,7 @@ function summit_insert_into_review_table($RF_id, $file){
         }
         fwrite($file,"userID = ".strval($current_userID)."\n");
         $fields_review['userID'] = $current_userID;
-        
 
-
-        //$KTSid = get_knowthyself_id($current_userID);
         $fields_review['knowThyselfID'] = 4;//get this id from bcr_know_thyself using userid HAS TO EXIST BEFORE SUBMISSION
         
 
@@ -110,13 +134,12 @@ function summit_insert_into_review_table($RF_id, $file){
 
         fwrite($file, "fields_review: ".implode(", ",$fields_review)."\n");
         $output2['success'] = $wpdb->insert($review_table, $fields_review);
-        //$str = "number of rows inserted: ".strval($output['success'])." ||| did not work if false\n";
-        //fwrite($file, $str);
         //echo strval(output['success'])."<br>";
         //$ajax_handler->add_response_data( true, $output );
         $last_review_id = $wpdb->insert_id;
         return $last_review_id;
 }
+*/
 
 function get_current_userID($file){
     global $wpdb;
@@ -136,14 +159,12 @@ function get_current_userID($file){
     $user_table = $wpdb->prefix . "bcr_users";
     $q = "SELECT 1 userID FROM $user_table WHERE userID = $cur_userID;";
     $res = $wpdb->query($q);
-    if($res == false){
-        //should not be allowed to start a form untill they are in bcr users
-        return "userID does not exist in bcr user table, has not registerd";
-    }
+
     //check if user in wp bcr users
     return intval($cur_userID);
 }
 
+/*
 function get_knowthyself_id($userID){
     global $wpdb;
     $KTS_table = $wpdb->prefix . "bcr_know_thyself";
@@ -151,7 +172,6 @@ function get_knowthyself_id($userID){
     $res = $wpdb->get_results($q);
     return $res->knowThyselfID;
 }
-
 function summit_insert_into_review_answer_table($review_id, $answer_ids,$file){
     //insert answer ids int review answer table
         global $wpdb;
