@@ -2,29 +2,31 @@
 
 function insert_into_ski_review( $header) {
         global $wpdb;
-    
-        $header->userWeight;
 
+        $answersContent = $header->answersContent;
+    
+        $userInfo = $header->userInfo;
+        
         
         if ( NULL === $header || 0 === $header || '0' === $header || empty( $header ) ) {
             return;
         }
         
         $ski_review = array(
-                            'post_title' => wp_strip_all_tags( /*$QnA->answerContent . ' ' .*/ $header->productName /*. ' ' . $QnA->answerContent*/),
+                            'post_title' => wp_strip_all_tags( $answersContent[1] . ' ' . $header->productName . ' ' . $answersContent[2]),
                             //'post_content' => wp_strip_all_tags( $QnA->$answerContent),
                             'meta_input' => array(
                                                   'reviewID'        => $header->reviewID,
-                                                  'userID'          => $header->userID,
-                                                  'heightFeet'          => $header->heightFeet,
-                                                  'heightInches'            => $header->heightInches,
-                                                  'weight'          => $header->weight,
-                                                  'skiAbility'          => $header->skiAbility,
+                                                  'userID'          => $userInfo->userID,
+                                                  'heightFeet'          => $userInfo->heightFeet,
+                                                  'heightInches'            => $userInfo->heightInches,
+                                                  'weight'          => $userInfo->weight,
+                                                  'skiAbility'          => $userInfo->skiAbility,
                                                   'product_tested'        => $header->productName,
                                                   'category'           => $header->categoryName,
                                                   'sport'          => $header->sportName,
-                                                  'questions'          => $header->questions_content,////////////////////fix name
-                                                  'answers'           => $header->answers_content
+                                                  'questions'          => $header->questionsContent,
+                                                  'answers'           => $header->answersContent
                                                   ),
                             'post_type'   => 'Ski Reviews',
                             'post_status' => 'publish',
