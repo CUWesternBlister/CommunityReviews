@@ -1,6 +1,6 @@
 <?php
 //require 'table_utils.php';
-
+/*
 function summit_review_from_sub( $record, $ajax_handler ) {
     global $wpdb;
     $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt'; 
@@ -169,4 +169,5 @@ function summit_insert_into_review_answer_table($review_id, $answer_ids,$file){
             //}
         }
 }
+*/
 ?>
