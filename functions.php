@@ -223,6 +223,48 @@ function get_record_from_form_submissions($atts) {
 }
 add_shortcode( 'form_submissions', 'get_record_from_form_submissions' );
 
+function display_user_info($atts){
+    global $wpdb;
+    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
+    $myfile = fopen($file_path, "a") or die('fopen failed');
+    $userID = get_current_userID($myfile);
+    fwrite($myfile, $userID);
+    $user_table_name = $wpdb->prefix . "bcr_users";
+    $q = $wpdb->prepare("SELECT * FROM $user_table_name WHERE userID = $userID LIMIT 1;");
+    $userEntry = $wpdb->get_results($q);
+    if ( $userEntry ) {
+        $heightF = array_map(
+            function( $form_sub_object ) {
+                return $form_sub_object->heightFeet;
+            },
+            $userEntry
+        );
+        $heightI = array_map(
+            function( $form_sub_object ) {
+                return $form_sub_object->heightInches;
+            },
+            $userEntry
+        );
+        $weight = array_map(
+            function( $form_sub_object ) {
+                return $form_sub_object->weight;
+            },
+            $userEntry
+        );
+        $ability = array_map(
+            function( $form_sub_object ) {
+                return $form_sub_object->skiAbility;
+            },
+            $userEntry
+        );
+        return "User Height: ".implode( '  ', $heightF) ."' ".implode( '  ', $heightI) .'"'.
+            "<br><br>User Weight: ".implode('  ', $weight)." lbs".
+            "<br><br>User Experience: ".implode('  ', $ability);
+    }
+    return '';
+}
+add_shortcode('user_info', 'display_user_info');
+
 // WRITING KNOW THY SELF FORM TO KNOWTHYSELF TABLE. THIS CAN BE USED ONLY FOR REFERENCE.
 
     function capstone_write_to_table($record, $ajax_handler) {
