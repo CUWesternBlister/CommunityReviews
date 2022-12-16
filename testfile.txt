@@ -1,0 +1,307 @@
+
+
+ SUMMIT get all form names 
+test review form
+Summit Review Form
+form names: Array
+current form name: Summit Review Form
+current form id: 2
+
+
+ SUMMIT INSERT INTO ANSWER TABLE 
+write to answer table ids:
+239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 0, 251, 252, 253, 254, 255, 256, 257
+write to review table id:
+
+
+ SUMMIT INSERT INTO REVIEW TABLE 
+          SUMMIT get user id 
+-------- 1 ----------
+userID = 1
+fields_review: 1, 4, 2
+last inserted review id: 56
+
+
+ SUMMIT INSERT INTO REVIEW ANSWER TABLE 
+
+
+ GET PRODUCT INFORMATION 
+form id: 2
+get results: 
+stdClass Object
+(
+    [reviewFormID] => 2
+    [reviewFormName] => Summit Review Form
+    [productID] => 2
+)
+
+product id: 2
+product info: 
+Array
+(
+    [productID] => 2
+    [productName] => test product
+    [categoryID] => 1
+)
+
+
+
+
+ GET CATEGORY INFORMATION 
+category id: 1
+get results: 
+stdClass Object
+(
+    [categoryID] => 1
+    [parentID] => 
+    [sportID] => 1
+    [categoryName] => test category
+)
+
+categroy info: 
+Array
+(
+    [categoryID] => 1
+    [categoryName] => test category
+    [parentID] => 
+    [sportID] => 1
+)
+
+
+sport info: 
+Array
+(
+    [sportID] => 1
+    [sportName] => test sport
+)
+
+
+
+
+ GET ANSWERS AND QUESTIONS 
+1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 13, 14, 17, 16, 19, 20, 21, 24, 22, 23 
+Product Tested, Brand Tested, Length Tested, Where did you test it?, What type of terrain did you ski?, What type of conditions did you ski in?, How did you feel about the Maneuverability of this ski?, The Stability of the ski: (check all that apply), How did you feel about the Stability of this ski?, How demanding or punishing did you find the ski to be?, Ride quality / suspension. This ski felt: , The ski felt comfortable to me on / in (check all that apply): , What type of skier do you imagine will get along best with this ski? (check all that apply), Did you feel like you were on the correct length of this ski?, How much do you like the looks of the product?, Please feel free to elaborate:, How likely are you to either buy or recommend this product?, Please feel free to elaborate:, Are there similar products you've skied that you clearly prefer? If so, which products and what about them makes you prefer them?, Anything else you'd like to add? 
+ski, Nordica, 158, Backcountry, Groomers, Extremely firm harpdack or ice - where it was very hard to hold an edge, I’d call it below average, Was more stable than I was expecting, Didn’t Love it., I felt like if I made any mistakes, this ski would kick my ass., Dead. No energy return. One-dimensional. Great if you want a tank., Lower-angle, intermediate terrain, I imagine that a lot of skiers will get along really well with this ski., Not fun. I didn’t really enjoy anything about it, honestly can’t imagine who would. Almost *anyone* who wants to just have fun on the mountain, I have trouble imagining that this ski will resonate with a broad range of skiers Beginner / intermediate skiers who want an easy going ski that will allow them to progress all over the mountain, I imagine it will resonate with a pretty niche / specific type of skier Beginner / intermediate skiers who will stick primarily to groomers, but might occasionally venture off piste, I imagine that a lot of skiers will get along really well with this ski. Intermediate skiers looking for a really fun, playful ski that’s comfortable all-around, It's among the most fun skis I’ve ever been on - in this category of skis Advanced and expert skiers who want an all-mountain ski, Very physically strong skiers, I’d like to try a shorter length, but not sure that shorter would be better., 9, 77777777777777, Might buy, 777777777777777, 777777777777777777, 777777777777777777777 
+QandA info: 
+Array
+(
+    [question_content] => Array
+        (
+            [0] => Product Tested
+            [1] => Brand Tested
+            [2] => Length Tested
+            [3] => Where did you test it?
+            [4] => What type of terrain did you ski?
+            [5] => What type of conditions did you ski in?
+            [6] => How did you feel about the Maneuverability of this ski?
+            [7] => The Stability of the ski: (check all that apply)
+            [8] => How did you feel about the Stability of this ski?
+            [9] => How demanding or punishing did you find the ski to be?
+            [10] => Ride quality / suspension. This ski felt: 
+            [11] => The ski felt comfortable to me on / in (check all that apply): 
+            [12] => What type of skier do you imagine will get along best with this ski? (check all that apply)
+            [13] => Did you feel like you were on the correct length of this ski?
+            [14] => How much do you like the looks of the product?
+            [15] => Please feel free to elaborate:
+            [16] => How likely are you to either buy or recommend this product?
+            [17] => Please feel free to elaborate:
+            [18] => Are there similar products you've skied that you clearly prefer? If so, which products and what about them makes you prefer them?
+            [19] => Anything else you'd like to add?
+        )
+
+    [answer_content] => Array
+        (
+            [0] => ski
+            [1] => Nordica
+            [2] => 158
+            [3] => Backcountry
+            [4] => Groomers
+            [5] => Extremely firm harpdack or ice - where it was very hard to hold an edge
+            [6] => I’d call it below average
+            [7] => Was more stable than I was expecting
+            [8] => Didn’t Love it.
+            [9] => I felt like if I made any mistakes, this ski would kick my ass.
+            [10] => Dead. No energy return. One-dimensional. Great if you want a tank.
+            [11] => Lower-angle, intermediate terrain
+            [12] => I imagine that a lot of skiers will get along really well with this ski., Not fun. I didn’t really enjoy anything about it, honestly can’t imagine who would. Almost *anyone* who wants to just have fun on the mountain, I have trouble imagining that this ski will resonate with a broad range of skiers Beginner / intermediate skiers who want an easy going ski that will allow them to progress all over the mountain, I imagine it will resonate with a pretty niche / specific type of skier Beginner / intermediate skiers who will stick primarily to groomers, but might occasionally venture off piste, I imagine that a lot of skiers will get along really well with this ski. Intermediate skiers looking for a really fun, playful ski that’s comfortable all-around, It's among the most fun skis I’ve ever been on - in this category of skis Advanced and expert skiers who want an all-mountain ski, Very physically strong skiers
+            [13] => I’d like to try a shorter length, but not sure that shorter would be better.
+            [14] => 9
+            [15] => 77777777777777
+            [16] => Might buy
+            [17] => 777777777777777
+            [18] => 777777777777777777
+            [19] => 777777777777777777777
+        )
+
+)
+
+
+
+
+ GET USER INFORMATION 
+          SUMMIT get user id 
+-------- 1 ----------
+user id: 1
+user info: 
+stdClass Object
+(
+    [userID] => 1
+    [heightFeet] => 5
+    [heightInches] => 10
+    [weight] => 175
+    [skiAbility] => 10
+)
+
+
+HEADER: 
+Array
+(
+    [reviewID] => 56
+    [productName] => test product
+    [categoryName] => test category
+    [sportName] => test sport
+    [questionContent] => Array
+        (
+            [0] => Product Tested
+            [1] => Brand Tested
+            [2] => Length Tested
+            [3] => Where did you test it?
+            [4] => What type of terrain did you ski?
+            [5] => What type of conditions did you ski in?
+            [6] => How did you feel about the Maneuverability of this ski?
+            [7] => The Stability of the ski: (check all that apply)
+            [8] => How did you feel about the Stability of this ski?
+            [9] => How demanding or punishing did you find the ski to be?
+            [10] => Ride quality / suspension. This ski felt: 
+            [11] => The ski felt comfortable to me on / in (check all that apply): 
+            [12] => What type of skier do you imagine will get along best with this ski? (check all that apply)
+            [13] => Did you feel like you were on the correct length of this ski?
+            [14] => How much do you like the looks of the product?
+            [15] => Please feel free to elaborate:
+            [16] => How likely are you to either buy or recommend this product?
+            [17] => Please feel free to elaborate:
+            [18] => Are there similar products you've skied that you clearly prefer? If so, which products and what about them makes you prefer them?
+            [19] => Anything else you'd like to add?
+        )
+
+    [answerContent] => Array
+        (
+            [0] => ski
+            [1] => Nordica
+            [2] => 158
+            [3] => Backcountry
+            [4] => Groomers
+            [5] => Extremely firm harpdack or ice - where it was very hard to hold an edge
+            [6] => I’d call it below average
+            [7] => Was more stable than I was expecting
+            [8] => Didn’t Love it.
+            [9] => I felt like if I made any mistakes, this ski would kick my ass.
+            [10] => Dead. No energy return. One-dimensional. Great if you want a tank.
+            [11] => Lower-angle, intermediate terrain
+            [12] => I imagine that a lot of skiers will get along really well with this ski., Not fun. I didn’t really enjoy anything about it, honestly can’t imagine who would. Almost *anyone* who wants to just have fun on the mountain, I have trouble imagining that this ski will resonate with a broad range of skiers Beginner / intermediate skiers who want an easy going ski that will allow them to progress all over the mountain, I imagine it will resonate with a pretty niche / specific type of skier Beginner / intermediate skiers who will stick primarily to groomers, but might occasionally venture off piste, I imagine that a lot of skiers will get along really well with this ski. Intermediate skiers looking for a really fun, playful ski that’s comfortable all-around, It's among the most fun skis I’ve ever been on - in this category of skis Advanced and expert skiers who want an all-mountain ski, Very physically strong skiers
+            [13] => I’d like to try a shorter length, but not sure that shorter would be better.
+            [14] => 9
+            [15] => 77777777777777
+            [16] => Might buy
+            [17] => 777777777777777
+            [18] => 777777777777777777
+            [19] => 777777777777777777777
+        )
+
+    [userInfo] => stdClass Object
+        (
+            [userID] => 1
+            [heightFeet] => 5
+            [heightInches] => 10
+            [weight] => 175
+            [skiAbility] => 10
+        )
+
+)
+
+
+answer content grabbed
+ski, Nordica, 158, Backcountry, Groomers, Extremely firm harpdack or ice - where it was very hard to hold an edge, I’d call it below average, Was more stable than I was expecting, Didn’t Love it., I felt like if I made any mistakes, this ski would kick my ass., Dead. No energy return. One-dimensional. Great if you want a tank., Lower-angle, intermediate terrain, I imagine that a lot of skiers will get along really well with this ski., Not fun. I didn’t really enjoy anything about it, honestly can’t imagine who would. Almost *anyone* who wants to just have fun on the mountain, I have trouble imagining that this ski will resonate with a broad range of skiers Beginner / intermediate skiers who want an easy going ski that will allow them to progress all over the mountain, I imagine it will resonate with a pretty niche / specific type of skier Beginner / intermediate skiers who will stick primarily to groomers, but might occasionally venture off piste, I imagine that a lot of skiers will get along really well with this ski. Intermediate skiers looking for a really fun, playful ski that’s comfortable all-around, It's among the most fun skis I’ve ever been on - in this category of skis Advanced and expert skiers who want an all-mountain ski, Very physically strong skiers, I’d like to try a shorter length, but not sure that shorter would be better., 9, 77777777777777, Might buy, 777777777777777, 777777777777777777, 777777777777777777777---------
+
+user info grabbed 
+post user info: 
+stdClass Object
+(
+    [userID] => 1
+    [heightFeet] => 5
+    [heightInches] => 10
+    [weight] => 175
+    [skiAbility] => 10
+)
+
+
+Post array: 
+Array
+(
+    [post_title] => Nordica test product 158
+    [meta_input] => Array
+        (
+            [id] => 56
+            [userID] => 1
+            [heightFeet] => 5
+            [heightInches] => 10
+            [weight] => 175
+            [skiAbility] => 10
+            [product_tested] => test product
+            [category] => test category
+            [sport] => test sport
+            [questions] => Array
+                (
+                    [0] => Product Tested
+                    [1] => Brand Tested
+                    [2] => Length Tested
+                    [3] => Where did you test it?
+                    [4] => What type of terrain did you ski?
+                    [5] => What type of conditions did you ski in?
+                    [6] => How did you feel about the Maneuverability of this ski?
+                    [7] => The Stability of the ski: (check all that apply)
+                    [8] => How did you feel about the Stability of this ski?
+                    [9] => How demanding or punishing did you find the ski to be?
+                    [10] => Ride quality / suspension. This ski felt: 
+                    [11] => The ski felt comfortable to me on / in (check all that apply): 
+                    [12] => What type of skier do you imagine will get along best with this ski? (check all that apply)
+                    [13] => Did you feel like you were on the correct length of this ski?
+                    [14] => How much do you like the looks of the product?
+                    [15] => Please feel free to elaborate:
+                    [16] => How likely are you to either buy or recommend this product?
+                    [17] => Please feel free to elaborate:
+                    [18] => Are there similar products you've skied that you clearly prefer? If so, which products and what about them makes you prefer them?
+                    [19] => Anything else you'd like to add?
+                )
+
+            [answers] => Array
+                (
+                    [0] => ski
+                    [1] => Nordica
+                    [2] => 158
+                    [3] => Backcountry
+                    [4] => Groomers
+                    [5] => Extremely firm harpdack or ice - where it was very hard to hold an edge
+                    [6] => I’d call it below average
+                    [7] => Was more stable than I was expecting
+                    [8] => Didn’t Love it.
+                    [9] => I felt like if I made any mistakes, this ski would kick my ass.
+                    [10] => Dead. No energy return. One-dimensional. Great if you want a tank.
+                    [11] => Lower-angle, intermediate terrain
+                    [12] => I imagine that a lot of skiers will get along really well with this ski., Not fun. I didn’t really enjoy anything about it, honestly can’t imagine who would. Almost *anyone* who wants to just have fun on the mountain, I have trouble imagining that this ski will resonate with a broad range of skiers Beginner / intermediate skiers who want an easy going ski that will allow them to progress all over the mountain, I imagine it will resonate with a pretty niche / specific type of skier Beginner / intermediate skiers who will stick primarily to groomers, but might occasionally venture off piste, I imagine that a lot of skiers will get along really well with this ski. Intermediate skiers looking for a really fun, playful ski that’s comfortable all-around, It's among the most fun skis I’ve ever been on - in this category of skis Advanced and expert skiers who want an all-mountain ski, Very physically strong skiers
+                    [13] => I’d like to try a shorter length, but not sure that shorter would be better.
+                    [14] => 9
+                    [15] => 77777777777777
+                    [16] => Might buy
+                    [17] => 777777777777777
+                    [18] => 777777777777777777
+                    [19] => 777777777777777777777
+                )
+
+        )
+
+    [post_type] => Ski Reviews
+    [post_status] => publish
+)
+
+

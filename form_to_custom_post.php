@@ -1,36 +1,41 @@
 <?php
 require 'table_utils.php';
-function insert_into_ski_review( $header) {
+function insert_into_ski_review($header, $questions, $answers, $file) {
         global $wpdb;
 
-        $answersContent = $header->answersContent;
+        //$answersContent = $header['answersContent'];
+        fwrite($file, "answer content grabbed\n".implode(', ', $answers)."---------\n\n");
     
-        $userInfo = $header->userInfo;
-        
+        $userInfo = $header['userInfo'];
+        fwrite($file, "user info grabbed \n");
+        $u_info = print_r($userInfo, true);
+        fwrite($file, "post user info: \n".$u_info."\n\n");
         
         if ( NULL === $header || 0 === $header || '0' === $header || empty( $header ) ) {
             return;
         }
         
         $ski_review = array(
-                            'post_title' => wp_strip_all_tags( $answersContent[1] . ' ' . $header->productName . ' ' . $answersContent[2]),
+                            'post_title' => wp_strip_all_tags( $answers[1] . ' ' . $header['productName'] . ' ' . $answers[2]),
                             //'post_content' => wp_strip_all_tags( $QnA->$answerContent),
                             'meta_input' => array(
-                                                  'reviewID'        => $header->reviewID,
+                                                  'id'        => $header['reviewID'],
                                                   'userID'          => $userInfo->userID,
                                                   'heightFeet'          => $userInfo->heightFeet,
                                                   'heightInches'            => $userInfo->heightInches,
                                                   'weight'          => $userInfo->weight,
                                                   'skiAbility'          => $userInfo->skiAbility,
-                                                  'product_tested'        => $header->productName,
-                                                  'category'           => $header->categoryName,
-                                                  'sport'          => $header->sportName,
-                                                  'questions'          => $header->questionsContent,
-                                                  'answers'           => $header->answersContent
+                                                  'product_tested'        => $header['productName'],
+                                                  'category'           => $header['categoryName'],
+                                                  'sport'          => $header['sportName'],
+                                                  'questions'          => $questions,
+                                                  'answers'           => $answers
                                                   ),
                             'post_type'   => 'Ski Reviews',
                             'post_status' => 'publish',
                             );
+        $custom_post_input = print_r($ski_review, true);
+        fwrite($file, "Post array: \n".$custom_post_input."\n\n");
         wp_insert_post( $ski_review );
         
     }
@@ -91,26 +96,49 @@ function summit_review_from_sub( $record, $ajax_handler ) {
         //$ajax_handler->add_response_data( true, $output );
         fwrite($myfile, "write to review table id:\n") or die('fwrite 3 failed');
         $id = summit_insert_into_review_table($current_form_id,$myfile);
-        fwrite($myfile, "last inserted review id".strval($id)."\n") or die('fwrite 2 failed');
+        fwrite($myfile, "last inserted review id: ".strval($id)."\n") or die('fwrite 2 failed');
         //$ajax_handler->add_response_data( true, $output );
         
 
         summit_insert_into_review_answer_table($id, $answer_ids,$myfile);
 
         //---------------create custom post-----------------------------------
-        $header = [];
-        $header['reviewID'] = $id;
-        $product_info = get_product_info($current_form_id);
-        $header['productName'] = $product_info['productName'];
-        $category_info = get_category_info($product_info->categoryID);
-        $header['categoryName'] = $category_info['categoryName'];
-        $sport_info = get_sport_info($category_info['sportID']); 
-        $header['sportName'] = $sport_info['sportName'];
+       
+        $product_info = get_product_info($current_form_id,$myfile);
+        $p_info_read = print_r($product_info, true);
+        fwrite($myfile, "product info: \n".$p_info_read."\n\n");
+        
+        $category_info = get_category_info($product_info['categoryID'], $myfile);
+        $c_info_read = print_r($category_info, true);
+        fwrite($myfile, "categroy info: \n".$c_info_read."\n\n");
+        
+        $sport_info = get_sport_info($category_info['sportID']);
+        $s_info_read = print_r($sport_info, true);
+        fwrite($myfile, "sport info: \n".$s_info_read."\n\n"); 
+        
         $q_and_a_content = get_answer_and_question_content($record,$myfile);
-        $header['questionContent'] = $q_and_a_content['question_content'];
-        $header['answerContent']= $q_and_a_content['answer_content'];
-        $header['userInfo'] = get_user_information();
-    	insert_into_ski_review($header);
+        $qa_info_read = print_r($q_and_a_content, true);
+        fwrite($myfile, "QandA info: \n".$qa_info_read."\n\n");
+        
+        $user_info = get_user_information($myfile);
+        $u_info_read = print_r($user_info, true);
+        fwrite($myfile, "user info: \n".$u_info_read."\n\n");
+       
+       $qs = $q_and_a_content['question_content'];
+       $as = $q_and_a_content['answer_content'];
+
+        $header = array(
+        	'reviewID' => $id,
+        	'productName' => $product_info['productName'],
+        	'categoryName' => $category_info['categoryName'],
+        	'sportName' => $sport_info['sportName'],
+        	'questionContent' => $q_and_a_content['question_content'],
+        	'answerContent' => $q_and_a_content['answer_content'],
+        	'userInfo' => $user_info
+        );
+        $header_info_read = print_r($header, true);
+        fwrite($myfile, "HEADER: \n".$header_info_read."\n\n");
+    	insert_into_ski_review($header, $qs, $as, $myfile);
 	}
 }
 
@@ -247,10 +275,15 @@ function get_answer_and_question_content($record,$file){
     fwrite($file, implode(", ", $question_ids)." \n");
     $question_table = $wpdb->prefix . "bcr_questions";
     $question_content = [];
+    $desired_column = "questionContent";
+    $where_column = "questionID";
     foreach($question_ids as $id){
     	$q = "SELECT questionContent FROM $question_table WHERE questionID = $id;";
-    	$q_content = $wpdb->get_results($q);
+    	$q_content = $wpdb->get_row($q);
+    	//$var = print_r($q_content, true);
+    	//fwrite($file,"get redults: \n".$var."\n");
     	$content = $q_content->questionContent;
+    	//fwrite($file,"contne from get result: \n".$content."\n");
     	array_push($question_content, $content);
     }
 
@@ -262,15 +295,22 @@ function get_answer_and_question_content($record,$file){
     return $return_array;
 }
 
-function get_product_info($form_id){
+function get_product_info($form_id,$file){
 	global $wpdb;
+	$start = "\n\n GET PRODUCT INFORMATION \n";
+    fwrite($file, $start);
+    fwrite($file, "form id: ".$form_id."\n");
 	$form_table = $wpdb->prefix . "bcr_review_forms";
-	$q1 = 'SELECT productID FROM $form_table WHERE reviewFormID = $form_id;';
-	$res1 = $wpdb->get_results($q1);
+	$q1 = "SELECT * FROM $form_table WHERE reviewFormID = $form_id;";
+	$res1 = $wpdb->get_row($q1);
+	$var = print_r($res1, true);
+    fwrite($file,"get results: \n".$var."\n");
 	$product_id = $res1->productID;
+	fwrite($file, "product id: ".$product_id."\n");
+
 	$product_table = $wpdb->prefix . "bcr_products";
-	$q2 = 'SELECT * FROM $product_table WHERE productID = $product_id;';
-	$res2 = $wpdb->get_results($q2);
+	$q2 = "SELECT * FROM $product_table WHERE productID = $product_id;";
+	$res2 = $wpdb->get_row($q2);
 	$return_array = [];
 	$return_array['productID'] = $res2->productID;
 	$return_array['productName'] = $res2->productName;
@@ -278,11 +318,16 @@ function get_product_info($form_id){
 	return $return_array;
 }
 
-function get_category_info($category_id){
+function get_category_info($category_id, $file){
 	global $wpdb;
+	$start = "\n\n GET CATEGORY INFORMATION \n";
+    fwrite($file, $start);
+    fwrite($file, "category id: ".$category_id."\n");
 	$category_table = $wpdb->prefix . "bcr_categories";
-	$q = 'SELECT * FROM $category_table WHERE categoryID = $category_id;';
-	$res = $wpdb->get_results($q);
+	$q = "SELECT * FROM $category_table WHERE categoryID = $category_id;";
+	$res = $wpdb->get_row($q);
+	$var = print_r($res, true);
+    fwrite($file,"get results: \n".$var."\n");
 	$return_array = [];
 	$return_array['categoryID'] = $category_id;
 	$return_array['categoryName'] = $res->categoryName;
@@ -294,24 +339,24 @@ function get_category_info($category_id){
 function get_sport_info($sport_id){
 	global $wpdb;
 	$sports_table = $wpdb->prefix . "bcr_sports";
-	$q = 'SELECT * FROM $sports_table WHERE sportID = $sport_id;';
-	$res = $wpdb->get_results($q);
+	$q = "SELECT * FROM $sports_table WHERE sportID = $sport_id;";
+	$res = $wpdb->get_row($q);
 	$return_array = [];
 	$return_array['sportID'] = $sport_id;
 	$return_array['sportName'] = $res->sportName;
 	return $return_array;
 }
 
-function get_user_information(){
+function get_user_information($file){
     global $wpdb;
-    
-    $userID = get_current_userID();
-    
-    $user_table_name = $wpdb->prefix . "bcr_users";
-    
-    $queryString = 'SELECT userID, heightFeet, heightInches, weight, skiAbility FROM $user_table_name WHERE userID=$userID';
-    
-    $userInformation = $wpdb->get_results($queryString);
+    $start = "\n\n GET USER INFORMATION \n";
+    fwrite($file, $start);
+    $userID = get_current_userID($file);
+    fwrite($file, "user id: ".$userID."\n");
+    $user_table_name = $wpdb->prefix . "bcr_users";//i do not have this same able 
+    $queryString = "SELECT * FROM $user_table_name WHERE userID=$userID";
+    $userInformation = $wpdb->get_row($queryString);
+
     return $userInformation;
 }
 
