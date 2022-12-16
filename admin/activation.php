@@ -124,7 +124,7 @@ function bcr_setup_tables() {
     dbDelta($sql);
 
     //Create Brand table
-    $brand_table_name = $wpdb->prefix . "bcr_brands";
+    $brands_table_name = $wpdb->prefix . "bcr_brands";
 
     $sql = "CREATE TABLE $brands_table_name (
         brandID int(9) NOT NULL AUTO_INCREMENT,
@@ -320,7 +320,7 @@ function bcr_upload_prev_summit_data() {
             }
             continue;
         }
-        $wpdb->replace($users_table_name, array('userID' => $row[1], ''))
+        $wpdb->replace($users_table_name, array('userID' => $row[1], ''));
         for($i = 1; $i < $num_entries; $i++) {
             //TODO fill out databases with data
         }
