@@ -228,7 +228,7 @@ function summit_insert_into_review_answer_table($review_id, $answer_ids,$file){
 
 function get_answer_and_question_content($record,$file){
     global $wpdb;
-    $start = "\n\n SUMMIT INSERT INTO ANSWER TABLE \n";
+    $start = "\n\n GET ANSWERS AND QUESTIONS \n";
     fwrite($file, $start);
 
     $return_array = [];
@@ -244,13 +244,18 @@ function get_answer_and_question_content($record,$file){
             array_push($question_ids, $id);
         }
     }
+    fwrite($file, implode(", ", $question_ids)." \n");
     $question_table = $wpdb->prefix . "bcr_questions";
     $question_content = [];
     foreach($question_ids as $id){
     	$q = "SELECT questionContent FROM $question_table WHERE questionID = $id;";
     	$q_content = $wpdb->get_results($q);
-    	array_push($question_content, $q_content->questionContent);
+    	$content = $q_content->questionContent;
+    	array_push($question_content, $content);
     }
+
+    fwrite($file, implode(", ", $question_content)." \n");
+    fwrite($file, implode(", ", $answer_content)." \n");
     $return_array['question_content'] = $question_content;
     $return_array['answer_content'] = $answer_content;
    

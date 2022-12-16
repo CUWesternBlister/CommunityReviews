@@ -1,5 +1,6 @@
 <?php
-//require 'table_utils.php';
+/*
+require 'table_utils.php';
 function profile_info_sub( $record, $ajax_handler ){
     global $wpdb;
     $user_table_name = $wpdb->prefix . "bcr_users";
@@ -29,6 +30,7 @@ function profile_info_sub( $record, $ajax_handler ){
     }
     fclose($myfile);
 }
+*/
 /*
 function summit_review_from_sub( $record, $ajax_handler ) {
     global $wpdb;
@@ -140,29 +142,6 @@ function summit_insert_into_review_table($RF_id, $file){
         return $last_review_id;
 }
 */
-
-function get_current_userID($file){
-    global $wpdb;
-    $start = "          SUMMIT get user id \n";
-    fwrite($file, $start);
-    if ( ! function_exists( 'get_current_user_id' ) ) {
-        return 0;
-    }
-    $cur_userID = get_current_user_id();
-    $str = "-------- " . strval($cur_userID) . " ----------\n";
-    fwrite($file, $str);
-    if($cur_userID == 0){
-        //then not logged in
-        //we should check this field when they click to start a review form.
-        return "userID does not exist, or user is not logged in";
-    }
-    $user_table = $wpdb->prefix . "bcr_users";
-    $q = "SELECT 1 userID FROM $user_table WHERE userID = $cur_userID;";
-    $res = $wpdb->query($q);
-
-    //check if user in wp bcr users
-    return intval($cur_userID);
-}
 
 /*
 function get_knowthyself_id($userID){
