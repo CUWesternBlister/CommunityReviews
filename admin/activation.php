@@ -290,6 +290,43 @@ function bcr_create_test_requirements() {
     $wpdb->insert($review_forms_questions_table_name, array('reviewFormID' => 1, 'questionID' => 4));
 }
 
+function bcr_upload_prev_summit_data() {
+    global $wpdb;
+
+    $questions_table_name = $wpdb->prefix . "bcr_questions";
+    $users_table_name = $wpdb->prefix . "bcr_users";
+
+    $sports_table_name = $wpdb->prefix . "bcr_sports";
+    $wpdb->insert($sports_table_name, array('sportName' => "Skiing"));
+    $skiing_id = $wpdb->get_var("SELECT sportID FROM $sports_table_name WHERE sportName = 'Skiing' LIMIT 1", 0, 0);
+
+    $categories_table_name = $wpdb->prefix . "bcr_categories";
+    $wpdb->insert($categories_table_name, array('sportID' => $skiing_id, 'categoryName' => "Skis"));
+    $skis_id = $wpdb->get_var("SELECT categoryID FROM $categories_table_name WHERE categoryName = 'Skis' LIMIT 1", 0, 0);
+
+    $prev_reviews_csv = fopen(BCR_PATH . 'admin/prev_summit_data/prev_summit_reviews.csv', "r");
+
+    $row_num = 0;
+    $categories = array();
+    $num_entries = 0;
+    while(($row = fgetcsv($prev_reviews_csv, 2500, ',')) !== FALSE) {
+        $row_num++;
+        if($row_num == 1) {
+            $categories = $row;
+            $num_entries = count($categories);
+            for($i = 1; $i < $num_entries; $i++) {
+                $wpdb->insert($questions_table_name, array('questionContent' => $categories[$i], 'questionType' => 'text'));
+                $categories[$i] = $wpdb->get_var("SELECT questionID FROM $questions_table_name DESC LIMIT 1", 0, 0);
+            }
+            continue;
+        }
+        $wpdb->replace($users_table_name, array('userID' => $row[1], ''))
+        for($i = 1; $i < $num_entries; $i++) {
+            //TODO fill out databases with data
+        }
+    }
+}
+
 //Execute activation
 bcr_activate();
 ?>
