@@ -1,5 +1,5 @@
 <?php
-
+require 'table_utils.php';
 function insert_into_ski_review( $header) {
         global $wpdb;
 
@@ -35,17 +35,34 @@ function insert_into_ski_review( $header) {
         
     }
 
-function get_user_information(){
+function profile_info_sub( $record, $ajax_handler ){
     global $wpdb;
-    
-    $userID = get_current_userID();
-    
     $user_table_name = $wpdb->prefix . "bcr_users";
-    
-    $queryString = 'SELECT userID, heightFeet, heightInches, weight, skiAbility FROM $user_table_name WHERE userID=$userID';
-    
-    $userInformation = wpdb->get_results(queryString);
-    return userInformation;
+    $form_name = $record->get_form_settings( 'form_name' );
+    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
+    $myfile = fopen($file_path, "a") or die('fopen failed');
+    $fields = [];
+    if($form_name == 'Profile Builder') {
+        $userID = get_current_userID($myfile);
+        fwrite($myfile,$userID);
+        $fields['userID'] = $userID;
+        $raw_fields = $record->get('fields');
+        $fields['heightFeet'] = $raw_fields["height_feet"]['value'];
+        $fields['heightInches'] = $raw_fields["height_inches"]['value'];
+        $fields['weight'] = $raw_fields["weight"]['value'];
+        $fields['skiAbility'] = $raw_fields["user_experience"]['value'];
+
+        $q = "SELECT userID FROM $user_table_name WHERE userID = $userID;";
+        $res = $wpdb->query($q);
+
+        if($res){
+            $output['success'] = $wpdb->update($user_table_name, $fields, array("userID"=>$userID));
+        }else {
+            $output['success'] = $wpdb->insert($user_table_name, $fields);
+        }
+        $ajax_handler->add_response_data(true, $output);
+    }
+    fclose($myfile);
 }
 
 function summit_review_from_sub( $record, $ajax_handler ) {
@@ -92,6 +109,7 @@ function summit_review_from_sub( $record, $ajax_handler ) {
         $q_and_a_content = get_answer_and_question_content($record,$myfile);
         $header['questionContent'] = $q_and_a_content['question_content'];
         $header['answerContent']= $q_and_a_content['answer_content'];
+        $header['userInfo'] = get_user_information();
     	insert_into_ski_review($header);
 	}
 }
@@ -112,32 +130,6 @@ function get_all_form_names($file){
         array_push($ret_arr, $r->reviewFormName);
     }
     return $ret_arr;
-}
-
-function get_current_userID($file){
-    global $wpdb;
-    $start = "          SUMMIT get user id \n";
-    fwrite($file, $start);
-    if ( ! function_exists( 'get_current_user_id' ) ) {
-        return 0;
-    }
-    $cur_userID = get_current_user_id();
-    $str = "-------- " . strval($cur_userID) . " ----------\n";
-    fwrite($file, $str);
-    if($cur_userID == 0){
-        //then not logged in
-        //we should check this field when they click to start a review form.
-        return "userID does not exist, or user is not logged in";
-    }
-    $user_table = $wpdb->prefix . "bcr_users";
-    $q = "SELECT userID FROM $user_table WHERE userID = $cur_userID;";
-    $res = $wpdb->query($q);
-    if($res == false){
-        //should not be allowed to start a form untill they are in bcr users
-        return "userID does not exist in bcr user table, has not registerd";
-    }
-    //check if user in wp bcr users
-    return intval($cur_userID->userID);
 }
 
 //------------------------------tabel writing stuff-----------------------------------
@@ -248,8 +240,8 @@ function get_answer_and_question_content($record,$file){
     $output = [];
     foreach ( $raw_fields as $id => $field ) {
         if($id != "step"){
-            array_push($answer_content, $field['value'];);
-            array_push($question_ids, $id)
+            array_push($answer_content, $field['value']);
+            array_push($question_ids, $id);
         }
     }
     $question_table = $wpdb->prefix . "bcr_questions";
@@ -302,7 +294,20 @@ function get_sport_info($sport_id){
 	$return_array = [];
 	$return_array['sportID'] = $sport_id;
 	$return_array['sportName'] = $res->sportName;
-	retrun $return_array;
+	return $return_array;
+}
+
+function get_user_information(){
+    global $wpdb;
+    
+    $userID = get_current_userID();
+    
+    $user_table_name = $wpdb->prefix . "bcr_users";
+    
+    $queryString = 'SELECT userID, heightFeet, heightInches, weight, skiAbility FROM $user_table_name WHERE userID=$userID';
+    
+    $userInformation = $wpdb->get_results($queryString);
+    return $userInformation;
 }
 
 ?>

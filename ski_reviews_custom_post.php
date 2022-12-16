@@ -64,7 +64,7 @@ function create_ski_review() {
         'exclude_from_search' => false,
         'show_in_rest' => true,
         'publicly_queryable' => true,
-        'query_var' => truzoome,
+        'query_var' => true,//truzoome
         'capability_type' => 'post',
     );
     register_post_type( 'Ski Reviews', $args );
