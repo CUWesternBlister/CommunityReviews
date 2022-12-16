@@ -95,30 +95,20 @@ function my_admin() {
     //fwrite($myfile, "Function my_admin ending\n");
 }
 
+add_action( 'wp_footer', 'display_ski_review_meta_box');
+
 function display_ski_review_meta_box() {
     
-    //global $myfile;
-    
-    //fwrite($myfile, "display_ski_review_meta_box starting\n");
-    
-    ?>
-    <table>
-        <tr>
-            <td style="width: 50%">ReviewID</td>
-            <td><input type="text" size="40" name="ski_review" value="<?php echo get_post_meta( get_the_ID(), 'reviewID', true ); ?>" readonly /></td>
-        </tr>
-        <tr>
-            <td style="width: 50%">Product Tested</td>
-            <td><input type="text" size="40" name="ski_review" value="<?php echo get_post_meta( get_the_ID(), 'product_tested', true ); ?>" readonly /></td>
-        </tr>
-    /*
-    <tr>
-        <td style="width: 50%">Questions</td>
-        <td><input type="text" size="40" name="ski_review" value="<?php echo get_post_meta( get_the_ID(), 'questions', true ); ?>" readonly /></td>
-    </tr>*/
-    </table>
-    <?php
-    //fwrite($myfile, "display_ski_review_meta_box ending\n");
+    $postmetas = get_post_meta(get_the_ID());
+
+    if ('skireviews' == get_post_type(get_the_ID())){
+
+        foreach($postmetas as $meta_key=>$meta_value) {
+            echo $meta_key . ' : ' . $meta_value[0] . '<br/>';
+        }
+
+    }
+
 }
 
 ?>
