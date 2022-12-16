@@ -87,7 +87,7 @@ function my_admin() {
     add_meta_box(
         'ski_review_meta_box',
         'Ski Reviews Information',
-        'display_ski_review_meta_box',
+        //'display_ski_review_meta_box',
         'Ski Reviews',
         'normal',
         'high'
@@ -95,19 +95,51 @@ function my_admin() {
     //fwrite($myfile, "Function my_admin ending\n");
 }
 
-add_action( 'wp_footer', 'display_ski_review_meta_box');
+//add_action( 'wp_footer', 'display_ski_review_meta_box');
+//add_filter('the_content', 'display_ski_review_meta_box');
 
-function display_ski_review_meta_box() {
-    
+function display_ski_review_meta_box($content) {
+    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
+    $myfile = fopen($file_path, "a") or die('fopen failed');
     $postmetas = get_post_meta(get_the_ID());
+    $questions = $postmetas['questions'];
+    $answers = $postmetas['answers'];
+    $a_metas = print_r($answers, true);
+    fwrite($myfile, " info: \n".$a_metas."\n\n");
+
+    $html = "";
+
+    
+    $post_metas = print_r($postmetas, true);
+    fwrite($myfile, " info: \n".$post_metas."\n\n");
 
     if ('skireviews' == get_post_type(get_the_ID())){
 
-        foreach($postmetas as $meta_key=>$meta_value) {
-            echo $meta_key . ' : ' . $meta_value[0] . '<br/>';
+        //foreach($postmetas as $meta_key=>$meta_value) {
+            $html .= "Reviewers height: ".$postmetas['heightFeet'][0]." feet, ".$postmetas['heightInches'][0]." inches<br/>";
+            $html .= "Reviewers weight: ".$postmetas['weight'][0]." lbs<br/>";
+            $html .= "Reviewers ski ability: ".$postmetas['skiAbility'][0]."<br/>";
+            $html .= "Reviewers product tested: ".$postmetas['product_tested'][0]."<br/>";
+            $html .= "Reviewers product tested: ".$postmetas['product_tested'][0]."<br/>";
+            $html .= "<br/>";
+
+            //if($meta_key == "sports"){break;}
+        //}
+
+        for ($i = 0; $i < count($questions); $i++) {
+            $html .= 'QQQQQQQQQQ '.$questions[$i].'<br/>';
+            $html .= 'AAAAAAAAAA '.$answers[$i].'<br/>';
+            $html .= '<br/>';
+
+
+            //$html .= $questions[$i].":\n";
+            //$html .= $answers[$i]."\n\n";
+
         }
 
     }
+
+    return $content.$html;
 
 }
 

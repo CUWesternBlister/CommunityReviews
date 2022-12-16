@@ -14,10 +14,13 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
         if ( NULL === $header || 0 === $header || '0' === $header || empty( $header ) ) {
             return;
         }
+
+        $html = format_questions_answers_post_content($questions, $answers);
+        fwrite($file, "HTML STRING: \n".$html."\n\n");
         
         $ski_review = array(
                             'post_title' => wp_strip_all_tags( $answers[1] . ' ' . $header['productName'] . ' ' . $answers[2]),
-                            //'post_content' => wp_strip_all_tags( $QnA->$answerContent),
+                            'post_content' => $html,
                             'meta_input' => array(
                                                   'id'        => $header['reviewID'],
                                                   'userID'          => $userInfo->userID,
@@ -39,6 +42,27 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
         wp_insert_post( $ski_review );
         
     }
+
+function format_questions_answers_post_content($questions, $answers){
+	//php assertion that question and answers atre same length
+	if (count($questions) !== count($answers)) {
+		die("questions and answers");
+	}
+	$html = "";
+	//foreach ($questions as $key = &gt; $value) {
+	for ($i = 0; $i < count($questions); $i++) {
+	    //$html .= '&lt;div class="row"&gt;';
+	    //$html .= '&lt;div class="col-md-6"&gt;'.$questions[$i].'&lt;/div&gt;';
+	   // $html .= '&lt;div class="col-md-6"&gt;'.$answers[$i].'&lt;/div&gt;';
+	    //$html .= '&lt;/div&gt;';
+
+
+	    $html .= "<div>".$questions[$i].":\n</div>";
+	    $html .= "<strong>".$answers[$i]."\n\n</strong>";
+
+	}
+	return $html;
+}
 
 function profile_info_sub( $record, $ajax_handler ){
     global $wpdb;
