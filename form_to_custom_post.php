@@ -17,7 +17,15 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
 
         $html = format_questions_answers_post_content($questions, $answers);
         fwrite($file, "HTML STRING: \n".$html."\n\n");
-        
+
+        //$user_html = "<div>".$userInfo->heightFeet.":\n<br/>".$answers[$i]."\n\n</div>";
+        $user_html.= "<div>Reviewers height: ".$userInfo->heightFeet." feet, ".$userInfo->heightInches." inches</div>";
+        $user_html .= "<div>Reviewers weight: ".$userInfo->weight." lbs</div>";
+        $user_html .= "<div>Reviewers ski ability: ".$userInfo->skiAbility."</div>";
+        $user_html .= "<br/>";
+
+        $html = $user_html . $html;
+
         $ski_review = array(
                             'post_title' => wp_strip_all_tags( $answers[1] . ' ' . $header['productName'] . ' ' . $answers[2]),
                             'post_content' => $html,
