@@ -265,6 +265,28 @@ function display_user_info($atts){
 }
 add_shortcode('user_info', 'display_user_info');
 
+//Testing https://developer.wordpress.org/reference/hooks/template_redirect/
+
+function summit_redirects() {
+    // for any other pages that need this redirect, just add page name to IF statement
+    if ( is_page('Community Reviews Profile') || is_page( 'Summit Review Form' )) {
+        global $wpdb;
+        $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
+        $myfile = fopen($file_path, "a") or die('fopen failed');
+        $userID = get_current_userID($myfile);
+        fwrite($myfile, $userID);
+        $user_table_name = $wpdb->prefix . "bcr_users";
+        $q = $wpdb->prepare("SELECT * FROM $user_table_name WHERE userID = $userID LIMIT 1;");
+        $userEntry = $wpdb->get_results($q);
+        if (!$userEntry) {
+            wp_redirect(home_url('/profile-information-form/'));
+            die;
+        }
+    }
+}
+
+add_action( 'template_redirect', 'summit_redirects' );
+
 // WRITING KNOW THY SELF FORM TO KNOWTHYSELF TABLE. THIS CAN BE USED ONLY FOR REFERENCE.
 
     function capstone_write_to_table($record, $ajax_handler) {
@@ -286,4 +308,6 @@ add_shortcode('user_info', 'display_user_info');
     }
 
     add_action( 'elementor_pro/forms/new_record', 'capstone_write_to_table', 10, 2);
+
+
 ?>
