@@ -43,6 +43,7 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
                                                   'answers'           => $answers
                                                   ),
                             'post_type'   => 'Ski Reviews',
+                            'post_excerpt' => $user_html,
                             'post_status' => 'publish',
                             );
         $custom_post_input = print_r($ski_review, true);
