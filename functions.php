@@ -224,14 +224,7 @@ function get_record_from_form_submissions($atts) {
 add_shortcode( 'form_submissions', 'get_record_from_form_submissions' );
 
 function display_user_info($atts){
-    global $wpdb;
-    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
-    $myfile = fopen($file_path, "a") or die('fopen failed');
-    $userID = get_current_userID($myfile);
-    fwrite($myfile, $userID);
-    $user_table_name = $wpdb->prefix . "bcr_users";
-    $q = $wpdb->prepare("SELECT * FROM $user_table_name WHERE userID = $userID LIMIT 1;");
-    $userEntry = $wpdb->get_results($q);
+    $userEntry = get_bcr_user();
     if ( $userEntry ) {
         $heightF = array_map(
             function( $form_sub_object ) {
@@ -270,15 +263,13 @@ add_shortcode('user_info', 'display_user_info');
 function summit_redirects() {
     // for any other pages that need this redirect, just add page name to IF statement
     if ( is_page('Community Reviews Profile') || is_page( 'Summit Review Form' )) {
-        global $wpdb;
-        $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
-        $myfile = fopen($file_path, "a") or die('fopen failed');
-        $userID = get_current_userID($myfile);
-        fwrite($myfile, $userID);
-        $user_table_name = $wpdb->prefix . "bcr_users";
-        $q = $wpdb->prepare("SELECT * FROM $user_table_name WHERE userID = $userID LIMIT 1;");
-        $userEntry = $wpdb->get_results($q);
-        if (!$userEntry) {
+        $userEntry = get_bcr_user();
+        if (!is_user_logged_in()){
+            //redirects to Blister Login
+            wp_redirect('https://blisterreview.com/my-account');
+            die;
+        }
+        else if (!$userEntry) {
             wp_redirect(home_url('/profile-information-form/'));
             die;
         }

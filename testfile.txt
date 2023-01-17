@@ -36,4 +36,47 @@ userID does not exist, or user is not logged in          SUMMIT get user id
 -------- 1 ----------
 1          SUMMIT get user id 
 -------- 0 ----------
-userID does not exist, or user is not logged in
+userID does not exist, or user is not logged in          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 0 ----------
+userID does not exist, or user is not logged in          SUMMIT get user id 
+-------- 0 ----------
+userID does not exist, or user is not logged in          SUMMIT get user id 
+-------- 0 ----------
+userID does not exist, or user is not logged in          SUMMIT get user id 
+-------- 0 ----------
+userID does not exist, or user is not logged in          SUMMIT get user id 
+-------- 0 ----------
+userID does not exist, or user is not logged in          SUMMIT get user id 
+-------- 0 ----------
+userID does not exist, or user is not logged in-------not logged in-------          SUMMIT get user id 
+-------- 0 ----------
+userID does not exist, or user is not logged in-------not logged in-------          SUMMIT get user id 
+-------- 7 ----------
+7          SUMMIT get user id 
+-------- 0 ----------
+userID does not exist, or user is not logged in          SUMMIT get user id 
+-------- 8 ----------
+8          SUMMIT get user id 
+-------- 8 ----------
+8          SUMMIT get user id 
+-------- 0 ----------
+userID does not exist, or user is not logged in          SUMMIT get user id 
+-------- 1 ----------
+1
+
+ SUMMIT get all form names 
+Test Product Review
+form names: Array
+current form name: Profile Builder
+current form id: 
+          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1
