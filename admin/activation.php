@@ -99,7 +99,7 @@ function bcr_setup_tables() {
     dbDelta($sql);
 
     //Create Know Thyself Form table
-    $know_thyself_forms_table_name = $wpdb->prefix . "bcr_know_thyself_forms";
+    /*$know_thyself_forms_table_name = $wpdb->prefix . "bcr_know_thyself_forms";
 
     $sql = "CREATE TABLE $know_thyself_forms_table_name (
         knowThyselfFormID int(9) NOT NULL AUTO_INCREMENT,
@@ -109,10 +109,10 @@ function bcr_setup_tables() {
         FOREIGN KEY  (sportID) REFERENCES $sports_table_name(sportID)
         ) $charset_collate;";
 
-    dbDelta($sql);
+    dbDelta($sql);*/
 
     //Create Know Thyself Form Questions association table
-    $know_thyself_forms_questions_table_name = $wpdb->prefix . "bcr_know_thyself_forms_questions";
+    /*$know_thyself_forms_questions_table_name = $wpdb->prefix . "bcr_know_thyself_forms_questions";
 
     $sql = "CREATE TABLE $know_thyself_forms_questions_table_name (
         knowThyselfFormID int(9) NOT NULL,
@@ -122,7 +122,7 @@ function bcr_setup_tables() {
         FOREIGN KEY  (questionID) REFERENCES $questions_table_name(questionID)
         ) $charset_collate;";
 
-    dbDelta($sql);
+    dbDelta($sql);*/
 
     //Create Know Thyself table 
     $know_thyself_table_name = $wpdb->prefix . "bcr_know_thyself";
@@ -138,7 +138,7 @@ function bcr_setup_tables() {
     dbDelta($sql);
 
     //Create Know Thyself Answers association table
-    $know_thyself_answers_table_name = $wpdb->prefix . "bcr_know_thyself_answers";
+    $/*know_thyself_answers_table_name = $wpdb->prefix . "bcr_know_thyself_answers";
 
     $sql = "CREATE TABLE $know_thyself_answers_table_name (
         knowThyselfID int(9) NOT NULL,
@@ -148,7 +148,7 @@ function bcr_setup_tables() {
         FOREIGN KEY  (answerID) REFERENCES $answers_table_name(answerID)
         ) $charset_collate;";
 
-    dbDelta($sql);
+    dbDelta($sql);*/
 
     //Create Review Forms table
     $review_forms_table_name = $wpdb->prefix . "bcr_review_forms";
@@ -156,15 +156,15 @@ function bcr_setup_tables() {
     $sql = "CREATE TABLE $review_forms_table_name (
         reviewFormID int(9) NOT NULL AUTO_INCREMENT,
         reviewFormName varchar(512) DEFAULT '' NOT NULL,
-        productID int(9) NOT NULL,
+        categoryID int(9) NOT NULL,
         PRIMARY KEY  (reviewFormID),
-        FOREIGN KEY  (productID) REFERENCES $products_table_name(productID)
+        FOREIGN KEY  (categoryID) REFERENCES $categories_table_name(categoryID)
         ) $charset_collate;";
 
     dbDelta($sql);
 
     //Create Review Form Questions association table
-    $review_forms_questions_table_name = $wpdb->prefix . "bcr_review_forms_questions";
+    /*$review_forms_questions_table_name = $wpdb->prefix . "bcr_review_forms_questions";
 
     $sql = "CREATE TABLE $review_forms_questions_table_name (
         reviewFormID int(9) NOT NULL,
@@ -174,7 +174,7 @@ function bcr_setup_tables() {
         FOREIGN KEY  (questionID) REFERENCES $questions_table_name(questionID)
         ) $charset_collate;";
 
-    dbDelta($sql);
+    dbDelta($sql);*/
 
     //Create Review table
     $reviews_table_name = $wpdb->prefix . "bcr_reviews";
@@ -182,10 +182,8 @@ function bcr_setup_tables() {
     $sql = "CREATE TABLE $reviews_table_name (
         reviewID int(9) NOT NULL AUTO_INCREMENT,
         userID int(9) NOT NULL,
-        knowThyselfID int(9) NOT NULL,
         reviewFormID int(9) NOT NULL,
         PRIMARY KEY  (reviewID),
-        FOREIGN KEY  (knowThyselfID) REFERENCES $know_thyself_table_name(knowThyselfID),
         FOREIGN KEY  (reviewFormID) REFERENCES $review_forms_table_name(reviewFormID)
         ) $charset_collate;";
 
@@ -208,7 +206,7 @@ function bcr_setup_tables() {
 /**
  * Create infrastructure for test reviews
  */
-function bcr_create_test_requirements() {
+/*function bcr_create_test_requirements() {
     global $wpdb;
 
     $sports_table_name = $wpdb->prefix . "bcr_sports";
@@ -233,7 +231,7 @@ function bcr_create_test_requirements() {
     $wpdb->insert($review_forms_questions_table_name, array('reviewFormID' => 1, 'questionID' => 2));
     $wpdb->insert($review_forms_questions_table_name, array('reviewFormID' => 1, 'questionID' => 3));
     $wpdb->insert($review_forms_questions_table_name, array('reviewFormID' => 1, 'questionID' => 4));
-}
+}*/
 
 //Execute activation
 bcr_activate();
