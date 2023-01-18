@@ -4,17 +4,10 @@
  * Author: Jacob Vogel
  * Description: Create Ski Review Custom Post from SQL database
  * Version: 0.1.1
- * text-domain: prefix-plugin-name
+ * text-domain: ski_reviews_custom_post
 */
 
-//$filePath = 'C:/Users/user/Local Sites/blister-capstone-project/app/public/wp-content/plugins/blister-community-reviews/testfile.txt';
-//$myfile = fopen($filePath, 'a') or die('fopen failed');
-
 function create_ski_review() {
-    
-    //global $myfile;
-    
-    //fwrite($myfile, "Function create_ski_review starting\n");
 
     $labels = array(
         'name' => _x( 'Ski Reviews', 'Post Type General Name', 'Ski Reviews' ),
@@ -76,9 +69,9 @@ add_action( 'init', 'create_ski_review', 0 );
 
 
 
-add_action( 'admin_init', 'my_admin' );
+add_action( 'admin_init', 'ski_admin' );
 
-function my_admin() {
+function ski_admin() {
     
     //global $myfile;
     
