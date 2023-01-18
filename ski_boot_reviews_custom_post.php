@@ -7,7 +7,7 @@
  * text-domain: ski_reviews_custom_post
 */
 
-function blah create_ski_boot_review() {
+function create_ski_boot_review() {
 
     $labels = array(
         'name' => _x( 'Ski Boot Reviews', 'Post Type General Name', 'Ski Boot Reviews' ),
