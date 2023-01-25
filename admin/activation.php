@@ -42,6 +42,7 @@ function bcr_setup_tables() {
     $sql = "CREATE TABLE $questions_table_name (
         questionID int(9) NOT NULL AUTO_INCREMENT,
         questionContent varchar(512) DEFAULT '' NOT NULL,
+        questionDisplayContent varchar(512) DEFAULT '' NOT NULL,
         PRIMARY KEY  (questionID)
         ) $charset_collate;";
 
@@ -61,7 +62,7 @@ function bcr_setup_tables() {
     dbDelta($sql);
 
     //Create Sport table
-    $sports_table_name = $wpdb->prefix . "bcr_sports";
+    /*$sports_table_name = $wpdb->prefix . "bcr_sports";
 
     $sql = "CREATE TABLE $sports_table_name (
         sportID int(9) NOT NULL AUTO_INCREMENT,
@@ -69,7 +70,7 @@ function bcr_setup_tables() {
         PRIMARY KEY  (sportID)
         ) $charset_collate;";
 
-    dbDelta($sql);
+    dbDelta($sql);*/
 
     //Create Category table
     $categories_table_name = $wpdb->prefix . "bcr_categories";
@@ -77,13 +78,20 @@ function bcr_setup_tables() {
     $sql = "CREATE TABLE $categories_table_name (
         categoryID int(9) NOT NULL AUTO_INCREMENT,
         parentID int(9) DEFAULT NULL,
-        sportID int(9) NOT NULL,
         categoryName varchar(512) DEFAULT '' NOT NULL,
-        PRIMARY KEY  (categoryID),
-        FOREIGN KEY  (sportID) REFERENCES $sports_table_name(sportID)
+        PRIMARY KEY  (categoryID)
         ) $charset_collate;";
 
     dbDelta($sql);
+    
+    //Create Brands table
+    $brands_table_name = $wpdb->prefix . "bcr_brands";
+
+    $sql = "CREATE TABLE $brands_table_name (
+        brandID int(9) NOT NULL AUTO_INCREMENT,
+        brandName varchar(512) DEFAULT '' NOT NULL,
+        PRIMARY KEY  (brandID)
+        ) $charset_collate;";
 
     //Create Product table
     $products_table_name = $wpdb->prefix . "bcr_products";
@@ -91,9 +99,11 @@ function bcr_setup_tables() {
     $sql = "CREATE TABLE $products_table_name (
         productID int(9) NOT NULL AUTO_INCREMENT,
         categoryID int(9) NOT NULL,
+        brandID int(9) NOT NULL,
         productName varchar(512) DEFAULT '' NOT NULL,
         PRIMARY KEY  (productID),
-        FOREIGN KEY  (categoryID) REFERENCES $categories_table_name(categoryID)
+        FOREIGN KEY  (categoryID) REFERENCES $categories_table_name(categoryID),
+        FOREIGN KEY  (brandID) REFERENCES $brands_table_name(brandID)
         ) $charset_collate;";
 
     dbDelta($sql);
@@ -184,7 +194,8 @@ function bcr_setup_tables() {
         userID int(9) NOT NULL,
         reviewFormID int(9) NOT NULL,
         PRIMARY KEY  (reviewID),
-        FOREIGN KEY  (reviewFormID) REFERENCES $review_forms_table_name(reviewFormID)
+        FOREIGN KEY  (reviewFormID) REFERENCES $review_forms_table_name(reviewFormID),
+        FOREIGN KEY  (userID) REFERENCES $user_table_name(userID)
         ) $charset_collate;";
 
     dbDelta($sql);

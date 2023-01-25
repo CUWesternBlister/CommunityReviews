@@ -69,6 +69,11 @@ function bcr_remove_tables() {
     $wpdb->query($sql);
     */
 
+    //Remove Brands table
+    $brands_table_name = $wpdb->prefix . "bcr_brands";
+    $sql = "DROP TABLE IF EXISTS $brands_table_name";
+    $wpdb->query($sql);
+
     //Remove Product table
     $products_table_name = $wpdb->prefix . "bcr_products";
     $sql = "DROP TABLE IF EXISTS $products_table_name";
@@ -80,9 +85,9 @@ function bcr_remove_tables() {
     $wpdb->query($sql);
 
     //Remove Sport table
-    $sports_table_name = $wpdb->prefix . "bcr_sports";
+    /*$sports_table_name = $wpdb->prefix . "bcr_sports";
     $sql = "DROP TABLE IF EXISTS $sports_table_name";
-    $wpdb->query($sql);
+    $wpdb->query($sql);*/
 
     //Remove Answer table
     $answers_table_name = $wpdb->prefix . "bcr_answers";
