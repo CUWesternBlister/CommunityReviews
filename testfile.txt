@@ -1297,3 +1297,29 @@ Array
 )
 
 
+
+
+ SUMMIT get all form names 
+Ski Review
+form names: Array
+current form name: Summit
+current form id: 
+
+
+ SUMMIT get all form names 
+Ski Review
+form names: Array
+current form name: Summit
+current form id: 
+
+
+ SUMMIT get all form names 
+Ski Review
+form names: Array
+current form name: Summit
+current form id: 
+          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1
