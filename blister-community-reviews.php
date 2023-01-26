@@ -101,9 +101,8 @@ function bcr_deactivation() {
 
 function bcr_include() {
     require_once( plugin_dir_path( __FILE__ ) . 'functions.php');
-    require_once( plugin_dir_path( __FILE__ ) . 'ski_reviews_custom_post.php');
+    require_once( plugin_dir_path( __FILE__ ) . 'community_reviews_custom_post.php');
     require_once( plugin_dir_path( __FILE__ ) . 'form_to_custom_post.php');
-    //require_once( plugin_dir_path( __FILE__ ) . 'table_writing_functions.php');
 }
 add_action( 'elementor_pro/forms/new_record', 'summit_review_from_sub', 10, 2);
 add_action( 'elementor_pro/forms/new_record', 'profile_info_sub', 10, 2);
