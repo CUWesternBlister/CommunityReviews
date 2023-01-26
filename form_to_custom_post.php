@@ -14,10 +14,21 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
         if ( NULL === $header || 0 === $header || '0' === $header || empty( $header ) ) {
             return;
         }
-        
+
+        $html = format_questions_answers_post_content($questions, $answers);
+        fwrite($file, "HTML STRING: \n".$html."\n\n");
+
+        //$user_html = "<div>".$userInfo->heightFeet.":\n<br/>".$answers[$i]."\n\n</div>";
+        $user_html.= "<div>Reviewers height: ".$userInfo->heightFeet." feet, ".$userInfo->heightInches." inches</div>";
+        $user_html .= "<div>Reviewers weight: ".$userInfo->weight." lbs</div>";
+        $user_html .= "<div>Reviewers ski ability: ".$userInfo->skiAbility."</div>";
+        $user_html .= "<br/>";
+
+        $html = $user_html . $html;
+
         $ski_review = array(
                             'post_title' => wp_strip_all_tags( $answers[1] . ' ' . $header['productName'] . ' ' . $answers[2]),
-                            //'post_content' => wp_strip_all_tags( $QnA->$answerContent),
+                            'post_content' => $html,
                             'meta_input' => array(
                                                   'id'        => $header['reviewID'],
                                                   'userID'          => $userInfo->userID,
@@ -33,6 +44,7 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
                                                   ),
                             //'post_content' => wp_strip_all_tags( $answers[1] . ' ' . $header['productName'] . ' ' . $answers[2]),
                             'post_type'   => 'Ski Reviews',
+                            'post_excerpt' => $user_html,
                             'post_status' => 'publish',
                             );
         $custom_post_input = print_r($ski_review, true);
@@ -40,6 +52,110 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
         wp_insert_post( $ski_review );
         
     }
+
+function format_questions_answers_post_content($questions, $answers){
+	//php assertion that question and answers atre same length
+	if (count($questions) !== count($answers)) {
+		die("questions and answers");
+	}
+	$html = "";
+	//foreach ($questions as $key = &gt; $value) {
+	//for ($i = 0; $i < count($questions); $i++) {
+	    //$html .= '&lt;div class="row"&gt;';
+	    //$html .= '&lt;div class="col-md-6"&gt;'.$questions[$i].'&lt;/div&gt;';
+	   // $html .= '&lt;div class="col-md-6"&gt;'.$answers[$i].'&lt;/div&gt;';
+	    //$html .= '&lt;/div&gt;';
+
+
+	    //$html .= "<strong>".$questions[$i]."\n</strong>";
+	    //$html .= "<div>".$answers[$i]."\n</div>";
+
+	//}
+
+    $html .= '<div style = "text-align:justify;">
+              <div style = "width:33.3%;padding:0 0 0 0;float:left;font-weight:bold;">Terrain Tested</div>
+              <div style = "width:33.3%;padding:0 0 0 0;float:left;font-weight:bold;">Where</div>
+              <div style = "width:33.3%;padding:0 0 0 0;float:right;font-weight:bold;">Conditions Tested</div>
+              </div>
+              <div style="clear:both;"></div>';
+
+    $html .= '<div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[4].'</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[3].'</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:right;column_gap:20px;">'.$answers[5].'</div>
+              </div>
+              <div style="clear:both;"></div>';       
+
+
+    $html .= '<div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Stablility?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Maniveurability?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Demand of ski</div>
+              <div style="clear:both;"></div>';
+
+
+    $html .= '<div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  '.$answers[7].$answers[8].'</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[6].'</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  '.$answers[9].'</div>
+              <div style="clear:both;"></div>';
+
+
+    $html .= '<div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Ride Quality</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Fun Factor</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:right;font-weight:bold;"> Ski felt good on...</div>
+              <div style="clear:both;"></div>';
+
+    $html .= '<div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[10].'</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[12].'</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[11].'</div>              
+              <div style="clear:both;"></div>';
+
+    $html .= '<div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Correct Lenght?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Who will like this Ski?</div>
+              <div style="clear:both;"></div>';
+
+
+    $html .= '<div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[13].'</div>
+              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[14].'</div>          
+              <div style="clear:both;"></div>';
+
+    $html .= '<div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> How good 1-10?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
+              <div style="clear:both;"></div>';
+
+    $html .= '<div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[15].'</div>
+              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[16].'</div>          
+              <div style="clear:both;"></div>';
+
+    $html .= '<div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Recommend?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
+              <div style="clear:both;"></div>'; 
+
+    $html .= '<div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[17].'</div>
+              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[18].'</div>          
+              <div style="clear:both;"></div>';  
+
+    $html .= '<div style = "text-align:Justify;">
+              <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Prefered Similar Products? and why?</div>
+              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[19].'</div>
+              <div style="clear:both;"></div>'; 
+
+    $html .= '<div style = "text-align:Justify;">
+              <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Personal Comment</div>
+              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[20].'</div>
+              <div style="clear:both;"></div>'; 
+
+	return $html;
+}
 
 function profile_info_sub( $record, $ajax_handler ){
     global $wpdb;
