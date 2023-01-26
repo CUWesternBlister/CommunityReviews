@@ -3,21 +3,413 @@ fluent_summit_review_from_sub
 formData 1: 
 Array
 (
-    [__fluent_form_embded_post_id] => 506
-    [_fluentform_5_fluentformnonce] => 2b462f28ba
-    [_wp_http_referer] => /fluent-review-form-test/
-    [28] => Nordic
-    [29_2] => Navigator
-    [30] => Array
+    [__fluent_form_embded_post_id] => 840
+    [_fluentform_3_fluentformnonce] => 7b1871868a
+    [_wp_http_referer] => /?page_id=840
+    [2] => K2
+    [1_2] => Disrutption MTi W
+    [3] => 180
+    [4] => Array
         (
-            [0] => Inbounds
-            [1] => Backcountry
+            [0] => Backcountry
         )
 
-    [31] => yes
-    [32] => wwwwwww
+    [5] => Array
+        (
+            [0] => Fairly Soft, pretty forgiving moguls
+        )
+
+    [6] => Array
+        (
+            [0] => Extremely firm hardpack or ice - where it was very hard to hold an edge
+        )
+
+    [7] => I'd call it below average
+    [8] => Array
+        (
+            [0] => Provided a lot less stability than I wanted
+        )
+
+    [9] => I'd call it below average.
+    [10] => Inspired a lot of confidence. Let me make quick turns easily, ski faster quite comfortably.
+    [11] => I'm not sure
+    [12] => Array
+        (
+            [0] => Fairly Soft, pretty forgiving moguls
+        )
+
+    [13] => Array
+        (
+            [0] => Not fun. I didn't really enjoy anything about it, honestly can't imagine who would.
+        )
+
+    [14] => I'd like to try a longer length, but nor sure that longer would be better.
+    [15] => Array
+        (
+            [0] => Beginner/intermediate skiers who want an easy going ski that will allow them to progress all over the mountain
+            [1] => Beginner/intermediate skiers who will stick primarily to groomers, but might occasionally venture off piste
+        )
+
+    [16] => 9
+    [17] => 5
+    [18] => Probably buying - it suits my style quite well, but so do a few other skis
+    [19] => f
+    [20] => efw
+    [21] => fds
 )
 
 
 Starting the Process 
+
+
+
+ start summit_form_submission_write_to_tabless 
+
+
+ SUMMIT INSERT INTO ANSWER TABLE 
+
+
+SUMMIT INSERT INTO REVIEW TABLE 
+
+
+SUMMIT INSERT INTO REVIEW ANSWER TABLE 
+
+
+summit_insert_into_review_answer_table function exited
+
+
+
+ summit_form_submission_custom_post_content 
+
+
+ GET PRODUCT INFORMATION 
+
+
+Current Form ID: 3
+
+get results: 
+stdClass Object
+(
+    [reviewFormID] => 3
+    [reviewFormName] => Ski Review Form
+    [productID] => 2
+)
+
+product id: 2
+product info: 
+Array
+(
+    [productID] => 2
+    [productName] => test product
+    [categoryID] => 1
+)
+
+
+
+
+ GET CATEGORY INFORMATION 
+categroy info: 
+Array
+(
+    [categoryID] => 1
+    [categoryName] => test category
+    [parentID] => 
+    [sportID] => 1
+)
+
+
+sport info: 
+Array
+(
+    [sportID] => 1
+    [sportName] => test sport
+)
+
+
+
+
+ GET ANSWERS AND QUESTIONS 
+QandA info: 
+Array
+(
+    [question_content] => Array
+        (
+            [0] => Product tested
+            [1] => Brand Tested
+            [2] => Length Tested
+            [3] => Where did you test it?
+            [4] => What type of terrain did you ski?
+            [5] => What type of conditions did you ski in?
+            [6] => How did you feel about the Maneuverability of this ski?
+            [7] => The Stability of the ski: (check all that apply)
+            [8] => How did you feel about the Stability of this ski?
+            [9] => How demanding or punishing did you find the ski to be?
+            [10] => Ride quality / suspension. This ski felt: 
+            [11] => The ski felt comfortable to me on / in (check all that apply): 
+            [12] => How would you describe the fun-factor of this ski?
+            [13] => Did you feel like you were on the correct length of this ski?
+            [14] => What type of skier do you imagine will get along best with this ski? (check all that apply)
+            [15] => How much do you like the looks of the product?
+            [16] => Please feel free to elaborate:
+            [17] => How likely are you to either buy or recommend this product?
+            [18] => Please feel free to elaborate:
+            [19] => Are there similar products you've skied that you clearly prefer? If so, which products and what about them makes you prefer them?
+            [20] => Anything else you'd like to add?
+        )
+
+    [answer_content] => Array
+        (
+            [0] => K2
+            [1] => Disrutption MTi W
+            [2] => 180
+            [3] => Backcountry
+            [4] => Fairly Soft, pretty forgiving moguls
+            [5] => Extremely firm hardpack or ice - where it was very hard to hold an edge
+            [6] => I'd call it below average
+            [7] => Provided a lot less stability than I wanted
+            [8] => I'd call it below average.
+            [9] => Inspired a lot of confidence. Let me make quick turns easily, ski faster quite comfortably.
+            [10] => I'm not sure
+            [11] => Fairly Soft, pretty forgiving moguls
+            [12] => Not fun. I didn't really enjoy anything about it, honestly can't imagine who would.
+            [13] => I'd like to try a longer length, but nor sure that longer would be better.
+            [14] => Beginner/intermediate skiers who want an easy going ski that will allow them to progress all over the mountain, Beginner/intermediate skiers who will stick primarily to groomers, but might occasionally venture off piste
+            [15] => 9
+            [16] => 5
+            [17] => Probably buying - it suits my style quite well, but so do a few other skis
+            [18] => f
+            [19] => efw
+            [20] => fds
+        )
+
+)
+
+
+
+
+ GET USER INFORMATION 
+user info: 
+stdClass Object
+(
+    [userID] => 1
+    [heightFeet] => 5
+    [heightInches] => 10
+    [weight] => 175
+    [skiAbility] => 10
+)
+
+
+HEADER: 
+Array
+(
+    [reviewID] => 3
+    [productName] => test product
+    [categoryName] => test category
+    [sportName] => test sport
+    [questionContent] => Array
+        (
+            [0] => Product tested
+            [1] => Brand Tested
+            [2] => Length Tested
+            [3] => Where did you test it?
+            [4] => What type of terrain did you ski?
+            [5] => What type of conditions did you ski in?
+            [6] => How did you feel about the Maneuverability of this ski?
+            [7] => The Stability of the ski: (check all that apply)
+            [8] => How did you feel about the Stability of this ski?
+            [9] => How demanding or punishing did you find the ski to be?
+            [10] => Ride quality / suspension. This ski felt: 
+            [11] => The ski felt comfortable to me on / in (check all that apply): 
+            [12] => How would you describe the fun-factor of this ski?
+            [13] => Did you feel like you were on the correct length of this ski?
+            [14] => What type of skier do you imagine will get along best with this ski? (check all that apply)
+            [15] => How much do you like the looks of the product?
+            [16] => Please feel free to elaborate:
+            [17] => How likely are you to either buy or recommend this product?
+            [18] => Please feel free to elaborate:
+            [19] => Are there similar products you've skied that you clearly prefer? If so, which products and what about them makes you prefer them?
+            [20] => Anything else you'd like to add?
+        )
+
+    [answerContent] => Array
+        (
+            [0] => K2
+            [1] => Disrutption MTi W
+            [2] => 180
+            [3] => Backcountry
+            [4] => Fairly Soft, pretty forgiving moguls
+            [5] => Extremely firm hardpack or ice - where it was very hard to hold an edge
+            [6] => I'd call it below average
+            [7] => Provided a lot less stability than I wanted
+            [8] => I'd call it below average.
+            [9] => Inspired a lot of confidence. Let me make quick turns easily, ski faster quite comfortably.
+            [10] => I'm not sure
+            [11] => Fairly Soft, pretty forgiving moguls
+            [12] => Not fun. I didn't really enjoy anything about it, honestly can't imagine who would.
+            [13] => I'd like to try a longer length, but nor sure that longer would be better.
+            [14] => Beginner/intermediate skiers who want an easy going ski that will allow them to progress all over the mountain, Beginner/intermediate skiers who will stick primarily to groomers, but might occasionally venture off piste
+            [15] => 9
+            [16] => 5
+            [17] => Probably buying - it suits my style quite well, but so do a few other skis
+            [18] => f
+            [19] => efw
+            [20] => fds
+        )
+
+    [userInfo] => stdClass Object
+        (
+            [userID] => 1
+            [heightFeet] => 5
+            [heightInches] => 10
+            [weight] => 175
+            [skiAbility] => 10
+        )
+
+)
+
+
+post user info: 
+Array
+(
+    [reviewID] => 3
+    [productName] => test product
+    [categoryName] => test category
+    [sportName] => test sport
+    [questionContent] => Array
+        (
+            [0] => Product tested
+            [1] => Brand Tested
+            [2] => Length Tested
+            [3] => Where did you test it?
+            [4] => What type of terrain did you ski?
+            [5] => What type of conditions did you ski in?
+            [6] => How did you feel about the Maneuverability of this ski?
+            [7] => The Stability of the ski: (check all that apply)
+            [8] => How did you feel about the Stability of this ski?
+            [9] => How demanding or punishing did you find the ski to be?
+            [10] => Ride quality / suspension. This ski felt: 
+            [11] => The ski felt comfortable to me on / in (check all that apply): 
+            [12] => How would you describe the fun-factor of this ski?
+            [13] => Did you feel like you were on the correct length of this ski?
+            [14] => What type of skier do you imagine will get along best with this ski? (check all that apply)
+            [15] => How much do you like the looks of the product?
+            [16] => Please feel free to elaborate:
+            [17] => How likely are you to either buy or recommend this product?
+            [18] => Please feel free to elaborate:
+            [19] => Are there similar products you've skied that you clearly prefer? If so, which products and what about them makes you prefer them?
+            [20] => Anything else you'd like to add?
+        )
+
+    [answerContent] => Array
+        (
+            [0] => K2
+            [1] => Disrutption MTi W
+            [2] => 180
+            [3] => Backcountry
+            [4] => Fairly Soft, pretty forgiving moguls
+            [5] => Extremely firm hardpack or ice - where it was very hard to hold an edge
+            [6] => I'd call it below average
+            [7] => Provided a lot less stability than I wanted
+            [8] => I'd call it below average.
+            [9] => Inspired a lot of confidence. Let me make quick turns easily, ski faster quite comfortably.
+            [10] => I'm not sure
+            [11] => Fairly Soft, pretty forgiving moguls
+            [12] => Not fun. I didn't really enjoy anything about it, honestly can't imagine who would.
+            [13] => I'd like to try a longer length, but nor sure that longer would be better.
+            [14] => Beginner/intermediate skiers who want an easy going ski that will allow them to progress all over the mountain, Beginner/intermediate skiers who will stick primarily to groomers, but might occasionally venture off piste
+            [15] => 9
+            [16] => 5
+            [17] => Probably buying - it suits my style quite well, but so do a few other skis
+            [18] => f
+            [19] => efw
+            [20] => fds
+        )
+
+    [userInfo] => stdClass Object
+        (
+            [userID] => 1
+            [heightFeet] => 5
+            [heightInches] => 10
+            [weight] => 175
+            [skiAbility] => 10
+        )
+
+)
+
+
+Post array: 
+Array
+(
+    [post_title] => test product
+    [post_content] => <div>Reviewers height: 5 feet, 10 inches</div><div>Reviewers weight: 175 lbs</div><div>Reviewers ski ability: 10</div><br/><div style = "text-align:justify;">
+              <div style = "width:33.3%;padding:0 0 0 0;float:left;font-weight:bold;">Terrain Tested</div>
+              <div style = "width:33.3%;padding:0 0 0 0;float:left;font-weight:bold;">Where</div>
+              <div style = "width:33.3%;padding:0 0 0 0;float:right;font-weight:bold;">Conditions Tested</div>
+              </div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Fairly Soft, pretty forgiving moguls</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Backcountry</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:right;column_gap:20px;">Extremely firm hardpack or ice - where it was very hard to hold an edge</div>
+              </div>
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Stablility?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Maniveurability?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Demand of ski</div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  Provided a lot less stability than I wantedI'd call it below average.</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">I'd call it below average</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  Inspired a lot of confidence. Let me make quick turns easily, ski faster quite comfortably.</div>
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Ride Quality</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Fun Factor</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:right;font-weight:bold;"> Ski felt good on...</div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">I'm not sure</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Not fun. I didn't really enjoy anything about it, honestly can't imagine who would.</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Fairly Soft, pretty forgiving moguls</div>              
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Correct Lenght?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Who will like this Ski?</div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">I'd like to try a longer length, but nor sure that longer would be better.</div>
+              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">Beginner/intermediate skiers who want an easy going ski that will allow them to progress all over the mountain, Beginner/intermediate skiers who will stick primarily to groomers, but might occasionally venture off piste</div>          
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> How good 1-10?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">9</div>
+              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">5</div>          
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Recommend?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Probably buying - it suits my style quite well, but so do a few other skis</div>
+              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">f</div>          
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Prefered Similar Products? and why?</div>
+              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;">efw</div>
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Personal Comment</div>
+              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;">fds</div>
+              <div style="clear:both;"></div>
+    [meta_input] => Array
+        (
+            [id] => 3
+            [userID] => 1
+            [heightFeet] => 5
+            [heightInches] => 10
+            [weight] => 175
+            [skiAbility] => 10
+            [product_tested] => test product
+            [category] => test category
+            [sport] => test sport
+            [questions] => 
+            [answers] => 
+        )
+
+    [post_type] => Ski Reviews
+    [post_excerpt] => <div>Reviewers height: 5 feet, 10 inches</div><div>Reviewers weight: 175 lbs</div><div>Reviewers ski ability: 10</div><br/>
+    [post_status] => publish
+)
+
 
