@@ -43,7 +43,7 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
                                                   'answers'           => $answers
                                                   ),
                             //'post_content' => wp_strip_all_tags( $answers[1] . ' ' . $header['productName'] . ' ' . $answers[2]),
-                            'post_type'   => 'Ski Reviews',
+                            'post_type'   => 'Community Reviews',
                             'post_excerpt' => $user_html,
                             'post_status' => 'publish',
                             );
