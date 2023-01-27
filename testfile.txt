@@ -3,28 +3,59 @@ fluent_summit_review_from_sub
 formData 1: 
 Array
 (
-    [__fluent_form_embded_post_id] => 864
-    [_fluentform_6_fluentformnonce] => d2dc637ff5
-    [_wp_http_referer] => /summit-apparel-review-form/
-    [1] => Patagonia
-    [2] => mv/mcls
-    [4] => Lift-accessed skiing with no hiking
-    [34] => Little tight
-    [19] => fdsafdsa
-    [35] => 3
-    [36] => Kept me totally dry. No water or wind got through.
-    [37] => 2
-    [38] => Was not warm enough, got cold.
-    [39] => hot
-    [40] => Array
+    [__fluent_form_embded_post_id] => 840
+    [_fluentform_4_fluentformnonce] => e5c11e0f16
+    [_wp_http_referer] => /elementor-840/
+    [2] => K2
+    [1_2] => Disrutption MTi W
+    [3] => 180
+    [4] => Array
         (
-            [0] => Pit zips
+            [0] => Inbounds
         )
 
-    [19_1] => fdsafd
-    [41] => 7
-    [18] => 3
-    [description] => fdsafd
+    [5] => Array
+        (
+            [0] => Groomers
+        )
+
+    [6] => Array
+        (
+            [0] => Firm, off-piste chop or crud
+        )
+
+    [7] => Didn't love it.
+    [8] => Array
+        (
+            [0] => Was more stable than I was expecting
+        )
+
+    [9] => I'd call it below average.
+    [10] => Had me a bit hesitant to open things up and ski faster.
+    [11] => Like a wet noodle - too soft. Lacked support in moguls or at higher speeds.
+    [12] => Array
+        (
+            [0] => Low-angle, intermediate terrain
+        )
+
+    [13] => Array
+        (
+            [0] => I have trouble imagining that this ski will resonate with a broad range of skiers
+        )
+
+    [14] => Yes, definitely.
+    [15] => Array
+        (
+            [0] => Almost *anyone* who wants to just have fun on the mountain
+            [1] => Advanced & expert skiers looking for a really fun, playful ski to trick off of jumps and maybe hit the park
+        )
+
+    [16] => 5
+    [17] => fdsafd
+    [18] => Probably buying - it suits my style quite well, but so do a few other skis
+    [19] => fdsa
+    [20] => fdsa
+    [21] => how ti s goihg oin
 )
 
 
@@ -54,13 +85,13 @@ summit_insert_into_review_answer_table function exited
  GET PRODUCT INFORMATION 
 
 
-Current Form ID: 6
+Current Form ID: 4
 
 get results: 
 stdClass Object
 (
-    [reviewFormID] => 6
-    [reviewFormName] => Summit_Apparel_Form
+    [reviewFormID] => 4
+    [reviewFormName] => Ski Review Form
     [productID] => 2
 )
 
@@ -103,38 +134,52 @@ Array
 (
     [question_content] => Array
         (
-            [0] => Brand Tested
-            [1] => Product tested
-            [2] => Where did you test it?
-            [3] => Fit of Apparel
-            [4] => Please feel free to elaborate:
-            [5] => How did the fabric feel? 1 -terrible. 10 - excellent.
-            [6] => Apparel Weather Resistance 
-            [7] => Apparel Breathability
-            [8] => Apparel Warmth
-            [9] => Do you tend to run cold or hot? 
-            [10] => Features of Apparel
-            [11] => Looks/Aesthetics of Apparel. 1 - unattractive. 10 - attractive.
-            [12] => How likely are you to either buy or recommend this product?
-            [13] => 
+            [0] => Product tested
+            [1] => Brand Tested
+            [2] => Length Tested
+            [3] => Where did you test it?
+            [4] => What type of terrain did you ski?
+            [5] => What type of conditions did you ski in?
+            [6] => How did you feel about the Maneuverability of this ski?
+            [7] => The Stability of the ski: (check all that apply)
+            [8] => How did you feel about the Stability of this ski?
+            [9] => How demanding or punishing did you find the ski to be?
+            [10] => Ride quality / suspension. This ski felt: 
+            [11] => The ski felt comfortable to me on / in (check all that apply): 
+            [12] => How would you describe the fun-factor of this ski?
+            [13] => Did you feel like you were on the correct length of this ski?
+            [14] => What type of skier do you imagine will get along best with this ski? (check all that apply)
+            [15] => How much do you like the looks of the product?
+            [16] => Please feel free to elaborate:
+            [17] => How likely are you to either buy or recommend this product?
+            [18] => Please feel free to elaborate:
+            [19] => Are there similar products you've skied that you clearly prefer? If so, which products and what about them makes you prefer them?
+            [20] => Anything else you'd like to add?
         )
 
     [answer_content] => Array
         (
-            [0] => Patagonia
-            [1] => mv/mcls
-            [2] => Lift-accessed skiing with no hiking
-            [3] => Little tight
-            [4] => fdsafd
-            [5] => 3
-            [6] => Kept me totally dry. No water or wind got through.
-            [7] => 2
-            [8] => Was not warm enough, got cold.
-            [9] => hot
-            [10] => Pit zips
-            [11] => 7
-            [12] => 3
-            [13] => fdsafd
+            [0] => K2
+            [1] => Disrutption MTi W
+            [2] => 180
+            [3] => Inbounds
+            [4] => Groomers
+            [5] => Firm, off-piste chop or crud
+            [6] => Didn't love it.
+            [7] => Was more stable than I was expecting
+            [8] => I'd call it below average.
+            [9] => Had me a bit hesitant to open things up and ski faster.
+            [10] => Like a wet noodle - too soft. Lacked support in moguls or at higher speeds.
+            [11] => Low-angle, intermediate terrain
+            [12] => I have trouble imagining that this ski will resonate with a broad range of skiers
+            [13] => Yes, definitely.
+            [14] => Almost *anyone* who wants to just have fun on the mountain, Advanced & expert skiers looking for a really fun, playful ski to trick off of jumps and maybe hit the park
+            [15] => 5
+            [16] => fdsafd
+            [17] => Probably buying - it suits my style quite well, but so do a few other skis
+            [18] => fdsa
+            [19] => fdsa
+            [20] => how ti s goihg oin
         )
 
 )
@@ -157,44 +202,58 @@ stdClass Object
 HEADER: 
 Array
 (
-    [reviewID] => 6
+    [reviewID] => 4
     [productName] => test product
     [categoryName] => test category
     [sportName] => Test Sport
     [questionContent] => Array
         (
-            [0] => Brand Tested
-            [1] => Product tested
-            [2] => Where did you test it?
-            [3] => Fit of Apparel
-            [4] => Please feel free to elaborate:
-            [5] => How did the fabric feel? 1 -terrible. 10 - excellent.
-            [6] => Apparel Weather Resistance 
-            [7] => Apparel Breathability
-            [8] => Apparel Warmth
-            [9] => Do you tend to run cold or hot? 
-            [10] => Features of Apparel
-            [11] => Looks/Aesthetics of Apparel. 1 - unattractive. 10 - attractive.
-            [12] => How likely are you to either buy or recommend this product?
-            [13] => 
+            [0] => Product tested
+            [1] => Brand Tested
+            [2] => Length Tested
+            [3] => Where did you test it?
+            [4] => What type of terrain did you ski?
+            [5] => What type of conditions did you ski in?
+            [6] => How did you feel about the Maneuverability of this ski?
+            [7] => The Stability of the ski: (check all that apply)
+            [8] => How did you feel about the Stability of this ski?
+            [9] => How demanding or punishing did you find the ski to be?
+            [10] => Ride quality / suspension. This ski felt: 
+            [11] => The ski felt comfortable to me on / in (check all that apply): 
+            [12] => How would you describe the fun-factor of this ski?
+            [13] => Did you feel like you were on the correct length of this ski?
+            [14] => What type of skier do you imagine will get along best with this ski? (check all that apply)
+            [15] => How much do you like the looks of the product?
+            [16] => Please feel free to elaborate:
+            [17] => How likely are you to either buy or recommend this product?
+            [18] => Please feel free to elaborate:
+            [19] => Are there similar products you've skied that you clearly prefer? If so, which products and what about them makes you prefer them?
+            [20] => Anything else you'd like to add?
         )
 
     [answerContent] => Array
         (
-            [0] => Patagonia
-            [1] => mv/mcls
-            [2] => Lift-accessed skiing with no hiking
-            [3] => Little tight
-            [4] => fdsafd
-            [5] => 3
-            [6] => Kept me totally dry. No water or wind got through.
-            [7] => 2
-            [8] => Was not warm enough, got cold.
-            [9] => hot
-            [10] => Pit zips
-            [11] => 7
-            [12] => 3
-            [13] => fdsafd
+            [0] => K2
+            [1] => Disrutption MTi W
+            [2] => 180
+            [3] => Inbounds
+            [4] => Groomers
+            [5] => Firm, off-piste chop or crud
+            [6] => Didn't love it.
+            [7] => Was more stable than I was expecting
+            [8] => I'd call it below average.
+            [9] => Had me a bit hesitant to open things up and ski faster.
+            [10] => Like a wet noodle - too soft. Lacked support in moguls or at higher speeds.
+            [11] => Low-angle, intermediate terrain
+            [12] => I have trouble imagining that this ski will resonate with a broad range of skiers
+            [13] => Yes, definitely.
+            [14] => Almost *anyone* who wants to just have fun on the mountain, Advanced & expert skiers looking for a really fun, playful ski to trick off of jumps and maybe hit the park
+            [15] => 5
+            [16] => fdsafd
+            [17] => Probably buying - it suits my style quite well, but so do a few other skis
+            [18] => fdsa
+            [19] => fdsa
+            [20] => how ti s goihg oin
         )
 
     [userInfo] => stdClass Object
@@ -212,44 +271,58 @@ Array
 post user info: 
 Array
 (
-    [reviewID] => 6
+    [reviewID] => 4
     [productName] => test product
     [categoryName] => test category
     [sportName] => Test Sport
     [questionContent] => Array
         (
-            [0] => Brand Tested
-            [1] => Product tested
-            [2] => Where did you test it?
-            [3] => Fit of Apparel
-            [4] => Please feel free to elaborate:
-            [5] => How did the fabric feel? 1 -terrible. 10 - excellent.
-            [6] => Apparel Weather Resistance 
-            [7] => Apparel Breathability
-            [8] => Apparel Warmth
-            [9] => Do you tend to run cold or hot? 
-            [10] => Features of Apparel
-            [11] => Looks/Aesthetics of Apparel. 1 - unattractive. 10 - attractive.
-            [12] => How likely are you to either buy or recommend this product?
-            [13] => 
+            [0] => Product tested
+            [1] => Brand Tested
+            [2] => Length Tested
+            [3] => Where did you test it?
+            [4] => What type of terrain did you ski?
+            [5] => What type of conditions did you ski in?
+            [6] => How did you feel about the Maneuverability of this ski?
+            [7] => The Stability of the ski: (check all that apply)
+            [8] => How did you feel about the Stability of this ski?
+            [9] => How demanding or punishing did you find the ski to be?
+            [10] => Ride quality / suspension. This ski felt: 
+            [11] => The ski felt comfortable to me on / in (check all that apply): 
+            [12] => How would you describe the fun-factor of this ski?
+            [13] => Did you feel like you were on the correct length of this ski?
+            [14] => What type of skier do you imagine will get along best with this ski? (check all that apply)
+            [15] => How much do you like the looks of the product?
+            [16] => Please feel free to elaborate:
+            [17] => How likely are you to either buy or recommend this product?
+            [18] => Please feel free to elaborate:
+            [19] => Are there similar products you've skied that you clearly prefer? If so, which products and what about them makes you prefer them?
+            [20] => Anything else you'd like to add?
         )
 
     [answerContent] => Array
         (
-            [0] => Patagonia
-            [1] => mv/mcls
-            [2] => Lift-accessed skiing with no hiking
-            [3] => Little tight
-            [4] => fdsafd
-            [5] => 3
-            [6] => Kept me totally dry. No water or wind got through.
-            [7] => 2
-            [8] => Was not warm enough, got cold.
-            [9] => hot
-            [10] => Pit zips
-            [11] => 7
-            [12] => 3
-            [13] => fdsafd
+            [0] => K2
+            [1] => Disrutption MTi W
+            [2] => 180
+            [3] => Inbounds
+            [4] => Groomers
+            [5] => Firm, off-piste chop or crud
+            [6] => Didn't love it.
+            [7] => Was more stable than I was expecting
+            [8] => I'd call it below average.
+            [9] => Had me a bit hesitant to open things up and ski faster.
+            [10] => Like a wet noodle - too soft. Lacked support in moguls or at higher speeds.
+            [11] => Low-angle, intermediate terrain
+            [12] => I have trouble imagining that this ski will resonate with a broad range of skiers
+            [13] => Yes, definitely.
+            [14] => Almost *anyone* who wants to just have fun on the mountain, Advanced & expert skiers looking for a really fun, playful ski to trick off of jumps and maybe hit the park
+            [15] => 5
+            [16] => fdsafd
+            [17] => Probably buying - it suits my style quite well, but so do a few other skis
+            [18] => fdsa
+            [19] => fdsa
+            [20] => how ti s goihg oin
         )
 
     [userInfo] => stdClass Object
@@ -274,54 +347,54 @@ Array
               <div style = "width:33.3%;padding:0 0 0 0;float:right;font-weight:bold;">Conditions Tested</div>
               </div>
               <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">fdsafd</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Little tight</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:right;column_gap:20px;">3</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Groomers</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Inbounds</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:right;column_gap:20px;">Firm, off-piste chop or crud</div>
               </div>
               <div style="clear:both;"></div><div style = "text-align:Justify;">
               <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Stablility?</div>
               <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Maniveurability?</div>
               <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Demand of ski</div>
               <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  2Was not warm enough, got cold.</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Kept me totally dry. No water or wind got through.</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  hot</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  Was more stable than I was expectingI'd call it below average.</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Didn't love it.</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  Had me a bit hesitant to open things up and ski faster.</div>
               <div style="clear:both;"></div><div style = "text-align:Justify;">
               <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Ride Quality</div>
               <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Fun Factor</div>
               <div style = "width:33.3%;padding:30px 0 0 0;float:right;font-weight:bold;"> Ski felt good on...</div>
               <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Pit zips</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">3</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">7</div>              
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Like a wet noodle - too soft. Lacked support in moguls or at higher speeds.</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">I have trouble imagining that this ski will resonate with a broad range of skiers</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Low-angle, intermediate terrain</div>              
               <div style="clear:both;"></div><div style = "text-align:Justify;">
               <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Correct Lenght?</div>
               <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Who will like this Ski?</div>
               <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">fdsafd</div>
-              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>          
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Yes, definitely.</div>
+              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">Almost *anyone* who wants to just have fun on the mountain, Advanced & expert skiers looking for a really fun, playful ski to trick off of jumps and maybe hit the park</div>          
               <div style="clear:both;"></div><div style = "text-align:Justify;">
               <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> How good 1-10?</div>
               <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
               <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
-              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>          
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">5</div>
+              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">fdsafd</div>          
               <div style="clear:both;"></div><div style = "text-align:Justify;">
               <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Recommend?</div>
               <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
               <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
-              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>          
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Probably buying - it suits my style quite well, but so do a few other skis</div>
+              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">fdsa</div>          
               <div style="clear:both;"></div><div style = "text-align:Justify;">
               <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Prefered Similar Products? and why?</div>
-              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
+              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;">fdsa</div>
               <div style="clear:both;"></div><div style = "text-align:Justify;">
               <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Personal Comment</div>
-              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
+              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;">how ti s goihg oin</div>
               <div style="clear:both;"></div>
     [meta_input] => Array
         (
-            [id] => 6
+            [id] => 4
             [userID] => 1
             [heightFeet] => 5
             [heightInches] => 10
