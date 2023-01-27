@@ -18,9 +18,7 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
             return;
         }
 
-
-
-        $html = format_questions_answers_post_content($header["questionContent"], $header["answerContent"]);
+        $html = format_questions_answers_post_content($header["questionContent"], $header["answerContent"],$header['reviewID']);
         //fwrite($file, "HTML STRING: \n".$html."\n\n");
 
         //$user_html = "<div>".$userInfo->heightFeet.":\n<br/>".$answers[$i]."\n\n</div>";
@@ -77,7 +75,7 @@ function get_userName_by_userID($userID, $file){
     return $res->display_name;
 }
 
-function format_questions_answers_post_content($questions, $answers){
+function format_questions_answers_post_content($questions, $answers, $form_id){
 	//php assertion that question and answers atre same length
 	if (count($questions) !== count($answers)) {
 		die("questions and answers");
@@ -96,89 +94,173 @@ function format_questions_answers_post_content($questions, $answers){
 
 	//}
 
-    $html .= '<div style = "text-align:justify;">
-              <div style = "width:33.3%;padding:0 0 0 0;float:left;font-weight:bold;">Terrain Tested</div>
-              <div style = "width:33.3%;padding:0 0 0 0;float:left;font-weight:bold;">Where</div>
-              <div style = "width:33.3%;padding:0 0 0 0;float:right;font-weight:bold;">Conditions Tested</div>
-              </div>
-              <div style="clear:both;"></div>';
+    if ($form_id == 4){
 
-    $html .= '<div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[4].'</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[3].'</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:right;column_gap:20px;">'.$answers[5].'</div>
-              </div>
-              <div style="clear:both;"></div>';       
+        $html .= '<div class = "long_container">
+            <div class = "section_title">Product Review</div>
+            <div class = "question_title">Stablility?</div>
+            <div class = "answer">  '.$answers[7].$answers[8].'</div>
+            <div class = "question_title">Maniveurability?</div>
+            <div class = "answer">'.$answers[6].'</div>
+            <div class = "question_title">Demand of ski</div>
+            <div class = "answer">  '.$answers[9].'</div>
+
+            <div class = "question_title"> Ride Quality</div>
+            <div class = "answer">'.$answers[10].'</div>
+            <div class = "question_title"> Fun Factor</div>
+            <div class = "answer">'.$answers[12].'</div>
+            <div class = "question_title"> Ski felt good on...</div>
+            <div class = "answer">'.$answers[11].'</div>              
+            <div class = "question_title"> Correct Lenght?</div>
+            <div class = "answer">'.$answers[13].'</div>
+            <div class = "question_title"> Who will like this Ski?</div>
+            <div class = "answer">'.$answers[14].'</div>          
+            </div>';
+
+        $html .= '<div class = "short_container">
+            <div class = "section_title">Testing Context</div>
+            <div class = "question_title">Terrain Tested</div>
+            <div class = "answer">'.$answers[4].'</div>
+            <div class = "question_title">Where</div>
+            <div class = "answer">'.$answers[3].'</div>
+            <div class = "question_title">Conditions Tested</div>
+            <div class = "answer">'.$answers[5].'</div>
+            </div>'; 
+
+        $html .= '<div class = "whole_container">
+            <div class = "section_title2">Tester Testimony</div>
+            <div class = "short_question"> How good 1-10?</div>
+            <div class = "long_question"> elaboration </div>
+            <div class = "short_answer">'.$answers[15].'</div>
+            <div class = "long_answer">'.$answers[16].'</div>          
+            <div class = "short_question"> Recommend?</div>
+            <div class = "long_question"> elaboration </div>
+            <div class = "short_answer">'.$answers[17].'</div>
+            <div class = "long_answer">'.$answers[18].'</div>          
+            <div class = "question_title"> Prefered Similar Products? and why?</div>
+            <div class = "answer">'.$answers[19].'</div>
+            <div class = "question_title"> Personal Comment</div>
+            <div class = "answer">'.$answers[20].'</div>
+            </div>'; 
+        return $html;
+    }
+    if ($form_id == 7){
+
+        $html .= '<div class = "long_container">
+            <div class = "section_title">Product Review</div>
+            <div class = "question_title">Boot Fit</div>
+            <div class = "answer">  '.$answers[6].'</div>
+            <div class = "question_title">Boot Stance?</div>
+            <div class = "answer">'.$answers[8].'</div>
+            <div class = "question_title">Flex Pattern</div>
+            <div class = "answer">  '.$answers[9].'</div>
+
+            <div class = "question_title"> Weight of Boot</div>
+            <div class = "answer">'.$answers[10].'</div>
+            <div class = "question_title"> Difficulty Putting on 1-10?</div>
+            <div class = "answer">'.$answers[11].'</div>';
+        if ($answers[12] == 'yes'){
+            $html.= '<div class = "question_title"> Touring Boot?</div>
+                <div class = "answer">'.$answers[12].'</div>    
+                <div class = "question_title"> Touring Buckles</div>
+                <div class = "answer">'.$answers[13].'</div>
+                <div class = "question_title"> Touring Walking?</div>
+                <div class = "answer">'.$answers[14].'</div>
+                <div class = "question_title"> Touring Power Straps</div>
+                <div class = "answer">'.$answers[15].'</div>
+                <div class = "question_title"> Touring Walk Mode?</div>
+                <div class = "answer">'.$answers[16].'</div>
+                </div>';
+            $html .= '<div class = "short_container">
+                <div class = "section_title">Testing Context</div>
+                <div class = "question_title">Terrain Tested</div>
+                <div class = "answer">'.$answers[4].'</div>
+                <div class = "question_title">Where</div>
+                <div class = "answer">'.$answers[3].'</div>
+                <div class = "question_title">Conditions Tested</div>
+                <div class = "answer">'.$answers[5].'</div>
+                </div>'; 
+
+            $html .= '<div class = "whole_container">
+                <div class = "section_title2">Tester Testimony</div>
+                <div class = "short_question">Looks 1-10?</div>
+                <div class = "long_question"> How likely to buy </div>
+                <div class = "short_answer">'.$answers[17].'</div>
+                <div class = "long_answer">'.$answers[18].'</div>                   
+                <div class = "question_title"> Boot Performance</div>
+                <div class = "answer">'.$answers[7].'</div>
+                <div class = "question_title"> Personal Comment and why?</div>
+                <div class = "answer">'.$answers[19].'</div>
+                </div>';
+                return $html;
+        }
+        else{
+            $html.= '<div class = "question_title"> Touring Boot?</div>
+                <div class = "answer">'.$answers[12].'</div>
+                </div>';
+
+                $html .= '<div class = "short_container">
+                <div class = "section_title">Testing Context</div>
+                <div class = "question_title">Terrain Tested</div>
+                <div class = "answer">'.$answers[4].'</div>
+                <div class = "question_title">Where</div>
+                <div class = "answer">'.$answers[3].'</div>
+                <div class = "question_title">Conditions Tested</div>
+                <div class = "answer">'.$answers[5].'</div>
+                </div>'; 
+
+            $html .= '<div class = "whole_container">
+                <div class = "section_title2">Tester Testimony</div>
+                <div class = "short_question">Looks 1-10?</div>
+                <div class = "long_question"> How likely to buy </div>
+                <div class = "short_answer">'.$answers[13].'</div>
+                <div class = "long_answer">'.$answers[14].'</div>                   
+                <div class = "question_title"> Boot Performance</div>
+                <div class = "answer">'.$answers[7].'</div>
+                <div class = "question_title"> Personal Comment?</div>
+                <div class = "answer">'.$answers[15].'</div>
+                </div>'; 
+                return $html;
+        }
+
+    }
+
+    if ($form_id == 6){ 
+
+        $html .= '<div class = "whole_container">
+            <div class = "section_title2">Product Review</div>
+            <div class = "short_question"> Where</div>
+            <div class = "long_answer">'.$answers[2].'</div>          
+            <div class = "short_question"> Feel 1-10</div>
+            <div class = "long_answer">'.$answers[5].'</div>
+            <div class = "short_question"> Weather Resistance</div>
+            <div class = "long_answer">'.$answers[6].'</div> 
+            <div class = "short_question"> Breathability</div>
+            <div class = "long_answer">'.$answers[7].'</div>      
+            <div class = "short_question"> Warmth</div>
+            <div class = "long_answer">'.$answers[8].'</div>
+            <div class = "short_question"> Do you run hot or cold?</div>
+            <div class = "long_answer">'.$answers[9].'</div>
+            <div class = "short_question"> Looks 1-10?</div>
+            <div class = "long_answer">'.$answers[12].'</div> 
+            <div class = "short_question"> How likely to buy?</div>
+            <div class = "long_answer">'.$answers[13].'</div> 
+            <div class = "short_question"> Has the features you want?</div>
+            <div class = "long_question"> elaboration </div>
+            <div class = "short_answer">'.$answers[10].'</div>
+            <div class = "long_answer">'.$answers[11].'</div>
+            <div class = "short_question"> Fit</div>
+            <div class = "long_question"> elaboration </div>
+            <div class = "short_answer">'.$answers[3].'</div>
+            <div class = "long_answer">'.$answers[4].'</div>
+
+            <div class = "question_title"> Personal Comment?</div>
+            <div class = "answer">'.$answers[14].'</div>
+            </div>';
+        return $html;
+    }
 
 
-    $html .= '<div style = "text-align:Justify;">
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Stablility?</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Maniveurability?</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Demand of ski</div>
-              <div style="clear:both;"></div>';
-
-
-    $html .= '<div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  '.$answers[7].$answers[8].'</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[6].'</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  '.$answers[9].'</div>
-              <div style="clear:both;"></div>';
-
-
-    $html .= '<div style = "text-align:Justify;">
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Ride Quality</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Fun Factor</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:right;font-weight:bold;"> Ski felt good on...</div>
-              <div style="clear:both;"></div>';
-
-    $html .= '<div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[10].'</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[12].'</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[11].'</div>              
-              <div style="clear:both;"></div>';
-
-    $html .= '<div style = "text-align:Justify;">
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Correct Lenght?</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Who will like this Ski?</div>
-              <div style="clear:both;"></div>';
-
-
-    $html .= '<div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[13].'</div>
-              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[14].'</div>          
-              <div style="clear:both;"></div>';
-
-    $html .= '<div style = "text-align:Justify;">
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> How good 1-10?</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
-              <div style="clear:both;"></div>';
-
-    $html .= '<div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[15].'</div>
-              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[16].'</div>          
-              <div style="clear:both;"></div>';
-
-    $html .= '<div style = "text-align:Justify;">
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Recommend?</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
-              <div style="clear:both;"></div>'; 
-
-    $html .= '<div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[17].'</div>
-              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[18].'</div>          
-              <div style="clear:both;"></div>';  
-
-    $html .= '<div style = "text-align:Justify;">
-              <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Prefered Similar Products? and why?</div>
-              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[19].'</div>
-              <div style="clear:both;"></div>'; 
-
-    $html .= '<div style = "text-align:Justify;">
-              <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Personal Comment</div>
-              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;">'.$answers[20].'</div>
-              <div style="clear:both;"></div>'; 
-
-	return $html;
 }
 
 function profile_info_sub( $record, $ajax_handler ){
@@ -329,7 +411,8 @@ function get_all_form_names($file){
     //$start = "\n\n SUMMIT get all form names \n";
     //fwrite($file, $start);
     $review_forms_table = $wpdb->prefix . "bcr_review_forms";
-    $q = "SELECT reviewFormName FROM $review_forms_table;";
+    //$q = "SELECT reviewFormName FROM $review_forms_table;";
+    $q = "SELECT reviewFormName FROM `wp_bcr_review_forms`";
     //$wpdb->prepare("SELECT %s FROM %s;", array("reviewFormName", $review_table));
     $res = $wpdb->get_results($q);
     $return_array = [];//json_decode(json_encode($res),true);

@@ -7,28 +7,32 @@ Array
     [_fluentform_7_fluentformnonce] => e87009b17f
     [_wp_http_referer] => /summit-ski-boot-review-form/
     [1] => K2
-    [2_2] => Anthem
+    [2_2] => Recon
     [22] => 29.5
-    [4] => inbound
+    [4] => back country
     [checkbox] => Array
         (
-            [0] => fairly soft
+            [0] => off-piste terrain
         )
 
     [5] => Array
         (
-            [0] => Mixed conditions
+            [0] => Soft chop
         )
 
-    [23] => Too big/sloppy
+    [23] => Too tight
     [24] => iiiiiiiiiiiiiii
-    [25] => Felt good – not too upright, not too forward
+    [25] => Too forward? (didn’t find instance of this response, but assumed it was option)
     [26] => Too stiff in moguls and rough terrain
     [27] => The weight of the boot felt great.
-    [28] => 5
-    [33] => no
-    [16] => 4
-    [18] => Might buy
+    [28] => 7
+    [33] => yes
+    [29] => Disliked them. Too finicky or too flimsy
+    [30] => I thought it was bad, clumsy not intuitive
+    [31] => Disliked it. Too finicky or too flimsy for me
+    [32] => I loved the range of motion. I think the boot walks great
+    [16] => 3
+    [18] => Probably buying – it suits my style quite well, but so do a few other skis
     [19] => fffffffff
 )
 
@@ -118,29 +122,37 @@ Array
             [10] => How did the weight of the boot feel?
             [11] => Difficulty of putting on and taking off boots. 1 - easy. 10 - difficult.
             [12] => Is this a Touring Boot?
-            [13] => How much do you like the looks of the product?
-            [14] => How likely are you to either buy or recommend this product?
-            [15] => Please feel free to elaborate:
+            [13] => Touring Boots Buckles
+            [14] => Touring Boots Walk Mechanism
+            [15] => Touring Boot power straps 
+            [16] => Touring Boots/ Boots with walk mode – Walking:
+            [17] => How much do you like the looks of the product?
+            [18] => How likely are you to either buy or recommend this product?
+            [19] => Please feel free to elaborate:
         )
 
     [answer_content] => Array
         (
             [0] => K2
-            [1] => Anthem
+            [1] => Recon
             [2] => 29.5
-            [3] => inbound
-            [4] => fairly soft
-            [5] => Mixed conditions
-            [6] => Too big/sloppy
+            [3] => back country
+            [4] => off-piste terrain
+            [5] => Soft chop
+            [6] => Too tight
             [7] => iiiiiiiiiiiiiii
-            [8] => Felt good – not too upright, not too forward
+            [8] => Too forward? (didn’t find instance of this response, but assumed it was option)
             [9] => Too stiff in moguls and rough terrain
             [10] => The weight of the boot felt great.
-            [11] => 5
-            [12] => no
-            [13] => 4
-            [14] => Might buy
-            [15] => fffffffff
+            [11] => 7
+            [12] => yes
+            [13] => Disliked them. Too finicky or too flimsy
+            [14] => I thought it was bad, clumsy not intuitive
+            [15] => Disliked it. Too finicky or too flimsy for me
+            [16] => I loved the range of motion. I think the boot walks great
+            [17] => 3
+            [18] => Probably buying – it suits my style quite well, but so do a few other skis
+            [19] => fffffffff
         )
 
 )
@@ -168,29 +180,37 @@ Array
             [10] => How did the weight of the boot feel?
             [11] => Difficulty of putting on and taking off boots. 1 - easy. 10 - difficult.
             [12] => Is this a Touring Boot?
-            [13] => How much do you like the looks of the product?
-            [14] => How likely are you to either buy or recommend this product?
-            [15] => Please feel free to elaborate:
+            [13] => Touring Boots Buckles
+            [14] => Touring Boots Walk Mechanism
+            [15] => Touring Boot power straps 
+            [16] => Touring Boots/ Boots with walk mode – Walking:
+            [17] => How much do you like the looks of the product?
+            [18] => How likely are you to either buy or recommend this product?
+            [19] => Please feel free to elaborate:
         )
 
     [answerContent] => Array
         (
             [0] => K2
-            [1] => Anthem
+            [1] => Recon
             [2] => 29.5
-            [3] => inbound
-            [4] => fairly soft
-            [5] => Mixed conditions
-            [6] => Too big/sloppy
+            [3] => back country
+            [4] => off-piste terrain
+            [5] => Soft chop
+            [6] => Too tight
             [7] => iiiiiiiiiiiiiii
-            [8] => Felt good – not too upright, not too forward
+            [8] => Too forward? (didn’t find instance of this response, but assumed it was option)
             [9] => Too stiff in moguls and rough terrain
             [10] => The weight of the boot felt great.
-            [11] => 5
-            [12] => no
-            [13] => 4
-            [14] => Might buy
-            [15] => fffffffff
+            [11] => 7
+            [12] => yes
+            [13] => Disliked them. Too finicky or too flimsy
+            [14] => I thought it was bad, clumsy not intuitive
+            [15] => Disliked it. Too finicky or too flimsy for me
+            [16] => I loved the range of motion. I think the boot walks great
+            [17] => 3
+            [18] => Probably buying – it suits my style quite well, but so do a few other skis
+            [19] => fffffffff
         )
 
     [userInfo] => stdClass Object
@@ -221,112 +241,92 @@ userID to get userName: 1
 username: 
 user name: izak 
 
-<div>User: izak</div><div>Reviewers height: 5 feet, 10 inches</div><div>Reviewers weight: 175 lbs</div><div>Reviewers ski ability: 10</div><br/><div style = "text-align:justify;">
-              <div style = "width:33.3%;padding:0 0 0 0;float:left;font-weight:bold;">Terrain Tested</div>
-              <div style = "width:33.3%;padding:0 0 0 0;float:left;font-weight:bold;">Where</div>
-              <div style = "width:33.3%;padding:0 0 0 0;float:right;font-weight:bold;">Conditions Tested</div>
-              </div>
-              <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">fairly soft</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">inbound</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:right;column_gap:20px;">Mixed conditions</div>
-              </div>
-              <div style="clear:both;"></div><div style = "text-align:Justify;">
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Stablility?</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Maniveurability?</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Demand of ski</div>
-              <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  iiiiiiiiiiiiiiiFelt good – not too upright, not too forward</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Too big/sloppy</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  Too stiff in moguls and rough terrain</div>
-              <div style="clear:both;"></div><div style = "text-align:Justify;">
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Ride Quality</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Fun Factor</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:right;font-weight:bold;"> Ski felt good on...</div>
-              <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">The weight of the boot felt great.</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">no</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">5</div>              
-              <div style="clear:both;"></div><div style = "text-align:Justify;">
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Correct Lenght?</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Who will like this Ski?</div>
-              <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">4</div>
-              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">Might buy</div>          
-              <div style="clear:both;"></div><div style = "text-align:Justify;">
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> How good 1-10?</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
-              <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">fffffffff</div>
-              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>          
-              <div style="clear:both;"></div><div style = "text-align:Justify;">
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Recommend?</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
-              <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
-              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>          
-              <div style="clear:both;"></div><div style = "text-align:Justify;">
-              <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Prefered Similar Products? and why?</div>
-              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
-              <div style="clear:both;"></div><div style = "text-align:Justify;">
-              <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Personal Comment</div>
-              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
-              <div style="clear:both;"></div>
+<div>User: izak</div><div>Reviewers height: 5 feet, 10 inches</div><div>Reviewers weight: 175 lbs</div><div>Reviewers ski ability: 10</div><br/><div class = "long_container">
+            <div class = "section_title">Product Review</div>
+            <div class = "question_title">Boot Fit</div>
+            <div class = "answer">  Too tight</div>
+            <div class = "question_title">Boot Stance?</div>
+            <div class = "answer">Too forward? (didn’t find instance of this response, but assumed it was option)</div>
+            <div class = "question_title">Flex Pattern</div>
+            <div class = "answer">  Too stiff in moguls and rough terrain</div>
+
+            <div class = "question_title"> Weight of Boot</div>
+            <div class = "answer">The weight of the boot felt great.</div>
+            <div class = "question_title"> Difficulty Putting on 1-10?</div>
+            <div class = "answer">7</div><div class = "question_title"> Touring Boot?</div>
+                <div class = "answer">yes</div>    
+                <div class = "question_title"> Touring Buckles</div>
+                <div class = "answer">Disliked them. Too finicky or too flimsy</div>
+                <div class = "question_title"> Touring Walking?</div>
+                <div class = "answer">I thought it was bad, clumsy not intuitive</div>
+                <div class = "question_title"> Touring Power Straps</div>
+                <div class = "answer">Disliked it. Too finicky or too flimsy for me</div>
+                <div class = "question_title"> Touring Walk Mode?</div>
+                <div class = "answer">I loved the range of motion. I think the boot walks great</div>
+                </div><div class = "short_container">
+                <div class = "section_title">Testing Context</div>
+                <div class = "question_title">Terrain Tested</div>
+                <div class = "answer">off-piste terrain</div>
+                <div class = "question_title">Where</div>
+                <div class = "answer">back country</div>
+                <div class = "question_title">Conditions Tested</div>
+                <div class = "answer">Soft chop</div>
+                </div><div class = "whole_container">
+                <div class = "section_title2">Tester Testimony</div>
+                <div class = "short_question">Looks 1-10?</div>
+                <div class = "long_question"> How likely to buy </div>
+                <div class = "short_answer">3</div>
+                <div class = "long_answer">Probably buying – it suits my style quite well, but so do a few other skis</div>                   
+                <div class = "question_title"> Boot Performance</div>
+                <div class = "answer">iiiiiiiiiiiiiii</div>
+                <div class = "question_title"> Personal Comment and why?</div>
+                <div class = "answer">fffffffff</div>
+                </div>
 Post array: 
 Array
 (
     [post_title] => test product
-    [post_content] => <div>User: izak</div><div>Reviewers height: 5 feet, 10 inches</div><div>Reviewers weight: 175 lbs</div><div>Reviewers ski ability: 10</div><br/><div style = "text-align:justify;">
-              <div style = "width:33.3%;padding:0 0 0 0;float:left;font-weight:bold;">Terrain Tested</div>
-              <div style = "width:33.3%;padding:0 0 0 0;float:left;font-weight:bold;">Where</div>
-              <div style = "width:33.3%;padding:0 0 0 0;float:right;font-weight:bold;">Conditions Tested</div>
-              </div>
-              <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">fairly soft</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">inbound</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:right;column_gap:20px;">Mixed conditions</div>
-              </div>
-              <div style="clear:both;"></div><div style = "text-align:Justify;">
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Stablility?</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Maniveurability?</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Demand of ski</div>
-              <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  iiiiiiiiiiiiiiiFelt good – not too upright, not too forward</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Too big/sloppy</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  Too stiff in moguls and rough terrain</div>
-              <div style="clear:both;"></div><div style = "text-align:Justify;">
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Ride Quality</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Fun Factor</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:right;font-weight:bold;"> Ski felt good on...</div>
-              <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">The weight of the boot felt great.</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">no</div>
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">5</div>              
-              <div style="clear:both;"></div><div style = "text-align:Justify;">
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Correct Lenght?</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Who will like this Ski?</div>
-              <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">4</div>
-              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">Might buy</div>          
-              <div style="clear:both;"></div><div style = "text-align:Justify;">
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> How good 1-10?</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
-              <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">fffffffff</div>
-              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>          
-              <div style="clear:both;"></div><div style = "text-align:Justify;">
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Recommend?</div>
-              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
-              <div style="clear:both;"></div><div style = "text-align:left;">
-              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
-              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>          
-              <div style="clear:both;"></div><div style = "text-align:Justify;">
-              <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Prefered Similar Products? and why?</div>
-              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
-              <div style="clear:both;"></div><div style = "text-align:Justify;">
-              <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Personal Comment</div>
-              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
-              <div style="clear:both;"></div>
+    [post_content] => <div>User: izak</div><div>Reviewers height: 5 feet, 10 inches</div><div>Reviewers weight: 175 lbs</div><div>Reviewers ski ability: 10</div><br/><div class = "long_container">
+            <div class = "section_title">Product Review</div>
+            <div class = "question_title">Boot Fit</div>
+            <div class = "answer">  Too tight</div>
+            <div class = "question_title">Boot Stance?</div>
+            <div class = "answer">Too forward? (didn’t find instance of this response, but assumed it was option)</div>
+            <div class = "question_title">Flex Pattern</div>
+            <div class = "answer">  Too stiff in moguls and rough terrain</div>
+
+            <div class = "question_title"> Weight of Boot</div>
+            <div class = "answer">The weight of the boot felt great.</div>
+            <div class = "question_title"> Difficulty Putting on 1-10?</div>
+            <div class = "answer">7</div><div class = "question_title"> Touring Boot?</div>
+                <div class = "answer">yes</div>    
+                <div class = "question_title"> Touring Buckles</div>
+                <div class = "answer">Disliked them. Too finicky or too flimsy</div>
+                <div class = "question_title"> Touring Walking?</div>
+                <div class = "answer">I thought it was bad, clumsy not intuitive</div>
+                <div class = "question_title"> Touring Power Straps</div>
+                <div class = "answer">Disliked it. Too finicky or too flimsy for me</div>
+                <div class = "question_title"> Touring Walk Mode?</div>
+                <div class = "answer">I loved the range of motion. I think the boot walks great</div>
+                </div><div class = "short_container">
+                <div class = "section_title">Testing Context</div>
+                <div class = "question_title">Terrain Tested</div>
+                <div class = "answer">off-piste terrain</div>
+                <div class = "question_title">Where</div>
+                <div class = "answer">back country</div>
+                <div class = "question_title">Conditions Tested</div>
+                <div class = "answer">Soft chop</div>
+                </div><div class = "whole_container">
+                <div class = "section_title2">Tester Testimony</div>
+                <div class = "short_question">Looks 1-10?</div>
+                <div class = "long_question"> How likely to buy </div>
+                <div class = "short_answer">3</div>
+                <div class = "long_answer">Probably buying – it suits my style quite well, but so do a few other skis</div>                   
+                <div class = "question_title"> Boot Performance</div>
+                <div class = "answer">iiiiiiiiiiiiiii</div>
+                <div class = "question_title"> Personal Comment and why?</div>
+                <div class = "answer">fffffffff</div>
+                </div>
     [meta_input] => Array
         (
             [id] => 7
