@@ -7,6 +7,7 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
         //fwrite($file, "answer content grabbed\n".implode(', ', $answers)."---------\n\n");
     
         $userInfo = $header['userInfo'];
+        $userName = get_userName_by_userID($userInfo->userID);
         //fwrite($file, "user info grabbed \n");
         //$u_info = print_r($userInfo, true);
         //fwrite($file, "post user info: \n".$u_info."\n\n");
@@ -15,32 +16,36 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
             return;
         }
 
+
+
         $html = format_questions_answers_post_content($header["questionContent"], $header["answerContent"]);
         //fwrite($file, "HTML STRING: \n".$html."\n\n");
 
         //$user_html = "<div>".$userInfo->heightFeet.":\n<br/>".$answers[$i]."\n\n</div>";
+        $user_html.= "<div>User: ".$userName."</div>";
         $user_html.= "<div>Reviewers height: ".$userInfo->heightFeet." feet, ".$userInfo->heightInches." inches</div>";
         $user_html .= "<div>Reviewers weight: ".$userInfo->weight." lbs</div>";
         $user_html .= "<div>Reviewers ski ability: ".$userInfo->skiAbility."</div>";
         $user_html .= "<br/>";
 
         $html = $user_html . $html;
-
+//fetch user name to insert
         $ski_review = array(
                             'post_title' => wp_strip_all_tags( $answers[1] . ' ' . $header['productName'] . ' ' . $answers[2]),
                             'post_content' => $html,
                             'meta_input' => array(
-                                                  'id'        => $header['reviewID'],
-                                                  'userID'          => $userInfo->userID,
-                                                  'heightFeet'          => $userInfo->heightFeet,
-                                                  'heightInches'            => $userInfo->heightInches,
-                                                  'weight'          => $userInfo->weight,
-                                                  'skiAbility'          => $userInfo->skiAbility,
-                                                  'product_tested'        => $header['productName'],
-                                                  'category'           => $header['categoryName'],
-                                                  'sport'          => $header['sportName'],
-                                                  'questions'          => $questions,
-                                                  'answers'           => $answers
+                                                  'id'            => $header['reviewID'],
+                                                  'userID'        => $userInfo->userID,
+                                                  'userName'      => $userName,
+                                                  'heightFeet'    => $userInfo->heightFeet,
+                                                  'heightInches'  => $userInfo->heightInches,
+                                                  'weight'        => $userInfo->weight,
+                                                  'skiAbility'    => $userInfo->skiAbility,
+                                                  'product_tested'=> $header['productName'],
+                                                  'category'      => $header['categoryName'],
+                                                  'sport'         => $header['sportName']//,
+                                                  //'questions'     => $questions, //probably do not need beacuse it is part of content 
+                                                  //'answers'       => $answers // same
                                                   ),
                             'post_type'   => 'Ski Reviews',
                             'post_excerpt' => $user_html,
@@ -48,9 +53,14 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
                             );
         $custom_post_input = print_r($ski_review, true);
         fwrite($file, "Post array: \n".$custom_post_input."\n\n");
-        wp_insert_post( $ski_review );
-        
-    }
+        wp_insert_post( $ski_review );        
+}
+
+function get_userName_by_userID($userID){
+    $userName = get_user_by('id', $userID);
+    if($userName == false){die('could not find username');}
+    return $userName;
+}
 
 function format_questions_answers_post_content($questions, $answers){
 	//php assertion that question and answers atre same length
@@ -359,6 +369,7 @@ function summit_insert_into_review_table($RF_id, $file){
         
         //$KTSid = get_knowthyself_id($current_userID);
         $fields_review['knowThyselfID'] = 4;//NOT NESSESARY ANYMORE get this id from bcr_know_thyself using userid HAS TO EXIST BEFORE SUBMISSION
+        //remove!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         $fields_review['reviewFormID'] = $RF_id;
 
@@ -422,6 +433,7 @@ function summit_form_submission_custom_post_content($current_form_id,$record,$fi
     $user_info = get_user_information($file);
     //$u_info_read = print_r($user_info, true);
     //fwrite($myfile, "user info: \n".$u_info_read."\n\n");
+
    
    $qs = $q_and_a_content['question_content'];
    $as = $q_and_a_content['answer_content'];
@@ -440,8 +452,8 @@ function summit_form_submission_custom_post_content($current_form_id,$record,$fi
 
 function get_answer_and_question_content($record,$file){
     global $wpdb;
-    $start = "\n\n GET ANSWERS AND QUESTIONS \n";
-    fwrite($file, $start);
+    //$start = "\n\n GET ANSWERS AND QUESTIONS \n";
+    //fwrite($file, $start);
 
     $return_array = [];
     //$answer_ids = []; //used for when inserting into reviews answers
@@ -499,8 +511,11 @@ function get_product_info($form_id,$file){//may just want to return res2 !!!!!!
 	$return_array['productID'] = $res2->productID;
 	$return_array['productName'] = $res2->productName;
 	$return_array['categoryID'] = $res2->categoryID;
+    //add brand id or band name 
 	return $return_array;
 }
+
+//another function that gets brand info and will change the custom post
 
 function get_category_info($category_id, $file){//may just want to return res !!!!!!
 	global $wpdb;
@@ -520,6 +535,7 @@ function get_category_info($category_id, $file){//may just want to return res !!
 	return $return_array;
 }
 
+//this may be removed from the structure 
 function get_sport_info($sport_id){ //may just want to return res !!!!!!
 	global $wpdb;
 	$sports_table = $wpdb->prefix . "bcr_sports";
@@ -533,8 +549,8 @@ function get_sport_info($sport_id){ //may just want to return res !!!!!!
 
 function get_user_information($file){
     global $wpdb;
-    $start = "\n\n GET USER INFORMATION \n";
-    fwrite($file, $start);
+    //$start = "\n\n GET USER INFORMATION \n";
+    //fwrite($file, $start);
     $userID = get_current_userID($file);
     //fwrite($file, "user id: ".$userID."\n");
     $user_table_name = $wpdb->prefix . "bcr_users";//i do not have this same able 
