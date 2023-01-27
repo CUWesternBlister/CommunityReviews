@@ -7,10 +7,12 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
         //fwrite($file, "answer content grabbed\n".implode(', ', $answers)."---------\n\n");
     
         $userInfo = $header['userInfo'];
-        $userName = get_userName_by_userID($userInfo->userID);
-        //fwrite($file, "user info grabbed \n");
-        $u_info = print_r($header, true);
+        $u_info = print_r($userInfo, true);
         fwrite($file, "post user info: \n".$u_info."\n\n");
+        
+
+        $userName = get_userName_by_userID($userInfo->userID,$file);
+        fwrite($file, "user name: ".$userName." \n");
         
         if ( NULL === $header || 0 === $header || '0' === $header || empty( $header ) ) {
             return;
@@ -29,6 +31,8 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
         $user_html .= "<br/>";
 
         $html = $user_html . $html;
+
+        fwrite($file, "\n".$html."\n");
 //fetch user name to insert
         $ski_review = array(
                             'post_title' => wp_strip_all_tags( $answers[1] . ' ' . $header['productName'] . ' ' . $answers[2]),
@@ -54,13 +58,23 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
                             );
         $custom_post_input = print_r($ski_review, true);
         fwrite($file, "Post array: \n".$custom_post_input."\n\n");
-        wp_insert_post( $ski_review );        
+        wp_insert_post( $ski_review );
+        fwrite($file,"\n\nHERE\n\n");      
 }
 
-function get_userName_by_userID($userID){
-    $userName = get_user_by('id', $userID);
-    if($userName == false){die('could not find username');}
-    return $userName;
+function get_userName_by_userID($userID, $file){
+    global $wpdb;
+    fwrite($file, "userID to get userName: ".$userID."\n");
+    $wp_user_table = $wpdb->prefix."users";
+    $q = "SELECT display_name FROM $wp_user_table WHERE ID = $userID;";
+    $res = $wpdb->get_row($q);
+    //$userName = get_userdata($userID);
+    //if($userName == false){
+    $res_p = print_r($res, true);
+    fwrite($file, "\nusername: ".$res_p->display_name."\n");
+        //die('could not find username');
+    //}
+    return $res->display_name;
 }
 
 function format_questions_answers_post_content($questions, $answers){

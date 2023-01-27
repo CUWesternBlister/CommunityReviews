@@ -1,0 +1,353 @@
+fluent_summit_review_from_sub
+
+formData 1: 
+Array
+(
+    [__fluent_form_embded_post_id] => 539
+    [_fluentform_7_fluentformnonce] => e87009b17f
+    [_wp_http_referer] => /summit-ski-boot-review-form/
+    [1] => K2
+    [2_2] => Anthem
+    [22] => 29.5
+    [4] => inbound
+    [checkbox] => Array
+        (
+            [0] => fairly soft
+        )
+
+    [5] => Array
+        (
+            [0] => Mixed conditions
+        )
+
+    [23] => Too big/sloppy
+    [24] => iiiiiiiiiiiiiii
+    [25] => Felt good – not too upright, not too forward
+    [26] => Too stiff in moguls and rough terrain
+    [27] => The weight of the boot felt great.
+    [28] => 5
+    [33] => no
+    [16] => 4
+    [18] => Might buy
+    [19] => fffffffff
+)
+
+
+Starting the Process 
+
+
+
+ start summit_form_submission_write_to_tabless 
+
+
+ SUMMIT INSERT INTO ANSWER TABLE 
+
+
+SUMMIT INSERT INTO REVIEW TABLE 
+
+
+SUMMIT INSERT INTO REVIEW ANSWER TABLE 
+
+
+summit_insert_into_review_answer_table function exited
+
+
+
+ summit_form_submission_custom_post_content 
+
+
+ GET PRODUCT INFORMATION 
+
+
+Current Form ID: 7
+
+get results: 
+stdClass Object
+(
+    [reviewFormID] => 7
+    [reviewFormName] => Summit_Ski_Boot_Review_Form
+    [productID] => 2
+)
+
+product id: 2
+product info: 
+Array
+(
+    [productID] => 2
+    [productName] => test product
+    [categoryID] => 1
+)
+
+
+
+
+ GET CATEGORY INFORMATION 
+categroy info: 
+Array
+(
+    [categoryID] => 1
+    [categoryName] => test category
+    [parentID] => 
+    [sportID] => 1
+)
+
+
+sport info: 
+Array
+(
+    [sportID] => 1
+    [sportName] => test sport
+)
+
+
+QandA info: 
+Array
+(
+    [question_content] => Array
+        (
+            [0] => Brand Tested
+            [1] => Product tested
+            [2] => Ski Boot Size
+            [3] => Where did you test it?
+            [4] => 
+            [5] => What type of terrain did you ski?
+            [6] => Boot fit
+            [7] => Please describe the ski boot's performance:
+            [8] => How did the boot stance feel?
+            [9] => How did the flex pattern feel?
+            [10] => How did the weight of the boot feel?
+            [11] => Difficulty of putting on and taking off boots. 1 - easy. 10 - difficult.
+            [12] => Is this a Touring Boot?
+            [13] => How much do you like the looks of the product?
+            [14] => How likely are you to either buy or recommend this product?
+            [15] => Please feel free to elaborate:
+        )
+
+    [answer_content] => Array
+        (
+            [0] => K2
+            [1] => Anthem
+            [2] => 29.5
+            [3] => inbound
+            [4] => fairly soft
+            [5] => Mixed conditions
+            [6] => Too big/sloppy
+            [7] => iiiiiiiiiiiiiii
+            [8] => Felt good – not too upright, not too forward
+            [9] => Too stiff in moguls and rough terrain
+            [10] => The weight of the boot felt great.
+            [11] => 5
+            [12] => no
+            [13] => 4
+            [14] => Might buy
+            [15] => fffffffff
+        )
+
+)
+
+
+HEADER: 
+Array
+(
+    [reviewID] => 7
+    [productName] => test product
+    [categoryName] => test category
+    [sportName] => test sport
+    [questionContent] => Array
+        (
+            [0] => Brand Tested
+            [1] => Product tested
+            [2] => Ski Boot Size
+            [3] => Where did you test it?
+            [4] => 
+            [5] => What type of terrain did you ski?
+            [6] => Boot fit
+            [7] => Please describe the ski boot's performance:
+            [8] => How did the boot stance feel?
+            [9] => How did the flex pattern feel?
+            [10] => How did the weight of the boot feel?
+            [11] => Difficulty of putting on and taking off boots. 1 - easy. 10 - difficult.
+            [12] => Is this a Touring Boot?
+            [13] => How much do you like the looks of the product?
+            [14] => How likely are you to either buy or recommend this product?
+            [15] => Please feel free to elaborate:
+        )
+
+    [answerContent] => Array
+        (
+            [0] => K2
+            [1] => Anthem
+            [2] => 29.5
+            [3] => inbound
+            [4] => fairly soft
+            [5] => Mixed conditions
+            [6] => Too big/sloppy
+            [7] => iiiiiiiiiiiiiii
+            [8] => Felt good – not too upright, not too forward
+            [9] => Too stiff in moguls and rough terrain
+            [10] => The weight of the boot felt great.
+            [11] => 5
+            [12] => no
+            [13] => 4
+            [14] => Might buy
+            [15] => fffffffff
+        )
+
+    [userInfo] => stdClass Object
+        (
+            [userID] => 1
+            [heightFeet] => 5
+            [heightInches] => 10
+            [weight] => 175
+            [skiAbility] => 10
+        )
+
+)
+
+
+post user info: 
+stdClass Object
+(
+    [userID] => 1
+    [heightFeet] => 5
+    [heightInches] => 10
+    [weight] => 175
+    [skiAbility] => 10
+)
+
+
+userID to get userName: 1
+
+username: 
+user name: izak 
+
+<div>User: izak</div><div>Reviewers height: 5 feet, 10 inches</div><div>Reviewers weight: 175 lbs</div><div>Reviewers ski ability: 10</div><br/><div style = "text-align:justify;">
+              <div style = "width:33.3%;padding:0 0 0 0;float:left;font-weight:bold;">Terrain Tested</div>
+              <div style = "width:33.3%;padding:0 0 0 0;float:left;font-weight:bold;">Where</div>
+              <div style = "width:33.3%;padding:0 0 0 0;float:right;font-weight:bold;">Conditions Tested</div>
+              </div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">fairly soft</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">inbound</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:right;column_gap:20px;">Mixed conditions</div>
+              </div>
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Stablility?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Maniveurability?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Demand of ski</div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  iiiiiiiiiiiiiiiFelt good – not too upright, not too forward</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Too big/sloppy</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  Too stiff in moguls and rough terrain</div>
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Ride Quality</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Fun Factor</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:right;font-weight:bold;"> Ski felt good on...</div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">The weight of the boot felt great.</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">no</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">5</div>              
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Correct Lenght?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Who will like this Ski?</div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">4</div>
+              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">Might buy</div>          
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> How good 1-10?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">fffffffff</div>
+              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>          
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Recommend?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
+              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>          
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Prefered Similar Products? and why?</div>
+              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Personal Comment</div>
+              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
+              <div style="clear:both;"></div>
+Post array: 
+Array
+(
+    [post_title] => test product
+    [post_content] => <div>User: izak</div><div>Reviewers height: 5 feet, 10 inches</div><div>Reviewers weight: 175 lbs</div><div>Reviewers ski ability: 10</div><br/><div style = "text-align:justify;">
+              <div style = "width:33.3%;padding:0 0 0 0;float:left;font-weight:bold;">Terrain Tested</div>
+              <div style = "width:33.3%;padding:0 0 0 0;float:left;font-weight:bold;">Where</div>
+              <div style = "width:33.3%;padding:0 0 0 0;float:right;font-weight:bold;">Conditions Tested</div>
+              </div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">fairly soft</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">inbound</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:right;column_gap:20px;">Mixed conditions</div>
+              </div>
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Stablility?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Maniveurability?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold">Demand of ski</div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  iiiiiiiiiiiiiiiFelt good – not too upright, not too forward</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">Too big/sloppy</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">  Too stiff in moguls and rough terrain</div>
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Ride Quality</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Fun Factor</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:right;font-weight:bold;"> Ski felt good on...</div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">The weight of the boot felt great.</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">no</div>
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">5</div>              
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Correct Lenght?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Who will like this Ski?</div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">4</div>
+              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;">Might buy</div>          
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> How good 1-10?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;">fffffffff</div>
+              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>          
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> Recommend?</div>
+              <div style = "width:33.3%;padding:30px 0 0 0;float:left;font-weight:bold;"> elaboration </div>
+              <div style="clear:both;"></div><div style = "text-align:left;">
+              <div style = "width:33.3%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
+              <div style = "width:66.6%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>          
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Prefered Similar Products? and why?</div>
+              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
+              <div style="clear:both;"></div><div style = "text-align:Justify;">
+              <div style = "width:100%;padding:30px 0 0 0;float:left;font-weight:bold;"> Personal Comment</div>
+              <div style = "width:100%;padding:10px 0 0 0;float:left;column_gap:20px;"></div>
+              <div style="clear:both;"></div>
+    [meta_input] => Array
+        (
+            [id] => 7
+            [userID] => 1
+            [userName] => izak
+            [heightFeet] => 5
+            [heightInches] => 10
+            [weight] => 175
+            [skiAbility] => 10
+            [product_tested] => test product
+            [category] => test category
+            [sport] => test sport
+        )
+
+    [post_type] => Community Reviews
+    [post_excerpt] => <div>User: izak</div><div>Reviewers height: 5 feet, 10 inches</div><div>Reviewers weight: 175 lbs</div><div>Reviewers ski ability: 10</div><br/>
+    [post_status] => publish
+)
+
+
+
+
+HERE
+
