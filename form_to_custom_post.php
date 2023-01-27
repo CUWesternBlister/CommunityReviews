@@ -9,8 +9,8 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
         $userInfo = $header['userInfo'];
         $userName = get_userName_by_userID($userInfo->userID);
         //fwrite($file, "user info grabbed \n");
-        //$u_info = print_r($userInfo, true);
-        //fwrite($file, "post user info: \n".$u_info."\n\n");
+        $u_info = print_r($header, true);
+        fwrite($file, "post user info: \n".$u_info."\n\n");
         
         if ( NULL === $header || 0 === $header || '0' === $header || empty( $header ) ) {
             return;
@@ -47,7 +47,8 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
                                                   //'questions'     => $questions, //probably do not need beacuse it is part of content 
                                                   //'answers'       => $answers // same
                                                   ),
-                            'post_type'   => 'Ski Reviews',
+                            //'post_content' => wp_strip_all_tags( $answers[1] . ' ' . $header['productName'] . ' ' . $answers[2]),
+                            'post_type'   => 'Community Reviews',
                             'post_excerpt' => $user_html,
                             'post_status' => 'publish',
                             );
@@ -171,11 +172,11 @@ function profile_info_sub( $record, $ajax_handler ){
     $user_table_name = $wpdb->prefix . "bcr_users";
     $form_name = $record->get_form_settings( 'form_name' );
     $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
-    $myfile = fopen($file_path, "a") or die('fopen failed');
+    $file = fopen($file_path, "w") or die('fopen failed');
     $fields = [];
     if($form_name == 'Profile Builder') {
-        $userID = get_current_userID($myfile);
-        fwrite($myfile,$userID);
+        $userID = get_current_userID($file);
+        fwrite($file,$userID);
         $fields['userID'] = $userID;
         $raw_fields = $record->get('fields');
         $fields['heightFeet'] = $raw_fields["height_feet"]['value'];
@@ -193,42 +194,41 @@ function profile_info_sub( $record, $ajax_handler ){
         }
         $ajax_handler->add_response_data(true, $output);
     }
-    fclose($myfile);
+    fclose($file);
 }
 
 function fluent_summit_review_from_sub($entryId, $formData, $form) {
     global $wpdb;
     $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt'; 
-    $myfile = fopen($file_path, "a") or die('fopen failed');
-    fwrite($myfile,"fluent_summit_review_from_sub\n\n");
-    $existing_form_names = get_all_form_names($myfile);
+    $file = fopen($file_path, "w") or die('fopen failed');
+    fwrite($file,"fluent_summit_review_from_sub\n\n");
+    $existing_form_names = get_all_form_names($file);
     //$form_name_str = print_r($existing_form_names, true);
-    //fwrite($myfile, "registered form names:\n".$form_name_str."\n");
+    //fwrite($file, "registered form names:\n".$form_name_str."\n");
     $current_form_name = $form->title; 
-    //fwrite($myfile, $current_form_name."\n");
+    //fwrite($file, $current_form_name."\n");
     $current_form_id = $form->id;
-    //fwrite($myfile, "\n\n".$current_form_id."\n\n");
 
     //$form_p = print_r($form, true);
     //$form_fields = $form->get( "form_fields" );
     $formData_p = print_r($formData, true);
-    fwrite($myfile, "formData 1: \n".$formData_p."\n\n");
+    fwrite($file, "formData 1: \n".$formData_p."\n\n");
 
-    $qs_and_as = fluent_get_fields_array($formData, $myfile);
+    $qs_and_as = fluent_get_fields_array($formData, $file);
     //$qs_and_as_p = print_r($qs_and_as, true);
-    //fwrite($myfile, "questions and answers: \n".$qs_and_as_p."\n\n");
+    //fwrite($file, "questions and answers: \n".$qs_and_as_p."\n\n");
     
     if(in_array($current_form_name, $existing_form_names)){
-        fwrite($myfile, "Starting the Process \n\n");
+        fwrite($file, "Starting the Process \n\n");
         //-----------------write to tables-----------------------------
-        summit_form_submission_write_to_tables($current_form_id, $qs_and_as, $myfile);
+        summit_form_submission_write_to_tables($current_form_id, $qs_and_as, $file);
         //---------------create custom post-----------------------------------
         $header = summit_form_submission_custom_post_content($current_form_id, $qs_and_as, $file);
-        //$header_info_read = print_r($header, true);
-        //fwrite($myfile, "HEADER: \n".$header_info_read."\n\n");
-        //insert_into_ski_review($header, $qs, $as, $myfile);
+        $header_info_read = print_r($header, true);
+        fwrite($file, "HEADER: \n".$header_info_read."\n\n");
+        insert_into_ski_review($header, $qs, $as, $file);
     }
-    fclose($myfile);
+    fclose($file);
 }
 
 function fluent_get_fields_array($formData, $file){
@@ -250,35 +250,35 @@ function fluent_get_fields_array($formData, $file){
 function elementor_summit_review_from_sub( $record, $ajax_handler ) {
     global $wpdb;
     $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt'; 
-    $myfile = fopen($file_path, "a") or die('fopen failed');
-    $existing_form_names = get_all_form_names($myfile);
-    fwrite($myfile,"form names: ".$existing_form_names."\n");
+    $file = fopen($file_path, "w") or die('fopen failed');
+    $existing_form_names = get_all_form_names($file);
+    fwrite($file,"form names: ".$existing_form_names."\n");
 
     $current_form_name = $record->get_form_settings( 'form_name' ); 
-    fwrite($myfile,"current form name: ".$current_form_name."\n");
+    fwrite($file,"current form name: ".$current_form_name."\n");
 
     $current_form_id = $record->get_form_settings('form_id');
-    //fwrite($myfile,"current form id: ".$current_form_id."\n"); 
+    //fwrite($file,"current form id: ".$current_form_id."\n");
 
     $raw_fields = $record->get( 'fields' );
     //$raw_fields_p = print_r($raw_fields, true);
-    //fwrite($myfile, "elementor raw fields: \n".$raw_fields_p."\n\n");
+    //fwrite($file, "elementor raw fields: \n".$raw_fields_p."\n\n");
 
-    $qs_and_as = elementor_get_fields_array($raw_fields, $myfile);
+    $qs_and_as = elementor_get_fields_array($raw_fields, $file);
     //$q_and_a_p = print_r($qs_and_as, true);
-    //fwrite($myfile, "elementor q and a: \n".$q_and_a_p."\n\n");
+    //fwrite($file, "elementor q and a: \n".$q_and_a_p."\n\n");
 
     if(in_array($current_form_name, $existing_form_names)){
     	//-----------------write to tables----------------------------
-        summit_form_submission_write_to_tables($current_form_id, $qs_and_as, $myfile);
+        summit_form_submission_write_to_tables($current_form_id, $qs_and_as, $file);
 
         //---------------create custom post-----------------------------------
         $header = summit_form_submission_custom_post_content($current_form_id, $qs_and_as, $file);
         //$header_info_read = print_r($header, true);
-        //fwrite($myfile, "HEADER: \n".$header_info_read."\n\n");
-    	insert_into_ski_review($header, $qs, $as, $myfile);
+        //fwrite($file, "HEADER: \n".$header_info_read."\n\n");
+    	insert_into_ski_review($header, $qs, $as, $file);
 	}
-    fclose($myfile);
+    fclose($file);
 }
 
 function elementor_get_fields_array($raw_fields, $file){
@@ -293,17 +293,21 @@ function elementor_get_fields_array($raw_fields, $file){
 
 //------------------------------table writing functions-----------------------------------
 function summit_form_submission_write_to_tables($current_form_id, $record, $file){
-    $answer_ids = summit_insert_into_answer_table($record, $myfile);
+    $start = "\n\n start summit_form_submission_write_to_tabless \n";
+    fwrite($file, $start);
+    $answer_ids = summit_insert_into_answer_table($record, $file);
     //fwrite($file, "write to answer table ids:\n".$answer_ids."\n\n") or die('fwrite 1 failed');
     //$res1 = implode(", ", $answer_ids)."\n";
-    //fwrite($myfile, $res1) or die('fwrite 2 failed');
+    //fwrite($file, $res1) or die('fwrite 2 failed');
 
     //$ajax_handler->add_response_data( true, $output );
-    //fwrite($myfile, "write to review table id:\n") or die('fwrite 3 failed');
+    //fwrite($file, "write to review table id:\n") or die('fwrite 3 failed');
     $id = summit_insert_into_review_table($current_form_id,$file);
-    //fwrite($myfile, "last inserted review id: ".strval($id)."\n") or die('fwrite 2 failed');
+    //fwrite($file, "last inserted review id: ".strval($id)."\n") or die('fwrite 2 failed');
     //$ajax_handler->add_response_data( true, $output );
     summit_insert_into_review_answer_table($id, $answer_ids, $file);
+    fwrite($file, "\n\nsummit_insert_into_review_answer_table function exited\n\n");
+    //$ajax_handler->add_response_data( true, $output );
 }
 
 function get_all_form_names($file){
@@ -353,8 +357,8 @@ function summit_insert_into_review_table($RF_id, $file){
        //insert review 
         //echo "in review table functions!<br>";
         global $wpdb;
-        //$start = "\n\nSUMMIT INSERT INTO REVIEW TABLE \n";
-        //fwrite($file, $start);
+        $start = "\n\nSUMMIT INSERT INTO REVIEW TABLE \n";
+        fwrite($file, $start);
         $output2 = [];
         $review_table = $wpdb->prefix . "bcr_reviews";
         $fields_review = [];
@@ -394,8 +398,8 @@ function get_knowthyself_id($userID){
 function summit_insert_into_review_answer_table($review_id, $answer_ids,$file){
     //insert answer ids int review answer table
         global $wpdb;
-        //$start = "\n\nSUMMIT INSERT INTO REVIEW ANSWER TABLE \n";
-        //fwrite($file, $start);
+        $start = "\n\nSUMMIT INSERT INTO REVIEW ANSWER TABLE \n";
+        fwrite($file, $start);
         $review_answer_table = $wpdb->prefix . "bcr_reviews_answers";
         $fields_review_answers = [];
         $output=[];
@@ -415,26 +419,25 @@ function summit_form_submission_custom_post_content($current_form_id,$record,$fi
     $start = "\n\n summit_form_submission_custom_post_content \n";
     fwrite($file, $start);
     $product_info = get_product_info($current_form_id,$file);
-    //$p_info_read = print_r($product_info, true);
-    //fwrite($myfile, "product info: \n".$p_info_read."\n\n");
+    $p_info_read = print_r($product_info, true);
+    fwrite($file, "product info: \n".$p_info_read."\n\n");
     
     $category_info = get_category_info($product_info['categoryID'], $file);
-    //$c_info_read = print_r($category_info, true);
-    //fwrite($myfile, "categroy info: \n".$c_info_read."\n\n");
+    $c_info_read = print_r($category_info, true);
+    fwrite($file, "categroy info: \n".$c_info_read."\n\n");
     
     $sport_info = get_sport_info($category_info['sportID']);
-    //$s_info_read = print_r($sport_info, true);
-    //fwrite($myfile, "sport info: \n".$s_info_read."\n\n"); 
+    $s_info_read = print_r($sport_info, true);
+    fwrite($file, "sport info: \n".$s_info_read."\n\n");
     
     $q_and_a_content = get_answer_and_question_content($record,$file);
-    //$qa_info_read = print_r($q_and_a_content, true);
-    //fwrite($myfile, "QandA info: \n".$qa_info_read."\n\n");
+    $qa_info_read = print_r($q_and_a_content, true);
+    fwrite($file, "QandA info: \n".$qa_info_read."\n\n");
     
     $user_info = get_user_information($file);
     //$u_info_read = print_r($user_info, true);
     //fwrite($myfile, "user info: \n".$u_info_read."\n\n");
 
-   
    $qs = $q_and_a_content['question_content'];
    $as = $q_and_a_content['answer_content'];
 
@@ -447,6 +450,7 @@ function summit_form_submission_custom_post_content($current_form_id,$record,$fi
         'answerContent' => $q_and_a_content['answer_content'],
         'userInfo' => $user_info
     );
+    
     return $header;
 }
 
@@ -493,16 +497,17 @@ function get_answer_and_question_content($record,$file){
 
 function get_product_info($form_id,$file){//may just want to return res2 !!!!!!
 	global $wpdb;
-	//$start = "\n\n GET PRODUCT INFORMATION \n";
-    //fwrite($file, $start);
+	$start = "\n\n GET PRODUCT INFORMATION \n";
+    fwrite($file, $start);
+    fwrite($file, "\n\nCurrent Form ID: ".$form_id."\n\n");
     //fwrite($file, "form id: ".$form_id."\n");
 	$form_table = $wpdb->prefix . "bcr_review_forms";
 	$q1 = "SELECT * FROM $form_table WHERE reviewFormID = $form_id;";
 	$res1 = $wpdb->get_row($q1);
-	//$var = print_r($res1, true);
-    //fwrite($file,"get results: \n".$var."\n");
+	$var = print_r($res1, true);
+    fwrite($file,"get results: \n".$var."\n");
 	$product_id = $res1->productID;
-	//fwrite($file, "product id: ".$product_id."\n");
+	fwrite($file, "product id: ".$product_id."\n");
 
 	$product_table = $wpdb->prefix . "bcr_products";
 	$q2 = "SELECT * FROM $product_table WHERE productID = $product_id;";
