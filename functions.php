@@ -260,7 +260,7 @@ add_shortcode('user_info', 'display_user_info');
 
 function BCR_login_shortcode(){
     if(is_user_logged_in()){
-        wp_redirect(home_url("/"));//set to home page
+        wp_redirect(home_url("summit-home-page"));//set to home page
         die;
     }
     else {
@@ -276,7 +276,7 @@ add_shortcode('BCR_login', 'BCR_login_shortcode');
 
 function summit_redirects() {
     // for any other pages that need this redirect, just add page name to array
-    if ( is_page(array('Community Reviews Profile', 'Summit Review Form', 'Fluent Forms Ski Review'))) {
+    if ( is_page(array('Summit Homepage','Community Reviews Profile', 'Summit Review Form', 'Fluent Forms Ski Review'))) {
         $userEntry = get_bcr_user();
         if (!is_user_logged_in()){
             //redirects to Blister Login
