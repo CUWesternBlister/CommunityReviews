@@ -258,15 +258,29 @@ function display_user_info($atts){
 }
 add_shortcode('user_info', 'display_user_info');
 
+function BCR_login_shortcode(){
+    if(is_user_logged_in()){
+        wp_redirect(home_url("/"));//set to home page
+        die;
+    }
+    else {
+        return wp_login_form( 'echo=0' );
+    }
+    // you can set where you will be redirected to after form is completed
+    // as it is it will just return to the page and then be redirected by if statement
+}
+
+add_shortcode('BCR_login', 'BCR_login_shortcode');
+
 //Testing https://developer.wordpress.org/reference/hooks/template_redirect/
 
 function summit_redirects() {
-    // for any other pages that need this redirect, just add page name to IF statement
-    if ( is_page('Community Reviews Profile') || is_page( 'Summit Review Form' )) {
+    // for any other pages that need this redirect, just add page name to array
+    if ( is_page(array('Community Reviews Profile', 'Summit Review Form', 'Fluent Forms Ski Review'))) {
         $userEntry = get_bcr_user();
         if (!is_user_logged_in()){
             //redirects to Blister Login
-            wp_redirect('https://blisterreview.com/my-account');
+            wp_redirect(home_url('/validation-page/'));
             die;
         }
         else if (!$userEntry) {
