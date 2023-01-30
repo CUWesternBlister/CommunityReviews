@@ -319,3 +319,4 @@ add_action( 'wp_enqueue_scripts', 'wpse_load_plugin_css' );
     }
 
     add_action( 'elementor_pro/forms/new_record', 'capstone_write_to_table', 10, 2);
+?>
