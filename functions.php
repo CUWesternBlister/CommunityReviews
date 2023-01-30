@@ -260,8 +260,8 @@ add_shortcode('user_info', 'display_user_info');
 
 function BCR_login_shortcode(){
     if(is_user_logged_in()){
-        //wp_redirect(home_url("summit-home-page"));//set to home page
-        //die;
+        wp_redirect(home_url("summit-home-page"));//set to home page
+        die;
     }
     else {
         return wp_login_form( 'echo=0' );
