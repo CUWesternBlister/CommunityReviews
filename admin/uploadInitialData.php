@@ -7,6 +7,7 @@
 function bcr_init_tables() {
     bcr_create_brands();
     bcr_create_skis();
+    bcr_create_questions();
 }
 
 /**
@@ -46,6 +47,24 @@ function bcr_create_skis() {
         }
     }
     fclose($skis_file);
+}
+
+/**
+ * 
+ * Add questions to table
+ * 
+ */
+function bcr_create_questions() {
+    global $wpdb;
+
+    $questions_table_name = $wpdb->prefix . "bcr_questions";
+
+    if(($questions_file = fopen(plugin_dir_path( __FILE__ ) . 'questions.csv', "r")) !== FALSE) {
+        while(($row = fgetcsv($questions_file, 1000, ",")) !== FALSE) {
+            $wpdb->insert($questions_table_name, array("questionID" => $row[0], "questionContent" => $row[1], "questionDisplayContent" => $row[2]));
+        }
+    }
+    fclose($questions_file);
 }
 
 bcr_init_tables();
