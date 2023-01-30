@@ -224,14 +224,7 @@ function get_record_from_form_submissions($atts) {
 add_shortcode( 'form_submissions', 'get_record_from_form_submissions' );
 
 function display_user_info($atts){
-    global $wpdb;
-    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
-    $myfile = fopen($file_path, "a") or die('fopen failed');
-    $userID = get_current_userID($myfile);
-    fwrite($myfile, $userID);
-    $user_table_name = $wpdb->prefix . "bcr_users";
-    $q = $wpdb->prepare("SELECT * FROM $user_table_name WHERE userID = $userID LIMIT 1;");
-    $userEntry = $wpdb->get_results($q);
+    $userEntry = get_bcr_user();
     if ( $userEntry ) {
         $heightF = array_map(
             function( $form_sub_object ) {
@@ -264,6 +257,46 @@ function display_user_info($atts){
     return '';
 }
 add_shortcode('user_info', 'display_user_info');
+
+function BCR_login_shortcode(){
+    if(is_user_logged_in()){
+        wp_redirect(home_url("/"));//set to home page
+        die;
+    }
+    else {
+        return wp_login_form( 'echo=0' );
+    }
+    // you can set where you will be redirected to after form is completed
+    // as it is it will just return to the page and then be redirected by if statement
+}
+
+add_shortcode('BCR_login', 'BCR_login_shortcode');
+
+//Testing https://developer.wordpress.org/reference/hooks/template_redirect/
+
+function summit_redirects() {
+    // for any other pages that need this redirect, just add page name to array
+    if ( is_page(array('Community Reviews Profile', 'Summit Review Form', 'Fluent Forms Ski Review'))) {
+        $userEntry = get_bcr_user();
+        if (!is_user_logged_in()){
+            //redirects to Blister Login
+            wp_redirect(home_url('/validation-page/'));
+            die;
+        }
+        else if (!$userEntry) {
+            wp_redirect(home_url('/profile-information-form/'));
+            die;
+        }
+    }
+}
+
+add_action( 'template_redirect', 'summit_redirects' );
+
+function wpse_load_plugin_css() {
+    $plugin_url = plugin_dir_url( __FILE__ );
+    wp_enqueue_style( 'style1', $plugin_url . 'style1.css' );
+}
+add_action( 'wp_enqueue_scripts', 'wpse_load_plugin_css' );
 
 // WRITING KNOW THY SELF FORM TO KNOWTHYSELF TABLE. THIS CAN BE USED ONLY FOR REFERENCE.
 
