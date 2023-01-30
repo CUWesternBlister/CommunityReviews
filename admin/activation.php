@@ -6,7 +6,7 @@
  */
 function bcr_activate() {
     bcr_setup_tables();
-    bcr_create_test_requirements();
+    require_once( plugin_dir_path( __FILE__ ) . 'uploadInitialData.php');
 }
 
 /**
@@ -93,6 +93,8 @@ function bcr_setup_tables() {
         PRIMARY KEY  (brandID)
         ) $charset_collate;";
 
+    dbDelta($sql);
+
     //Create Product table
     $products_table_name = $wpdb->prefix . "bcr_products";
 
@@ -135,7 +137,7 @@ function bcr_setup_tables() {
     dbDelta($sql);*/
 
     //Create Know Thyself table 
-    $know_thyself_table_name = $wpdb->prefix . "bcr_know_thyself";
+    /*$know_thyself_table_name = $wpdb->prefix . "bcr_know_thyself";
 
     $sql = "CREATE TABLE $know_thyself_table_name (
         knowThyselfID int(9) NOT NULL AUTO_INCREMENT,
@@ -145,10 +147,10 @@ function bcr_setup_tables() {
         FOREIGN KEY  (knowThyselfFormID) REFERENCES $know_thyself_forms_table_name(knowThyselfFormID)
         ) $charset_collate;";
 
-    dbDelta($sql);
+    dbDelta($sql);*/
 
     //Create Know Thyself Answers association table
-    $/*know_thyself_answers_table_name = $wpdb->prefix . "bcr_know_thyself_answers";
+    /*know_thyself_answers_table_name = $wpdb->prefix . "bcr_know_thyself_answers";
 
     $sql = "CREATE TABLE $know_thyself_answers_table_name (
         knowThyselfID int(9) NOT NULL,
