@@ -1,9 +1,8 @@
 <?php
-//---------------------------------------------------------------------------------------------FOR TESTING ONLY REMOVE!!!------------------------------------------------------------------------
 //check if run by wordpress
-/*if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
     die;
-}*/
+}
 
 /**
  * Run all uninstall functions
@@ -70,15 +69,15 @@ function bcr_remove_tables() {
     $wpdb->query($sql);
     */
 
+    //Remove Brands table
+    $brands_table_name = $wpdb->prefix . "bcr_brands";
+    $sql = "DROP TABLE IF EXISTS $brands_table_name";
+    $wpdb->query($sql);
+
     //Remove Product table
     $products_table_name = $wpdb->prefix . "bcr_products";
     $sql = "DROP TABLE IF EXISTS $products_table_name";
     $wpdb->query($sql);
-
-     //Remove Brands table
-     $brands_table_name = $wpdb->prefix . "bcr_brands";
-     $sql = "DROP TABLE IF EXISTS $brands_table_name";
-     $wpdb->query($sql);
 
     //Remove Category table
     $categories_table_name = $wpdb->prefix . "bcr_categories";
@@ -98,11 +97,6 @@ function bcr_remove_tables() {
     //Remove Question table
     $questions_table_name = $wpdb->prefix . "bcr_questions";
     $sql = "DROP TABLE IF EXISTS $questions_table_name";
-    $wpdb->query($sql);
-
-    //Remove User table
-    $user_table_name = $wpdb->prefix . "bcr_users";
-    $sql = "DROP TABLE IF EXISTS $user_table_name";
     $wpdb->query($sql);
 }
 
