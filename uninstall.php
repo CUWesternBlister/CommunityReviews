@@ -1,9 +1,8 @@
 <?php
-//---------------------------------------------------------------------------------------------FOR TESTING ONLY REMOVE!!!------------------------------------------------------------------------
 //check if run by wordpress
-/*if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
     die;
-}*/
+}
 
 /**
  * Run all uninstall functions
