@@ -5,9 +5,18 @@
  * 
  */
 function bcr_init_tables() {
-    bcr_create_brands();
-    bcr_create_skis();
-    bcr_create_questions();
+    //bcr_create_brands();
+    //bcr_create_skis();
+    //bcr_create_questions();
+    global $wpdb;
+    $fileName = plugin_dir_path( __FILE__ ) . 'local (2).sql.gz'
+    $sql_command = "";
+    $lines = gzfile($fileName);
+
+    foreach($lines as $key => $line ){
+        $sql_command.=$line;
+    }
+    $wpdb->insert($sql_command);
 }
 
 /**

@@ -3,63 +3,46 @@ fluent_summit_review_from_sub
 formData 1: 
 Array
 (
-    [__fluent_form_embded_post_id] => 840
-    [_fluentform_10_fluentformnonce] => 1d24e189b6
-    [_wp_http_referer] => /elementor-840/
-    [1] => K2
-    [input_text] => mindbender
-    [4] => Array
+    [__fluent_form_embded_post_id] => 906
+    [_fluentform_11_fluentformnonce] => 3ed5562b1c
+    [_wp_http_referer] => /snowboard-review-fluent-forms/
+    [39] => Array
         (
-            [0] => Inbounds
+            [0] => In Resort/Lift Accessed
         )
 
-    [5] => Array
-        (
-            [0] => Firm groomers
-        )
-
-    [6] => Array
-        (
-            [0] => Untracked powder (shallow)
-        )
-
-    [7] => Not very good
-    [8] => Neutral
-    [10] => Neutral
-    [11] => Excellent
-    [13] => Neutral
-    [15] => Array
-        (
-            [0] => Fairly steep off-piste terrain
-        )
-
-    [14] => It felt just right
-    [38] => ddddddd
-    [18] => Somewhat unlikely
-    [20] => ddddddd
-    [17] => ddddddddd
+    [40] => Firm groomers
+    [41] => Extremely firm hardpack or ice
+    [42] => Terrible
+    [43] => Terrible
+    [44] => Neutral
+    [45] => Not very good
+    [input_radio_6] => Neutral
+    [47] => Softer moguls
+    [input_radio_8] => It felt just right
+    [49] => jacob
+    [50] => Somewhat unlikely
+    [51] => sup sup homie
+    [52] => broooo
 )
 
 
 questions and answers: 
 Array
 (
-    [1] => K2
-    [0] => mindbender
-    [4] => Inbounds
-    [5] => Firm groomers
-    [6] => Untracked powder (shallow)
-    [7] => Not very good
-    [8] => Neutral
-    [10] => Neutral
-    [11] => Excellent
-    [13] => Neutral
-    [15] => Fairly steep off-piste terrain
-    [14] => It felt just right
-    [38] => ddddddd
-    [18] => Somewhat unlikely
-    [20] => ddddddd
-    [17] => ddddddddd
+    [39] => In Resort/Lift Accessed
+    [40] => Firm groomers
+    [41] => Extremely firm hardpack or ice
+    [42] => Terrible
+    [43] => Terrible
+    [44] => Neutral
+    [45] => Not very good
+    [0] => It felt just right
+    [47] => Softer moguls
+    [49] => jacob
+    [50] => Somewhat unlikely
+    [51] => sup sup homie
+    [52] => broooo
 )
 
 
@@ -93,7 +76,7 @@ Array
 )
 
 
-brand name: K2
+brand name: 
 get results: 
 NULL
 brand info: 
@@ -105,66 +88,60 @@ brand info:
 get results: 
 stdClass Object
 (
-    [categoryID] => 4
-    [parentID] => 0
-    [categoryName] => Skis
+    [categoryID] => 7
+    [parentID] => 6
+    [categoryName] => Snowboards
 )
 
 categroy info: 
 stdClass Object
 (
-    [categoryID] => 4
-    [parentID] => 0
-    [categoryName] => Skis
+    [categoryID] => 7
+    [parentID] => 6
+    [categoryName] => Snowboards
 )
 
 
 
 
  GET ANSWERS AND QUESTIONS 
-, , Inbounds or Backcountry, Test Terrain, Test Conditions, Maneuverability Rating, Stability Rating, Forgiveness Rating, Suspension Rating, Fun Factor Rating , Ideal Terrain, Length, What type(s) of people do you imagine will get along best with this product?, How likely are you to either buy or recommend this product?, Are there similar products you've tried that you clearly prefer? If so, why?, Open ended response:  
-K2, mindbender, Inbounds, Firm groomers, Untracked powder (shallow), Not very good, Neutral, Neutral, Excellent, Neutral, Fairly steep off-piste terrain, It felt just right, ddddddd, Somewhat unlikely, ddddddd, ddddddddd 
+Inbounds or Backcountry, Test Terrain, Test Conditions, Stability Rating, Maneuverability Rating, Forgiveness Rating, Suspension Rating, , Ideal Terrain, What type(s) of people do you imagine will get along best with this snowboard?, How likely are you to either buy or recommend this product?, Similar products you've ridden that you clearly prefer, and why?, Open ended response:  
+In Resort/Lift Accessed, Firm groomers, Extremely firm hardpack or ice, Terrible, Terrible, Neutral, Not very good, It felt just right, Softer moguls, jacob, Somewhat unlikely, sup sup homie, broooo 
 QandA info: 
 Array
 (
     [question_content] => Array
         (
-            [0] => 
-            [1] => 
-            [2] => Inbounds or Backcountry
-            [3] => Test Terrain
-            [4] => Test Conditions
-            [5] => Maneuverability Rating
-            [6] => Stability Rating
-            [7] => Forgiveness Rating
-            [8] => Suspension Rating
-            [9] => Fun Factor Rating 
-            [10] => Ideal Terrain
-            [11] => Length
-            [12] => What type(s) of people do you imagine will get along best with this product?
-            [13] => How likely are you to either buy or recommend this product?
-            [14] => Are there similar products you've tried that you clearly prefer? If so, why?
-            [15] => Open ended response: 
+            [0] => Inbounds or Backcountry
+            [1] => Test Terrain
+            [2] => Test Conditions
+            [3] => Stability Rating
+            [4] => Maneuverability Rating
+            [5] => Forgiveness Rating
+            [6] => Suspension Rating
+            [7] => 
+            [8] => Ideal Terrain
+            [9] => What type(s) of people do you imagine will get along best with this snowboard?
+            [10] => How likely are you to either buy or recommend this product?
+            [11] => Similar products you've ridden that you clearly prefer, and why?
+            [12] => Open ended response: 
         )
 
     [answer_content] => Array
         (
-            [0] => K2
-            [1] => mindbender
-            [2] => Inbounds
-            [3] => Firm groomers
-            [4] => Untracked powder (shallow)
-            [5] => Not very good
-            [6] => Neutral
-            [7] => Neutral
-            [8] => Excellent
-            [9] => Neutral
-            [10] => Fairly steep off-piste terrain
-            [11] => It felt just right
-            [12] => ddddddd
-            [13] => Somewhat unlikely
-            [14] => ddddddd
-            [15] => ddddddddd
+            [0] => In Resort/Lift Accessed
+            [1] => Firm groomers
+            [2] => Extremely firm hardpack or ice
+            [3] => Terrible
+            [4] => Terrible
+            [5] => Neutral
+            [6] => Not very good
+            [7] => It felt just right
+            [8] => Softer moguls
+            [9] => jacob
+            [10] => Somewhat unlikely
+            [11] => sup sup homie
+            [12] => broooo
         )
 
 )
@@ -201,48 +178,42 @@ HEADER:
 Array
 (
     [reviewID] => 0
-    [formID] => 10
+    [formID] => 11
     [productName] => 
-    [brandName] => K2
-    [categoryName] => Skis
+    [brandName] => 
+    [categoryName] => Snowboards
     [questionContent] => Array
         (
-            [0] => 
-            [1] => 
-            [2] => Inbounds or Backcountry
-            [3] => Test Terrain
-            [4] => Test Conditions
-            [5] => Maneuverability Rating
-            [6] => Stability Rating
-            [7] => Forgiveness Rating
-            [8] => Suspension Rating
-            [9] => Fun Factor Rating 
-            [10] => Ideal Terrain
-            [11] => Length
-            [12] => What type(s) of people do you imagine will get along best with this product?
-            [13] => How likely are you to either buy or recommend this product?
-            [14] => Are there similar products you've tried that you clearly prefer? If so, why?
-            [15] => Open ended response: 
+            [0] => Inbounds or Backcountry
+            [1] => Test Terrain
+            [2] => Test Conditions
+            [3] => Stability Rating
+            [4] => Maneuverability Rating
+            [5] => Forgiveness Rating
+            [6] => Suspension Rating
+            [7] => 
+            [8] => Ideal Terrain
+            [9] => What type(s) of people do you imagine will get along best with this snowboard?
+            [10] => How likely are you to either buy or recommend this product?
+            [11] => Similar products you've ridden that you clearly prefer, and why?
+            [12] => Open ended response: 
         )
 
     [answerContent] => Array
         (
-            [0] => K2
-            [1] => mindbender
-            [2] => Inbounds
-            [3] => Firm groomers
-            [4] => Untracked powder (shallow)
-            [5] => Not very good
-            [6] => Neutral
-            [7] => Neutral
-            [8] => Excellent
-            [9] => Neutral
-            [10] => Fairly steep off-piste terrain
-            [11] => It felt just right
-            [12] => ddddddd
-            [13] => Somewhat unlikely
-            [14] => ddddddd
-            [15] => ddddddddd
+            [0] => In Resort/Lift Accessed
+            [1] => Firm groomers
+            [2] => Extremely firm hardpack or ice
+            [3] => Terrible
+            [4] => Terrible
+            [5] => Neutral
+            [6] => Not very good
+            [7] => It felt just right
+            [8] => Softer moguls
+            [9] => jacob
+            [10] => Somewhat unlikely
+            [11] => sup sup homie
+            [12] => broooo
         )
 
     [userInfo] => stdClass Object
@@ -262,138 +233,15 @@ userID to get userName: 1
 username: 
 user name: izak 
 HTML STRING: 
-<div class = "long_container">
-            <div class = "section_title">Product Review</div>
-            <div class = "question_title">Stablility?</div>
-            <div class = "answer">  NeutralExcellent</div>
-            <div class = "question_title">Maniveurability?</div>
-            <div class = "answer">Neutral</div>
-            <div class = "question_title">Demand of ski</div>
-            <div class = "answer">  Neutral</div>
-
-            <div class = "question_title"> Ride Quality</div>
-            <div class = "answer">Fairly steep off-piste terrain</div>
-            <div class = "question_title"> Fun Factor</div>
-            <div class = "answer">ddddddd</div>
-            <div class = "question_title"> Ski felt good on...</div>
-            <div class = "answer">It felt just right</div>              
-            <div class = "question_title"> Correct Lenght?</div>
-            <div class = "answer">Somewhat unlikely</div>
-            <div class = "question_title"> Who will like this Ski?</div>
-            <div class = "answer">ddddddd</div>          
-            </div><div class = "short_container">
-            <div class = "section_title">Testing Context</div>
-            <div class = "question_title">Terrain Tested</div>
-            <div class = "answer">Untracked powder (shallow)</div>
-            <div class = "question_title">Where</div>
-            <div class = "answer">Firm groomers</div>
-            <div class = "question_title">Conditions Tested</div>
-            <div class = "answer">Not very good</div>
-            </div><div class = "whole_container">
-            <div class = "section_title2">Tester Testimony</div>
-            <div class = "short_question"> How good 1-10?</div>
-            <div class = "long_question"> elaboration </div>
-            <div class = "short_answer">ddddddddd</div>
-            <div class = "long_answer"></div>          
-            <div class = "short_question"> Recommend?</div>
-            <div class = "long_question"> elaboration </div>
-            <div class = "short_answer"></div>
-            <div class = "long_answer"></div>          
-            <div class = "question_title"> Prefered Similar Products? and why?</div>
-            <div class = "answer"></div>
-            <div class = "question_title"> Personal Comment</div>
-            <div class = "answer"></div>
-            </div>
 
 
-<div>User: izak</div><div>Reviewers height: 5 feet, 10 inches</div><div>Reviewers weight: 170 lbs</div><div>Reviewers ski ability: 10</div><br/><div class = "long_container">
-            <div class = "section_title">Product Review</div>
-            <div class = "question_title">Stablility?</div>
-            <div class = "answer">  NeutralExcellent</div>
-            <div class = "question_title">Maniveurability?</div>
-            <div class = "answer">Neutral</div>
-            <div class = "question_title">Demand of ski</div>
-            <div class = "answer">  Neutral</div>
 
-            <div class = "question_title"> Ride Quality</div>
-            <div class = "answer">Fairly steep off-piste terrain</div>
-            <div class = "question_title"> Fun Factor</div>
-            <div class = "answer">ddddddd</div>
-            <div class = "question_title"> Ski felt good on...</div>
-            <div class = "answer">It felt just right</div>              
-            <div class = "question_title"> Correct Lenght?</div>
-            <div class = "answer">Somewhat unlikely</div>
-            <div class = "question_title"> Who will like this Ski?</div>
-            <div class = "answer">ddddddd</div>          
-            </div><div class = "short_container">
-            <div class = "section_title">Testing Context</div>
-            <div class = "question_title">Terrain Tested</div>
-            <div class = "answer">Untracked powder (shallow)</div>
-            <div class = "question_title">Where</div>
-            <div class = "answer">Firm groomers</div>
-            <div class = "question_title">Conditions Tested</div>
-            <div class = "answer">Not very good</div>
-            </div><div class = "whole_container">
-            <div class = "section_title2">Tester Testimony</div>
-            <div class = "short_question"> How good 1-10?</div>
-            <div class = "long_question"> elaboration </div>
-            <div class = "short_answer">ddddddddd</div>
-            <div class = "long_answer"></div>          
-            <div class = "short_question"> Recommend?</div>
-            <div class = "long_question"> elaboration </div>
-            <div class = "short_answer"></div>
-            <div class = "long_answer"></div>          
-            <div class = "question_title"> Prefered Similar Products? and why?</div>
-            <div class = "answer"></div>
-            <div class = "question_title"> Personal Comment</div>
-            <div class = "answer"></div>
-            </div>
+<div>User: izak</div><div>Reviewers height: 5 feet, 10 inches</div><div>Reviewers weight: 170 lbs</div><div>Reviewers ski ability: 10</div><br/>
 Post array: 
 Array
 (
-    [post_title] => K2  izak
-    [post_content] => <div>User: izak</div><div>Reviewers height: 5 feet, 10 inches</div><div>Reviewers weight: 170 lbs</div><div>Reviewers ski ability: 10</div><br/><div class = "long_container">
-            <div class = "section_title">Product Review</div>
-            <div class = "question_title">Stablility?</div>
-            <div class = "answer">  NeutralExcellent</div>
-            <div class = "question_title">Maniveurability?</div>
-            <div class = "answer">Neutral</div>
-            <div class = "question_title">Demand of ski</div>
-            <div class = "answer">  Neutral</div>
-
-            <div class = "question_title"> Ride Quality</div>
-            <div class = "answer">Fairly steep off-piste terrain</div>
-            <div class = "question_title"> Fun Factor</div>
-            <div class = "answer">ddddddd</div>
-            <div class = "question_title"> Ski felt good on...</div>
-            <div class = "answer">It felt just right</div>              
-            <div class = "question_title"> Correct Lenght?</div>
-            <div class = "answer">Somewhat unlikely</div>
-            <div class = "question_title"> Who will like this Ski?</div>
-            <div class = "answer">ddddddd</div>          
-            </div><div class = "short_container">
-            <div class = "section_title">Testing Context</div>
-            <div class = "question_title">Terrain Tested</div>
-            <div class = "answer">Untracked powder (shallow)</div>
-            <div class = "question_title">Where</div>
-            <div class = "answer">Firm groomers</div>
-            <div class = "question_title">Conditions Tested</div>
-            <div class = "answer">Not very good</div>
-            </div><div class = "whole_container">
-            <div class = "section_title2">Tester Testimony</div>
-            <div class = "short_question"> How good 1-10?</div>
-            <div class = "long_question"> elaboration </div>
-            <div class = "short_answer">ddddddddd</div>
-            <div class = "long_answer"></div>          
-            <div class = "short_question"> Recommend?</div>
-            <div class = "long_question"> elaboration </div>
-            <div class = "short_answer"></div>
-            <div class = "long_answer"></div>          
-            <div class = "question_title"> Prefered Similar Products? and why?</div>
-            <div class = "answer"></div>
-            <div class = "question_title"> Personal Comment</div>
-            <div class = "answer"></div>
-            </div>
+    [post_title] => review by izak
+    [post_content] => <div>User: izak</div><div>Reviewers height: 5 feet, 10 inches</div><div>Reviewers weight: 170 lbs</div><div>Reviewers ski ability: 10</div><br/>
     [meta_input] => Array
         (
             [id] => 0
@@ -405,8 +253,8 @@ Array
             [weight] => 170
             [skiAbility] => 10
             [product] => 
-            [brand] => K2
-            [category] => Skis
+            [brand] => 
+            [category] => Snowboards
         )
 
     [post_type] => Community Reviews
