@@ -224,14 +224,7 @@ function get_record_from_form_submissions($atts) {
 add_shortcode( 'form_submissions', 'get_record_from_form_submissions' );
 
 function display_user_info($atts){
-    global $wpdb;
-    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
-    $myfile = fopen($file_path, "a") or die('fopen failed');
-    $userID = get_current_userID($myfile);
-    fwrite($myfile, $userID);
-    $user_table_name = $wpdb->prefix . "bcr_users";
-    $q = $wpdb->prepare("SELECT * FROM $user_table_name WHERE userID = $userID LIMIT 1;");
-    $userEntry = $wpdb->get_results($q);
+    $userEntry = get_bcr_user();
     if ( $userEntry ) {
         $heightF = array_map(
             function( $form_sub_object ) {
@@ -265,6 +258,46 @@ function display_user_info($atts){
 }
 add_shortcode('user_info', 'display_user_info');
 
+function BCR_login_shortcode(){
+    if(!is_user_logged_in()){
+        $args = array(
+          'echo' => 0,
+          'redirect' => home_url('/summit-home-page/')
+        );
+        return wp_login_form( $args ) . '<a href="https://blisterreview.com/my-account" target="_blank">Click here to Register at BlisterReviews.com</a>';
+    }
+    // you can set where you will be redirected to after form is completed
+}
+
+add_shortcode('BCR_login', 'BCR_login_shortcode');
+
+//Testing https://developer.wordpress.org/reference/hooks/template_redirect/
+
+function summit_redirects() {
+    if (is_page('Validation Page') and is_user_logged_in()){
+        //redirects away from login page if already logged in
+        wp_redirect(home_url("summit-home-page"));
+        die;
+    }
+    // for any other pages that need this redirect, just add page name to array
+    if ( is_page(array('Summit Homepage','Community Reviews Profile', 'Ski Review', 'Apparel Review',
+        'Ski Boot Review', 'Skiing Know Thyself', 'Climbing Skins Review', 'Snowboard Review', 'Summit Read Reviews Prototype'))){
+        $userEntry = get_bcr_user();
+        if (!is_user_logged_in()){
+            //redirects to Blister Login
+            wp_redirect(home_url('/validation-page/'));
+            die;
+            //exit;
+        }
+        else if (!$userEntry) {
+            wp_redirect(home_url('/profile-information-form/'));
+            die;
+            //exit;
+        }
+    }
+}
+
+add_action( 'template_redirect', 'summit_redirects' );
 
 function wpse_load_plugin_css() {
     $plugin_url = plugin_dir_url( __FILE__ );
@@ -293,5 +326,4 @@ add_action( 'wp_enqueue_scripts', 'wpse_load_plugin_css' );
     }
 
     add_action( 'elementor_pro/forms/new_record', 'capstone_write_to_table', 10, 2);
-
 ?>
