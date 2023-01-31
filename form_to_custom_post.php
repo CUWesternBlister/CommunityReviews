@@ -82,18 +82,6 @@ function format_questions_answers_post_content($questions, $answers, $form_name)
 		die("questions and answers");
 	}
 	$html = "";
-	//foreach ($questions as $key = &gt; $value) {
-	//for ($i = 0; $i < count($questions); $i++) {
-	    //$html .= '&lt;div class="row"&gt;';
-	    //$html .= '&lt;div class="col-md-6"&gt;'.$questions[$i].'&lt;/div&gt;';
-	   // $html .= '&lt;div class="col-md-6"&gt;'.$answers[$i].'&lt;/div&gt;';
-	    //$html .= '&lt;/div&gt;';
-
-
-	    //$html .= "<strong>".$questions[$i]."\n</strong>";
-	    //$html .= "<div>".$answers[$i]."\n</div>";
-
-	//}
 
     if ($form_name == 'Ski Review Form'){//ski
 
@@ -145,8 +133,8 @@ function format_questions_answers_post_content($questions, $answers, $form_name)
             </div>'; 
         return $html;
     }
-    /*
-    if ($form_id == 7){//boot
+    
+    if ($form_name == 'Summit_Ski_Boot_Review_Form'){//boot
 
         $html .= '<div class = "long_container">
             <div class = "section_title">Product Review</div>
@@ -161,72 +149,42 @@ function format_questions_answers_post_content($questions, $answers, $form_name)
             <div class = "answer">'.$answers[10].'</div>
             <div class = "question_title"> Difficulty Putting on 1-10?</div>
             <div class = "answer">'.$answers[11].'</div>';
-        if ($answers[12] == 'yes'){
-            $html.= '<div class = "question_title"> Touring Boot?</div>
-                <div class = "answer">'.$answers[12].'</div>    
-                <div class = "question_title"> Touring Buckles</div>
-                <div class = "answer">'.$answers[13].'</div>
-                <div class = "question_title"> Touring Walking?</div>
-                <div class = "answer">'.$answers[14].'</div>
-                <div class = "question_title"> Touring Power Straps</div>
-                <div class = "answer">'.$answers[15].'</div>
-                <div class = "question_title"> Touring Walk Mode?</div>
-                <div class = "answer">'.$answers[16].'</div>
-                </div>';
-            $html .= '<div class = "short_container">
-                <div class = "section_title">Testing Context</div>
-                <div class = "question_title">Terrain Tested</div>
-                <div class = "answer">'.$answers[4].'</div>
-                <div class = "question_title">Where</div>
-                <div class = "answer">'.$answers[3].'</div>
-                <div class = "question_title">Conditions Tested</div>
-                <div class = "answer">'.$answers[5].'</div>
-                </div>'; 
 
-            $html .= '<div class = "whole_container">
-                <div class = "section_title2">Tester Testimony</div>
-                <div class = "short_question">Looks 1-10?</div>
-                <div class = "long_question"> How likely to buy </div>
-                <div class = "short_answer">'.$answers[17].'</div>
-                <div class = "long_answer">'.$answers[18].'</div>                   
-                <div class = "question_title"> Boot Performance</div>
-                <div class = "answer">'.$answers[7].'</div>
-                <div class = "question_title"> Personal Comment and why?</div>
-                <div class = "answer">'.$answers[19].'</div>
-                </div>';
-                return $html;
-        }
-        else{
-            $html.= '<div class = "question_title"> Touring Boot?</div>
-                <div class = "answer">'.$answers[12].'</div>
-                </div>';
+        $html.= '<div class = "question_title"> Touring Boot?</div>
+            <div class = "answer">'.$answers[12].'</div>    
+            <div class = "question_title"> Touring Buckles</div>
+            <div class = "answer">'.$answers[13].'</div>
+            <div class = "question_title"> Touring Walking?</div>
+            <div class = "answer">'.$answers[14].'</div>
+            <div class = "question_title"> Touring Power Straps</div>
+            <div class = "answer">'.$answers[15].'</div>
+            <div class = "question_title"> Touring Walk Mode?</div>
+            <div class = "answer">'.$answers[16].'</div>
+            </div>';
+        $html .= '<div class = "short_container">
+            <div class = "section_title">Testing Context</div>
+            <div class = "question_title">Terrain Tested</div>
+            <div class = "answer">'.$answers[4].'</div>
+            <div class = "question_title">Where</div>
+            <div class = "answer">'.$answers[3].'</div>
+            <div class = "question_title">Conditions Tested</div>
+            <div class = "answer">'.$answers[5].'</div>
+            </div>'; 
 
-                $html .= '<div class = "short_container">
-                <div class = "section_title">Testing Context</div>
-                <div class = "question_title">Terrain Tested</div>
-                <div class = "answer">'.$answers[4].'</div>
-                <div class = "question_title">Where</div>
-                <div class = "answer">'.$answers[3].'</div>
-                <div class = "question_title">Conditions Tested</div>
-                <div class = "answer">'.$answers[5].'</div>
-                </div>'; 
-
-            $html .= '<div class = "whole_container">
-                <div class = "section_title2">Tester Testimony</div>
-                <div class = "short_question">Looks 1-10?</div>
-                <div class = "long_question"> How likely to buy </div>
-                <div class = "short_answer">'.$answers[13].'</div>
-                <div class = "long_answer">'.$answers[14].'</div>                   
-                <div class = "question_title"> Boot Performance</div>
-                <div class = "answer">'.$answers[7].'</div>
-                <div class = "question_title"> Personal Comment?</div>
-                <div class = "answer">'.$answers[15].'</div>
-                </div>'; 
-                return $html;
-        }
-
+        $html .= '<div class = "whole_container">
+            <div class = "section_title2">Tester Testimony</div>
+            <div class = "short_question">Looks 1-10?</div>
+            <div class = "long_question"> How likely to buy </div>
+            <div class = "short_answer">'.$answers[17].'</div>
+            <div class = "long_answer">'.$answers[18].'</div>                   
+            <div class = "question_title"> Boot Performance</div>
+            <div class = "answer">'.$answers[7].'</div>
+            <div class = "question_title"> Personal Comment and why?</div>
+            <div class = "answer">'.$answers[19].'</div>
+            </div>';
+            return $html;
     }
-    */
+    
 
     if ($form_name == 'Summit_Apparel_Form'){ //apparel
 
