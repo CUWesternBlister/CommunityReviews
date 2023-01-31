@@ -264,7 +264,7 @@ function BCR_login_shortcode(){
           'echo' => 0,
           'redirect' => home_url('/summit-home-page/')
         );
-        return wp_login_form( $args );
+        return wp_login_form( $args ) . '<a href="https://blisterreview.com/my-account" target="_blank">Click here to Register at BlisterReviews.com</a>';
     }
     // you can set where you will be redirected to after form is completed
 }
