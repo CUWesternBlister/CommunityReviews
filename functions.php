@@ -259,15 +259,8 @@ function display_user_info($atts){
 add_shortcode('user_info', 'display_user_info');
 
 function BCR_login_shortcode(){
-    if(is_user_logged_in()){
-        wp_redirect(home_url("summit-home-page"));//set to home page
-        die;
-    }
-    else {
-        return wp_login_form( 'echo=0' );
-    }
+    return wp_login_form( 'echo=0' );
     // you can set where you will be redirected to after form is completed
-    // as it is it will just return to the page and then be redirected by if statement
 }
 
 add_shortcode('BCR_login', 'BCR_login_shortcode');
@@ -275,6 +268,11 @@ add_shortcode('BCR_login', 'BCR_login_shortcode');
 //Testing https://developer.wordpress.org/reference/hooks/template_redirect/
 
 function summit_redirects() {
+    if (is_page('Validation Page') and is_user_logged_in()){
+        //redirects away from login page if already logged in
+        wp_redirect(home_url("summit-home-page"));
+        die;
+    }
     // for any other pages that need this redirect, just add page name to array
     if ( is_page(array('Summit Homepage','Community Reviews Profile', 'Summit Review Form', 'Fluent Forms Ski Review'))) {
         $userEntry = get_bcr_user();
