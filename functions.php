@@ -280,9 +280,8 @@ function summit_redirects() {
         die;
     }
     // for any other pages that need this redirect, just add page name to array
-    if ( is_page(array('Summit Homepage','Community Reviews Profile', 'Fluent Forms Ski Review',
-        'Summit Apparel Review Form', 'Summit Ski Boot Review Form', 'Skiing Know Thyself (Fluent Forms)',
-         'Climbing Skins Review (Fluent Forms)', 'Snowboard Review (Fluent Forms)'))){
+    if ( is_page(array('Summit Homepage','Community Reviews Profile', 'Ski Review', 'Apparel Review',
+        'Ski Boot Review', 'Skiing Know Thyself', 'Climbing Skins Review', 'Snowboard Review'))){
         $userEntry = get_bcr_user();
         if (!is_user_logged_in()){
             //redirects to Blister Login
