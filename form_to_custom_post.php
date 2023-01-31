@@ -1,6 +1,6 @@
 <?php
 require 'table_utils.php';
-function insert_into_ski_review($header, $questions, $answers, $file) {
+function insert_into_ski_review($header, $questions, $answers, $file, $formName) {
         global $wpdb;
 
         //$answersContent = $header['answersContent'];
@@ -17,7 +17,7 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
             return;
         }
 
-        $html = format_questions_answers_post_content($header["questionContent"], $header["answerContent"],$header["formID"]);
+        $html = format_questions_answers_post_content($header["questionContent"], $header["answerContent"],$formName);
         fwrite($file, "HTML STRING: \n".$html."\n\n");
 
         //$user_html = "<div>".$userInfo->heightFeet.":\n<br/>".$answers[$i]."\n\n</div>";
@@ -76,7 +76,7 @@ function get_userName_by_userID($userID, $file){
     return $res->display_name;
 }
 
-function format_questions_answers_post_content($questions, $answers, $form_id){
+function format_questions_answers_post_content($questions, $answers, $form_name){
 	//php assertion that question and answers atre same length
 	if (count($questions) !== count($answers)) {
 		die("questions and answers");
@@ -95,7 +95,7 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
 
 	//}
 
-    if ($form_id == 10){//ski
+    if ($form_name == 'Ski Review Form'){//ski
 
         $html .= '<div class = "long_container">
             <div class = "section_title">Product Review</div>
@@ -145,6 +145,7 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
             </div>'; 
         return $html;
     }
+    /*
     if ($form_id == 7){//boot
 
         $html .= '<div class = "long_container">
@@ -225,8 +226,9 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
         }
 
     }
+    */
 
-    if ($form_id == 8){ //apparel
+    if ($form_name == 'Summit_Apparel_Form'){ //apparel
 
         $html .= '<div class = "whole_container">
             <div class = "section_title2">Product Review</div>
@@ -323,7 +325,7 @@ function fluent_summit_review_from_sub($entryId, $formData, $form) {
         $header = summit_form_submission_custom_post_content($review_id, $current_form_id, $qs_and_as, $file);
         $header_info_read = print_r($header, true);
         fwrite($file, "HEADER: \n".$header_info_read."\n\n");
-        insert_into_ski_review($header, $qs, $as, $file);
+        insert_into_ski_review($header, $qs, $as, $file, $current_form_name);
     }
     fclose($file);
 }
