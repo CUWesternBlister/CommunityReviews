@@ -107,20 +107,6 @@ function bcr_setup_tables() {
         ) $charset_collate;";
 
     dbDelta($sql);
-    /* self referencing key?????????
-    ,
-        FOREIGN KEY  (categoryID) REFERENCES $categories_table_name(categoryID),
-        FOREIGN KEY (prduct_id) REFERENCES employee(employee_id)
-    */
-    $brand_table_name = $wpdb->prefix . "bcr_brands";
-
-    $sql = "CREATE TABLE $products_table_name (
-        brandID int(9) NOT NULL AUTO_INCREMENT,
-        brandName varchar(512) DEFAULT '' NOT NULL,
-        PRIMARY KEY  (brandID),
-        ) $charset_collate;";
-
-    dbDelta($sql);
 
     //Create Product table
     $products_table_name = $wpdb->prefix . "bcr_products";

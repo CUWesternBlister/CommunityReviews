@@ -419,3 +419,43 @@ Array
 
 HERE
 
+          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1
+
+ SUMMIT get all form names 
+Test Review Form
+form names: Array
+current form name: Know_Thyself_Form
+current form id: 
+          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 0 ----------
+userID does not exist, or user is not logged in          SUMMIT get user id 
+-------- 0 ----------
+userID does not exist, or user is not logged in          SUMMIT get user id 
+-------- 1 ----------
+1

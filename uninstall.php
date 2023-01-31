@@ -20,6 +20,11 @@ function bcr_uninstall() {
  */
 function bcr_remove_tables() {
     global $wpdb;
+    
+     //Remove User table
+    $user_table_name = $wpdb->prefix . "bcr_users";
+    $sql = "DROP TABLE IF EXISTS $user_table_name";
+    $wpdb->query($sql);
 
     //Remove Review Answer association table
     $reviews_answers_table_name = $wpdb->prefix . "bcr_reviews_answers";
@@ -69,6 +74,7 @@ function bcr_remove_tables() {
     $wpdb->query($sql);
     */
 
+
     //Remove Brands table
     $brands_table_name = $wpdb->prefix . "bcr_brands";
     $sql = "DROP TABLE IF EXISTS $brands_table_name";
@@ -98,6 +104,8 @@ function bcr_remove_tables() {
     $questions_table_name = $wpdb->prefix . "bcr_questions";
     $sql = "DROP TABLE IF EXISTS $questions_table_name";
     $wpdb->query($sql);
+
+
 }
 
 //Execute uninstall
