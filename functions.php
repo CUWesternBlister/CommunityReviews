@@ -265,6 +265,13 @@ function display_user_info($atts){
 }
 add_shortcode('user_info', 'display_user_info');
 
+
+function wpse_load_plugin_css() {
+    $plugin_url = plugin_dir_url( __FILE__ );
+    wp_enqueue_style( 'style1', $plugin_url . 'style1.css' );
+}
+add_action( 'wp_enqueue_scripts', 'wpse_load_plugin_css' );
+
 // WRITING KNOW THY SELF FORM TO KNOWTHYSELF TABLE. THIS CAN BE USED ONLY FOR REFERENCE.
 
     function capstone_write_to_table($record, $ajax_handler) {
@@ -286,4 +293,5 @@ add_shortcode('user_info', 'display_user_info');
     }
 
     add_action( 'elementor_pro/forms/new_record', 'capstone_write_to_table', 10, 2);
+
 ?>
