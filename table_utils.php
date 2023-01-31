@@ -1,14 +1,14 @@
 <?php
 	function get_current_userID($file){
 	    global $wpdb;
-	    //$start = "          SUMMIT get user id \n";
-	    //fwrite($file, $start);
+	    $start = "          SUMMIT get user id \n";
+	    fwrite($file, $start);
 	    if ( ! function_exists( 'get_current_user_id' ) ) {
 	        return 0;
 	    }
 	    $cur_userID = get_current_user_id();
-	    //$str = "-------- " . strval($cur_userID) . " ----------\n";
-	    //fwrite($file, $str);
+	    $str = "-------- " . strval($cur_userID) . " ----------\n";
+	    fwrite($file, $str);
 	    if($cur_userID == 0){
 	        //then not logged in
 	        //we should check this field when they click to start a review form.
