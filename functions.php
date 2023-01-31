@@ -260,11 +260,16 @@ add_shortcode('user_info', 'display_user_info');
 
 function BCR_login_shortcode(){
     if(is_user_logged_in()){
-        wp_redirect(home_url("summit-home-page"));//set to home page
-        die;
+        //wp_redirect(home_url("/summit-home-page/"));//set to home page
+        //die;
+        //exit;
     }
     else {
-        return wp_login_form( 'echo=0' );
+        $args = array(
+          'echo' => 0,
+          'redirect' => home_url('/summit-home-page/')
+        );
+        return wp_login_form( $args );
     }
     // you can set where you will be redirected to after form is completed
     // as it is it will just return to the page and then be redirected by if statement
@@ -282,10 +287,12 @@ function summit_redirects() {
             //redirects to Blister Login
             wp_redirect(home_url('/validation-page/'));
             die;
+            //exit;
         }
         else if (!$userEntry) {
             wp_redirect(home_url('/profile-information-form/'));
             die;
+            //exit;
         }
     }
 }
