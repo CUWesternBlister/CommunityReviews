@@ -5,6 +5,7 @@
  * 
  */
 function bcr_init_tables() {
+
     //bcr_create_brands();
     //bcr_create_skis();
     //bcr_create_questions();
