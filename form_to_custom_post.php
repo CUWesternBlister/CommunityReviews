@@ -32,7 +32,7 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
         fwrite($file, "\n".$html."\n");
 //fetch user name to insert
         $ski_review = array(
-                            'post_title' => wp_strip_all_tags( $header['brandName'] . ' ' . $header['productName'] . ' ' . $userName),
+                            'post_title' => wp_strip_all_tags( $header['brandName'] . ' ' . $header['productName'] . ' review by ' . $userName),
                             'post_content' => $html,
                             'meta_input' => array(
                                                   'id'            => $header['reviewID'],
