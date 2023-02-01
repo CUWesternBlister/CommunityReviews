@@ -607,7 +607,7 @@ function get_product_info($form_id,$file){//may just want to return res2 !!!!!!
 	fwrite($file, "product id: ".$product_id."\n");
 
 	$product_table = $wpdb->prefix . "bcr_products";
-	$q2 = "SELECT * FROM $product_table WHERE productID = $product_id;";
+	$q2 = $wpdb->prepare("SELECT * FROM $product_table WHERE productID = %s;", $product_id);
 	$res2 = $wpdb->get_row($q2);
 	$return_array = [];
 	$return_array['productID'] = $res2->productID;
@@ -625,7 +625,7 @@ function get_category_info($category_id, $file){//may just want to return res !!
     fwrite($file, $start);
     //fwrite($file, "category id: ".$category_id."\n");
 	$category_table = $wpdb->prefix . "bcr_categories";
-	$q = "SELECT * FROM $category_table WHERE categoryID = $category_id;";
+	$q = $wpdb->prepare("SELECT * FROM $category_table WHERE categoryID = %s;", $category_id);
 	$res = $wpdb->get_row($q);
 	//$var = print_r($res, true);
     //fwrite($file,"get results: \n".$var."\n");
