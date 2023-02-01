@@ -599,7 +599,7 @@ function get_product_info($form_id,$file){//may just want to return res2 !!!!!!
     fwrite($file, "\n\nCurrent Form ID: ".$form_id."\n\n");
     //fwrite($file, "form id: ".$form_id."\n");
 	$form_table = $wpdb->prefix . "bcr_review_forms";
-	$q1 = "SELECT * FROM $form_table WHERE reviewFormID = $form_id;";
+	$q1 = $wpdb->prepare("SELECT * FROM $form_table WHERE reviewFormID = %s;", $form_id);
 	$res1 = $wpdb->get_row($q1);
 	$var = print_r($res1, true);
     fwrite($file,"get results: \n".$var."\n");
