@@ -1,1 +1,476 @@
+fluent_summit_review_from_sub
 
+formData 1: 
+Array
+(
+    [__fluent_form_embded_post_id] => 840
+    [_fluentform_6_fluentformnonce] => dfc04da2b0
+    [_wp_http_referer] => /elementor-840/
+    [2] => K2
+    [1_2] => Disrutption MTi W
+    [3] => 180
+    [4] => Array
+        (
+            [0] => Backcountry
+        )
+
+    [5] => Array
+        (
+            [0] => Fairly Soft, pretty forgiving moguls
+        )
+
+    [6] => Array
+        (
+            [0] => Softer, mixed conditions
+        )
+
+    [7] => Didn't love it, didn't hate it. No strong impression one way or the other
+    [8] => Array
+        (
+            [0] => Offered *too much* stability - the ski felt "dead" to me, too planted
+        )
+
+    [9] => Absolutely love how stable it felt. Extremely impressed
+    [10] => Felt like it was forgiving of mistakes, while also being nicely supportive.
+    [11] => Jarring. Too stiff and harsh. Like riding a rigid mountain bike down a rocky trail.
+    [12] => Array
+        (
+            [0] => Steeps (e.g., terrain off the High Lift or the North Face t-bar)
+        )
+
+    [13] => Array
+        (
+            [0] => It's among the most fun skis I've ever been on - in this category of skis
+        )
+
+    [14] => I'd like to try a shorter length, but not sure that shorter would be better.
+    [15] => Array
+        (
+            [0] => Intermediate skiers looking for a really fun, playful ski that's comfortable all-around
+        )
+
+    [16] => 1
+    [17] => eagerg
+    [18] => Probably buying - it suits my style quite well, but so do a few other skis
+    [19] => awefwaef
+    [20] => eawfweaf
+    [21] => awefewaf
+)
+
+
+questions and answers: 
+Array
+(
+    [2] => K2
+    [1] => Disrutption MTi W
+    [3] => 180
+    [4] => Backcountry
+    [5] => Fairly Soft, pretty forgiving moguls
+    [6] => Softer, mixed conditions
+    [7] => Didn't love it, didn't hate it. No strong impression one way or the other
+    [8] => Offered *too much* stability - the ski felt "dead" to me, too planted
+    [9] => Absolutely love how stable it felt. Extremely impressed
+    [10] => Felt like it was forgiving of mistakes, while also being nicely supportive.
+    [11] => Jarring. Too stiff and harsh. Like riding a rigid mountain bike down a rocky trail.
+    [12] => Steeps (e.g., terrain off the High Lift or the North Face t-bar)
+    [13] => It's among the most fun skis I've ever been on - in this category of skis
+    [14] => I'd like to try a shorter length, but not sure that shorter would be better.
+    [15] => Intermediate skiers looking for a really fun, playful ski that's comfortable all-around
+    [16] => 1
+    [17] => eagerg
+    [18] => Probably buying - it suits my style quite well, but so do a few other skis
+    [19] => awefwaef
+    [20] => eawfweaf
+    [21] => awefewaf
+)
+
+
+Starting the Process 
+
+
+
+ start summit_form_submission_write_to_tabless 
+
+
+ SUMMIT INSERT INTO ANSWER TABLE 
+
+
+SUMMIT INSERT INTO REVIEW TABLE 
+          SUMMIT get user id 
+-------- 1 ----------
+
+
+SUMMIT INSERT INTO REVIEW ANSWER TABLE 
+
+
+summit_insert_into_review_answer_table function exited
+
+
+
+ summit_form_submission_custom_post_content 
+product info: 
+Array
+(
+    [productName] => K2
+)
+
+
+brand name: Disrutption MTi W
+get results: 
+NULL
+brand info: 
+
+
+
+
+ GET CATEGORY INFORMATION 
+get results: 
+stdClass Object
+(
+    [categoryID] => 4
+    [parentID] => 1
+    [categoryName] => Skis
+)
+
+categroy info: 
+stdClass Object
+(
+    [categoryID] => 4
+    [parentID] => 1
+    [categoryName] => Skis
+)
+
+
+
+
+ GET ANSWERS AND QUESTIONS 
+, , , Inbounds or Backcountry, Test Terrain, Test Conditions, Maneuverability Rating, Stability Rating, , Forgiveness Rating, Suspension Rating, , Fun Factor Rating , Length, Ideal Terrain, , Open ended response: , How likely are you to either buy or recommend this product?, , Are there similar products you've tried that you clearly prefer? If so, why?,  
+K2, Disrutption MTi W, 180, Backcountry, Fairly Soft, pretty forgiving moguls, Softer, mixed conditions, Didn't love it, didn't hate it. No strong impression one way or the other, Offered *too much* stability - the ski felt "dead" to me, too planted, Absolutely love how stable it felt. Extremely impressed, Felt like it was forgiving of mistakes, while also being nicely supportive., Jarring. Too stiff and harsh. Like riding a rigid mountain bike down a rocky trail., Steeps (e.g., terrain off the High Lift or the North Face t-bar), It's among the most fun skis I've ever been on - in this category of skis, I'd like to try a shorter length, but not sure that shorter would be better., Intermediate skiers looking for a really fun, playful ski that's comfortable all-around, 1, eagerg, Probably buying - it suits my style quite well, but so do a few other skis, awefwaef, eawfweaf, awefewaf 
+QandA info: 
+Array
+(
+    [question_content] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => 
+            [3] => Inbounds or Backcountry
+            [4] => Test Terrain
+            [5] => Test Conditions
+            [6] => Maneuverability Rating
+            [7] => Stability Rating
+            [8] => 
+            [9] => Forgiveness Rating
+            [10] => Suspension Rating
+            [11] => 
+            [12] => Fun Factor Rating 
+            [13] => Length
+            [14] => Ideal Terrain
+            [15] => 
+            [16] => Open ended response: 
+            [17] => How likely are you to either buy or recommend this product?
+            [18] => 
+            [19] => Are there similar products you've tried that you clearly prefer? If so, why?
+            [20] => 
+        )
+
+    [answer_content] => Array
+        (
+            [0] => K2
+            [1] => Disrutption MTi W
+            [2] => 180
+            [3] => Backcountry
+            [4] => Fairly Soft, pretty forgiving moguls
+            [5] => Softer, mixed conditions
+            [6] => Didn't love it, didn't hate it. No strong impression one way or the other
+            [7] => Offered *too much* stability - the ski felt "dead" to me, too planted
+            [8] => Absolutely love how stable it felt. Extremely impressed
+            [9] => Felt like it was forgiving of mistakes, while also being nicely supportive.
+            [10] => Jarring. Too stiff and harsh. Like riding a rigid mountain bike down a rocky trail.
+            [11] => Steeps (e.g., terrain off the High Lift or the North Face t-bar)
+            [12] => It's among the most fun skis I've ever been on - in this category of skis
+            [13] => I'd like to try a shorter length, but not sure that shorter would be better.
+            [14] => Intermediate skiers looking for a really fun, playful ski that's comfortable all-around
+            [15] => 1
+            [16] => eagerg
+            [17] => Probably buying - it suits my style quite well, but so do a few other skis
+            [18] => awefwaef
+            [19] => eawfweaf
+            [20] => awefewaf
+        )
+
+)
+
+
+
+
+ GET USER INFORMATION 
+          SUMMIT get user id 
+-------- 1 ----------
+user id: 1
+get results: 
+stdClass Object
+(
+    [userID] => 1
+    [heightFeet] => 10
+    [heightInches] => 10
+    [weight] => 1000
+    [skiAbility] => Intermediate
+)
+
+user info: 
+stdClass Object
+(
+    [userID] => 1
+    [heightFeet] => 10
+    [heightInches] => 10
+    [weight] => 1000
+    [skiAbility] => Intermediate
+)
+
+
+HEADER: 
+Array
+(
+    [reviewID] => 0
+    [formID] => 6
+    [productName] => K2
+    [brandName] => Disrutption MTi W
+    [categoryName] => Skis
+    [questionContent] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => 
+            [3] => Inbounds or Backcountry
+            [4] => Test Terrain
+            [5] => Test Conditions
+            [6] => Maneuverability Rating
+            [7] => Stability Rating
+            [8] => 
+            [9] => Forgiveness Rating
+            [10] => Suspension Rating
+            [11] => 
+            [12] => Fun Factor Rating 
+            [13] => Length
+            [14] => Ideal Terrain
+            [15] => 
+            [16] => Open ended response: 
+            [17] => How likely are you to either buy or recommend this product?
+            [18] => 
+            [19] => Are there similar products you've tried that you clearly prefer? If so, why?
+            [20] => 
+        )
+
+    [answerContent] => Array
+        (
+            [0] => K2
+            [1] => Disrutption MTi W
+            [2] => 180
+            [3] => Backcountry
+            [4] => Fairly Soft, pretty forgiving moguls
+            [5] => Softer, mixed conditions
+            [6] => Didn't love it, didn't hate it. No strong impression one way or the other
+            [7] => Offered *too much* stability - the ski felt "dead" to me, too planted
+            [8] => Absolutely love how stable it felt. Extremely impressed
+            [9] => Felt like it was forgiving of mistakes, while also being nicely supportive.
+            [10] => Jarring. Too stiff and harsh. Like riding a rigid mountain bike down a rocky trail.
+            [11] => Steeps (e.g., terrain off the High Lift or the North Face t-bar)
+            [12] => It's among the most fun skis I've ever been on - in this category of skis
+            [13] => I'd like to try a shorter length, but not sure that shorter would be better.
+            [14] => Intermediate skiers looking for a really fun, playful ski that's comfortable all-around
+            [15] => 1
+            [16] => eagerg
+            [17] => Probably buying - it suits my style quite well, but so do a few other skis
+            [18] => awefwaef
+            [19] => eawfweaf
+            [20] => awefewaf
+        )
+
+    [userInfo] => stdClass Object
+        (
+            [userID] => 1
+            [heightFeet] => 10
+            [heightInches] => 10
+            [weight] => 1000
+            [skiAbility] => Intermediate
+        )
+
+)
+
+
+userID to get userName: 1
+
+username: 
+user name: guma6480 
+HTML STRING: 
+<div class = "long_container">
+            <div class = "section_title">Product Review</div>
+            <div class = "question_title">Stablility?</div>
+            <div class = "answer">  Offered *too much* stability - the ski felt "dead" to me, too plantedAbsolutely love how stable it felt. Extremely impressed</div>
+            <div class = "question_title">Maniveurability?</div>
+            <div class = "answer">Didn't love it, didn't hate it. No strong impression one way or the other</div>
+            <div class = "question_title">Demand of ski</div>
+            <div class = "answer">  Felt like it was forgiving of mistakes, while also being nicely supportive.</div>
+
+            <div class = "question_title"> Ride Quality</div>
+            <div class = "answer">Jarring. Too stiff and harsh. Like riding a rigid mountain bike down a rocky trail.</div>
+            <div class = "question_title"> Fun Factor</div>
+            <div class = "answer">It's among the most fun skis I've ever been on - in this category of skis</div>
+            <div class = "question_title"> Ski felt good on...</div>
+            <div class = "answer">Steeps (e.g., terrain off the High Lift or the North Face t-bar)</div>              
+            <div class = "question_title"> Correct Lenght?</div>
+            <div class = "answer">I'd like to try a shorter length, but not sure that shorter would be better.</div>
+            <div class = "question_title"> Who will like this Ski?</div>
+            <div class = "answer">Intermediate skiers looking for a really fun, playful ski that's comfortable all-around</div>          
+            </div><div class = "short_container">
+            <div class = "section_title">Testing Context</div>
+            <div class = "question_title">Terrain Tested</div>
+            <div class = "answer">Fairly Soft, pretty forgiving moguls</div>
+            <div class = "question_title">Where</div>
+            <div class = "answer">Backcountry</div>
+            <div class = "question_title">Conditions Tested</div>
+            <div class = "answer">Softer, mixed conditions</div>
+            </div><div class = "whole_container">
+            <div class = "section_title2">Tester Testimony</div>
+            <div class = "short_question"> How good 1-10?</div>
+            <div class = "long_question"> elaboration </div>
+            <div class = "short_answer">1</div>
+            <div class = "long_answer">eagerg</div>          
+            <div class = "short_question"> Recommend?</div>
+            <div class = "long_question"> elaboration </div>
+            <div class = "short_answer">Probably buying - it suits my style quite well, but so do a few other skis</div>
+            <div class = "long_answer">awefwaef</div>          
+            <div class = "question_title"> Prefered Similar Products? and why?</div>
+            <div class = "answer">eawfweaf</div>
+            <div class = "question_title"> Personal Comment</div>
+            <div class = "answer">awefewaf</div>
+            </div>
+
+
+<div>User: guma6480</div><div>Reviewers height: 10 feet, 10 inches</div><div>Reviewers weight: 1000 lbs</div><div>Reviewers ski ability: Intermediate</div><br/><div class = "long_container">
+            <div class = "section_title">Product Review</div>
+            <div class = "question_title">Stablility?</div>
+            <div class = "answer">  Offered *too much* stability - the ski felt "dead" to me, too plantedAbsolutely love how stable it felt. Extremely impressed</div>
+            <div class = "question_title">Maniveurability?</div>
+            <div class = "answer">Didn't love it, didn't hate it. No strong impression one way or the other</div>
+            <div class = "question_title">Demand of ski</div>
+            <div class = "answer">  Felt like it was forgiving of mistakes, while also being nicely supportive.</div>
+
+            <div class = "question_title"> Ride Quality</div>
+            <div class = "answer">Jarring. Too stiff and harsh. Like riding a rigid mountain bike down a rocky trail.</div>
+            <div class = "question_title"> Fun Factor</div>
+            <div class = "answer">It's among the most fun skis I've ever been on - in this category of skis</div>
+            <div class = "question_title"> Ski felt good on...</div>
+            <div class = "answer">Steeps (e.g., terrain off the High Lift or the North Face t-bar)</div>              
+            <div class = "question_title"> Correct Lenght?</div>
+            <div class = "answer">I'd like to try a shorter length, but not sure that shorter would be better.</div>
+            <div class = "question_title"> Who will like this Ski?</div>
+            <div class = "answer">Intermediate skiers looking for a really fun, playful ski that's comfortable all-around</div>          
+            </div><div class = "short_container">
+            <div class = "section_title">Testing Context</div>
+            <div class = "question_title">Terrain Tested</div>
+            <div class = "answer">Fairly Soft, pretty forgiving moguls</div>
+            <div class = "question_title">Where</div>
+            <div class = "answer">Backcountry</div>
+            <div class = "question_title">Conditions Tested</div>
+            <div class = "answer">Softer, mixed conditions</div>
+            </div><div class = "whole_container">
+            <div class = "section_title2">Tester Testimony</div>
+            <div class = "short_question"> How good 1-10?</div>
+            <div class = "long_question"> elaboration </div>
+            <div class = "short_answer">1</div>
+            <div class = "long_answer">eagerg</div>          
+            <div class = "short_question"> Recommend?</div>
+            <div class = "long_question"> elaboration </div>
+            <div class = "short_answer">Probably buying - it suits my style quite well, but so do a few other skis</div>
+            <div class = "long_answer">awefwaef</div>          
+            <div class = "question_title"> Prefered Similar Products? and why?</div>
+            <div class = "answer">eawfweaf</div>
+            <div class = "question_title"> Personal Comment</div>
+            <div class = "answer">awefewaf</div>
+            </div>
+Post array: 
+Array
+(
+    [post_title] => Disrutption MTi W K2 review by guma6480
+    [post_content] => <div>User: guma6480</div><div>Reviewers height: 10 feet, 10 inches</div><div>Reviewers weight: 1000 lbs</div><div>Reviewers ski ability: Intermediate</div><br/><div class = "long_container">
+            <div class = "section_title">Product Review</div>
+            <div class = "question_title">Stablility?</div>
+            <div class = "answer">  Offered *too much* stability - the ski felt "dead" to me, too plantedAbsolutely love how stable it felt. Extremely impressed</div>
+            <div class = "question_title">Maniveurability?</div>
+            <div class = "answer">Didn't love it, didn't hate it. No strong impression one way or the other</div>
+            <div class = "question_title">Demand of ski</div>
+            <div class = "answer">  Felt like it was forgiving of mistakes, while also being nicely supportive.</div>
+
+            <div class = "question_title"> Ride Quality</div>
+            <div class = "answer">Jarring. Too stiff and harsh. Like riding a rigid mountain bike down a rocky trail.</div>
+            <div class = "question_title"> Fun Factor</div>
+            <div class = "answer">It's among the most fun skis I've ever been on - in this category of skis</div>
+            <div class = "question_title"> Ski felt good on...</div>
+            <div class = "answer">Steeps (e.g., terrain off the High Lift or the North Face t-bar)</div>              
+            <div class = "question_title"> Correct Lenght?</div>
+            <div class = "answer">I'd like to try a shorter length, but not sure that shorter would be better.</div>
+            <div class = "question_title"> Who will like this Ski?</div>
+            <div class = "answer">Intermediate skiers looking for a really fun, playful ski that's comfortable all-around</div>          
+            </div><div class = "short_container">
+            <div class = "section_title">Testing Context</div>
+            <div class = "question_title">Terrain Tested</div>
+            <div class = "answer">Fairly Soft, pretty forgiving moguls</div>
+            <div class = "question_title">Where</div>
+            <div class = "answer">Backcountry</div>
+            <div class = "question_title">Conditions Tested</div>
+            <div class = "answer">Softer, mixed conditions</div>
+            </div><div class = "whole_container">
+            <div class = "section_title2">Tester Testimony</div>
+            <div class = "short_question"> How good 1-10?</div>
+            <div class = "long_question"> elaboration </div>
+            <div class = "short_answer">1</div>
+            <div class = "long_answer">eagerg</div>          
+            <div class = "short_question"> Recommend?</div>
+            <div class = "long_question"> elaboration </div>
+            <div class = "short_answer">Probably buying - it suits my style quite well, but so do a few other skis</div>
+            <div class = "long_answer">awefwaef</div>          
+            <div class = "question_title"> Prefered Similar Products? and why?</div>
+            <div class = "answer">eawfweaf</div>
+            <div class = "question_title"> Personal Comment</div>
+            <div class = "answer">awefewaf</div>
+            </div>
+    [meta_input] => Array
+        (
+            [id] => 0
+            [formID] => 
+            [userID] => 1
+            [userName] => guma6480
+            [heightFeet] => 10
+            [heightInches] => 10
+            [weight] => 1000
+            [skiAbility] => Intermediate
+            [product] => K2
+            [brand] => Disrutption MTi W
+            [category] => Skis
+        )
+
+    [post_type] => Community Reviews
+    [post_excerpt] => <div>User: guma6480</div><div>Reviewers height: 10 feet, 10 inches</div><div>Reviewers weight: 1000 lbs</div><div>Reviewers ski ability: Intermediate</div><br/>
+    [post_status] => publish
+)
+
+
+
+
+HERE
+
+          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1          SUMMIT get user id 
+-------- 1 ----------
+1
