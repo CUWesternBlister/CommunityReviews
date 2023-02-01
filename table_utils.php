@@ -15,7 +15,7 @@
 	        return "userID does not exist, or user is not logged in";
 	    }
 	    $user_table = $wpdb->prefix . "bcr_users";
-	    $q = "SELECT 1 userID FROM $user_table WHERE userID = $cur_userID;";
+	    $q = $wpdb->prepare("SELECT 1 userID FROM $user_table WHERE userID = %s;", $cur_userID);
 	    $res = $wpdb->query($q);
 
 	    //check if user in wp bcr users
