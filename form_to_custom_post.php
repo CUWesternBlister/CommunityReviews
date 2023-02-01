@@ -641,7 +641,7 @@ function get_category_info($category_id, $file){//may just want to return res !!
 function get_sport_info($sport_id){ //may just want to return res !!!!!!
 	global $wpdb;
 	$sports_table = $wpdb->prefix . "bcr_sports";
-	$q = "SELECT * FROM $sports_table WHERE sportID = $sport_id;";
+	$q = $wpdb->prepare("SELECT * FROM $sports_table WHERE sportID = %s;", $sport_id);
 	$res = $wpdb->get_row($q);
 	$return_array = [];
 	$return_array['sportID'] = $sport_id;
