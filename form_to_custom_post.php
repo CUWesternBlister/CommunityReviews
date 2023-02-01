@@ -87,41 +87,41 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
         $html .= '<div class = "long_container">
             <div class = "section_title">Product Review</div>
             <div class = "question_title">Stablility?</div>
-            <div class = "answer">  '.$answers[6].'</div>
+            <div class = "answer">  '.esc_html($answers[6]).'</div>
             <div class = "question_title">Maniveurability?</div>
-            <div class = "answer">'.$answers[5].'</div>
+            <div class = "answer">'.esc_html($answers[5]).'</div>
             <div class = "question_title">How forgiving?</div>
-            <div class = "answer">  '.$answers[7].'</div>
+            <div class = "answer">  '.esc_html($answers[7]).'</div>
             <div class = "question_title"> Suspension</div>
-            <div class = "answer">'.$answers[8].'</div>
+            <div class = "answer">'.esc_html($answers[8]).'</div>
             <div class = "question_title"> Fun Factor</div>
-            <div class = "answer">'.$answers[9].'</div>
+            <div class = "answer">'.esc_html($answers[9]).'</div>
             <div class = "question_title"> Ski felt good on...</div>
-            <div class = "answer">'.$answers[10].'</div>              
+            <div class = "answer">'.esc_html($answers[10]).'</div>              
             <div class = "question_title"> Correct Lenght?</div>
-            <div class = "answer">'.$answers[11].'</div> 
+            <div class = "answer">'.esc_html($answers[11]).'</div> 
             <div class = "question_title"> How likely to buy?</div>
-            <div class = "answer">'.$answers[13].'</div>          
+            <div class = "answer">'.esc_html($answers[13]).'</div>          
             </div>';
 
         $html .= '<div class = "short_container">
             <div class = "section_title">Testing Context</div>
             <div class = "question_title">Terrain Tested</div>
-            <div class = "answer">'.$answers[3].'</div>
+            <div class = "answer">'.esc_html($answers[3]).'</div>
             <div class = "question_title">Where</div>
-            <div class = "answer">'.$answers[2].'</div>
+            <div class = "answer">'.esc_html($answers[2]).'</div>
             <div class = "question_title">Conditions Tested</div>
-            <div class = "answer">'.$answers[4].'</div>
+            <div class = "answer">'.esc_html($answers[4]).'</div>
             </div>'; 
 
         $html .= '<div class = "whole_container">
             <div class = "section_title2">Tester Testimony</div>
             <div class = "question_title"> What type of skier will ike this product?</div>
-            <div class = "answer">'.$answers[12].'</div>
+            <div class = "answer">'.esc_html($answers[12]).'</div>
             <div class = "question_title"> Better Products?</div>
-            <div class = "answer">'.$answers[14].'</div>          
+            <div class = "answer">'.esc_html($answers[14]).'</div>          
             <div class = "question_title"> Personal Comment</div>
-            <div class = "answer">'.$answers[15].'</div>
+            <div class = "answer">'.esc_hmtl($answers[15]).'</div>
             </div>'; 
         return $html;
     }
@@ -131,36 +131,36 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
         $html .= '<div class = "long_container">
             <div class = "section_title">Product Review</div>
             <div class = "question_title">Boot Fit</div>
-            <div class = "answer">  '.$answers[6].'</div>
+            <div class = "answer">  '.esc_html($answers[6]).'</div>
             <div class = "question_title">Suspension?</div>
-            <div class = "answer">'.$answers[8].'</div>
+            <div class = "answer">'.esc_html($answers[8]).'</div>
             <div class = "question_title">Flex Pattern</div>
-            <div class = "answer">  '.$answers[7].'</div>
+            <div class = "answer">  '.esc_html($answers[7]).'</div>
 
             <div class = "question_title"> Boot Walking?</div>
-            <div class = "answer">'.$answers[9].'</div>
+            <div class = "answer">'.esc_html($answers[9]).'</div>
             <div class = "question_title"> How likely to buy?</div>
-            <div class = "answer">'.$answers[11].'</div>
+            <div class = "answer">'.esc_html($answers[11]).'</div>
             </div>';
 
         $html .= '<div class = "short_container">
             <div class = "section_title">Testing Context</div>
             <div class = "question_title">Terrain Tested</div>
-            <div class = "answer">'.$answers[4].'</div>
+            <div class = "answer">'.esc_html($answers[4]).'</div>
             <div class = "question_title">Where</div>
-            <div class = "answer">'.$answers[3].'</div>
+            <div class = "answer">'.esc_html($answers[3]).'</div>
             <div class = "question_title">Conditions Tested</div>
-            <div class = "answer">'.$answers[5].'</div>
+            <div class = "answer">'.esc_html($answers[5]).'</div>
             </div>'; 
 
         $html .= '<div class = "whole_container">
             <div class = "section_title2">Tester Testimony</div>
             <div class = "question_title"> What type of skier will ike this product?</div>
-            <div class = "answer">'.$answers[10].'</div>
+            <div class = "answer">'.esc_html($answers[10]).'</div>
             <div class = "question_title"> Better Products?</div>
-            <div class = "answer">'.$answers[12].'</div>          
+            <div class = "answer">'.esc_html($answers[12]).'</div>          
             <div class = "question_title"> Personal Comment</div>
-            <div class = "answer">'.$answers[13].'</div>
+            <div class = "answer">'.esc_html($answers[13]).'</div>
             </div>'; 
         return $html;
     }
@@ -171,25 +171,25 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
         $html .= '<div class = "whole_container">
             <div class = "section_title2">Product Review</div>
             <div class = "short_question"> Where</div>
-            <div class = "long_answer">'.$answers[2].'</div>          
+            <div class = "long_answer">'.esc_html($answers[2]).'</div>          
             <div class = "short_question"> Conditions Tested</div>
-            <div class = "long_answer">'.$answers[3].'</div>
+            <div class = "long_answer">'.esc_html($answers[3]).'</div>
             <div class = "short_question"> Fit</div>
-            <div class = "long_answer">'.$answers[4].'</div> 
+            <div class = "long_answer">'.esc_html($answers[4]).'</div> 
             <div class = "short_question"> Comfort</div>
-            <div class = "long_answer">'.$answers[5].'</div>      
+            <div class = "long_answer">'.esc_html($answers[5]).'</div>      
             <div class = "short_question"> Breathability</div>
-            <div class = "long_answer">'.$answers[7].'</div>
+            <div class = "long_answer">'.esc_html($answers[7]).'</div>
             <div class = "question_title"> Wind/Water Resistence</div>
-            <div class = "answer">'.$answers[6].'</div>
+            <div class = "answer">'.esc_html($answers[6]).'</div>
             <div class = "question_title"> Who will like this?</div>
-            <div class = "answer">'.$answers[8].'</div> 
+            <div class = "answer">'.esc_html($answers[8]).'</div> 
             <div class = "question_title"> How likely to buy?</div>
-            <div class = "answer">'.$answers[9].'</div> 
+            <div class = "answer">'.esc_html($answers[9]).'</div> 
             <div class = "question_title"> Similar Products?</div>
-            <div class = "answer">'.$answers[10].'</div>
+            <div class = "answer">'.esc_html($answers[10]).'</div>
             <div class = "question_title"> Personal Comment?</div>
-            <div class = "answer">'.$answers[11].'</div>
+            <div class = "answer">'.esc_html($answers[11]).'</div>
             </div>';
         return $html;
     }
@@ -199,41 +199,41 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
         $html .= '<div class = "long_container">
             <div class = "section_title">Product Review</div>
             <div class = "question_title">Stablility?</div>
-            <div class = "answer">  '.$answers[5].'</div>
+            <div class = "answer">  '.esc_html($answers[5]).'</div>
             <div class = "question_title">Maniveurability?</div>
-            <div class = "answer">'.$answers[6].'</div>
+            <div class = "answer">'.esc_html($answers[6]).'</div>
             <div class = "question_title">How forgiving?</div>
-            <div class = "answer">  '.$answers[7].'</div>
+            <div class = "answer">  '.esc_html($answers[7]).'</div>
             <div class = "question_title"> Suspension</div>
-            <div class = "answer">'.$answers[8].'</div>
+            <div class = "answer">'.esc_html($answers[8]).'</div>
             <div class = "question_title"> Fun Factor</div>
-            <div class = "answer">'.$answers[9].'</div>
+            <div class = "answer">'.esc_html($answers[9]).'</div>
             <div class = "question_title"> Ideal Terrain</div>
-            <div class = "answer">'.$answers[10].'</div>              
+            <div class = "answer">'.esc_html($answers[10]).'</div>              
             <div class = "question_title"> Correct Lenght?</div>
-            <div class = "answer">'.$answers[11].'</div> 
+            <div class = "answer">'.esc_html($answers[11]).'</div> 
             <div class = "question_title"> How likely to buy?</div>
-            <div class = "answer">'.$answers[13].'</div>          
+            <div class = "answer">'.esc_html($answers[13]).'</div>          
             </div>';
 
         $html .= '<div class = "short_container">
             <div class = "section_title">Testing Context</div>
             <div class = "question_title">Terrain Tested</div>
-            <div class = "answer">'.$answers[3].'</div>
+            <div class = "answer">'.esc_html($answers[3]).'</div>
             <div class = "question_title">Where</div>
-            <div class = "answer">'.$answers[2].'</div>
+            <div class = "answer">'.esc_html($answers[2]).'</div>
             <div class = "question_title">Conditions Tested</div>
-            <div class = "answer">'.$answers[4].'</div>
+            <div class = "answer">'.esc_html($answers[4]).'</div>
             </div>'; 
 
         $html .= '<div class = "whole_container">
             <div class = "section_title2">Tester Testimony</div>
             <div class = "question_title"> What type of Snowboarder will ike this product?</div>
-            <div class = "answer">'.$answers[12].'</div>
+            <div class = "answer">'.esc_html($answers[12]).'</div>
             <div class = "question_title"> Better Products?</div>
-            <div class = "answer">'.$answers[14].'</div>          
+            <div class = "answer">'.esc_html($answers[14]).'</div>          
             <div class = "question_title"> Personal Comment</div>
-            <div class = "answer">'.$answers[15].'</div>
+            <div class = "answer">'.esc_html($answers[15]).'</div>
             </div>'; 
         return $html;
     }
@@ -244,21 +244,21 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
         $html .= '<div class = "whole_container">
             <div class = "section_title2">Product Review</div>
             <div class = "short_question"> Where</div>
-            <div class = "long_answer">'.$answers[2].'</div>          
+            <div class = "long_answer">'.esc_html($answers[2]).'</div>          
             <div class = "short_question"> Glide</div>
-            <div class = "long_answer">'.$answers[3].'</div>
+            <div class = "long_answer">'.esc_html($answers[3]).'</div>
             <div class = "short_question"> Grip</div>
-            <div class = "long_answer">'.$answers[4].'</div> 
+            <div class = "long_answer">'.esc_html($answers[4]).'</div> 
             <div class = "short_question"> Packability</div>
-            <div class = "long_answer">'.$answers[5].'</div>      
+            <div class = "long_answer">'.esc_html($answers[5]).'</div>      
             <div class = "question_title"> Who will like this?</div>
-            <div class = "answer">'.$answers[6].'</div> 
+            <div class = "answer">'.esc_html($answers[6]).'</div> 
             <div class = "question_title"> How likely to buy?</div>
-            <div class = "answer">'.$answers[7].'</div> 
+            <div class = "answer">'.esc_html($answers[7]).'</div> 
             <div class = "question_title"> Similar Products?</div>
-            <div class = "answer">'.$answers[8].'</div>
+            <div class = "answer">'.esc_html($answers[8]).'</div>
             <div class = "question_title"> Personal Comment?</div>
-            <div class = "answer">'.$answers[9].'</div>
+            <div class = "answer">'.esc_html($answers[9]).'</div>
             </div>';
         return $html;
     }
