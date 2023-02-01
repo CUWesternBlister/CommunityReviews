@@ -5,7 +5,6 @@
  * 
  */
 function bcr_init_tables() {
-
     //bcr_create_brands();
     //bcr_create_skis();
     //bcr_create_questions();
@@ -17,7 +16,6 @@ function bcr_init_tables() {
         $sql_command.= $wpdb->prepare($line);
     }
     dbDelta($sql_command);
-
 }
 
 /**
