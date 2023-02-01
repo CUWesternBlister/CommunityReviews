@@ -64,7 +64,7 @@ function get_userName_by_userID($userID, $file){
     global $wpdb;
     fwrite($file, "userID to get userName: ".$userID."\n");
     $wp_user_table = $wpdb->prefix."users";
-    $q = "SELECT display_name FROM $wp_user_table WHERE ID = $userID;";
+    $q = $wpdb->prepare("SELECT display_name FROM $wp_user_table WHERE ID = %s;", $userID);
     $res = $wpdb->get_row($q);
     //$userName = get_userdata($userID);
     //if($userName == false){
