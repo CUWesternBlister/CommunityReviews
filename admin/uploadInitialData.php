@@ -5,24 +5,10 @@
  * 
  */
 function bcr_init_tables() {
-<<<<<<< HEAD
-=======
-
->>>>>>> e6da53c2460bc40880d335c85fa24f05bfc8afa5
     //bcr_create_brands();
     //bcr_create_skis();
     //bcr_create_questions();
     global $wpdb;
-<<<<<<< HEAD
-    $fileName = plugin_dir_path( __FILE__ ) . 'local (2).sql.gz'
-    $sql_command = "";
-    $lines = gzfile($fileName);
-
-    foreach($lines as $key => $line ){
-        $sql_command.=$line;
-    }
-    $wpdb->insert($sql_command);
-=======
     $fileName = plugin_dir_path( __FILE__ ) . 'local (2).sql.gz';
     $sql_command = "";
     $lines = gzfile($fileName);
@@ -30,8 +16,6 @@ function bcr_init_tables() {
         $sql_command.=$line;
     }
     dbDelta($sql_command);
-
->>>>>>> e6da53c2460bc40880d335c85fa24f05bfc8afa5
 }
 
 /**
