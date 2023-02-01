@@ -250,7 +250,7 @@ function display_user_info($atts){
             },
             $userEntry
         );
-        return "User Height: ".exc_html(implode( '  ', $heightF)) ."' ".esc_html(implode( '  ', $heightI)) .'"'.
+        return "User Height: ".esc_html(implode( '  ', $heightF)) ."' ".esc_html(implode( '  ', $heightI)) .'"'.
             "<br><br>User Weight: ".esc_html(implode('  ', $weight))." lbs".
             "<br><br>User Experience: ".esc_html(implode('  ', $ability));
     }
