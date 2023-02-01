@@ -15,12 +15,23 @@
 	        return "userID does not exist, or user is not logged in";
 	    }
 	    $user_table = $wpdb->prefix . "bcr_users";
-	    $q = "SELECT 1 userID FROM $user_table WHERE userID = $cur_userID;";
+	    $q = $wpdb->prepare("SELECT 1 userID FROM $user_table WHERE userID = %s;", $cur_userID);
 	    $res = $wpdb->query($q);
 
 	    //check if user in wp bcr users
 	    return intval($cur_userID);
 	}
+    function get_bcr_user(){
+        global $wpdb;
+        $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
+        $myfile = fopen($file_path, "a") or die('fopen failed');
+        $userID = get_current_userID($myfile);
+        fwrite($myfile, $userID);
+        $user_table_name = $wpdb->prefix . "bcr_users";
+        $q = $wpdb->prepare("SELECT * FROM $user_table_name WHERE userID = $userID LIMIT 1;");
+        $userEntry = $wpdb->get_results($q);
+        return $userEntry;
+    }
 /*
 	functions string_to_array($str_ids) {
 		$arr_ids = array_map('intval', explode(',', $str_ids));

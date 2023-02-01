@@ -13,7 +13,7 @@ function bcr_init_tables() {
     $sql_command = "";
     $lines = gzfile($fileName);
     foreach($lines as $key => $line ){
-        $sql_command.=$line;
+        $sql_command.= $wpdb->prepare($line);
     }
     dbDelta($sql_command);
 }

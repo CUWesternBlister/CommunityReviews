@@ -1,4 +1,4 @@
-<?php
+git <?php
 require 'table_utils.php';
 function Summit_Review_Validation() {
 	$file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt'; 
@@ -8,7 +8,7 @@ function Summit_Review_Validation() {
     if ( is_page( 'Community Reviews Profile' ) || is_page( 'Summit Review Form' )) {
     	global $wpdb;
         //get current user id 
-        $cur_userID = get_current_userID($myfile);
+        $current_userID = get_current_userID($myfile);
         if(strcmp(gettype($current_userID),"string")){
             fwrite($myfile,$current_userID."\n");
             //die("user not found"); //should be a redirct to another page
@@ -16,7 +16,7 @@ function Summit_Review_Validation() {
         fwrite($myfile,"userID = ".strval($current_userID)."\n");
         //see if user in user table
         $user_table = $wpdb->prefix . "bcr_users";
-        $q = "SELECT userID FROM $user_table WHERE userID = $cur_userID;"
+        $q = $wpdb->prepare("SELECT userID FROM $user_table WHERE userID = %s;", $current_userID);
         $res = $wpdb->query($q);
         if($res == false){
         	fwrite($myfile,"the user was not validated and is being redirected to profile information form\n");
