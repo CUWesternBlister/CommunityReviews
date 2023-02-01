@@ -280,7 +280,7 @@ function profile_info_sub( $record, $ajax_handler ){
         $fields['weight'] = $raw_fields["weight"]['value'];
         $fields['skiAbility'] = $raw_fields["user_experience"]['value'];
 
-        $q = "SELECT userID FROM $user_table_name WHERE userID = $userID;";
+        $q = $wpdb->prepare("SELECT userID FROM $user_table_name WHERE userID = %s;", $userID);
         $res = $wpdb->query($q);
 
         if($res){
