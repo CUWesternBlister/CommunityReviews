@@ -16,7 +16,7 @@ function Summit_Review_Validation() {
         fwrite($myfile,"userID = ".strval($current_userID)."\n");
         //see if user in user table
         $user_table = $wpdb->prefix . "bcr_users";
-        $q = "SELECT userID FROM $user_table WHERE userID = $current_userID;";
+        $q = $wpdb->prepare("SELECT userID FROM $user_table WHERE userID = %s;", $current_userID);
         $res = $wpdb->query($q);
         if($res == false){
         	fwrite($myfile,"the user was not validated and is being redirected to profile information form\n");
