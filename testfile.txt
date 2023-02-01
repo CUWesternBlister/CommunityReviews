@@ -3,46 +3,37 @@ fluent_summit_review_from_sub
 formData 1: 
 Array
 (
-    [__fluent_form_embded_post_id] => 906
-    [_fluentform_11_fluentformnonce] => 3ed5562b1c
-    [_wp_http_referer] => /snowboard-review-fluent-forms/
-    [39] => Array
-        (
-            [0] => In Resort/Lift Accessed
-        )
-
-    [40] => Firm groomers
-    [41] => Extremely firm hardpack or ice
-    [42] => Terrible
-    [43] => Terrible
-    [44] => Neutral
-    [45] => Not very good
-    [input_radio_6] => Neutral
-    [47] => Softer moguls
-    [input_radio_8] => It felt just right
-    [49] => jacob
-    [50] => Somewhat unlikely
-    [51] => sup sup homie
-    [52] => broooo
+    [__fluent_form_embded_post_id] => 915
+    [_fluentform_12_fluentformnonce] => 3ed5562b1c
+    [_wp_http_referer] => /climbing-skins-review-fluent-forms/
+    [1] => G3
+    [2] => furry skins
+    [53] => Fairly firm but not icy
+    [54] => Neutral
+    [55] => Pretty good
+    [56] => Neutral
+    [57] => kjjjjjjjjj
+    [58] => Not sure/Neutral
+    [59] => kjjjjjjjj
+    [60] => jjjjjjjjjj
+    [input_text] => kkkk
 )
 
 
 questions and answers: 
 Array
 (
-    [39] => In Resort/Lift Accessed
-    [40] => Firm groomers
-    [41] => Extremely firm hardpack or ice
-    [42] => Terrible
-    [43] => Terrible
-    [44] => Neutral
-    [45] => Not very good
-    [0] => It felt just right
-    [47] => Softer moguls
-    [49] => jacob
-    [50] => Somewhat unlikely
-    [51] => sup sup homie
-    [52] => broooo
+    [1] => G3
+    [2] => furry skins
+    [53] => Fairly firm but not icy
+    [54] => Neutral
+    [55] => Pretty good
+    [56] => Neutral
+    [57] => kjjjjjjjjj
+    [58] => Not sure/Neutral
+    [59] => kjjjjjjjj
+    [60] => jjjjjjjjjj
+    [0] => kkkk
 )
 
 
@@ -72,11 +63,11 @@ summit_insert_into_review_answer_table function exited
 product info: 
 Array
 (
-    [productName] => 
+    [productName] => furry skins
 )
 
 
-brand name: 
+brand name: G3
 get results: 
 NULL
 brand info: 
@@ -88,60 +79,56 @@ brand info:
 get results: 
 stdClass Object
 (
-    [categoryID] => 7
-    [parentID] => 6
-    [categoryName] => Snowboards
+    [categoryID] => 5
+    [parentID] => 1
+    [categoryName] => Climbing Skins
 )
 
 categroy info: 
 stdClass Object
 (
-    [categoryID] => 7
-    [parentID] => 6
-    [categoryName] => Snowboards
+    [categoryID] => 5
+    [parentID] => 1
+    [categoryName] => Climbing Skins
 )
 
 
 
 
  GET ANSWERS AND QUESTIONS 
-Inbounds or Backcountry, Test Terrain, Test Conditions, Stability Rating, Maneuverability Rating, Forgiveness Rating, Suspension Rating, , Ideal Terrain, What type(s) of people do you imagine will get along best with this snowboard?, How likely are you to either buy or recommend this product?, Similar products you've ridden that you clearly prefer, and why?, Open ended response:  
-In Resort/Lift Accessed, Firm groomers, Extremely firm hardpack or ice, Terrible, Terrible, Neutral, Not very good, It felt just right, Softer moguls, jacob, Somewhat unlikely, sup sup homie, broooo 
+, , Test Conditions, Glide, Grip, Packability, What type(s) of people do you imagine will get along best with this product?, How likely are you to either buy or recommend this product?, Similar products you've ridden that you clearly prefer, and why?, Open ended response: ,  
+G3, furry skins, Fairly firm but not icy, Neutral, Pretty good, Neutral, kjjjjjjjjj, Not sure/Neutral, kjjjjjjjj, jjjjjjjjjj, kkkk 
 QandA info: 
 Array
 (
     [question_content] => Array
         (
-            [0] => Inbounds or Backcountry
-            [1] => Test Terrain
+            [0] => 
+            [1] => 
             [2] => Test Conditions
-            [3] => Stability Rating
-            [4] => Maneuverability Rating
-            [5] => Forgiveness Rating
-            [6] => Suspension Rating
-            [7] => 
-            [8] => Ideal Terrain
-            [9] => What type(s) of people do you imagine will get along best with this snowboard?
-            [10] => How likely are you to either buy or recommend this product?
-            [11] => Similar products you've ridden that you clearly prefer, and why?
-            [12] => Open ended response: 
+            [3] => Glide
+            [4] => Grip
+            [5] => Packability
+            [6] => What type(s) of people do you imagine will get along best with this product?
+            [7] => How likely are you to either buy or recommend this product?
+            [8] => Similar products you've ridden that you clearly prefer, and why?
+            [9] => Open ended response: 
+            [10] => 
         )
 
     [answer_content] => Array
         (
-            [0] => In Resort/Lift Accessed
-            [1] => Firm groomers
-            [2] => Extremely firm hardpack or ice
-            [3] => Terrible
-            [4] => Terrible
+            [0] => G3
+            [1] => furry skins
+            [2] => Fairly firm but not icy
+            [3] => Neutral
+            [4] => Pretty good
             [5] => Neutral
-            [6] => Not very good
-            [7] => It felt just right
-            [8] => Softer moguls
-            [9] => jacob
-            [10] => Somewhat unlikely
-            [11] => sup sup homie
-            [12] => broooo
+            [6] => kjjjjjjjjj
+            [7] => Not sure/Neutral
+            [8] => kjjjjjjjj
+            [9] => jjjjjjjjjj
+            [10] => kkkk
         )
 
 )
@@ -178,42 +165,38 @@ HEADER:
 Array
 (
     [reviewID] => 0
-    [formID] => 11
-    [productName] => 
-    [brandName] => 
-    [categoryName] => Snowboards
+    [formID] => 12
+    [productName] => furry skins
+    [brandName] => G3
+    [categoryName] => Climbing Skins
     [questionContent] => Array
         (
-            [0] => Inbounds or Backcountry
-            [1] => Test Terrain
+            [0] => 
+            [1] => 
             [2] => Test Conditions
-            [3] => Stability Rating
-            [4] => Maneuverability Rating
-            [5] => Forgiveness Rating
-            [6] => Suspension Rating
-            [7] => 
-            [8] => Ideal Terrain
-            [9] => What type(s) of people do you imagine will get along best with this snowboard?
-            [10] => How likely are you to either buy or recommend this product?
-            [11] => Similar products you've ridden that you clearly prefer, and why?
-            [12] => Open ended response: 
+            [3] => Glide
+            [4] => Grip
+            [5] => Packability
+            [6] => What type(s) of people do you imagine will get along best with this product?
+            [7] => How likely are you to either buy or recommend this product?
+            [8] => Similar products you've ridden that you clearly prefer, and why?
+            [9] => Open ended response: 
+            [10] => 
         )
 
     [answerContent] => Array
         (
-            [0] => In Resort/Lift Accessed
-            [1] => Firm groomers
-            [2] => Extremely firm hardpack or ice
-            [3] => Terrible
-            [4] => Terrible
+            [0] => G3
+            [1] => furry skins
+            [2] => Fairly firm but not icy
+            [3] => Neutral
+            [4] => Pretty good
             [5] => Neutral
-            [6] => Not very good
-            [7] => It felt just right
-            [8] => Softer moguls
-            [9] => jacob
-            [10] => Somewhat unlikely
-            [11] => sup sup homie
-            [12] => broooo
+            [6] => kjjjjjjjjj
+            [7] => Not sure/Neutral
+            [8] => kjjjjjjjj
+            [9] => jjjjjjjjjj
+            [10] => kkkk
         )
 
     [userInfo] => stdClass Object
@@ -240,7 +223,7 @@ HTML STRING:
 Post array: 
 Array
 (
-    [post_title] => review by izak
+    [post_title] => G3 furry skins review by izak
     [post_content] => <div>User: izak</div><div>Reviewers height: 5 feet, 10 inches</div><div>Reviewers weight: 170 lbs</div><div>Reviewers ski ability: 10</div><br/>
     [meta_input] => Array
         (
@@ -252,9 +235,9 @@ Array
             [heightInches] => 10
             [weight] => 170
             [skiAbility] => 10
-            [product] => 
-            [brand] => 
-            [category] => Snowboards
+            [product] => furry skins
+            [brand] => G3
+            [category] => Climbing Skins
         )
 
     [post_type] => Community Reviews
@@ -267,43 +250,3 @@ Array
 
 HERE
 
-          SUMMIT get user id 
--------- 1 ----------
-1          SUMMIT get user id 
--------- 1 ----------
-1          SUMMIT get user id 
--------- 1 ----------
-1          SUMMIT get user id 
--------- 1 ----------
-1          SUMMIT get user id 
--------- 1 ----------
-1          SUMMIT get user id 
--------- 1 ----------
-1          SUMMIT get user id 
--------- 1 ----------
-1          SUMMIT get user id 
--------- 1 ----------
-1          SUMMIT get user id 
--------- 1 ----------
-1          SUMMIT get user id 
--------- 1 ----------
-1          SUMMIT get user id 
--------- 1 ----------
-1          SUMMIT get user id 
--------- 1 ----------
-1
-
- SUMMIT get all form names 
-Test Review Form
-form names: Array
-current form name: Know_Thyself_Form
-current form id: 
-          SUMMIT get user id 
--------- 1 ----------
-1          SUMMIT get user id 
--------- 0 ----------
-userID does not exist, or user is not logged in          SUMMIT get user id 
--------- 0 ----------
-userID does not exist, or user is not logged in          SUMMIT get user id 
--------- 1 ----------
-1
