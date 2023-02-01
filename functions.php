@@ -217,7 +217,7 @@ function get_record_from_form_submissions($atts) {
             },
             $nameresults
         );
-        return "Skiing Style: ".implode( ', ', $skiingStyle_subs)."<br><br>Confidence in Icy Groomers: ".implode(', ', $confidenceIcyGroomer_subs)."<br><br>Confidence in Soft Groomers: ".implode(', ', $confidenceSoftGroomer_subs);
+        return "Skiing Style: ".esc_html(implode( ', ', $skiingStyle_subs))."<br><br>Confidence in Icy Groomers: ".esc_html(implode(', ', $confidenceIcyGroomer_subs))."<br><br>Confidence in Soft Groomers: ".esc_html(implode(', ', $confidenceSoftGroomer_subs));
     }
     return '';
 }
