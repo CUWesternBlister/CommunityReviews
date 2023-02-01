@@ -656,7 +656,7 @@ function get_user_information($file){
     $userID = get_current_userID($file);
     //fwrite($file, "user id: ".$userID."\n");
     $user_table_name = $wpdb->prefix . "bcr_users";//i do not have this same able 
-    $queryString = "SELECT * FROM $user_table_name WHERE userID=$userID";
+    $queryString = $wpdb->prepare("SELECT * FROM $user_table_name WHERE userID=%s", $userID);
     $userInformation = $wpdb->get_row($queryString);
 
     return $userInformation;
