@@ -1,27 +1,22 @@
 <?php
 require 'table_utils.php';
-function insert_into_ski_review($header, $questions, $answers, $file) {
+function insert_into_ski_review($header, $questions, $answers, $file, $formName) {
         global $wpdb;
-
-        //$answersContent = $header['answersContent'];
-        //fwrite($file, "answer content grabbed\n".implode(', ', $answers)."---------\n\n");
     
         $userInfo = $header['userInfo'];
         $u_info = print_r($userInfo, true);
-        fwrite($file, "post user info: \n".$u_info."\n\n");
+        //fwrite($file, "post user info: \n".$u_info."\n\n");
         
 
         $userName = get_userName_by_userID($userInfo->userID,$file);
-        fwrite($file, "user name: ".$userName." \n");
+        //fwrite($file, "user name: ".$userName." \n");
         
         if ( NULL === $header || 0 === $header || '0' === $header || empty( $header ) ) {
             return;
         }
-
-        $html = format_questions_answers_post_content($header["questionContent"], $header["answerContent"],$header['reviewID']);
-        //fwrite($file, "HTML STRING: \n".$html."\n\n");
-
-        //$user_html = "<div>".$userInfo->heightFeet.":\n<br/>".$answers[$i]."\n\n</div>";
+        
+        $html = format_questions_answers_post_content($header["questionContent"], $header["answerContent"],$formName,$file);
+        
         $user_html.= "<div>User: ".esc_html($userName)."</div>";
         $user_html.= "<div>Reviewers height: ".esc_html($userInfo->heightFeet)." feet, ".esc_html($userInfo->heightInches)." inches</div>";
         $user_html .= "<div>Reviewers weight: ".esc_html($userInfo->weight)." lbs</div>";
@@ -30,10 +25,10 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
 
         $html = $user_html . $html;
 
-        fwrite($file, "\n".$html."\n");
+        //fwrite($file, "\n".$html."\n");
 //fetch user name to insert
         $ski_review = array(
-                            'post_title' => wp_strip_all_tags( $answers[1] . ' ' . $header['productName'] . ' ' . $answers[2]),
+                            'post_title' =>wp_strip_all_tags( $header['brandName'] . ' ' . $header['productName'] . ' review by ' . $userName),
                             'post_content' => $html,
                             'meta_input' => array(
                                                   'id'            => $header['reviewID'],
@@ -45,58 +40,42 @@ function insert_into_ski_review($header, $questions, $answers, $file) {
                                                   'skiAbility'    => $userInfo->skiAbility,
                                                   'product_tested'=> $header['productName'],
                                                   'category'      => $header['categoryName'],
-                                                  'sport'         => $header['sportName']//,
-                                                  //'questions'     => $questions, //probably do not need beacuse it is part of content 
-                                                  //'answers'       => $answers // same
+                                                  'sport'         => $header['sportName']
                                                   ),
-                            //'post_content' => wp_strip_all_tags( $answers[1] . ' ' . $header['productName'] . ' ' . $answers[2]),
                             'post_type'   => 'Community Reviews',
                             'post_excerpt' => $user_html,
                             'post_status' => 'publish',
                             );
-        $custom_post_input = print_r($ski_review, true);
-        fwrite($file, "Post array: \n".$custom_post_input."\n\n");
+        //$custom_post_input = print_r($ski_review, true);
+        //fwrite($file, "Post array: \n".$custom_post_input."\n\n");
         wp_insert_post( $ski_review );
-        fwrite($file,"\n\nHERE\n\n");      
+        //fwrite($file,"\n\nHERE\n\n");      
 }
 
 function get_userName_by_userID($userID, $file){
     global $wpdb;
-    fwrite($file, "userID to get userName: ".$userID."\n");
+    //fwrite($file, "userID to get userName: ".$userID."\n");
     $wp_user_table = $wpdb->prefix."users";
     $q = $wpdb->prepare("SELECT display_name FROM $wp_user_table WHERE ID = %s;", $userID);
     $res = $wpdb->get_row($q);
-    //$userName = get_userdata($userID);
-    //if($userName == false){
-    $res_p = print_r($res, true);
-    fwrite($file, "\nusername: ".$res_p->display_name."\n");
-        //die('could not find username');
-    //}
     return $res->display_name;
 }
 
-function format_questions_answers_post_content($questions, $answers, $form_id){
-	//php assertion that question and answers atre same length
-	if (count($questions) !== count($answers)) {
-		die("questions and answers");
-	}
-	$html = "";
-
-    if ($form_id == 4){
-
+function format_questions_answers_post_content($questions, $answers, $form_name, $file){
+    //php assertion that question and answers atre same length
+    if (count($questions) !== count($answers)) {
+        die("questions and answers");
+    }
+    $html = "";
+    //fwrite($file, $formName."\n")
+    if ($form_name == 'Ski Review Form'){//ski
+        
         $html .= '<div class = "long_container">
             <div class = "section_title">Product Review</div>
             <div class = "question_title">Stablility?</div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <div class = "answer">  '.$answers[6].'</div>
-            <div class = "question_title">Maniveurability?</div>
-            <div class = "answer">'.$answers[5].'</div>
-=======
             <div class = "answer">  '.esc_html($answers[6]).'</div>
             <div class = "question_title">Maniveurability?</div>
             <div class = "answer">'.esc_html($answers[5]).'</div>
->>>>>>> 4513b694fbc171397196b17e3319eb4ae67bc8c1
             <div class = "question_title">How forgiving?</div>
             <div class = "answer">  '.esc_html($answers[7]).'</div>
             <div class = "question_title"> Suspension</div>
@@ -110,7 +89,7 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
             <div class = "question_title"> How likely to buy?</div>
             <div class = "answer">'.esc_html($answers[13]).'</div>          
             </div>';
-
+        
         $html .= '<div class = "short_container">
             <div class = "section_title">Testing Context</div>
             <div class = "question_title">Terrain Tested</div>
@@ -120,7 +99,7 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
             <div class = "question_title">Conditions Tested</div>
             <div class = "answer">'.esc_html($answers[4]).'</div>
             </div>'; 
-
+        
         $html .= '<div class = "whole_container">
             <div class = "section_title2">Tester Testimony</div>
             <div class = "question_title"> What type of skier will ike this product?</div>
@@ -128,8 +107,9 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
             <div class = "question_title"> Better Products?</div>
             <div class = "answer">'.esc_html($answers[14]).'</div>          
             <div class = "question_title"> Personal Comment</div>
-            <div class = "answer">'.esc_hmtl($answers[15]).'</div>
+            <div class = "answer">'.esc_html($answers[15]).'</div>
             </div>'; 
+            
         return $html;
     }
     
@@ -147,29 +127,7 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
             <div class = "question_title"> Boot Walking?</div>
             <div class = "answer">'.esc_html($answers[9]).'</div>
             <div class = "question_title"> How likely to buy?</div>
-<<<<<<< HEAD
-            <div class = "answer">'.$answers[11].'</div>
-=======
-            <div class = "answer">  '.esc_html($answers[7]).esc_html($answers[8]).'</div>
-            <div class = "question_title">Maniveurability?</div>
-            <div class = "answer">'.esc_html($answers[6]).'</div>
-            <div class = "question_title">Demand of ski</div>
-            <div class = "answer">  '.esc_html($answers[9]).'</div>
-
-            <div class = "question_title"> Ride Quality</div>
-            <div class = "answer">'.esc_html($answers[10]).'</div>
-            <div class = "question_title"> Fun Factor</div>
-            <div class = "answer">'.esc_html($answers[12]).'</div>
-            <div class = "question_title"> Ski felt good on...</div>
-            <div class = "answer">'.esc_html($answers[11]).'</div>              
-            <div class = "question_title"> Correct Lenght?</div>
-            <div class = "answer">'.esc_html($answers[13]).'</div>
-            <div class = "question_title"> Who will like this Ski?</div>
-            <div class = "answer">'.esc_html($answers[14]).'</div>          
->>>>>>> af9fd11bddbcf00ffabad3441a53a4217f1c3bf5
-=======
             <div class = "answer">'.esc_html($answers[11]).'</div>
->>>>>>> 4513b694fbc171397196b17e3319eb4ae67bc8c1
             </div>';
 
         $html .= '<div class = "short_container">
@@ -184,128 +142,18 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
 
         $html .= '<div class = "whole_container">
             <div class = "section_title2">Tester Testimony</div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <div class = "question_title"> What type of skier will ike this product?</div>
-            <div class = "answer">'.$answers[10].'</div>
-            <div class = "question_title"> Better Products?</div>
-            <div class = "answer">'.$answers[12].'</div>          
-            <div class = "question_title"> Personal Comment</div>
-            <div class = "answer">'.$answers[13].'</div>
-=======
+
             <div class = "question_title"> What type of skier will ike this product?</div>
             <div class = "answer">'.esc_html($answers[10]).'</div>
             <div class = "question_title"> Better Products?</div>
             <div class = "answer">'.esc_html($answers[12]).'</div>          
             <div class = "question_title"> Personal Comment</div>
             <div class = "answer">'.esc_html($answers[13]).'</div>
->>>>>>> 4513b694fbc171397196b17e3319eb4ae67bc8c1
             </div>'; 
         return $html;
     }
-    
-<<<<<<< HEAD
-=======
-            <div class = "short_question"> How good 1-10?</div>
-            <div class = "long_question"> elaboration </div>
-            <div class = "short_answer">'.esc_html($answers[15]).'</div>
-            <div class = "long_answer">'.esc_html($answers[16]).'</div>          
-            <div class = "short_question"> Recommend?</div>
-            <div class = "long_question"> elaboration </div>
-            <div class = "short_answer">'.esc_html($answers[17]).'</div>
-            <div class = "long_answer">'.esc_html($answers[18]).'</div>          
-            <div class = "question_title"> Prefered Similar Products? and why?</div>
-            <div class = "answer">'.esc_html($answers[19]).'</div>
-            <div class = "question_title"> Personal Comment</div>
-            <div class = "answer">'.esc_html($answers[20]).'</div>
-            </div>'; 
-        return $html;
-    }
-    if ($form_id == 7){
 
-        $html .= '<div class = "long_container">
-            <div class = "section_title">Product Review</div>
-            <div class = "question_title">Boot Fit</div>
-            <div class = "answer">  '.esc_html($answers[6]).'</div>
-            <div class = "question_title">Boot Stance?</div>
-            <div class = "answer">'.esc_html($answers[8]).'</div>
-            <div class = "question_title">Flex Pattern</div>
-            <div class = "answer">  '.esc_html($answers[9]).'</div>
-
-            <div class = "question_title"> Weight of Boot</div>
-            <div class = "answer">'.esc_html($answers[10]).'</div>
-            <div class = "question_title"> Difficulty Putting on 1-10?</div>
-            <div class = "answer">'.esc_html($answers[11]).'</div>';
-        if ($answers[12] == 'yes'){
-            $html.= '<div class = "question_title"> Touring Boot?</div>
-                <div class = "answer">'.esc_html($answers[12]).'</div>    
-                <div class = "question_title"> Touring Buckles</div>
-                <div class = "answer">'.esc_html($answers[13]).'</div>
-                <div class = "question_title"> Touring Walking?</div>
-                <div class = "answer">'.esc_html($answers[14]).'</div>
-                <div class = "question_title"> Touring Power Straps</div>
-                <div class = "answer">'.esc_html($answers[15]).'</div>
-                <div class = "question_title"> Touring Walk Mode?</div>
-                <div class = "answer">'.esc_html($answers[16]).'</div>
-                </div>';
-            $html .= '<div class = "short_container">
-                <div class = "section_title">Testing Context</div>
-                <div class = "question_title">Terrain Tested</div>
-                <div class = "answer">'.esc_html($answers[4]).'</div>
-                <div class = "question_title">Where</div>
-                <div class = "answer">'.esc_html($answers[3]).'</div>
-                <div class = "question_title">Conditions Tested</div>
-                <div class = "answer">'.$answers[5].'</div>
-                </div>'; 
-
-            $html .= '<div class = "whole_container">
-                <div class = "section_title2">Tester Testimony</div>
-                <div class = "short_question">Looks 1-10?</div>
-                <div class = "long_question"> How likely to buy </div>
-                <div class = "short_answer">'.esc_html($answers[17]).'</div>
-                <div class = "long_answer">'.esc_html($answers[18]).'</div>                   
-                <div class = "question_title"> Boot Performance</div>
-                <div class = "answer">'.esc_html($answers[7]).'</div>
-                <div class = "question_title"> Personal Comment and why?</div>
-                <div class = "answer">'.esc_html($answers[19]).'</div>
-                </div>';
-                return $html;
-        }
-        else{
-            $html.= '<div class = "question_title"> Touring Boot?</div>
-                <div class = "answer">'.esc_html($answers[12]).'</div>
-                </div>';
-
-                $html .= '<div class = "short_container">
-                <div class = "section_title">Testing Context</div>
-                <div class = "question_title">Terrain Tested</div>
-                <div class = "answer">'.esc_html($answers[4]).'</div>
-                <div class = "question_title">Where</div>
-                <div class = "answer">'.esc_html($answers[3]).'</div>
-                <div class = "question_title">Conditions Tested</div>
-                <div class = "answer">'.esc_html($answers[5]).'</div>
-                </div>'; 
-
-            $html .= '<div class = "whole_container">
-                <div class = "section_title2">Tester Testimony</div>
-                <div class = "short_question">Looks 1-10?</div>
-                <div class = "long_question"> How likely to buy </div>
-                <div class = "short_answer">'.esc_html($answers[13]).'</div>
-                <div class = "long_answer">'.esc_html($answers[14]).'</div>                   
-                <div class = "question_title"> Boot Performance</div>
-                <div class = "answer">'.esc_html($answers[7]).'</div>
-                <div class = "question_title"> Personal Comment?</div>
-                <div class = "answer">'.esc_html($answers[15]).'</div>
-                </div>'; 
-                return $html;
-        }
-
-    }
->>>>>>> af9fd11bddbcf00ffabad3441a53a4217f1c3bf5
-=======
->>>>>>> 4513b694fbc171397196b17e3319eb4ae67bc8c1
-
-    if ($form_id == 6){ 
+    if ($form_name == 'Summit_Apparel_Form'){ //apparel
 
         $html .= '<div class = "whole_container">
             <div class = "section_title2">Product Review</div>
@@ -333,7 +181,7 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
         return $html;
     }
 
-    if ($form_name == 'Snowboard Review'){//ski
+    if ($form_name == 'Snowboard Review'){//snowboard
 
         $html .= '<div class = "long_container">
             <div class = "section_title">Product Review</div>
@@ -344,25 +192,16 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
             <div class = "question_title">How forgiving?</div>
             <div class = "answer">  '.esc_html($answers[7]).'</div>
             <div class = "question_title"> Suspension</div>
-<<<<<<< HEAD
-            <div class = "answer">'.$answers[8].'</div>
-=======
             <div class = "answer">'.esc_html($answers[8]).'</div>
             <div class = "question_title"> Fun Factor</div>
             <div class = "answer">'.esc_html($answers[9]).'</div>
->>>>>>> 4513b694fbc171397196b17e3319eb4ae67bc8c1
             <div class = "question_title"> Ideal Terrain</div>
             <div class = "answer">'.esc_html($answers[10]).'</div>              
             <div class = "question_title"> Correct Lenght?</div>
-<<<<<<< HEAD
-            <div class = "answer">'.$answers[9].'</div> 
-            <div class = "question_title"> How likely to buy?</div>
-            <div class = "answer">'.$answers[12].'</div>          
-=======
+
             <div class = "answer">'.esc_html($answers[11]).'</div> 
             <div class = "question_title"> How likely to buy?</div>
             <div class = "answer">'.esc_html($answers[13]).'</div>          
->>>>>>> 4513b694fbc171397196b17e3319eb4ae67bc8c1
             </div>';
 
         $html .= '<div class = "short_container">
@@ -378,46 +217,21 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
         $html .= '<div class = "whole_container">
             <div class = "section_title2">Tester Testimony</div>
             <div class = "question_title"> What type of Snowboarder will ike this product?</div>
-<<<<<<< HEAD
-            <div class = "answer">'.$answers[11].'</div>
-            <div class = "question_title"> Better Products?</div>
-            <div class = "answer">'.$answers[13].'</div>          
-            <div class = "question_title"> Personal Comment</div>
-            <div class = "answer">'.$answers[14].'</div>
-=======
             <div class = "answer">'.esc_html($answers[12]).'</div>
             <div class = "question_title"> Better Products?</div>
             <div class = "answer">'.esc_html($answers[14]).'</div>          
             <div class = "question_title"> Personal Comment</div>
             <div class = "answer">'.esc_html($answers[15]).'</div>
->>>>>>> 4513b694fbc171397196b17e3319eb4ae67bc8c1
             </div>'; 
         return $html;
     }
 
 
-    if ($form_name == 'Climbing Skin Review'){ //apparel
+    if ($form_name == 'Climbing Skin Review'){ //climbing skins
 
         $html .= '<div class = "whole_container">
             <div class = "section_title2">Product Review</div>
             <div class = "short_question"> Where</div>
-<<<<<<< HEAD
-            <div class = "long_answer">'.$answers[0].'</div>          
-            <div class = "short_question"> Glide</div>
-            <div class = "long_answer">'.$answers[1].'</div>
-            <div class = "short_question"> Grip</div>
-            <div class = "long_answer">'.$answers[2].'</div> 
-            <div class = "short_question"> Packability</div>
-            <div class = "long_answer">'.$answers[3].'</div>      
-            <div class = "question_title"> Who will like this?</div>
-            <div class = "answer">'.$answers[4].'</div> 
-            <div class = "question_title"> How likely to buy?</div>
-            <div class = "answer">'.$answers[5].'</div> 
-            <div class = "question_title"> Similar Products?</div>
-            <div class = "answer">'.$answers[6].'</div>
-            <div class = "question_title"> Personal Comment?</div>
-            <div class = "answer">'.$answers[7].'</div>
-=======
             <div class = "long_answer">'.esc_html($answers[2]).'</div>          
             <div class = "short_question"> Glide</div>
             <div class = "long_answer">'.esc_html($answers[3]).'</div>
@@ -433,7 +247,6 @@ function format_questions_answers_post_content($questions, $answers, $form_id){
             <div class = "answer">'.esc_html($answers[8]).'</div>
             <div class = "question_title"> Personal Comment?</div>
             <div class = "answer">'.esc_html($answers[9]).'</div>
->>>>>>> 4513b694fbc171397196b17e3319eb4ae67bc8c1
             </div>';
         return $html;
     }
@@ -449,7 +262,7 @@ function profile_info_sub( $record, $ajax_handler ){
     $fields = [];
     if($form_name == 'Profile Builder') {
         $userID = get_current_userID($file);
-        fwrite($file,$userID);
+        //fwrite($file,$userID);
         $fields['userID'] = $userID;
         $raw_fields = $record->get('fields');
         $fields['heightFeet'] = $raw_fields["height_feet"]['value'];
@@ -474,7 +287,7 @@ function fluent_summit_review_from_sub($entryId, $formData, $form) {
     global $wpdb;
     $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt'; 
     $file = fopen($file_path, "w") or die('fopen failed');
-    fwrite($file,"fluent_summit_review_from_sub\n\n");
+    //fwrite($file,"fluent_summit_review_from_sub\n\n");
     $existing_form_names = get_all_form_names($file);
     //$form_name_str = print_r($existing_form_names, true);
     //fwrite($file, "registered form names:\n".$form_name_str."\n");
@@ -485,21 +298,21 @@ function fluent_summit_review_from_sub($entryId, $formData, $form) {
     //$form_p = print_r($form, true);
     //$form_fields = $form->get( "form_fields" );
     $formData_p = print_r($formData, true);
-    fwrite($file, "formData 1: \n".$formData_p."\n\n");
+    //fwrite($file, "formData 1: \n".$formData_p."\n\n");
 
     $qs_and_as = fluent_get_fields_array($formData, $file);
     //$qs_and_as_p = print_r($qs_and_as, true);
     //fwrite($file, "questions and answers: \n".$qs_and_as_p."\n\n");
     
     if(in_array($current_form_name, $existing_form_names)){
-        fwrite($file, "Starting the Process \n\n");
+        //fwrite($file, "Starting the Process \n\n");
         //-----------------write to tables-----------------------------
-        summit_form_submission_write_to_tables($current_form_id, $qs_and_as, $file);
+        $review_id = summit_form_submission_write_to_tables($current_form_id, $qs_and_as, $file);
         //---------------create custom post-----------------------------------
-        $header = summit_form_submission_custom_post_content($current_form_id, $qs_and_as, $file);
-        $header_info_read = print_r($header, true);
-        fwrite($file, "HEADER: \n".$header_info_read."\n\n");
-        insert_into_ski_review($header, $qs, $as, $file);
+        $header = summit_form_submission_custom_post_content($review_id, $current_form_id, $qs_and_as, $file);
+        //$header_info_read = print_r($header, true);
+        //fwrite($file, "HEADER: \n".$header_info_read."\n\n");
+        insert_into_ski_review($header, $qs, $as, $file, $current_form_name);
     }
     fclose($file);
 }
@@ -525,10 +338,10 @@ function elementor_summit_review_from_sub( $record, $ajax_handler ) {
     $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt'; 
     $file = fopen($file_path, "w") or die('fopen failed');
     $existing_form_names = get_all_form_names($file);
-    fwrite($file,"form names: ".$existing_form_names."\n");
+    //fwrite($file,"form names: ".$existing_form_names."\n");
 
     $current_form_name = $record->get_form_settings( 'form_name' ); 
-    fwrite($file,"current form name: ".$current_form_name."\n");
+    //fwrite($file,"current form name: ".$current_form_name."\n");
 
     $current_form_id = $record->get_form_settings('form_id');
     //fwrite($file,"current form id: ".$current_form_id."\n");
@@ -543,13 +356,13 @@ function elementor_summit_review_from_sub( $record, $ajax_handler ) {
 
     if(in_array($current_form_name, $existing_form_names)){
     	//-----------------write to tables----------------------------
-        summit_form_submission_write_to_tables($current_form_id, $qs_and_as, $file);
+        $review_id = summit_form_submission_write_to_tables($current_form_id, $qs_and_as, $file);
 
         //---------------create custom post-----------------------------------
-        $header = summit_form_submission_custom_post_content($current_form_id, $qs_and_as, $file);
+        $header = summit_form_submission_custom_post_content($review_id, $current_form_id, $qs_and_as, $file);
         //$header_info_read = print_r($header, true);
         //fwrite($file, "HEADER: \n".$header_info_read."\n\n");
-    	insert_into_ski_review($header, $qs, $as, $file);
+    	insert_into_ski_review($header, $qs, $as, $file, $current_form_name);
 	}
     fclose($file);
 }
@@ -566,8 +379,8 @@ function elementor_get_fields_array($raw_fields, $file){
 
 //------------------------------table writing functions-----------------------------------
 function summit_form_submission_write_to_tables($current_form_id, $record, $file){
-    $start = "\n\n start summit_form_submission_write_to_tabless \n";
-    fwrite($file, $start);
+    //$start = "\n\n start summit_form_submission_write_to_tabless \n";
+    //fwrite($file, $start);
     $answer_ids = summit_insert_into_answer_table($record, $file);
     //fwrite($file, "write to answer table ids:\n".$answer_ids."\n\n") or die('fwrite 1 failed');
     //$res1 = implode(", ", $answer_ids)."\n";
@@ -579,8 +392,9 @@ function summit_form_submission_write_to_tables($current_form_id, $record, $file
     //fwrite($file, "last inserted review id: ".strval($id)."\n") or die('fwrite 2 failed');
     //$ajax_handler->add_response_data( true, $output );
     summit_insert_into_review_answer_table($id, $answer_ids, $file);
-    fwrite($file, "\n\nsummit_insert_into_review_answer_table function exited\n\n");
+    //fwrite($file, "\n\nsummit_insert_into_review_answer_table function exited\n\n");
     //$ajax_handler->add_response_data( true, $output );
+    return $id;
 }
 
 function get_all_form_names($file){
@@ -603,8 +417,8 @@ function get_all_form_names($file){
 
 function summit_insert_into_answer_table($record,$file){
     global $wpdb;
-    $start = "\n\n SUMMIT INSERT INTO ANSWER TABLE \n";
-    fwrite($file, $start);
+    //$start = "\n\n SUMMIT INSERT INTO ANSWER TABLE \n";
+    //fwrite($file, $start);
     $answer_table = $wpdb->prefix . "bcr_answers";
     $answer_ids = []; //used for when inserting into reviews answers
     //$question_ids = [];//manually entered into elementor form, until we can make a form dynamically 
@@ -631,8 +445,8 @@ function summit_insert_into_review_table($RF_id, $file){
        //insert review 
         //echo "in review table functions!<br>";
         global $wpdb;
-        $start = "\n\nSUMMIT INSERT INTO REVIEW TABLE \n";
-        fwrite($file, $start);
+        //$start = "\n\nSUMMIT INSERT INTO REVIEW TABLE \n";
+        //fwrite($file, $start);
         $output2 = [];
         $review_table = $wpdb->prefix . "bcr_reviews";
         $fields_review = [];
@@ -660,7 +474,7 @@ function summit_insert_into_review_table($RF_id, $file){
         $last_review_id = $wpdb->insert_id; //STILL NOT SURE IF THIS IS THREAD SAFE
         return $last_review_id;
 }
-
+/*
 function get_knowthyself_id($userID){
     global $wpdb;
     $KTS_table = $wpdb->prefix . "bcr_know_thyself";
@@ -668,12 +482,12 @@ function get_knowthyself_id($userID){
     $res = $wpdb->get_results($q);
     return $res->knowThyselfID;
 }
-
+*/
 function summit_insert_into_review_answer_table($review_id, $answer_ids,$file){
     //insert answer ids int review answer table
         global $wpdb;
-        $start = "\n\nSUMMIT INSERT INTO REVIEW ANSWER TABLE \n";
-        fwrite($file, $start);
+        //$start = "\n\nSUMMIT INSERT INTO REVIEW ANSWER TABLE \n";
+        //fwrite($file, $start);
         $review_answer_table = $wpdb->prefix . "bcr_reviews_answers";
         $fields_review_answers = [];
         $output=[];
@@ -689,24 +503,35 @@ function summit_insert_into_review_answer_table($review_id, $answer_ids,$file){
 
 // --------------getters for creating custom post--------------------------
 
-function summit_form_submission_custom_post_content($current_form_id,$record,$file){
-    $start = "\n\n summit_form_submission_custom_post_content \n";
-    fwrite($file, $start);
-    $product_info = get_product_info($current_form_id,$file);
-    $p_info_read = print_r($product_info, true);
-    fwrite($file, "product info: \n".$p_info_read."\n\n");
+function summit_form_submission_custom_post_content($current_review_id, $current_form_id,$record,$file){
+    //$start = "\n\n summit_form_submission_custom_post_content \n";
+    //fwrite($file, $start);
     
-    $category_info = get_category_info($product_info['categoryID'], $file);
-    $c_info_read = print_r($category_info, true);
-    fwrite($file, "categroy info: \n".$c_info_read."\n\n");
+    $product_info = [];
+    $product_info['productName'] = $record[2];//get_product_info($current_form_id,$file);
+    //$p_info_read = print_r($product_info, true);
+    //fwrite($file, "product info: \n".$p_info_read."\n\n");
+    //$p_info_read = print_r($product_info, true);
+    //fwrite($file, "product info: \n".$p_info_read."\n\n");
     
+    $brand_name = $record[1];
+    $brand_info = get_brand_info($brand_name, $file);
+    //$b_info_read = print_r($brand_info, true);
+    //fwrite($file, "brand info: \n".$b_info_read."\n\n");
+
+    $category_info = get_category_info($current_form_id, $file);
+    //$c_info_read = print_r($category_info, true);
+    //fwrite($file, "categroy info: \n".$c_info_read."\n\n");
+
+    /*
     $sport_info = get_sport_info($category_info['sportID']);
-    $s_info_read = print_r($sport_info, true);
-    fwrite($file, "sport info: \n".$s_info_read."\n\n");
-    
+    //$s_info_read = print_r($sport_info, true);
+    //fwrite($file, "sport info: \n".$s_info_read."\n\n");
+    */
+
     $q_and_a_content = get_answer_and_question_content($record,$file);
-    $qa_info_read = print_r($q_and_a_content, true);
-    fwrite($file, "QandA info: \n".$qa_info_read."\n\n");
+    //$qa_info_read = print_r($q_and_a_content, true);
+    //fwrite($file, "QandA info: \n".$qa_info_read."\n\n");
     
     $user_info = get_user_information($file);
     //$u_info_read = print_r($user_info, true);
@@ -716,10 +541,11 @@ function summit_form_submission_custom_post_content($current_form_id,$record,$fi
    $as = $q_and_a_content['answer_content'];
 
     $header = array(
-        'reviewID' => $current_form_id,
+        'reviewID' => $current_review_id, 
+        'formID' => $current_form_id,
         'productName' => $product_info['productName'],
-        'categoryName' => $category_info['categoryName'],
-        'sportName' => $sport_info['sportName'],
+        'brandName' => $brand_name,
+        'categoryName' => $category_info->categoryName,
         'questionContent' => $q_and_a_content['question_content'],
         'answerContent' => $q_and_a_content['answer_content'],
         'userInfo' => $user_info
@@ -736,28 +562,19 @@ function get_answer_and_question_content($record,$file){
     $return_array = [];
     //$answer_ids = []; //used for when inserting into reviews answers
     $answer_content = array_values($record);
-    $question_ids = array_keys($record);//manually entered into elementor form, until we can make a form dynamically 
-    
-    //$raw_fields = $record->get( 'fields' );
-    //$output = [];
-    //sufficient to split array into array keys == question_ids and values  == answer_content
-    /*foreach ( $record as $id => $field) {
-        if($id != "step"){
-            array_push($answer_content, $field);
-            array_push($question_ids, $id);
-        }
-    }*/
+    $question_ids = array_keys($record);//manually entered into 
+
     //fwrite($file, implode(", ", $question_ids)." \n");
     $question_content = [];
     $question_table = $wpdb->prefix . "bcr_questions";
     $desired_column = "questionContent";
     $where_column = "questionID";
     foreach($question_ids as $id){
-    	$q = "SELECT questionContent FROM $question_table WHERE questionID = $id;";
+    	$q = "SELECT questionDisplayContent FROM $question_table WHERE questionID = $id;";
     	$q_content = $wpdb->get_row($q);
     	//$var = print_r($q_content, true);
     	//fwrite($file,"get redults: \n".$var."\n");
-    	$content = $q_content->questionContent;
+    	$content = $q_content->questionDisplayContent;
     	//fwrite($file,"contne from get result: \n".$content."\n");
     	array_push($question_content, $content);
     }
@@ -769,51 +586,82 @@ function get_answer_and_question_content($record,$file){
     return $return_array;
 }
 
+/*
 function get_product_info($form_id,$file){//may just want to return res2 !!!!!!
-	global $wpdb;
-	$start = "\n\n GET PRODUCT INFORMATION \n";
+    global $wpdb;
+    $start = "\n\n GET PRODUCT INFORMATION \n";
     fwrite($file, $start);
     fwrite($file, "\n\nCurrent Form ID: ".$form_id."\n\n");
     //fwrite($file, "form id: ".$form_id."\n");
-	$form_table = $wpdb->prefix . "bcr_review_forms";
-	$q1 = $wpdb->prepare("SELECT * FROM $form_table WHERE reviewFormID = %s;", $form_id);
-	$res1 = $wpdb->get_row($q1);
-	$var = print_r($res1, true);
+    $form_table = $wpdb->prefix . "bcr_review_forms";
+    $q1 = "SELECT * FROM $form_table WHERE reviewFormID = $form_id;";
+    $res1 = $wpdb->get_row($q1);
+    $var = print_r($res1, true);
     fwrite($file,"get results: \n".$var."\n");
-	$product_id = $res1->productID;
-	fwrite($file, "product id: ".$product_id."\n");
-
-	$product_table = $wpdb->prefix . "bcr_products";
-	$q2 = $wpdb->prepare("SELECT * FROM $product_table WHERE productID = %s;", $product_id);
-	$res2 = $wpdb->get_row($q2);
-	$return_array = [];
-	$return_array['productID'] = $res2->productID;
-	$return_array['productName'] = $res2->productName;
-	$return_array['categoryID'] = $res2->categoryID;
+    $product_id = $res1->productID;
+    fwrite($file, "product id: ".$product_id."\n");
+    $product_table = $wpdb->prefix . "bcr_products";
+    $q2 = "SELECT * FROM $product_table WHERE productID = $product_id;";
+    $res2 = $wpdb->get_row($q2);
+    $return_array = [];
+    $return_array['productID'] = $res2->productID;
+    $return_array['productName'] = $res2->productName;
+    $return_array['categoryID'] = $res2->categoryID;
     //add brand id or band name 
-	return $return_array;
+    return $return_array;
 }
+function get_product_info($product_name, $file){
+    $product_table = $wpdb->prefix . "bcr_products";
+    $q = "SELECT * FROM $product_table WHERE productName = $product_name;";
+    $res = $wpdb->get_row($q);
+    //$var = print_r($res, true);
+    //fwrite($file,"get results: \n".$var."\n");
+    return $res;
+}
+*/
 
 //another function that gets brand info and will change the custom post
-
-function get_category_info($category_id, $file){//may just want to return res !!!!!!
-	global $wpdb;
-	$start = "\n\n GET CATEGORY INFORMATION \n";
-    fwrite($file, $start);
-    //fwrite($file, "category id: ".$category_id."\n");
-	$category_table = $wpdb->prefix . "bcr_categories";
-	$q = $wpdb->prepare("SELECT * FROM $category_table WHERE categoryID = %s;", $category_id);
-	$res = $wpdb->get_row($q);
-	//$var = print_r($res, true);
-    //fwrite($file,"get results: \n".$var."\n");
-	$return_array = [];
-	$return_array['categoryID'] = $category_id;
-	$return_array['categoryName'] = $res->categoryName;
-	$return_array['parentID'] = $res->parentID;
-	$return_array['sportID'] = $res->sportID;
-	return $return_array;
+function get_brand_info($brand_name, $file){
+    global $wpdb;
+    //fwrite($file, "brand name: ". $brand_name . "\n");
+    $brand_table = $wpdb->prefix . "bcr_brands";
+    $q = "SELECT * FROM $brand_table WHERE brandName = $brand_name;";
+    $res = $wpdb->get_row($q);
+    //$var = print_r($res, true);
+    //fwrite($file,"get results: \n".gettype($var)."\n");
+    return $res;
 }
 
+function get_category_info($form_id, $file){//may just want to return res !!!!!!
+    global $wpdb;
+    //$start = "\n\n GET CATEGORY INFORMATION \n";
+    //fwrite($file, $start);
+    //fwrite($file, "category id: ".$category_id."\n");
+
+    $form_table = $wpdb->prefix . "bcr_review_forms";
+    $q1 = "SELECT * FROM $form_table WHERE reviewFormID = $form_id;";
+    $res1 = $wpdb->get_row($q1);
+    //$var = print_r($res1, true);
+    //fwrite($file,"get results: \n".$var."\n");
+    $category_id = $res1->categoryID;
+
+    $category_table = $wpdb->prefix . "bcr_categories";
+    $q = "SELECT * FROM $category_table WHERE categoryID = $category_id;";
+    $res = $wpdb->get_row($q);
+    $var = print_r($res, true);
+    //fwrite($file,"get results: \n".$var."\n");
+    return $res;
+    /*
+    $return_array = [];
+    $return_array['categoryID'] = $category_id;
+    $return_array['categoryName'] = $res->categoryName;
+    $return_array['parentID'] = $res->parentID;
+    $return_array['sportID'] = $res->sportID;
+    return $return_array;
+    */
+}
+
+/*
 //this may be removed from the structure 
 function get_sport_info($sport_id){ //may just want to return res !!!!!!
 	global $wpdb;
@@ -825,6 +673,7 @@ function get_sport_info($sport_id){ //may just want to return res !!!!!!
 	$return_array['sportName'] = $res->sportName;
 	return $return_array;
 }
+*/
 
 function get_user_information($file){
     global $wpdb;
