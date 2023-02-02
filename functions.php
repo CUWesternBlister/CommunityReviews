@@ -217,7 +217,7 @@ function get_record_from_form_submissions($atts) {
             },
             $nameresults
         );
-        return "Skiing Style: ".implode( ', ', $skiingStyle_subs)."<br><br>Confidence in Icy Groomers: ".implode(', ', $confidenceIcyGroomer_subs)."<br><br>Confidence in Soft Groomers: ".implode(', ', $confidenceSoftGroomer_subs);
+        return "Skiing Style: ".esc_html(implode( ', ', $skiingStyle_subs))."<br><br>Confidence in Icy Groomers: ".esc_html(implode(', ', $confidenceIcyGroomer_subs))."<br><br>Confidence in Soft Groomers: ".esc_html(implode(', ', $confidenceSoftGroomer_subs));
     }
     return '';
 }
@@ -250,9 +250,9 @@ function display_user_info($atts){
             },
             $userEntry
         );
-        return "User Height: ".implode( '  ', $heightF) ."' ".implode( '  ', $heightI) .'"'.
-            "<br><br>User Weight: ".implode('  ', $weight)." lbs".
-            "<br><br>User Experience: ".implode('  ', $ability);
+        return "User Height: ".esc_html(implode( '  ', $heightF)) ."' ".esc_html(implode( '  ', $heightI)) .'"'.
+            "<br><br>User Weight: ".esc_html(implode('  ', $weight))." lbs".
+            "<br><br>User Experience: ".esc_html(implode('  ', $ability));
     }
     return '';
 }
