@@ -103,6 +103,7 @@ function bcr_include() {
     require_once( plugin_dir_path( __FILE__ ) . 'functions.php');
     require_once( plugin_dir_path( __FILE__ ) . 'community_reviews_custom_post.php');
     require_once( plugin_dir_path( __FILE__ ) . 'form_to_custom_post.php');
+    require_once( plugin_dir_path( __FILE__ ) . 'show_users_reviews.php');
 }
 
 
