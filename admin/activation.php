@@ -1,4 +1,4 @@
-<?php
+5<?php
 /**
  * Run all activation functions
  * 
