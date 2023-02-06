@@ -17,18 +17,16 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
         
         $html = format_questions_answers_post_content($header["questionContent"], $header["answerContent"],$formName,$file);
         
-        $user_html.= "<div>User: ".esc_html($userName)."</div>";
-        $user_html.= "<div>Reviewers height: ".esc_html($userInfo->heightFeet)." feet, ".esc_html($userInfo->heightInches)." inches</div>";
-        $user_html .= "<div>Reviewers weight: ".esc_html($userInfo->weight)." lbs</div>";
-        $user_html .= "<div>Reviewers ski ability: ".esc_html($userInfo->skiAbility)."</div>";
-        $user_html .= "<br/>";
-
+        $user_html.='<div id= "userName" class = "userInfo">Username: '.esc_html($userName). '</div>
+                    <div id= "userHeight" class = "userInfo">Height: '.esc_html($userInfo->heightFeet).'feet, '.esc_html($userInfo->heightInches).' inches</div>
+                    <div id "userWeight" class = "userInfo">Weight: '.esc_html($userInfo->weight).' lbs</div>
+                    <div id= "userAbility" class = "userInfo">Ski Ability: '.esc_html($userInfo->skiAbility).'</div>';
         $html = $user_html . $html;
 
         //fwrite($file, "\n".$html."\n");
 //fetch user name to insert
         $ski_review = array(
-                            'post_title' =>wp_strip_all_tags( $header['brandName'] . ' ' . $header['productName'] . ' review by ' . $userName),
+                            'post_title' =>wp_strip_all_tags( $header['brandName'] . ' ' . $header['productName']),
                             'post_content' => $html,
                             'meta_input' => array(
                                                   'id'            => $header['reviewID'],
@@ -68,46 +66,46 @@ function format_questions_answers_post_content($questions, $answers, $form_name,
     }
     $html = "";
     //fwrite($file, $formName."\n")
-    if ($form_name == 'Ski Review Form'){//ski
+if ($form_name == 'Ski Review Form'){//ski
         
-        $html .= '<div class = "long_container">
-            <div class = "section_title">Product Review</div>
-            <div class = "question_title">Stablility?</div>
-            <div class = "answer">  '.esc_html($answers[6]).'</div>
-            <div class = "question_title">Maniveurability?</div>
-            <div class = "answer">'.esc_html($answers[5]).'</div>
-            <div class = "question_title">How forgiving?</div>
-            <div class = "answer">  '.esc_html($answers[7]).'</div>
-            <div class = "question_title"> Suspension</div>
-            <div class = "answer">'.esc_html($answers[8]).'</div>
-            <div class = "question_title"> Fun Factor</div>
-            <div class = "answer">'.esc_html($answers[9]).'</div>
-            <div class = "question_title"> Ski felt good on...</div>
-            <div class = "answer">'.esc_html($answers[10]).'</div>              
-            <div class = "question_title"> Correct Lenght?</div>
-            <div class = "answer">'.esc_html($answers[11]).'</div> 
-            <div class = "question_title"> How likely to buy?</div>
-            <div class = "answer">'.esc_html($answers[13]).'</div>          
+        $html .= '<div id= "skiReviewContainer" class = "long_container">
+            <div id= "skiReviewTitle" class = "section_title">Product Review</div>
+            <div id= "skiQuestion6" class = "question_title">Stablility?</div>
+            <div id= "skiAnswer6" class = "answer">  '.esc_html($answers[6]).'</div>
+            <div id= "skiQuestion5"class = "question_title">Maniveurability?</div>
+            <div id= "skiAnswer5" class = "answer">'.esc_html($answers[5]).'</div>
+            <div id= "skiQuestion7" class = "question_title">How forgiving?</div>
+            <div id= "skiAnswer7" class = "answer">'.esc_html($answers[7]).'</div>
+            <div id= "skiQuestion8" class = "question_title"> Suspension</div>
+            <div id= "skiAnswer8" class = "answer">'.esc_html($answers[8]).'</div>
+            <div id= "skiQuestion9" class = "question_title"> Fun Factor</div>
+            <div id= "skiAnswer9" class = "answer">'.esc_html($answers[9]).'</div>
+            <div id= "skiQuestion10" class = "question_title"> Ski felt good on...</div>
+            <div id= "skiAnswer10" class = "answer">'.esc_html($answers[10]).'</div>              
+            <div id= "skiQuestion11" class = "question_title"> Correct Lenght?</div>
+            <div id= "skiAnswer11" class = "answer">'.esc_html($answers[11]).'</div> 
+            <div id= "skiQuestion13" class = "question_title"> How likely to buy?</div>
+            <div id= "skiAnswer13" class = "answer">'.esc_html($answers[13]).'</div>          
             </div>';
         
-        $html .= '<div class = "short_container">
-            <div class = "section_title">Testing Context</div>
-            <div class = "question_title">Terrain Tested</div>
-            <div class = "answer">'.esc_html($answers[3]).'</div>
-            <div class = "question_title">Where</div>
-            <div class = "answer">'.esc_html($answers[2]).'</div>
-            <div class = "question_title">Conditions Tested</div>
-            <div class = "answer">'.esc_html($answers[4]).'</div>
+        $html .= '<div id= "skiConditionsContainer" class = "short_container">
+            <div id= "skiConditionsTitle" class = "section_title">Testing Context</div>
+            <div id= "skiQuestion3" class = "question_title">Terrain Tested</div>
+            <div id= "skiAnswer3" class = "answer">'.esc_html($answers[3]).'</div>
+            <div id= "skiQuestion2" class = "question_title">Where</div>
+            <div id= "skiAnswer2" class = "answer">'.esc_html($answers[2]).'</div>
+            <div id= "skiQuestion4" class = "question_title">Conditions Tested</div>
+            <div id= "skiAnswer4" class = "answer">'.esc_html($answers[4]).'</div>
             </div>'; 
         
-        $html .= '<div class = "whole_container">
-            <div class = "section_title2">Tester Testimony</div>
-            <div class = "question_title"> What type of skier will ike this product?</div>
-            <div class = "answer">'.esc_html($answers[12]).'</div>
-            <div class = "question_title"> Better Products?</div>
-            <div class = "answer">'.esc_html($answers[14]).'</div>          
-            <div class = "question_title"> Personal Comment</div>
-            <div class = "answer">'.esc_html($answers[15]).'</div>
+        $html .= '<div id= "skiTestimonyContainer" class = "whole_container">
+            <div id= "skiTestimonyTitle" class = "section_title2">Tester Testimony</div>
+            <div id= "skiQuestion12" class = "question_title"> What type of skier will ike this product?</div>
+            <div id= "skiAnswer12" class = "answer">'.esc_html($answers[12]).'</div>
+            <div id= "skiQuestion14" class = "question_title"> Better Products?</div>
+            <div id= "skiAnswer14" class = "answer">'.esc_html($answers[14]).'</div>          
+            <div id= "skiQuestion15" class = "question_title"> Personal Comment</div>
+            <div id= "skiAnswer15" class = "answer">'.esc_html($answers[15]).'</div>
             </div>'; 
             
         return $html;
@@ -115,113 +113,112 @@ function format_questions_answers_post_content($questions, $answers, $form_name,
     
     if ($form_name == 'Summit_Ski_Boot_Review_Form'){//boot
 
-        $html .= '<div class = "long_container">
-            <div class = "section_title">Product Review</div>
-            <div class = "question_title">Boot Fit</div>
-            <div class = "answer">  '.esc_html($answers[6]).'</div>
-            <div class = "question_title">Suspension?</div>
-            <div class = "answer">'.esc_html($answers[8]).'</div>
-            <div class = "question_title">Flex Pattern</div>
-            <div class = "answer">  '.esc_html($answers[7]).'</div>
+        $html .= '<div id= "bootReviewContainer" class = "long_container">
+            <div id= "bootReviewTitle" class = "section_title">Product Review</div>
+            <div id= "bootQuestion6" class = "question_title">Boot Fit</div>
+            <div id= "bootAnswer6" class = "answer">  '.esc_html($answers[6]).'</div>
+            <div id= "bootQuestion8" class = "question_title">Suspension?</div>
+            <div id= "bootAnswer8" class = "answer">'.esc_html($answers[8]).'</div>
+            <div id= "bootQuestion7" class = "question_title">Flex Pattern</div>
+            <div id= "bootAnswer7" class = "answer">  '.esc_html($answers[7]).'</div>
 
-            <div class = "question_title"> Boot Walking?</div>
-            <div class = "answer">'.esc_html($answers[9]).'</div>
-            <div class = "question_title"> How likely to buy?</div>
-            <div class = "answer">'.esc_html($answers[11]).'</div>
+            <div id= "bootQuestion9" class = "question_title"> Boot Walking?</div>
+            <div id= "bootAnswer9" class = "answer">'.esc_html($answers[9]).'</div>
+            <div id= "bootQuestion11" class = "question_title"> How likely to buy?</div>
+            <div id= "bootAnswer11" class = "answer">'.esc_html($answers[11]).'</div>
             </div>';
 
-        $html .= '<div class = "short_container">
-            <div class = "section_title">Testing Context</div>
-            <div class = "question_title">Terrain Tested</div>
-            <div class = "answer">'.esc_html($answers[4]).'</div>
-            <div class = "question_title">Where</div>
-            <div class = "answer">'.esc_html($answers[3]).'</div>
-            <div class = "question_title">Conditions Tested</div>
-            <div class = "answer">'.esc_html($answers[5]).'</div>
+        $html .= '<div id= "bootConditionsContainer"class = "short_container">
+            <div id= "bootCondtionsTitle" class = "section_title">Testing Context</div>
+            <div id= "bootQuestion4" class = "question_title">Terrain Tested</div>
+            <div id= "bootAnswer4" class = "answer">'.esc_html($answers[4]).'</div>
+            <div id= "bootQuestion3" class = "question_title">Where</div>
+            <div id= "bootAnswer3" class = "answer">'.esc_html($answers[3]).'</div>
+            <div id= "bootQuestion5" class = "question_title">Conditions Tested</div>
+            <div id= "bootAnswer5" class = "answer">'.esc_html($answers[5]).'</div>
             </div>'; 
 
-        $html .= '<div class = "whole_container">
-            <div class = "section_title2">Tester Testimony</div>
+        $html .= '<div id= "bootTestimonyContainer" class = "whole_container">
+            <div id= "bootTestimonyTitle"class = "section_title2">Tester Testimony</div>
 
-            <div class = "question_title"> What type of skier will ike this product?</div>
-            <div class = "answer">'.esc_html($answers[10]).'</div>
-            <div class = "question_title"> Better Products?</div>
-            <div class = "answer">'.esc_html($answers[12]).'</div>          
-            <div class = "question_title"> Personal Comment</div>
-            <div class = "answer">'.esc_html($answers[13]).'</div>
+            <div id= "bootQuestion10" class = "question_title"> What type of skier will ike this product?</div>
+            <div id= "bootAnswer10" class = "answer">'.esc_html($answers[10]).'</div>
+            <div id= "bootQuestion12" class = "question_title"> Better Products?</div>
+            <div id= "bootAnswer12" class = "answer">'.esc_html($answers[12]).'</div>          
+            <div id= "bootQuestion13" class = "question_title"> Personal Comment</div>
+            <div id= "bootAnswer13" class = "answer">'.esc_html($answers[13]).'</div>
             </div>'; 
         return $html;
     }
 
     if ($form_name == 'Summit_Apparel_Form'){ //apparel
 
-        $html .= '<div class = "whole_container">
-            <div class = "section_title2">Product Review</div>
-            <div class = "short_question"> Where</div>
-            <div class = "long_answer">'.esc_html($answers[2]).'</div>          
-            <div class = "short_question"> Conditions Tested</div>
-            <div class = "long_answer">'.esc_html($answers[3]).'</div>
-            <div class = "short_question"> Fit</div>
-            <div class = "long_answer">'.esc_html($answers[4]).'</div> 
-            <div class = "short_question"> Comfort</div>
-            <div class = "long_answer">'.esc_html($answers[5]).'</div>      
-            <div class = "short_question"> Breathability</div>
-            <div class = "long_answer">'.esc_html($answers[7]).'</div>
-            <div class = "question_title"> Wind/Water Resistence</div>
-            <div class = "answer">'.esc_html($answers[6]).'</div>
-            <div class = "question_title"> Who will like this?</div>
-            <div class = "answer">'.esc_html($answers[8]).'</div> 
-            <div class = "question_title"> How likely to buy?</div>
-            <div class = "answer">'.esc_html($answers[9]).'</div> 
-            <div class = "question_title"> Similar Products?</div>
-            <div class = "answer">'.esc_html($answers[10]).'</div>
-            <div class = "question_title"> Personal Comment?</div>
-            <div class = "answer">'.esc_html($answers[11]).'</div>
+        $html .= '<div id= "apparelReviewContainer" class = "whole_container">
+            <div id= "apparelReviewTitle" class = "section_title2">Product Review</div>
+            <div id= "apparelQuestion2" class = "short_question"> Where</div>
+            <div id= "apparelAnswer2" class = "long_answer">'.esc_html($answers[2]).'</div>          
+            <div id= "apparelQuestion3" class = "short_question"> Conditions Tested</div>
+            <div id= "apparelAnswer3" class = "long_answer">'.esc_html($answers[3]).'</div>
+            <div id= "apparelQuestion4" class = "short_question"> Fit</div>
+            <div id= "apparelAnswer4" class = "long_answer">'.esc_html($answers[4]).'</div> 
+            <div id= "apparelQuestion5" class = "short_question"> Comfort</div>
+            <div id= "apparelAnswer5" class = "long_answer">'.esc_html($answers[5]).'</div>      
+            <div id= "apparelQuestion7" class = "short_question"> Breathability</div>
+            <div id= "apparelAnswer7" class = "long_answer">'.esc_html($answers[7]).'</div>
+            <div id= "apparelQuestion6" class = "question_title"> Wind/Water Resistence</div>
+            <div id= "apparelAnswer6" class = "answer">'.esc_html($answers[6]).'</div>
+            <div id= "apparelQuestion8" class = "question_title"> Who will like this?</div>
+            <div id= "apparelAnswer8" class = "answer">'.esc_html($answers[8]).'</div> 
+            <div id= "apparelQuestion9" class = "question_title"> How likely to buy?</div>
+            <div id= "apparelAnswer9" class = "answer">'.esc_html($answers[9]).'</div> 
+            <div id= "apparelQuestion10" class = "question_title"> Similar Products?</div>
+            <div id= "apparelAnswer10" class = "answer">'.esc_html($answers[10]).'</div>
+            <div id= "apparelQuestion11" class = "question_title"> Personal Comment?</div>
+            <div id= "apparelAnswer11" class = "answer">'.esc_html($answers[11]).'</div>
             </div>';
         return $html;
     }
 
     if ($form_name == 'Snowboard Review'){//snowboard
 
-        $html .= '<div class = "long_container">
-            <div class = "section_title">Product Review</div>
-            <div class = "question_title">Stablility?</div>
-            <div class = "answer">  '.esc_html($answers[5]).'</div>
-            <div class = "question_title">Maniveurability?</div>
-            <div class = "answer">'.esc_html($answers[6]).'</div>
-            <div class = "question_title">How forgiving?</div>
-            <div class = "answer">  '.esc_html($answers[7]).'</div>
-            <div class = "question_title"> Suspension</div>
-            <div class = "answer">'.esc_html($answers[8]).'</div>
-            <div class = "question_title"> Fun Factor</div>
-            <div class = "answer">'.esc_html($answers[9]).'</div>
-            <div class = "question_title"> Ideal Terrain</div>
-            <div class = "answer">'.esc_html($answers[10]).'</div>              
-            <div class = "question_title"> Correct Lenght?</div>
-
-            <div class = "answer">'.esc_html($answers[11]).'</div> 
-            <div class = "question_title"> How likely to buy?</div>
-            <div class = "answer">'.esc_html($answers[13]).'</div>          
+        $html .= '<div id= "snowboardReviewContainer" class = "long_container">
+            <div id= "snowboardReviewTitle" class = "section_title">Product Review</div>
+            <div id= "snowboardQuestion5" class = "question_title">Stablility?</div>
+            <div id= "snowboardAnswer5" class = "answer">  '.esc_html($answers[5]).'</div>
+            <div id= "snowboardQuestion6" class = "question_title">Maniveurability?</div>
+            <div id= "snowboardAnswer6" class = "answer">'.esc_html($answers[6]).'</div>
+            <div id= "snowboardQuestion7" class = "question_title">How forgiving?</div>
+            <div id= "snowboardAnswer7" class = "answer">  '.esc_html($answers[7]).'</div>
+            <div id= "snowboardQuestion8" class = "question_title"> Suspension</div>
+            <div id= "snowboardAnswer8" class = "answer">'.esc_html($answers[8]).'</div>
+            <div id= "snowboardQuestion9" class = "question_title"> Fun Factor</div>
+            <div id= "snowboardAnswer9" class = "answer">'.esc_html($answers[9]).'</div>
+            <div id= "snowboardQuestion10" class = "question_title"> Ideal Terrain</div>
+            <div id= "snowboardAnswer10" class = "answer">'.esc_html($answers[10]).'</div>              
+            <div id= "snowboardQuestion11" class = "question_title"> Correct Lenght?</div>
+            <div id= "snowboardAnswer11" class = "answer">'.esc_html($answers[11]).'</div> 
+            <div id= "snowboardQuestion13" class = "question_title"> How likely to buy?</div>
+            <div id= "snowboardAnswer13" class = "answer">'.esc_html($answers[13]).'</div>          
             </div>';
 
-        $html .= '<div class = "short_container">
-            <div class = "section_title">Testing Context</div>
-            <div class = "question_title">Terrain Tested</div>
-            <div class = "answer">'.esc_html($answers[3]).'</div>
-            <div class = "question_title">Where</div>
-            <div class = "answer">'.esc_html($answers[2]).'</div>
-            <div class = "question_title">Conditions Tested</div>
-            <div class = "answer">'.esc_html($answers[4]).'</div>
+        $html .= '<div id= "snowboardCondtionsContainer" class = "short_container">
+            <div id= "snowboardConditionsTitle" class = "section_title">Testing Context</div>
+            <div id= "snowboardQuestion3" class = "question_title">Terrain Tested</div>
+            <div id= "snowboardAnswer3" class = "answer">'.esc_html($answers[3]).'</div>
+            <div id= "snowboardQuestion2" class = "question_title">Where</div>
+            <div id= "snowboardAnswer2" class = "answer">'.esc_html($answers[2]).'</div>
+            <div id= "snowboardQuestion4" class = "question_title">Conditions Tested</div>
+            <div id= "snowboardAnswer4" class = "answer">'.esc_html($answers[4]).'</div>
             </div>'; 
 
-        $html .= '<div class = "whole_container">
-            <div class = "section_title2">Tester Testimony</div>
-            <div class = "question_title"> What type of Snowboarder will ike this product?</div>
-            <div class = "answer">'.esc_html($answers[12]).'</div>
-            <div class = "question_title"> Better Products?</div>
-            <div class = "answer">'.esc_html($answers[14]).'</div>          
-            <div class = "question_title"> Personal Comment</div>
-            <div class = "answer">'.esc_html($answers[15]).'</div>
+        $html .= '<div id= "snowboardTestimonyContainer" class = "whole_container">
+            <div id= "snowboardTestimonyTitle" class = "section_title2">Tester Testimony</div>
+            <div id= "snowboardQuestion12" class = "question_title"> What type of Snowboarder will ike this product?</div>
+            <div id= "snowboardAnswer12" class = "answer">'.esc_html($answers[12]).'</div>
+            <div id= "snowboardQuestion14" class = "question_title"> Better Products?</div>
+            <div id= "snowboardAnswer14" class = "answer">'.esc_html($answers[14]).'</div>          
+            <div id= "snowboardQuestion15" class = "question_title"> Personal Comment</div>
+            <div id= "snowboardAnswer15" class = "answer">'.esc_html($answers[15]).'</div>
             </div>'; 
         return $html;
     }
@@ -229,23 +226,23 @@ function format_questions_answers_post_content($questions, $answers, $form_name,
 
     if ($form_name == 'Climbing Skin Review'){ //climbing skins
 
-        $html .= '<div class = "whole_container">
-            <div class = "section_title2">Product Review</div>
-            <div class = "short_question"> Where</div>
+        $html .= '<div id= "climbingSkinReviewContainer" class = "whole_container">
+            <div id= "climbingSkinReviewTitle" class = "section_title2">Product Review</div>
+            <div id= "climbingSkinQuestion2" class = "short_question"> Where</div>
             <div class = "long_answer">'.esc_html($answers[2]).'</div>          
-            <div class = "short_question"> Glide</div>
+            <div id= "climbingSkinQuestion3" class = "short_question"> Glide</div>
             <div class = "long_answer">'.esc_html($answers[3]).'</div>
-            <div class = "short_question"> Grip</div>
+            <div id= "climbingSkinQuestion4" class = "short_question"> Grip</div>
             <div class = "long_answer">'.esc_html($answers[4]).'</div> 
-            <div class = "short_question"> Packability</div>
+            <div id= "climbingSkinQuestion5" class = "short_question"> Packability</div>
             <div class = "long_answer">'.esc_html($answers[5]).'</div>      
-            <div class = "question_title"> Who will like this?</div>
+            <div id= "climbingSkinQuestion6" class = "question_title"> Who will like this?</div>
             <div class = "answer">'.esc_html($answers[6]).'</div> 
-            <div class = "question_title"> How likely to buy?</div>
+            <div id= "climbingSkinQuestion7" class = "question_title"> How likely to buy?</div>
             <div class = "answer">'.esc_html($answers[7]).'</div> 
-            <div class = "question_title"> Similar Products?</div>
+            <div id= "climbingSkinQuestion8" class = "question_title"> Similar Products?</div>
             <div class = "answer">'.esc_html($answers[8]).'</div>
-            <div class = "question_title"> Personal Comment?</div>
+            <div id= "climbingSkinQuestion9" class = "question_title"> Personal Comment?</div>
             <div class = "answer">'.esc_html($answers[9]).'</div>
             </div>';
         return $html;
