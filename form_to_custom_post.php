@@ -7,9 +7,10 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
         $u_info = print_r($userInfo, true);
         //fwrite($file, "post user info: \n".$u_info."\n\n");
         
-
-        $userName = get_userName_by_userID($userInfo->userID,$file);
-        //fwrite($file, "user name: ".$userName." \n");
+        $current_userData = get_userdata($userInfo->userID);
+        $userName = $current_userData->display_name;
+        //$userName = get_userName_by_userID($userInfo->userID,$file);
+        fwrite($file, "user name: ".$userName." \n");
         
         if ( NULL === $header || 0 === $header || '0' === $header || empty( $header ) ) {
             return;
@@ -52,6 +53,7 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
         //fwrite($file,"\n\nHERE\n\n");      
 }
 
+/*
 function get_userName_by_userID($userID, $file){
     global $wpdb;
     //fwrite($file, "userID to get userName: ".$userID."\n");
@@ -60,6 +62,7 @@ function get_userName_by_userID($userID, $file){
     $res = $wpdb->get_row($q);
     return $res->display_name;
 }
+*/
 
 function format_questions_answers_post_content($questions, $answers, $form_name, $file){
     //php assertion that question and answers atre same length
@@ -377,7 +380,31 @@ function elementor_get_fields_array($raw_fields, $file){
     return $return_array;
 }
 
-//------------------------------table writing functions-----------------------------------
+function get_all_form_names($file){
+    global $wpdb;
+    //$start = "\n\n SUMMIT get all form names \n";
+    //fwrite($file, $start);
+    $review_forms_table = $wpdb->prefix . "bcr_review_forms";
+    $q = $wpdb->prepare("SELECT reviewFormName FROM $review_forms_table;");
+    //$q = "SELECT reviewFormName FROM `wp_bcr_review_forms`";
+    //$wpdb->prepare("SELECT %s FROM %s;", array("reviewFormName", $review_table));
+    $res = $wpdb->get_results($q);
+    $return_array = [];//json_decode(json_encode($res),true);
+    foreach ($res as $value) {
+        $return_array[] = $value->reviewFormName;
+    }
+    //$res_p = print_r($return_array, true);
+    //fwrite($file, "all form names:\n".$res_p."\n");
+    return $return_array;
+}
+
+
+/*
+This could be its own sperate file
+------------------------------table writing functions-----------------------------------
+*/
+
+
 function summit_form_submission_write_to_tables($current_form_id, $record, $file){
     //$start = "\n\n start summit_form_submission_write_to_tabless \n";
     //fwrite($file, $start);
@@ -395,24 +422,6 @@ function summit_form_submission_write_to_tables($current_form_id, $record, $file
     //fwrite($file, "\n\nsummit_insert_into_review_answer_table function exited\n\n");
     //$ajax_handler->add_response_data( true, $output );
     return $id;
-}
-
-function get_all_form_names($file){
-    global $wpdb;
-    //$start = "\n\n SUMMIT get all form names \n";
-    //fwrite($file, $start);
-    $review_forms_table = $wpdb->prefix . "bcr_review_forms";
-    $q = "SELECT reviewFormName FROM $review_forms_table;";
-    //$q = "SELECT reviewFormName FROM `wp_bcr_review_forms`";
-    //$wpdb->prepare("SELECT %s FROM %s;", array("reviewFormName", $review_table));
-    $res = $wpdb->get_results($q);
-    $return_array = [];//json_decode(json_encode($res),true);
-    foreach ($res as $value) {
-        $return_array[] = $value->reviewFormName;
-    }
-    //$res_p = print_r($return_array, true);
-    //fwrite($file, "all form names:\n".$res_p."\n");
-    return $return_array;
 }
 
 function summit_insert_into_answer_table($record,$file){
@@ -501,7 +510,10 @@ function summit_insert_into_review_answer_table($review_id, $answer_ids,$file){
         }
 }
 
+/*
+this could be its own seperate file
 // --------------getters for creating custom post--------------------------
+*/
 
 function summit_form_submission_custom_post_content($current_review_id, $current_form_id,$record,$file){
     //$start = "\n\n summit_form_submission_custom_post_content \n";
@@ -544,7 +556,7 @@ function summit_form_submission_custom_post_content($current_review_id, $current
         'reviewID' => $current_review_id, 
         'formID' => $current_form_id,
         'productName' => $product_info['productName'],
-        'brandName' => $brand_name,
+        'brandName' => $brand_info->brandName,
         'categoryName' => $category_info->categoryName,
         'questionContent' => $q_and_a_content['question_content'],
         'answerContent' => $q_and_a_content['answer_content'],
@@ -570,7 +582,7 @@ function get_answer_and_question_content($record,$file){
     $desired_column = "questionContent";
     $where_column = "questionID";
     foreach($question_ids as $id){
-    	$q = "SELECT questionDisplayContent FROM $question_table WHERE questionID = $id;";
+    	$q = $wpdb->prepare("SELECT questionDisplayContent FROM $question_table WHERE questionID = $id;");
     	$q_content = $wpdb->get_row($q);
     	//$var = print_r($q_content, true);
     	//fwrite($file,"get redults: \n".$var."\n");
@@ -612,7 +624,7 @@ function get_product_info($form_id,$file){//may just want to return res2 !!!!!!
 }
 function get_product_info($product_name, $file){
     $product_table = $wpdb->prefix . "bcr_products";
-    $q = "SELECT * FROM $product_table WHERE productName = $product_name;";
+    $q = $wpdb->prepare("SELECT * FROM $product_table WHERE productName = '".$product_name."';");
     $res = $wpdb->get_row($q);
     //$var = print_r($res, true);
     //fwrite($file,"get results: \n".$var."\n");
@@ -625,10 +637,12 @@ function get_brand_info($brand_name, $file){
     global $wpdb;
     //fwrite($file, "brand name: ". $brand_name . "\n");
     $brand_table = $wpdb->prefix . "bcr_brands";
-    $q = "SELECT * FROM $brand_table WHERE brandName = $brand_name;";
+    $q = $wpdb->prepare("SELECT * FROM $brand_table WHERE brandName = '".$brand_name."';");
+    //fwrite($file, "query: ".$q."\n");
     $res = $wpdb->get_row($q);
+    //fwrite($file,"get results type: \n".gettype($res)."\n");
     //$var = print_r($res, true);
-    //fwrite($file,"get results: \n".gettype($var)."\n");
+    //fwrite($file,"get results: \n".$var."\n");
     return $res;
 }
 
@@ -639,26 +653,18 @@ function get_category_info($form_id, $file){//may just want to return res !!!!!!
     //fwrite($file, "category id: ".$category_id."\n");
 
     $form_table = $wpdb->prefix . "bcr_review_forms";
-    $q1 = "SELECT * FROM $form_table WHERE reviewFormID = $form_id;";
+    $q1 = $wpdb->prepare("SELECT * FROM $form_table WHERE reviewFormID = $form_id;");
     $res1 = $wpdb->get_row($q1);
     //$var = print_r($res1, true);
     //fwrite($file,"get results: \n".$var."\n");
     $category_id = $res1->categoryID;
 
     $category_table = $wpdb->prefix . "bcr_categories";
-    $q = "SELECT * FROM $category_table WHERE categoryID = $category_id;";
+    $q = $wpdb->prepare("SELECT * FROM $category_table WHERE categoryID = $category_id;");
     $res = $wpdb->get_row($q);
-    $var = print_r($res, true);
+    //$var = print_r($res, true);
     //fwrite($file,"get results: \n".$var."\n");
     return $res;
-    /*
-    $return_array = [];
-    $return_array['categoryID'] = $category_id;
-    $return_array['categoryName'] = $res->categoryName;
-    $return_array['parentID'] = $res->parentID;
-    $return_array['sportID'] = $res->sportID;
-    return $return_array;
-    */
 }
 
 /*
@@ -684,7 +690,6 @@ function get_user_information($file){
     $user_table_name = $wpdb->prefix . "bcr_users";//i do not have this same able 
     $queryString = $wpdb->prepare("SELECT * FROM $user_table_name WHERE userID=%s", $userID);
     $userInformation = $wpdb->get_row($queryString);
-
     return $userInformation;
 }
 
