@@ -17,15 +17,16 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
         
         $html = format_questions_answers_post_content($header["questionContent"], $header["answerContent"],$formName,$file);
         
-        $user_html.='<div id= "userHeight" class = "userInfo">Height:'.esc_html($userInfo->heightFeet).'feet, '.esc_html($userInfo->heightInches).' inches</div>
-                    <div id "userWeight" class = "userInfo">Weight:'.esc_html($userInfo->weight).' lbs</div>
-                    <div id= "userAbility" class = "userInfo">Ski ability:'.esc_html($userInfo->skiAbility).'</div>';
+        $user_html.='<div id= "userName" class = "userInfo">Username: '.esc_html($userName). '</div>
+                    <div id= "userHeight" class = "userInfo">Height: '.esc_html($userInfo->heightFeet).'feet, '.esc_html($userInfo->heightInches).' inches</div>
+                    <div id "userWeight" class = "userInfo">Weight: '.esc_html($userInfo->weight).' lbs</div>
+                    <div id= "userAbility" class = "userInfo">Ski Ability: '.esc_html($userInfo->skiAbility).'</div>';
         $html = $user_html . $html;
 
         //fwrite($file, "\n".$html."\n");
 //fetch user name to insert
         $ski_review = array(
-                            'post_title' =>wp_strip_all_tags( $header['brandName'] . ' ' . $header['productName'] . ' review by ' . $userName),
+                            'post_title' =>wp_strip_all_tags( $header['brandName'] . ' ' . $header['productName']),
                             'post_content' => $html,
                             'meta_input' => array(
                                                   'id'            => $header['reviewID'],
