@@ -1,11 +1,5 @@
 <?php
-/**
- * Plugin Name: Community Review Custom Post
- * Author: Jacob Vogel
- * Description: Create Community Review Custom Post from SQL database
- * Version: 0.1.2
- * text-domain: community_reviews_custom_post
-*/
+
 
 function create_community_review() {
 

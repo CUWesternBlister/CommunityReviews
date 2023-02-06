@@ -16,6 +16,7 @@ function bcr_init_tables() {
     foreach($lines as $key => $line ){
         $sql_command.= $wpdb->prepare($line);
     }
+    $sql_command = $wpdb->prepare(str_replace("wp_", $wpdb->prefix, $sql_command));
     dbDelta($sql_command);
 }
 
