@@ -52,7 +52,6 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
         wp_insert_post( $ski_review );
         //fwrite($file,"\n\nHERE\n\n");      
 }
-
 /*
 function get_userName_by_userID($userID, $file){
     global $wpdb;
@@ -63,7 +62,6 @@ function get_userName_by_userID($userID, $file){
     return $res->display_name;
 }
 */
-
 function format_questions_answers_post_content($questions, $answers, $form_name, $file){
     //php assertion that question and answers atre same length
     if (count($questions) !== count($answers)) {
