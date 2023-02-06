@@ -1,3 +1,4 @@
+questionID,writingReviewQuestion,readingReviewQuestion
 1,Brand Tested,
 2,Product tested,
 3,Length Tested,
@@ -46,3 +47,5 @@
 58,How likely are you to either buy or recommend this product?,How likely are you to either buy or recommend this product?
 59,Are there similar products you've tried that you clearly prefer? If so why?,"Similar products you've ridden that you clearly prefer, and why?"
 60,Please elaborate on anything else you'd like to say about this product. Feel free to go into detail.,Open ended response: 
+61,How would you rate the fit of this backpack?,Fit
+62,Did you feel that the backpack had adequate pockets/storage? Why or why not?,Pockets/Storage
