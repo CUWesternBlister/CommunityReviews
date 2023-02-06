@@ -54,7 +54,7 @@ function bcr_setup_tables() {
     $sql = "CREATE TABLE $answers_table_name (
         answerID int(9) NOT NULL AUTO_INCREMENT,
         answerContent varchar(512) DEFAULT '' NOT NULL,
-        questionID int(9) UNSIGNED NOT NULL,
+        questionID int(9) NOT NULL,
         preDefinedAnswer int(1),
         PRIMARY KEY  (answerID),
         FOREIGN KEY  (questionID) REFERENCES $questions_table_name(questionID)
@@ -224,7 +224,7 @@ function bcr_setup_tables() {
 
     $sql = "CREATE TABLE $review_answers_table_name (
         reviewID int(9) UNSIGNED NOT NULL,
-        answerID int(9) NOT NULL,
+        answerID int(9) UNSIGNED NOT NULL,
         PRIMARY KEY  (reviewID, answerID),
         FOREIGN KEY  (reviewID) REFERENCES $reviews_table_name(reviewID),
         FOREIGN KEY  (answerID) REFERENCES $answers_table_name(answerID)
