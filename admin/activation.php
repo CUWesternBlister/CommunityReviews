@@ -5,7 +5,7 @@
  * @return void
  */
 function bcr_activate() {
-    bcr_setup_tables();
+    //bcr_setup_tables();
     require_once( plugin_dir_path( __FILE__ ) . 'uploadInitialData.php');
 }
 
@@ -35,7 +35,7 @@ function bcr_setup_tables() {
         ) $charset_collate;";
 
     dbDelta($sql);
-
+    
     //Create Question table
     $questions_table_name = $wpdb->prefix . "bcr_questions";
 
@@ -47,13 +47,13 @@ function bcr_setup_tables() {
         ) $charset_collate;";
 
     dbDelta($sql);
-
+    
     //Create Answer table
     $answers_table_name = $wpdb->prefix . "bcr_answers";
 
     $sql = "CREATE TABLE $answers_table_name (
         answerID int(9) NOT NULL AUTO_INCREMENT,
-        answerContent varchar(512) DEFAULT '' NOT NULL,
+        answerContent TEXT(4000) DEFAULT '' NOT NULL,
         questionID int(9) NOT NULL,
         preDefinedAnswer int(1),
         PRIMARY KEY  (answerID),
@@ -84,7 +84,7 @@ function bcr_setup_tables() {
         ) $charset_collate;";
 
     dbDelta($sql);*/
-
+    
     //Create Category table
     $categories_table_name = $wpdb->prefix . "bcr_categories";
 
@@ -122,7 +122,7 @@ function bcr_setup_tables() {
         ) $charset_collate;";
 
     dbDelta($sql);
-
+    
     //Create Know Thyself Form table
     /*$know_thyself_forms_table_name = $wpdb->prefix . "bcr_know_thyself_forms";
 
