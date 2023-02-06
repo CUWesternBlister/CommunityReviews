@@ -1,11 +1,5 @@
 <?php
-/**
- * Plugin Name: Community Review Custom Post
- * Author: Jacob Vogel
- * Description: Create Community Review Custom Post from SQL database
- * Version: 0.1.2
- * text-domain: community_reviews_custom_post
-*/
+
 
 function create_community_review() {
 
@@ -95,7 +89,7 @@ function display_community_review_meta_box() {
     if ('skireviews' == get_post_type(get_the_ID())){
 
         foreach($postmetas as $meta_key=>$meta_value) {
-            echo $meta_key . ' : ' . $meta_value[0] . '<br/>';
+            echo esc_html($meta_key) . ' : ' . esc_html($meta_value[0]) . '<br/>';
         }
 
     }

@@ -1,9 +1,4 @@
 <?php
-/**
- * Plugin Name: Blister Community Reviews
- * Description: A plugin to facilitate Blister community created reviews.
- * Author: Gunnar Marquardt, Jayden Omi, Izak Litte, Jacob Vogel
- */
 
 add_action( 'elementor_pro/forms/new_record', function( $record, $ajax_handler ) {
     
@@ -55,7 +50,7 @@ function get_record_from_form_submissions($atts) {
             },
             $nameresults
         );
-        return "Name: ".implode( ', ', $name_subs)."<br>Email: ".implode(', ', $email_subs)."<br>Message: ".implode(', ', $message_subs);
+        return "Name: ".esc_html(implode( ', ', $name_subs))."<br>Email: ".esc_html(implode(', ', $email_subs))."<br>Message: ".esc_html(implode(', ', $message_subs));
     }
     return '';
 }
