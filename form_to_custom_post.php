@@ -553,8 +553,8 @@ function summit_form_submission_custom_post_content($current_review_id, $current
 
 function get_answer_and_question_content($record,$file){
     global $wpdb;
-    //$start = "\n\n GET ANSWERS AND QUESTIONS \n";
-    //fwrite($file, $start);
+    $start = "\n\n GET ANSWERS AND QUESTIONS \n";
+    fwrite($file, $start);
 
     $return_array = [];
     //$answer_ids = []; //used for when inserting into reviews answers
@@ -567,16 +567,18 @@ function get_answer_and_question_content($record,$file){
     $desired_column = "questionContent";
     $where_column = "questionID";
     foreach($question_ids as $id){
-    	$q = "SELECT questionDisplayContent FROM $question_table WHERE questionID = $id;";
+    	$q = "SELECT questionDisplayContent, questionType FROM $question_table WHERE questionID = $id;";
     	$q_content = $wpdb->get_row($q);
-    	//$var = print_r($q_content, true);
-    	//fwrite($file,"get redults: \n".$var."\n");
-    	$content = $q_content->questionDisplayContent;
+    	$var = print_r($q_content, true);
+    	fwrite($file,"get redults: \n".$var."\n");
+    	//$content = $q_content->questionDisplayContent;
     	//fwrite($file,"contne from get result: \n".$content."\n");
-    	array_push($question_content, $content);
+    	array_push($question_content, $q_content);
     }
+    $var = print_r($question_content, true);
+    fwrite($file,"get redults: \n".$var."\n");
     //fwrite($file, implode(", ", $question_content)." \n");
-    //fwrite($file, implode(", ", $answer_content)." \n");
+    fwrite($file, implode(", ", $answer_content)." \n");
     $return_array['question_content'] = $question_content;
     $return_array['answer_content'] = $answer_content;
    
