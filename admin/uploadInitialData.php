@@ -1,14 +1,10 @@
 <?php
 /**
  * 
- * Create required table contents
+ * Create required initial table entries
  * 
  */
 function bcr_init_tables() {
-
-    //bcr_create_brands();
-    //bcr_create_skis();
-    //bcr_create_questions();
     global $wpdb;
     $fileName = plugin_dir_path( __FILE__ ) . 'local (2).sql.gz';
     $sql_command = "";
@@ -22,7 +18,7 @@ function bcr_init_tables() {
 
 /**
  * 
- * Add brands to brands table
+ * Add brands to brands table from csv
  * 
  */
 function bcr_create_brands() {
@@ -40,7 +36,7 @@ function bcr_create_brands() {
 
 /**
  * 
- * Add Skis to products table
+ * Add Skis to products table from csv
  * 
  */
 function bcr_create_skis() {
@@ -61,7 +57,7 @@ function bcr_create_skis() {
 
 /**
  * 
- * Add questions to table
+ * Add questions to table from csv
  * 
  */
 function bcr_create_questions() {
