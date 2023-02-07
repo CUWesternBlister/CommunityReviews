@@ -1,10 +1,10 @@
 <?php
 /**
- * 
  * Reads in the ID and name of all fluent forms currently
  * on the site at the time of this function running and
  * populates the bcr_review_forms table with that information.
  * 
+ * @return void
  */
 function align_form_ids() {
     global $wpdb;

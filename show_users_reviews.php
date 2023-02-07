@@ -1,8 +1,10 @@
 <?php
-/**
- * 
+/** 
  * Filter posts so that only those written by the current user show
  * 
+ * @param Query     $query  The Wordpress Query object to modify
+ * 
+ * @return Query
  */
 function bcr_view_current_user_reviews_only_query( $query ) {
     if(!is_user_logged_in()) {

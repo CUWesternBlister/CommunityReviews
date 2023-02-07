@@ -1,8 +1,8 @@
 <?php
-/**
- * 
+/** 
  * Create required initial table entries
  * 
+ * @return void
  */
 function bcr_init_tables() {
     global $wpdb;
@@ -17,9 +17,9 @@ function bcr_init_tables() {
 }
 
 /**
- * 
  * Add brands to brands table from csv
  * 
+ * @return void
  */
 function bcr_create_brands() {
     global $wpdb;
@@ -35,9 +35,9 @@ function bcr_create_brands() {
 }
 
 /**
- * 
  * Add Skis to products table from csv
  * 
+ * @return void
  */
 function bcr_create_skis() {
     global $wpdb;
@@ -56,9 +56,9 @@ function bcr_create_skis() {
 }
 
 /**
- * 
  * Add questions to table from csv
  * 
+ * @return void
  */
 function bcr_create_questions() {
     global $wpdb;
