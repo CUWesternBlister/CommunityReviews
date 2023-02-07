@@ -15,7 +15,7 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
             return;
         }
         
-        $html = format_questions_answers_post_content($header["questionContent"], $header["answerContent"],$formName,$file);
+        $html = format_questions_answers_post_content($header["questions_and_answers"],$formName,$file);
         
         $user_html.='<div id= "userName" class = "userInfo">Username: '.esc_html($userName). '</div>
                     <div id= "userHeight" class = "userInfo">Height: '.esc_html($userInfo->heightFeet).'feet, '.esc_html($userInfo->heightInches).' inches</div>
@@ -59,7 +59,7 @@ function get_userName_by_userID($userID, $file){
     return $res->display_name;
 }
 
-function format_questions_answers_post_content($questions, $answers, $form_name, $file){
+function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
     //php assertion that question and answers atre same length
     if (count($questions) !== count($answers)) {
         die("questions and answers");
@@ -307,8 +307,8 @@ function fluent_summit_review_from_sub($entryId, $formData, $form) {
         $review_id = summit_form_submission_write_to_tables($current_form_id, $qs_and_as, $file);
         //---------------create custom post-----------------------------------
         $header = summit_form_submission_custom_post_content($review_id, $current_form_id, $qs_and_as, $file);
-        //$header_info_read = print_r($header, true);
-        //fwrite($file, "HEADER: \n".$header_info_read."\n\n");
+        $header_info_read = print_r($header, true);
+        fwrite($file, "HEADER: \n".$header_info_read."\n\n");
         insert_into_ski_review($header, $qs, $as, $file, $current_form_name);
     }
     fclose($file);
@@ -534,17 +534,13 @@ function summit_form_submission_custom_post_content($current_review_id, $current
     //$u_info_read = print_r($user_info, true);
     //fwrite($myfile, "user info: \n".$u_info_read."\n\n");
 
-   $qs = $q_and_a_content['question_content'];
-   $as = $q_and_a_content['answer_content'];
-
     $header = array(
         'reviewID' => $current_review_id, 
         'formID' => $current_form_id,
         'productName' => $product_info['productName'],
         'brandName' => $brand_name,
         'categoryName' => $category_info->categoryName,
-        'questionContent' => $q_and_a_content['question_content'],
-        'answerContent' => $q_and_a_content['answer_content'],
+        'questions_and_answers' => $q_and_a_content,
         'userInfo' => $user_info
     );
     
@@ -553,34 +549,41 @@ function summit_form_submission_custom_post_content($current_review_id, $current
 
 function get_answer_and_question_content($record,$file){
     global $wpdb;
-    $start = "\n\n GET ANSWERS AND QUESTIONS \n";
-    fwrite($file, $start);
+    //$start = "\n\n GET ANSWERS AND QUESTIONS \n";
+    //fwrite($file, $start);
 
-    $return_array = [];
+    $return_array = array(
+        'title' => array(),
+        'testingConditions' => array(),
+        'multipleChoice' => array(),
+        'testimony' => array()
+    );
+
+
     //$answer_ids = []; //used for when inserting into reviews answers
     $answer_content = array_values($record);
     $question_ids = array_keys($record);//manually entered into 
-
-    //fwrite($file, implode(", ", $question_ids)." \n");
+    
     $question_content = [];
     $question_table = $wpdb->prefix . "bcr_questions";
     $desired_column = "questionContent";
     $where_column = "questionID";
+
+    $i = 0;
     foreach($question_ids as $id){
     	$q = "SELECT questionDisplayContent, questionType FROM $question_table WHERE questionID = $id;";
     	$q_content = $wpdb->get_row($q);
-    	$var = print_r($q_content, true);
-    	fwrite($file,"get redults: \n".$var."\n");
-    	//$content = $q_content->questionDisplayContent;
-    	//fwrite($file,"contne from get result: \n".$content."\n");
-    	array_push($question_content, $q_content);
+        $type = $q_content->questionType;
+        $display = $q_content->questionDisplayContent;
+        $answer = $answer_content[$i];
+        //fwrite($file, "question type: " . $type. "\n");
+        //fwrite($file, "question display: " . $display. "\n");
+        //fwrite($file, "question answer: " . $answer. "\n");
+        //fwrite($file, "-----------------------------\n");
+        $return_array[$type][$display] = $answer; 
+        $i += 1;
     }
-    $var = print_r($question_content, true);
-    fwrite($file,"get redults: \n".$var."\n");
-    //fwrite($file, implode(", ", $question_content)." \n");
-    fwrite($file, implode(", ", $answer_content)." \n");
-    $return_array['question_content'] = $question_content;
-    $return_array['answer_content'] = $answer_content;
+    
    
     return $return_array;
 }
