@@ -3,6 +3,8 @@ add_action( 'admin_menu', 'bcr_admin_page');
 
 /**
  * Create the menu page for Blister Community Reviews in wordpress
+ * 
+ * @return void
  */
 function bcr_admin_page() {
     add_menu_page(
@@ -17,6 +19,8 @@ function bcr_admin_page() {
 
 /**
  * HTML for rendering the admin page
+ * 
+ * @return void
  */
 function bcr_admin_page_html() {   
     ?>
