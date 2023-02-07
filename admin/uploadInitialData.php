@@ -10,13 +10,14 @@ function bcr_init_tables() {
     //bcr_create_skis();
     //bcr_create_questions();
     global $wpdb;
-    $fileName = plugin_dir_path( __FILE__ ) . 'local (2).sql.gz';
+    $fileName = plugin_dir_path( __FILE__ ) . 'AllTables.gz';
     $sql_command = "";
     $lines = gzfile($fileName);
     foreach($lines as $key => $line ){
         $sql_command.= $wpdb->prepare($line);
     }
     $sql_command = $wpdb->prepare(str_replace("wp_", $wpdb->prefix, $sql_command));
+    $sql_command = $wpdb->prepare(str_replace("wp8o_", $wpdb->prefix, $sql_command));
     dbDelta($sql_command);
 }
 
