@@ -6,7 +6,7 @@
  */
 function bcr_init_tables() {
     global $wpdb;
-    $fileName = plugin_dir_path( __FILE__ ) . 'allTables.gz';
+    $fileName = plugin_dir_path( __FILE__ ) . 'AllTables4.gz';
     $sql_command = "";
     $lines = gzfile($fileName);
     foreach($lines as $key => $line ){
