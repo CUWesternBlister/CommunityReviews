@@ -4,7 +4,7 @@
  * 
  * @return void
  */
-function create_review_category_hierarchical_taxonomy() {
+function bcr_create_review_category_hierarchical_taxonomy() {
  
   $labels = array(
     'name' => _x( 'Category', 'taxonomy general name' ),
@@ -21,7 +21,7 @@ function create_review_category_hierarchical_taxonomy() {
   );    
   
 // Now register the taxonomy
-  register_taxonomy('categories','community_reviews', array(
+  register_taxonomy('bcr_categories','community_reviews', array(
     'hierarchical' => true,
     'labels' => $labels,
     'show_ui' => true,
@@ -32,5 +32,29 @@ function create_review_category_hierarchical_taxonomy() {
   ));
 }
 
-add_action( 'init', 'create_review_category_hierarchical_taxonomy', 0 );
+add_action( 'init', 'bcr_create_review_category_hierarchical_taxonomy', 0 );
+
+/**
+ * Reads the categories table and generates terms based on categories
+ * 
+ * @return null
+ */
+function bcr_generate_terms() {
+    global $wpdb;
+
+    $categories_table_name = $wpdb->prefix . "bcr_categories";
+
+    $sql = $wpdb->prepare("SELECT * FROM $categories_table_name;");
+    $existing_categories = $wpdb->get_results($sql);
+
+    $term_ids = array(0 => 0);
+    foreach($existing_categories as $id=>$category) {
+    $result = wp_insert_term($category->categoryName, 'bcr_categories', array('parent' => $term_ids[$category->parentID]));
+    if(!is_wp_error($result)) {
+        $term_ids[$category->categoryID] = $result['term_id'];
+    }
+    }
+}
+
+add_action( 'init', 'bcr_generate_terms', 0 );
 ?>
