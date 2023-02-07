@@ -10,7 +10,7 @@ function bcr_init_tables() {
     //bcr_create_skis();
     //bcr_create_questions();
     global $wpdb;
-    $fileName = plugin_dir_path( __FILE__ ) . 'AllTables.gz';
+    $fileName = plugin_dir_path( __FILE__ ) . 'AllTables3.gz';
     $sql_command = "";
     $lines = gzfile($fileName);
     foreach($lines as $key => $line ){
