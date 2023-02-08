@@ -53,6 +53,14 @@
 	display:block;
 	background-color:rgb(227,227,227);
 }
+
+.whole_container_version{
+	width:90%;
+	padding-right:20px;
+	float:left;
+	display:block;
+	background-color: white;
+}
 .short_question{
 	width:30%;
 	padding-left:10px;
