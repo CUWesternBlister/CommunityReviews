@@ -131,11 +131,14 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 
 
 function gen_HTML_for_multiple_choice_qs($mulipleChoiceQs){
+    //the object is now: ["id" => $id, "question" => $display, "answer" => $answer];
+    //not question=>answer
+    //below should sort of be the update to these fucntions:
     $html = '<div class = "long_container">
             <div class = "section_title">Product Review</div>';
-    foreach($mulipleChoiceQs as $question => $answer){
-            $html.='<div class = "question_title">'.esc_html($question).'</div>
-                    <div class = "answer">'.esc_html($answer).'</div>';    
+    foreach($mulipleChoiceQs as $key => $arr){
+            $html.='<div id = "'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
+                    <div class = "answer">'.esc_html($arr['answer']).'</div>';    
     }
     return $html.'</div>';
 }
@@ -479,7 +482,6 @@ function get_answer_and_question_content($record,$file){
         'testimony' => array()
     );
 
-
     //$answer_ids = []; //used for when inserting into reviews answers
     $answer_content = array_values($record);
     $question_ids = array_keys($record);//manually entered into 
@@ -496,14 +498,14 @@ function get_answer_and_question_content($record,$file){
         $type = $q_content->questionType;
         $display = $q_content->questionDisplayContent;
         $answer = $answer_content[$i];
+        $obj = ["id" => $id, "question" => $display, "answer" => $answer];
         //fwrite($file, "question type: " . $type. "\n");
         //fwrite($file, "question display: " . $display. "\n");
         //fwrite($file, "question answer: " . $answer. "\n");
         //fwrite($file, "-----------------------------\n");
-        $return_array[$type][$display] = $answer; 
+        $return_array[$type][] = $obj;
         $i += 1;
     }
-    
    
     return $return_array;
 }
