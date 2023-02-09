@@ -5,8 +5,33 @@
  * @return void
  */
 function bcr_init_tables() {
+    $categories_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_categories.sql.gz';
+    $brands_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_brands.sql.gz';
+    $products_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_products.sql.gz';
+    $questions_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_questions.sql.gz';
+
+    $categories_sql = bcr_prepare_sql($categories_table_file);
+    $brands_sql = bcr_prepare_sql($brands_table_file);
+    $products_sql = bcr_prepare_sql($products_table_file);
+    $questions_sql = bcr_prepare_sql($questions_table_file);
+
+    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
+    $file = fopen($file_path, "w") or die('fopen failed');
+    fwrite($file, "questions_sql: \n".$questions_sql."\n\n");
+    dbDelta($categories_sql);
+    dbDelta($brands_sql);
+    dbDelta($products_sql);
+    dbDelta($questions_sql);
+}
+/**
+ *Creates prepares the sql command, takes in file path to gzipped sql file 
+ * 
+ * 
+ * 
+ * @return $sql_command 
+ */
+function bcr_prepare_sql($fileName){
     global $wpdb;
-    $fileName = plugin_dir_path( __FILE__ ) . 'AllTables4.gz';
     $sql_command = "";
     $lines = gzfile($fileName);
     foreach($lines as $key => $line ){
@@ -14,7 +39,8 @@ function bcr_init_tables() {
     }
     $sql_command = $wpdb->prepare(str_replace("wp_", $wpdb->prefix, $sql_command));
     $sql_command = $wpdb->prepare(str_replace("wp8o_", $wpdb->prefix, $sql_command));
-    dbDelta($sql_command);
+
+    return $sql_command;
 }
 
 /**

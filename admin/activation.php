@@ -44,6 +44,7 @@ function bcr_setup_tables() {
         questionID int(9) NOT NULL AUTO_INCREMENT,
         questionContent varchar(512) DEFAULT '' NOT NULL,
         questionDisplayContent varchar(512) DEFAULT '' NOT NULL,
+        questionType varchar(512) DEFAULT '' NOT NULL,
         PRIMARY KEY  (questionID)
         ) $charset_collate;";
 
