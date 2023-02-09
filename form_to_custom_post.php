@@ -136,7 +136,7 @@ function gen_HTML_for_multiple_choice_qs($mulipleChoiceQs){
     //below should sort of be the update to these fucntions:
     $html = '<div class = "long_container">
             <div class = "section_title">Product Review</div>';
-    foreach($mulipleChoiceQs as $key => $arr){
+    foreach($mulipleChoiceQs as $arr){
             $html.='<div id = "'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
                     <div class = "answer">'.esc_html($arr['answer']).'</div>';    
     }
