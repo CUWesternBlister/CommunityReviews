@@ -91,8 +91,8 @@ function bcr_setup_tables() {
 
     $sql = "CREATE TABLE $products_table_name (
         productID int(9) NOT NULL AUTO_INCREMENT,
-        categoryID int(9) UNSIGNED NOT NULL,
-        brandID int(9) UNSIGNED NOT NULL,
+        categoryID int(9) NOT NULL,
+        brandID int(9) NOT NULL,
         productName varchar(512) DEFAULT '' NOT NULL,
         PRIMARY KEY  (productID),
         FOREIGN KEY  (categoryID) REFERENCES $categories_table_name(categoryID),
@@ -107,7 +107,7 @@ function bcr_setup_tables() {
     $sql = "CREATE TABLE $review_forms_table_name (
         reviewFormID int(9) NOT NULL AUTO_INCREMENT,
         reviewFormName varchar(512) DEFAULT '' NOT NULL,
-        categoryID int(9) UNSIGNED NOT NULL,
+        categoryID int(9) NOT NULL,
         PRIMARY KEY  (reviewFormID),
         FOREIGN KEY  (categoryID) REFERENCES $categories_table_name(categoryID)
         ) $charset_collate;";
@@ -120,7 +120,7 @@ function bcr_setup_tables() {
     $sql = "CREATE TABLE $reviews_table_name (
         reviewID int(9) NOT NULL AUTO_INCREMENT,
         userID int(9) NOT NULL,
-        reviewFormID int(9) UNSIGNED NOT NULL,
+        reviewFormID int(9) NOT NULL,
         isShown BOOLEAN NOT NULL DEFAULT 1,
         PRIMARY KEY  (reviewID),
         FOREIGN KEY  (reviewFormID) REFERENCES $review_forms_table_name(reviewFormID),
@@ -133,8 +133,8 @@ function bcr_setup_tables() {
     $review_answers_table_name = $wpdb->prefix . "bcr_reviews_answers";
 
     $sql = "CREATE TABLE $review_answers_table_name (
-        reviewID int(9) UNSIGNED NOT NULL,
-        answerID int(9) UNSIGNED NOT NULL,
+        reviewID int(9) NOT NULL,
+        answerID int(9) NOT NULL,
         PRIMARY KEY  (reviewID, answerID),
         FOREIGN KEY  (reviewID) REFERENCES $reviews_table_name(reviewID),
         FOREIGN KEY  (answerID) REFERENCES $answers_table_name(answerID)
