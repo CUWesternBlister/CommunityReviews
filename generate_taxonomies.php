@@ -22,7 +22,7 @@ function bcr_create_review_category_hierarchical_taxonomy() {
   
 // Now register the taxonomy
   register_taxonomy('bcr_categories','community_reviews', array(
-    'hierarchical' => true,
+    'hierarchical' => false,
     'labels' => $labels,
     'show_ui' => true,
     'show_in_rest' => true,
@@ -49,10 +49,12 @@ function bcr_generate_terms() {
 
     $term_ids = array(0 => 0);
     foreach($existing_categories as $id=>$category) {
-    $result = wp_insert_term($category->categoryName, 'bcr_categories', array('parent' => $term_ids[$category->parentID]));
-    if(!is_wp_error($result)) {
-        $term_ids[$category->categoryID] = $result['term_id'];
-    }
+      $result = wp_insert_term($category->categoryName, 'bcr_categories'/*, array('parent' => $term_ids[$category->parentID])*/);
+      if(!is_wp_error($result)) {
+          $term_ids[$category->categoryID] = $result['term_id'];
+      } else {
+        break;
+      }
     }
 }
 

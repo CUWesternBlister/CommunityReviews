@@ -330,4 +330,18 @@ add_action( 'wp_enqueue_scripts', 'wpse_load_plugin_css' );
     }
 
     add_action( 'elementor_pro/forms/new_record', 'capstone_write_to_table', 10, 2);
+
+/**
+ * Convert the category name to a slug
+ * 
+ * @param string    categoryName
+ * 
+ * @return string   slug
+ */
+function bcr_convert_name_to_slug($categoryName) {
+    $categoryName = strtolower($categoryName);
+    $categoryName = str_replace(' ', '-', $categoryName);
+
+    return $categoryName;
+}
 ?>

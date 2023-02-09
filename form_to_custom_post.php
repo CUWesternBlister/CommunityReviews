@@ -24,6 +24,14 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
         $html = $user_html . $html;
 
         //fwrite($file, "\n".$html."\n");
+
+        //fetch the term id of the category
+       /* $term_id = 0;
+        $term = get_term_by('name', 'categoryName', 'bcr_categories', ARRAY_A);
+        if($term != false) {
+            $term_id = $term['term_id'];
+        }*/
+
 //fetch user name to insert
         $ski_review = array(
                             'post_title' =>wp_strip_all_tags( $header['brandName'] . ' ' . $header['productName']),
@@ -40,13 +48,16 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
                                                   'category'      => $header['categoryName'],
                                                   'sport'         => $header['sportName']
                                                   ),
-                            'post_type'   => 'Community Reviews',
+                            'post_type'   => 'community_reviews',
                             'post_excerpt' => $user_html,
                             'post_status' => 'publish',
+                            'tax_input' => array('bcr_categories' => $header['categoryName'])
                             );
         //$custom_post_input = print_r($ski_review, true);
         //fwrite($file, "Post array: \n".$custom_post_input."\n\n");
-        wp_insert_post( $ski_review );
+        $post_id = wp_insert_post( $ski_review );
+
+        //wp_set_post_terms($post_id, array('Skis'), 'bcr_categories');
         //fwrite($file,"\n\nHERE\n\n");      
 }
 
