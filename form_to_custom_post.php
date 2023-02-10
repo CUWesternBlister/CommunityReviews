@@ -99,7 +99,7 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
         $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
         $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
-        $html .= '<div class = "whole_container_version">
+        $html .= '<div class = "whole_container_version" hidden="hidden">
             <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
             </div>';
     }
@@ -109,7 +109,7 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
         $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
         $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
-        $html .= '<div class = "whole_container_version">
+        $html .= '<div class = "whole_container_version" hidden="hidden">
             <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
             </div>';
     }
@@ -118,7 +118,7 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 
         $html .= gen_HTML_for_multiple_choice_qs2($multipleChoiceQuestions, $form_name);
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
-        $html .= '<div class = "whole_container_version">
+        $html .= '<div class = "whole_container_version" hidden="hidden">
             <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
             </div>';
     }
@@ -127,7 +127,7 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
         $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
         $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
-        $html .= '<div class = "whole_container_version">
+        $html .= '<div class = "whole_container_version" hidden="hidden">
             <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
             </div>';
     }
@@ -136,7 +136,7 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 
         $html .= gen_HTML_for_multiple_choice_qs2($multipleChoiceQuestions, $form_name);
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
-        $html .= '<div class = "whole_container_version">
+        $html .= '<div class = "whole_container_version" hidden="hidden">
             <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
             </div>';
     }
@@ -145,7 +145,7 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 
         $html .= gen_HTML_for_multiple_choice_qs2($multipleChoiceQuestions, $form_name);
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
-        $html .= '<div class = "whole_container_version">
+        $html .= '<div class = "whole_container_version" hidden="hidden">
             <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
             </div>';
     }
