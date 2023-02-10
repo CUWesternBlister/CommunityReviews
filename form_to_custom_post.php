@@ -23,10 +23,17 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
                     <div id= "userAbility" class = "userInfo">Ski Ability: '.esc_html($userInfo->skiAbility).'</div>';
         $html = $user_html . $html;
 
+        $title_arr = $header["questions_and_answers"]["title"];
+        //$custom_post_input = print_r($title_arr, true);
+        //fwrite($file, "tile array: \n".$custom_post_input."\n\n");
+        
+        $postTitle = get_post_title($title_arr);
+
         //fwrite($file, "\n".$html."\n");
-//fetch user name to insert
+        //fetch user name to insert
+        ////wp_strip_all_tags( $header['brandName'] . ' ' . $header['productName']),
         $ski_review = array(
-                            'post_title' =>wp_strip_all_tags( $header['brandName'] . ' ' . $header['productName']),
+                            'post_title' => wp_strip_all_tags($postTitle), 
                             'post_content' => $html,
                             'meta_input' => array(
                                                   'id'            => $header['reviewID'],
@@ -50,6 +57,18 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
         //fwrite($file,"\n\nHERE\n\n");      
 }
 
+function get_post_title($title_arr){
+    $str = "";
+    foreach($title_arr as $arr){
+        if($arr['id'] == 3){
+            $str.=$arr["answer"] . 'cm, ';
+        }else{
+            $str.=$arr["answer"] . ', ';    
+        }
+    }
+    return rtrim($str, ", ");
+}
+
 
 function get_userName_by_userID($userID, $file){
     global $wpdb;
@@ -63,18 +82,23 @@ function get_userName_by_userID($userID, $file){
 function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 
     $titleQuestions = $qs_and_ans['title'];
+    
     $testingConditionsQuestions = $qs_and_ans['testingConditions'];
+    
     $multipleChoiceQuestions = $qs_and_ans['multipleChoice'];
+    
     $testimonyQuestions = $qs_and_ans['testimony'];
+   
+
     $pluginData = get_plugin_data(plugin_dir_path( __FILE__ ).'/blister-community-reviews.php');
     $pluginVersion = $pluginData['Version'];
 
 
     if ($form_name == 'Ski Review Form'){//ski
 
-        $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions);
-        $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions);
-        $html .= gen_HTML_for_testimony_qs($testimonyQuestions);
+        $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
+        $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
+        $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
         $html .= '<div class = "whole_container_version">
             <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
             </div>';
@@ -82,9 +106,9 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 
     if ($form_name == 'Summit_Ski_Boot_Review_Form'){//boot
 
-        $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions);
-        $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions);
-        $html .= gen_HTML_for_testimony_qs($testimonyQuestions);
+        $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
+        $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
+        $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
         $html .= '<div class = "whole_container_version">
             <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
             </div>';
@@ -92,17 +116,17 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 
     if ($form_name == 'Summit_Apparel_Form'){//apparel
 
-        $html .= gen_HTML_for_multiple_choice_qs2($multipleChoiceQuestions);
-        $html .= gen_HTML_for_testimony_qs($testimonyQuestions);
+        $html .= gen_HTML_for_multiple_choice_qs2($multipleChoiceQuestions, $form_name);
+        $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
         $html .= '<div class = "whole_container_version">
             <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
             </div>';
     }
     if ($form_name == 'Snowboard Review'){//snowboard
 
-        $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions);
-        $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions);
-        $html .= gen_HTML_for_testimony_qs($testimonyQuestions);
+        $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
+        $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
+        $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
         $html .= '<div class = "whole_container_version">
             <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
             </div>';
@@ -110,8 +134,8 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 
         if ($form_name == 'Climbing Skin Review'){//apparel
 
-        $html .= gen_HTML_for_multiple_choice_qs2($multipleChoiceQuestions);
-        $html .= gen_HTML_for_testimony_qs($testimonyQuestions);
+        $html .= gen_HTML_for_multiple_choice_qs2($multipleChoiceQuestions, $form_name);
+        $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
         $html .= '<div class = "whole_container_version">
             <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
             </div>';
@@ -119,8 +143,8 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 
         if ($form_name == 'Backpack review'){//apparel
 
-        $html .= gen_HTML_for_multiple_choice_qs2($multipleChoiceQuestions);
-        $html .= gen_HTML_for_testimony_qs($testimonyQuestions);
+        $html .= gen_HTML_for_multiple_choice_qs2($multipleChoiceQuestions, $form_name);
+        $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
         $html .= '<div class = "whole_container_version">
             <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
             </div>';
@@ -130,42 +154,47 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 }
 
 
-function gen_HTML_for_multiple_choice_qs($mulipleChoiceQs){
+function gen_HTML_for_multiple_choice_qs($mulipleChoiceQs, $formName){
+    //the object is now: ["id" => $id, "question" => $display, "answer" => $answer];
+    //not question=>answer
+    //below should sort of be the update to these fucntions:
     $html = '<div class = "long_container">
             <div class = "section_title">Product Review</div>';
-    foreach($mulipleChoiceQs as $question => $answer){
-            $html.='<div class = "question_title">'.esc_html($question).'</div>
-                    <div class = "answer">'.esc_html($answer).'</div>';    
+    foreach($mulipleChoiceQs as $arr){
+            $html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
+                    <div class = "answer">'.esc_html($arr['answer']).'</div>';    
     }
     return $html.'</div>';
 }
 
-function gen_HTML_for_multiple_choice_qs2($mulipleChoiceQs){
+function gen_HTML_for_multiple_choice_qs2($mulipleChoiceQs, $formName ){
     $html = '<div class = "whole_container">
             <div class = "section_title">Product Review</div>';
-    foreach($mulipleChoiceQs as $question => $answer){
-            $html.='<div class = "question_title">'.esc_html($question).'</div>
-                    <div class = "answer">'.esc_html($answer).'</div>';    
+    foreach($mulipleChoiceQs as $arr){
+            $html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
+                    <div class = "answer">'.esc_html($arr['answer']).'</div>';    
     }
     return $html.'</div>';
 }
 
-function gen_HTML_for_testing_conditions_qs($testingConditions){
+function gen_HTML_for_testing_conditions_qs($testingConditions, $formName){
     $html = '<div class = "short_container">
             <div class = "section_title">Testing Conditions</div>';
-    foreach($testingConditions as $question => $answer){
-            $html.='<div class = "question_title">'.esc_html($question).'</div>
-                    <div class = "answer">'.esc_html($answer).'</div>';    
+    foreach($testingConditions as $arr){
+            $html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
+                    <div class = "answer">'.esc_html($arr['answer']).'</div>';    
     }
     return $html.'</div>';
 }
 
-function gen_HTML_for_testimony_qs($testimony){
+function gen_HTML_for_testimony_qs($testimony, $formName){
     $html = '<div class = "whole_container">
-            <div class = "section_title">Testing Conditions</div>';
-    foreach($testimony as $question => $answer){
-            $html.='<div class = "question_title">'.esc_html($question).'</div>
-                    <div class = "answer">'.esc_html($answer).'</div>';    
+            <div class = "section_title">Testimony</div>';
+    foreach($testimony as $arr){
+        if($arr['answer'] != ""){
+            $html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
+                    <div class = "answer">'.esc_html($arr['answer']).'</div>';    
+        }
     }
     return $html.'</div>';
 }
@@ -479,7 +508,6 @@ function get_answer_and_question_content($record,$file){
         'testimony' => array()
     );
 
-
     //$answer_ids = []; //used for when inserting into reviews answers
     $answer_content = array_values($record);
     $question_ids = array_keys($record);//manually entered into 
@@ -496,14 +524,14 @@ function get_answer_and_question_content($record,$file){
         $type = $q_content->questionType;
         $display = $q_content->questionDisplayContent;
         $answer = $answer_content[$i];
+        $obj = ["id" => $id, "question" => $display, "answer" => $answer];
         //fwrite($file, "question type: " . $type. "\n");
         //fwrite($file, "question display: " . $display. "\n");
         //fwrite($file, "question answer: " . $answer. "\n");
         //fwrite($file, "-----------------------------\n");
-        $return_array[$type][$display] = $answer; 
+        $return_array[$type][] = $obj;
         $i += 1;
     }
-    
    
     return $return_array;
 }
