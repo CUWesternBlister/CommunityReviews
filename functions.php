@@ -275,7 +275,17 @@ function BCR_login_shortcode(){
 
 add_shortcode('BCR_login', 'BCR_login_shortcode');
 
-//Testing https://developer.wordpress.org/reference/hooks/template_redirect/
+//https://developer.wordpress.org/reference/hooks/template_redirect/
+
+function disable_BCR_redirects(){
+    if(current_user_can('edit_private_pages')){
+        if( \Elementor\Plugin::$instance->preview->is_preview_mode() ){
+            remove_action( 'template_redirect', 'summit_redirects', 10);
+        }
+    }
+}
+
+add_action( 'template_redirect', 'disable_BCR_redirects', 5);
 
 function summit_redirects() {
     if (is_page('Validation Page') and is_user_logged_in()){
@@ -301,7 +311,7 @@ function summit_redirects() {
     }
 }
 
-add_action( 'template_redirect', 'summit_redirects' );
+add_action( 'template_redirect', 'summit_redirects', 10);
 
 function wpse_load_plugin_css() {
     $plugin_url = plugin_dir_url( __FILE__ );
