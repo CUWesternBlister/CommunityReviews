@@ -17,10 +17,10 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
         
         $html = format_questions_answers_post_content($header["questions_and_answers"],$formName,$file);
         
-        $user_html.='<div id= "userName" class = "userInfo">Username: '.esc_html($userName). '</div>
-                    <div id= "userHeight" class = "userInfo">Height: '.esc_html($userInfo->heightFeet).'feet, '.esc_html($userInfo->heightInches).' inches</div>
+        $user_html.='<div id= "userName" class = "userInfo">Reviewer: '.esc_html($userName). '</div>
+                    <div id= "userHeight" class = "userInfo">Height: '.esc_html($userInfo->heightFeet).' ft, '.esc_html($userInfo->heightInches).' in</div>
                     <div id "userWeight" class = "userInfo">Weight: '.esc_html($userInfo->weight).' lbs</div>
-                    <div id= "userAbility" class = "userInfo">Ski Ability: '.esc_html($userInfo->skiAbility).'</div>';
+                    <div id= "userAbility" class = "userInfo">Reviewer Ability: '.esc_html($userInfo->skiAbility).'</div>';
         $html = $user_html . $html;
 
         //fwrite($file, "\n".$html."\n");
