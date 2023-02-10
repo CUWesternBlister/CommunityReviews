@@ -63,7 +63,7 @@ function get_post_title($title_arr){
         if($arr['id'] == 3){
             $str.=$arr["answer"] . 'cm, ';
         }else{
-            $str.=$arr["answer"] . ', ';    
+            $str.=$arr["answer"] . ' ';    
         }
     }
     return rtrim($str, ", ");
@@ -158,42 +158,42 @@ function gen_HTML_for_multiple_choice_qs($mulipleChoiceQs, $formName){
     //the object is now: ["id" => $id, "question" => $display, "answer" => $answer];
     //not question=>answer
     //below should sort of be the update to these fucntions:
-    $html = '<div class = "long_container">
-            <div class = "section_title">Product Review</div>';
+    $html = '<div id = "multipleChoice" class = "long_container">
+            <div id = "multipleChoiceTitle" class = "section_title">Product Review</div>';
     foreach($mulipleChoiceQs as $arr){
             $html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
-                    <div class = "answer">'.esc_html($arr['answer']).'</div>';    
+                    <div id = "'.esc_html($formName).'_answer_'.esc_html($arr['id']).'"  class = "answer">'.esc_html($arr['answer']).'</div>';    
     }
     return $html.'</div>';
 }
 
 function gen_HTML_for_multiple_choice_qs2($mulipleChoiceQs, $formName ){
-    $html = '<div class = "whole_container">
-            <div class = "section_title">Product Review</div>';
+    $html = '<div id = "multipleChoice2" class = "whole_container">
+            <div id = "multipleChoiceTitle2" class = "section_title">Product Review</div>';
     foreach($mulipleChoiceQs as $arr){
             $html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
-                    <div class = "answer">'.esc_html($arr['answer']).'</div>';    
+                    <div id = "'.esc_html($formName).'_answer_'.esc_html($arr['id']).'" class = "answer">'.esc_html($arr['answer']).'</div>';    
     }
     return $html.'</div>';
 }
 
 function gen_HTML_for_testing_conditions_qs($testingConditions, $formName){
-    $html = '<div class = "short_container">
-            <div class = "section_title">Testing Conditions</div>';
+    $html = '<div id = "testingConditions" class = "short_container">
+            <div id = "testingConditionsTitle" class = "section_title">Testing Conditions</div>';
     foreach($testingConditions as $arr){
             $html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
-                    <div class = "answer">'.esc_html($arr['answer']).'</div>';    
+                    <div id = "'.esc_html($formName).'_answer_'.esc_html($arr['id']).'" class = "answer">'.esc_html($arr['answer']).'</div>';    
     }
     return $html.'</div>';
 }
 
 function gen_HTML_for_testimony_qs($testimony, $formName){
-    $html = '<div class = "whole_container">
-            <div class = "section_title">Testimony</div>';
+    $html = '<div id = "testimony" class = "whole_container">
+            <div id = "testimonyTitle" class = "section_title">Testimony</div>';
     foreach($testimony as $arr){
         if($arr['answer'] != ""){
             $html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
-                    <div class = "answer">'.esc_html($arr['answer']).'</div>';    
+                    <div id = "'.esc_html($formName).'_answer_'.esc_html($arr['id']).'" class = "answer">'.esc_html($arr['answer']).'</div>';    
         }
     }
     return $html.'</div>';
