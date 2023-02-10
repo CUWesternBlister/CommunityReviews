@@ -278,10 +278,8 @@ add_shortcode('BCR_login', 'BCR_login_shortcode');
 //https://developer.wordpress.org/reference/hooks/template_redirect/
 
 function disable_BCR_redirects(){
-    if(current_user_can('edit_private_pages')){
-        if( \Elementor\Plugin::$instance->preview->is_preview_mode() ){
-            remove_action( 'template_redirect', 'summit_redirects', 10);
-        }
+    if( \Elementor\Plugin::$instance->preview->is_preview_mode() ){
+        remove_action( 'template_redirect', 'summit_redirects', 10);
     }
 }
 
