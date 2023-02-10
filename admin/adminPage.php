@@ -40,12 +40,38 @@ function bcr_admin_page_html() {
                 $wpdb->prefix . "bcr_reviews_answers"
             );
 
+            bcr_display_user_reset();
+
             foreach($table_names_array as $table_name) {
                 bcr_display_table_contents($table_name);
             }
         ?>
     </div>
     <?php
+}
+
+function bcr_display_user_reset() {
+    if(is_user_logged_in()) {
+        if ( function_exists( 'get_current_user_id' ) ) {
+	        $uid = get_current_user_id();
+
+            if(array_key_exists('user_reset_button', $_POST)) {
+                global $wpdb;
+
+                $users_table_name = $wpdb->prefix . "bcr_users";
+
+                $wpdb->delete($users_table_name, array("userID" => $uid));
+            }
+
+           ?>
+            <div id="user_reset">
+                <form method="post">
+                    <input type="submit" name="user_reset_button" class="button" value="Reset Current User's Community Reviews Profile" />
+                </form>
+            </div>
+           <?php
+        }
+    }
 }
 
 /**
