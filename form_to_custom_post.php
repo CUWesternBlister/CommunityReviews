@@ -59,14 +59,22 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
 
 function get_post_title($title_arr){
     $str = "";
+    $year = "";
+    $html = "";
     foreach($title_arr as $arr){
-        if($arr['id'] == 3){
-            $str.=$arr["answer"] . 'cm, ';
-        }else{
-            $str.=$arr["answer"] . ' ';    
+        if($arr['id'] == 9){
+                $year .= $arr["answer"] . ' ';
+        }
+        else{
+            if($arr['id'] == 3){
+                $str.=$arr["answer"] . 'cm ';
+            }else{
+                $str.=$arr["answer"] . ' ';  
+            }  
         }
     }
-    return rtrim($str, ", ");
+    $html = $year . $str; 
+    return $html;
 }
 
 
@@ -99,9 +107,9 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
         $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
         $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
-        $html .= '<div class = "whole_container_version" hidden="hidden">
-            <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
-            </div>';
+        //$html .= '<div class = "whole_container_version" hidden="hidden">
+        //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
+        //    </div>';
     }
 
     if ($form_name == 'Summit_Ski_Boot_Review_Form'){//boot
@@ -109,45 +117,45 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
         $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
         $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
-        $html .= '<div class = "whole_container_version" hidden="hidden">
-            <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
-            </div>';
+        //$html .= '<div class = "whole_container_version" hidden="hidden">
+        //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
+        //    </div>';
     }
 
     if ($form_name == 'Summit_Apparel_Form'){//apparel
 
         $html .= gen_HTML_for_multiple_choice_qs2($multipleChoiceQuestions, $form_name);
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
-        $html .= '<div class = "whole_container_version" hidden="hidden">
-            <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
-            </div>';
+        //$html .= '<div class = "whole_container_version" hidden="hidden">
+        //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
+        //    </div>';
     }
     if ($form_name == 'Snowboard Review'){//snowboard
 
         $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
         $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
-        $html .= '<div class = "whole_container_version" hidden="hidden">
-            <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
-            </div>';
+        //$html .= '<div class = "whole_container_version" hidden="hidden">
+        //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
+        //    </div>';
     }
 
         if ($form_name == 'Climbing Skin Review'){//apparel
 
         $html .= gen_HTML_for_multiple_choice_qs2($multipleChoiceQuestions, $form_name);
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
-        $html .= '<div class = "whole_container_version" hidden="hidden">
-            <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
-            </div>';
+        //$html .= '<div class = "whole_container_version" hidden="hidden">
+        //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
+        //    </div>';
     }
 
         if ($form_name == 'Backpack review'){//apparel
 
         $html .= gen_HTML_for_multiple_choice_qs2($multipleChoiceQuestions, $form_name);
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
-        $html .= '<div class = "whole_container_version" hidden="hidden">
-            <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
-            </div>';
+        //$html .= '<div class = "whole_container_version" hidden="hidden">
+        //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
+        //    </div>';
     }
     return $html;
 
