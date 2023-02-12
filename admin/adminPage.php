@@ -10,7 +10,7 @@ function bcr_admin_page() {
     add_menu_page(
         'Community_Reviews',
         'Community Reviews',
-        'administrator',
+        'tech_admin',
         'bcr_commuinty_reviews',
         'bcr_admin_page_html',
         'none'
