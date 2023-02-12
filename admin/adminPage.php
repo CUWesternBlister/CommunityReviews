@@ -39,7 +39,8 @@ function bcr_admin_page_html() {
                 $wpdb->prefix . "bcr_reviews",
                 $wpdb->prefix . "bcr_reviews_answers"
             );
-
+            
+            bcr_display_version();
             bcr_display_user_reset();
 
             foreach($table_names_array as $table_name) {
@@ -50,6 +51,28 @@ function bcr_admin_page_html() {
     <?php
 }
 
+/**
+ * Displays the current plugin version
+ * 
+ * @return void
+ */
+function bcr_display_version() {
+    $plugin_data = get_plugin_data(BCR_PATH.'/blister-community-reviews.php');
+    ?>
+        <div id="plugin_info">
+            <p><?php
+                $plugin_info = esc_html($plugin_data['Name']) . " version " . esc_html($plugin_data['Version']);
+                echo $plugin_info; 
+            ?></p>
+        </div>
+    <?php
+}
+
+/**
+ * Displays a button to reset the current user's profile information
+ * 
+ * @return void
+ */
 function bcr_display_user_reset() {
     if(is_user_logged_in()) {
         if ( function_exists( 'get_current_user_id' ) ) {
