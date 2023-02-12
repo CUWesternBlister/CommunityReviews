@@ -123,7 +123,7 @@ function disable_BCR_redirects(){
 add_action( 'template_redirect', 'disable_BCR_redirects', 5);
 
 function summit_redirects() {
-    if (is_page('Summit Validation') and is_user_logged_in()){
+    if (is_page('Community Reviews Validation') and is_user_logged_in()){
         //redirects away from login page if already logged in
         wp_redirect(home_url( '/community-reviews-home-page/' ));
         die;
@@ -134,7 +134,7 @@ function summit_redirects() {
         $userEntry = get_bcr_user();
         if (!is_user_logged_in()){
             //redirects to Blister Login
-            wp_redirect(home_url('/validation-page/'));
+            wp_redirect(home_url('/community-reviews-validation-page/'));
             die;
             //exit;
         }
