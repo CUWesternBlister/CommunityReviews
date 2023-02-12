@@ -111,27 +111,6 @@ function display_user_info($atts){
     return '';
 }
 add_shortcode('user_info', 'display_user_info');
-/*
-function BCR_login_shortcode(){
-    if(!is_user_logged_in()){
-        $args = array(
-          'echo' => 0,
-          'redirect' => home_url('/summit-home-page/')
-        );
-        return wp_login_form( $args ) . '<a href="https://blisterreview.com/my-account" target="_blank">Click here to Register at BlisterReviews.com</a>';
-    }
-    // you can set where you will be redirected to after form is completed
-}
-
-add_shortcode('BCR_login', 'BCR_login_shortcode');
-*/
-function login_redirect(){
-    if(is_user_logged_in()){
-        wp_redirect(home_url('/community-reviews-home-page/'));
-    }
-}
-
-add_shortcode('BCR_login_redirect', 'login_redirect');
 
 //https://developer.wordpress.org/reference/hooks/template_redirect/
 
@@ -144,9 +123,9 @@ function disable_BCR_redirects(){
 add_action( 'template_redirect', 'disable_BCR_redirects', 5);
 
 function summit_redirects() {
-    if (is_page('Validation Page') and is_user_logged_in()){
+    if (is_page('Summit Validation') and is_user_logged_in()){
         //redirects away from login page if already logged in
-        wp_redirect(home_url('/community-reviews-home-page/'));
+        wp_redirect(home_url( '/community-reviews-home-page/' ));
         die;
     }
     // for any other pages that need this redirect, just add page name to array
