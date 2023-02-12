@@ -227,6 +227,14 @@ function profile_info_sub( $record, $ajax_handler ){
         $ajax_handler->add_response_data(true, $output);
     }
     fclose($file);
+
+    session_start();
+
+    $prev_url = isset($_SESSION['prev_url']) ? $_SESSION['prev_url'] : '';
+
+    $redirect_to = $record->replace_setting_shortcodes( $prev_url );
+
+	$ajax_handler->add_response_data( 'redirect_url', $redirect_to );
 }
 
 function fluent_summit_review_from_sub($entryId, $formData, $form) {

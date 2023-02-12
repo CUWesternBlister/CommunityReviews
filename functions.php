@@ -142,8 +142,16 @@ function summit_redirects() {
         die;
     }
     // for any other pages that need this redirect, just add page name to array
-    if ( is_page(array('Summit Homepage','Community Reviews Profile', 'Ski Review', 'Apparel Review',
-        'Ski Boot Review', 'Skiing Know Thyself', 'Climbing Skins Review', 'Snowboard Review', 'Summit Read Reviews Prototype'))){
+    if ( is_page(array('Community Reviews Profile', 'Ski Review', 'Summit Apparel Review Form',
+        'Ski Boot Review', 'Skiing Know Thyself', 'Climbing Skins Review', 'Snowboard Review'))){
+
+        session_start();
+        // Set the previous URL session variable
+        global $wp;
+
+        $_SESSION['prev_url'] = home_url( $wp->request );
+
+
         $userEntry = get_bcr_user();
         if (!is_user_logged_in()){
             //redirects to Blister Login
@@ -152,7 +160,7 @@ function summit_redirects() {
             //exit;
         }
         else if (!$userEntry) {
-            wp_redirect(home_url('/profile-information-form/'));
+            wp_redirect( home_url('/profile-information-form/') );
             die;
             //exit;
         }
