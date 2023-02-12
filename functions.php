@@ -134,7 +134,7 @@ function summit_redirects() {
         $userEntry = get_bcr_user();
         if (!is_user_logged_in()){
             //redirects to Blister Login
-            wp_redirect(home_url('/community-reviews-validation-page/'));
+            wp_redirect(home_url('/community-reviews-validation/'));
             die;
             //exit;
         }
