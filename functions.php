@@ -125,7 +125,7 @@ add_action( 'template_redirect', 'disable_BCR_redirects', 5);
 function summit_redirects() {
     if (is_page('Community Reviews Validation') and is_user_logged_in()){
         //redirects away from login page if already logged in
-        wp_redirect(home_url( '/community-reviews-home-page/' ));
+        wp_redirect(home_url( '/community-reviews-homepage/' ));
         die;
     }
     // for any other pages that need this redirect, just add page name to array
