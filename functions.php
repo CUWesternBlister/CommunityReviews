@@ -131,7 +131,7 @@ function summit_redirects() {
     // for any other pages that need this redirect, just add page name to array
 
     if ( is_page(array('Community Reviews Profile', 'Ski Review', 'Apparel Review',
-        'Ski Boot Review', 'Skiing Know Thyself', 'Climbing Skins Review', 'Snowboard Review'))){
+        'Ski Boot Review', 'Skiing Know Thyself', 'Climbing Skins Review', 'Snowboard Review', 'Backpack Review'))){
 
         session_start();
         // Set the previous URL session variable
