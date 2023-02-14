@@ -477,7 +477,7 @@ function summit_form_submission_custom_post_content($current_review_id, $current
     //fwrite($file, "product info: \n".$p_info_read."\n\n");
     
     $brand_name = $record[1];
-    $brand_info = get_brand_info($brand_name, $file);
+    //$brand_info = get_brand_info($brand_name, $file);
     //$b_info_read = print_r($brand_info, true);
     //fwrite($file, "brand info: \n".$b_info_read."\n\n");
 
