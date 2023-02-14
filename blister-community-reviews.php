@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) exit;
 
 // Register activation and deactivation procedures
 register_activation_hook(__FILE__, 'bcr_activation');
-//register_deactivation_hook(__FILE__, 'bcr_deactivation');
+register_deactivation_hook(__FILE__, 'bcr_deactivation');
 
 define( 'BCR_PATH', plugin_dir_path( __FILE__ ));
 
@@ -21,7 +21,7 @@ define( 'BCR_PATH', plugin_dir_path( __FILE__ ));
  * @return void
  */
 function bcr_activation() {
-    require_once( plugin_dir_path( __FILE__) . '/admin/activation.php');
+    require_once( plugin_dir_path( __FILE__ ) . '/admin/activation.php');
 }
 
 /**

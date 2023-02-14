@@ -78,9 +78,7 @@ function get_record_from_form_submissions($atts) {
 add_shortcode( 'form_submissions', 'get_record_from_form_submissions' );
 
 function display_user_info($atts){
-    if(is_user_logged_in()){
-        $userEntry = get_bcr_user();//---------------------------------
-    }   
+    $userEntry = get_bcr_user();
     if ( $userEntry ) {
         $heightF = array_map(
             function( $form_sub_object ) {
@@ -114,54 +112,50 @@ function display_user_info($atts){
 }
 add_shortcode('user_info', 'display_user_info');
 
-function BCR_login_shortcode(){
-    if(!is_user_logged_in()){
-        $args = array(
-          'echo' => 0,
-          'redirect' => home_url('/summit-home-page/')
-        );
-        return wp_login_form( $args ) . '<a href="https://blisterreview.com/my-account" target="_blank">Click here to Register at BlisterReviews.com</a>';
+//https://developer.wordpress.org/reference/hooks/template_redirect/
+
+function disable_BCR_redirects(){
+    if( \Elementor\Plugin::$instance->preview->is_preview_mode() ){
+        remove_action( 'template_redirect', 'summit_redirects', 10);
     }
-    // you can set where you will be redirected to after form is completed
 }
 
-add_shortcode('BCR_login', 'BCR_login_shortcode');
-
-//Testing https://developer.wordpress.org/reference/hooks/template_redirect/
+add_action( 'template_redirect', 'disable_BCR_redirects', 5);
 
 function summit_redirects() {
-    if (is_page('Validation Page') and is_user_logged_in()){
+    if (is_page('Community Reviews Validation') and is_user_logged_in()){
         //redirects away from login page if already logged in
-        wp_redirect(home_url("summit-home-page"));
+        wp_redirect(home_url( '/community-reviews-homepage/' ));
         die;
     }
     // for any other pages that need this redirect, just add page name to array
 
-    if ( is_page(array('Backpack Review','Summit Homepage','Community Reviews Profile', 'Ski Review', 'Apparel Review',
-        'Ski Boot Review', 'Skiing Know Thyself', 'Climbing Skins Review', 'Snowboard Review', 'Summit Read Reviews Prototype'))){
+    if ( is_page(array('Community Reviews Profile', 'Ski Review', 'Apparel Review',
+        'Ski Boot Review', 'Skiing Know Thyself', 'Climbing Skins Review', 'Snowboard Review', 'Backpack Review'))){
 
         session_start();
         // Set the previous URL session variable
-        if (isset($_SERVER['HTTP_REFERER'])) {
-          $_SESSION['prev_url'] = $_SERVER['HTTP_REFERER'];
-        }
+        global $wp;
 
+        $_SESSION['prev_url'] = home_url( $wp->request );
+
+
+        $userEntry = get_bcr_user();
         if (!is_user_logged_in()){
             //redirects to Blister Login
-            wp_redirect(home_url('/validation-page/'));
+            wp_redirect(home_url('/community-reviews-validation/'));
             die;
             //exit;
         }
-        $userEntry = get_bcr_user();
-        if (!$userEntry) {
-            wp_redirect(home_url('/profile-information-form/'));
+        else if (!$userEntry) {
+            wp_redirect( home_url('/profile-information-form/') );
             die;
             //exit;
         }
     }
 }
 
-add_action( 'template_redirect', 'summit_redirects' );
+add_action( 'template_redirect', 'summit_redirects', 10);
 
 function wpse_load_plugin_css() {
     $plugin_url = plugin_dir_url( __FILE__ );
@@ -190,18 +184,4 @@ add_action( 'wp_enqueue_scripts', 'wpse_load_plugin_css' );
     }
 
     add_action( 'elementor_pro/forms/new_record', 'capstone_write_to_table', 10, 2);
-
-/**
- * Convert the category name to a slug
- * 
- * @param string    categoryName
- * 
- * @return string   slug
- */
-function bcr_convert_name_to_slug($categoryName) {
-    $categoryName = strtolower($categoryName);
-    $categoryName = str_replace(' ', '-', $categoryName);
-
-    return $categoryName;
-}
 ?>
