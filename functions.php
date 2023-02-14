@@ -136,9 +136,10 @@ function summit_redirects() {
         die;
     }
     // for any other pages that need this redirect, just add page name to array
+
     if ( is_page(array('Backpack Review','Summit Homepage','Community Reviews Profile', 'Ski Review', 'Apparel Review',
         'Ski Boot Review', 'Skiing Know Thyself', 'Climbing Skins Review', 'Snowboard Review', 'Summit Read Reviews Prototype'))){
-        
+
         session_start();
         // Set the previous URL session variable
         if (isset($_SERVER['HTTP_REFERER'])) {
