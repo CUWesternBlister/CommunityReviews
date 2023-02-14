@@ -9,9 +9,9 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
  * 
  * @return void
  */
-//function bcr_uninstall() {
-//    bcr_remove_tables();
-//}
+function bcr_uninstall() {
+    bcr_remove_tables();
+}
 
 /**
  * Drop all custom tables from database
@@ -73,5 +73,5 @@ function bcr_remove_tables() {
 }
 
 //Execute uninstall
-//bcr_uninstall();
+bcr_uninstall();
 ?>

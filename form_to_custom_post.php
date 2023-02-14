@@ -477,11 +477,7 @@ function summit_form_submission_custom_post_content($current_review_id, $current
     //fwrite($file, "product info: \n".$p_info_read."\n\n");
     
     $brand_name = $record[1];
-    //$brand_info = get_brand_info($brand_name, $file);
-    /* 
-    get_brand_info will not work until all brands in the froms are in the tables as well
-    this is a function that will be helpful whe reviews are accosiated with brands.
-    */
+    $brand_info = get_brand_info($brand_name, $file);
     //$b_info_read = print_r($brand_info, true);
     //fwrite($file, "brand info: \n".$b_info_read."\n\n");
 
