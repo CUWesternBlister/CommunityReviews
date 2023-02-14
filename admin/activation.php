@@ -5,10 +5,27 @@
  * @return void
  */
 function bcr_activate() {
-    bcr_setup_tables();
-    require_once( plugin_dir_path( __FILE__ ) . 'uploadInitialData.php');
+    //bcr_setup_tables();
+    //require_once( plugin_dir_path( __FILE__ ) . 'uploadInitialData.php');
     require_once( plugin_dir_path( __FILE__ ) . 'align_form_ids.php');
 }
+
+/*function check_if_table_exists($tableName){
+    global $wpdb;
+    /*
+    $database_name = $wpdb->dbname;
+    $current_schema = $wpdb->get_var("SELECT DATABASE()");
+    $sql = "IF (EXISTS (SELECT * 
+                    FROM $database_name.TABLES 
+                    WHERE TABLE_SCHEMA = $current_schema 
+                    AND TABLE_NAME = $tableName))
+                BEGIN
+                    SELECT 1 AS res ELSE SELECT 0 AS res;
+                END;";
+    
+    $table_exists = $wpdb->get_var("SHOW TABLES LIKE $tableName") !== null;
+    return $table_exists
+}*/
 
 /**
  * Create the necessary mysql tables for storing Community Reviews
