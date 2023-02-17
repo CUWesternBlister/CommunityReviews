@@ -3,16 +3,13 @@
 include 'generate_html.php';
 
 function insert_into_ski_review($header, $file, $formName) {
+    //$start = "\n\n INSERT INTO SKI REVIEW \n";
+    //fwrite($file, $start);
     global $wpdb;
-
     $userInfo = $header['userInfo'];
-    $u_info = print_r($userInfo, true);
-    //fwrite($file, "post user info: \n".$u_info."\n\n");
     
     $current_userData = get_userdata($userInfo->userID);
     $userName = $current_userData->display_name;
-    //$userName = get_userName_by_userID($userInfo->userID,$file);
-    fwrite($file, "user name: ".$userName." \n");
     
     if ( NULL === $header || 0 === $header || '0' === $header || empty( $header ) ) {
         return;
@@ -27,14 +24,9 @@ function insert_into_ski_review($header, $file, $formName) {
     $html = $user_html . $html;
 
     $title_arr = $header["questions_and_answers"]["title"];
-    //$custom_post_input = print_r($title_arr, true);
-    //fwrite($file, "tile array: \n".$custom_post_input."\n\n");
     
     $postTitle = get_post_title($title_arr);
 
-    //fwrite($file, "\n".$html."\n");
-    //fetch user name to insert
-    ////wp_strip_all_tags( $header['brandName'] . ' ' . $header['productName']),
     $ski_review = array(
                         'post_title' => wp_strip_all_tags($postTitle), 
                         'post_content' => $html,
@@ -54,10 +46,7 @@ function insert_into_ski_review($header, $file, $formName) {
                         'post_excerpt' => $user_html,
                         'post_status' => 'publish',
                         );
-    //$custom_post_input = print_r($ski_review, true);
-    //fwrite($file, "Post array: \n".$custom_post_input."\n\n");
-    wp_insert_post( $ski_review );
-    //fwrite($file,"\n\nHERE\n\n");      
+    wp_insert_post( $ski_review );     
 }
 
 function get_post_title($title_arr){
@@ -78,6 +67,36 @@ foreach($title_arr as $arr){
 }
 $html = $year . $str; 
 return $html;
+}
+
+function get_answer_and_question_content($record,$file){
+    global $wpdb;
+    //$start = "\n\n GET ANSWERS AND QUESTIONS \n";
+    //fwrite($file, $start);
+
+    $return_array = array(
+        'title' => array(),
+        'testingConditions' => array(),
+        'multipleChoice' => array(),
+        'testimony' => array()
+    );
+
+    $answer_content = array_values($record);
+    $question_ids = array_keys($record);   
+    $question_table = $wpdb->prefix . "bcr_questions";
+
+    $answer_arr_i = 0;
+    foreach($question_ids as $id){
+        $q_content = get_question_read_content($id);
+        $type = $q_content->questionType;
+        $display = $q_content->questionDisplayContent;
+        $answer = $answer_content[$answer_arr_i];
+        $obj = ["id" => $id, "question" => $display, "answer" => $answer];
+        $return_array[$type][] = $obj;
+        $answer_arr_i += 1;
+    }
+   
+    return $return_array;
 }
 
 /*

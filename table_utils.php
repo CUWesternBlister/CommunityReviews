@@ -43,4 +43,9 @@
 		return $str_ids;
 	}
 */
+
+function print_to_test_file($input, $message, $file){
+	$input_p = print_r($input, true);
+    fwrite($file, $message."\n".$input_p."\n\n");
+}
 ?>
