@@ -6,9 +6,32 @@
  */
 function bcr_activate() {
     bcr_setup_tables();
+    //require_once( plugin_dir_path( __FILE__ ) . 'uploadPages.php');
+    create_test_page();
     require_once( plugin_dir_path( __FILE__ ) . 'uploadInitialData.php');
     require_once( plugin_dir_path( __FILE__ ) . 'align_form_ids.php');
 }
+
+/**
+ * Upload pages function
+ *
+ * @return void
+ */
+function create_test_page() {
+    $post_content = 'Test content';
+    $post_title = 'Hello World Testing Page Upload';
+    $post_status = 'publish';
+    $post_type = 'page';
+    
+    $test_page = array(
+        'post_title' => $post_title,
+        'post_content' => $post_content,
+        'post_status' => $post_status,
+        'post_type' => $post_type
+    );
+    wp_insert_post( $test_page );
+}
+
 
 /**
  * Create the necessary mysql tables for storing Community Reviews
