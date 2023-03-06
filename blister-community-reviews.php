@@ -48,3 +48,11 @@ function bcr_include() {
 }
 
 add_action( 'plugins_loaded', 'bcr_include');
+
+function bcr_register_widgets( $widgets_manager ) {
+    require_once( plugin_dir_path( __FILE__ ) . '/widgets/community-reviews-display.php');
+
+    $widgets_manager->register( new \Community_Reviews_Display() );
+}
+
+add_action( 'elementor/widgets/register', 'bcr_register_widgets' );
