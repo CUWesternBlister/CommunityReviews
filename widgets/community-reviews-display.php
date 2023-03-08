@@ -12,6 +12,10 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
         return __( 'Community Reviews', 'community-reviews' );
     }
 
+	public function get_categories() {
+		return [ 'community_reviews', 'basic' ];
+	}
+
     public function get_icon() {
 		return 'eicon-post-list';
 	}
@@ -26,13 +30,90 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 		?>
 		<div class="community-reviews-display">
 			<div class="community-reviews-display-filter">
-				<label for="community-reviews-display-author">Author:</label>
-				<input type="text" id="community-reviews-display-author">
+
+				<label for="community-reviews-display-product">Product:</label>
+				<select id="community-reviews-display-product">
+					<option value="">--No Product Filter--</option>
+					<?php
+						global $wpdb;
+
+						$products_table_name = $wpdb->prefix . "bcr_products";
+
+						$sql = $wpdb->prepare("SELECT productName FROM $products_table_name;");
+				
+						$results  = $wpdb->get_results($sql);
+
+						foreach ($results as $id => $product_obj) {
+							$product_name = $product_obj->productName;
+
+							echo '<option value="' . esc_html($product_name) . '">' . esc_html($product_name) . '</option>';
+						}
+					?>
+				</select>
+
+				<label for="community-reviews-display-brand">Brand:</label>
+				<select id="community-reviews-display-brand">
+					<option value="">--No Brand Filter--</option>
+					<?php
+						global $wpdb;
+
+						$brands_table_name = $wpdb->prefix . "bcr_brands";
+
+						$sql = $wpdb->prepare("SELECT brandName FROM $brands_table_name;");
+				
+						$results  = $wpdb->get_results($sql);
+
+						foreach ($results as $id => $brand_obj) {
+							$brand_name = $brand_obj->brandName;
+
+							echo '<option value="' . esc_html($brand_name) . '">' . esc_html($brand_name) . '</option>';
+						}
+					?>
+				</select>
+
+				<label for="community-reviews-display-category">Category:</label>
+				<select id="community-reviews-display-category">
+					<option value="">--No Category Filter--</option>
+					<?php
+						global $wpdb;
+
+						$categories_table_name = $wpdb->prefix . "bcr_categories";
+
+						$sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name;");
+				
+						$results  = $wpdb->get_results($sql);
+
+						foreach ($results as $id => $category_obj) {
+							$category_name = $category_obj->categoryName;
+
+							echo '<option value="' . esc_html($category_name) . '">' . esc_html($category_name) . '</option>';
+						}
+					?>
+				</select>
 
 				<button id="community-reviews-display-submit">Filter</button>
 			</div>
 
 			<div class="community-reviews-display-show-posts">
+				<?php
+					$args = array(
+						'post_type' 	 => 'Community Reviews',
+						'posts_per_page' => -1,
+					);
+
+					$query = new \WP_Query( $args );
+					
+					global $post;
+					if ( $query->have_posts() ) {
+						echo '<ul>';
+						while ( $query->have_posts() ) {
+							$query->the_post();
+							echo '<li>' . get_the_title() . get_the_excerpt() . '</li>';
+						}
+						echo '</ul>';
+						wp_reset_postdata();
+					}
+				?>
 			</div>
 		</div>
 
@@ -41,14 +122,18 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 			$( '#community-reviews-display-submit' ).on( 'click', function( event ) {
 				event.preventDefault();
 
-				var author = $( '#community-reviews-display-author' ).val();
+				var product = $( '#community-reviews-display-product' ).val();
+				var brand = $( '#community-reviews-display-brand' ).val();
+				var category = $( '#community-reviews-display-category' ).val();
 
 				$.ajax( {
 					url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
 					method: 'POST',
 					data: {
 						action: 'bcr_filter_posts',
-						author: author
+						product: product,
+						brand: brand,
+						category: category
 					},
 					success: function( data ) {
 						$( '.community-reviews-display-show-posts' ).html( data );
