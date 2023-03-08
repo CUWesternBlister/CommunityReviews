@@ -20,5 +20,10 @@ function bcr_view_current_user_reviews_only_query( $query ) {
     }
 }
 
-add_action( 'elementor/query/users_reviews', 'bcr_view_current_user_reviews_only_query');
+add_action( 'elementor/query/users_reviews', 'bcr_view_current_user_reviews_only_query' );
+
+// function bcr_filter_test( $query ) {
+//     $query = new WP_Query(array('post__in' => array(0)));
+// }
+// add_action( 'elementor/query/filter_test', 'bcr_filter_test' );
 ?>
