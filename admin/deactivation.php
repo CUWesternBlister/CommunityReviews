@@ -1,5 +1,4 @@
 <?php
-//----------------------------------------------------------------------FOR TESTING ONLY REMOVE FOR SUMMIT FINAL VERSION!!!------------------------------------------------------------------------
 
 /**
  * Run all uninstall functions
@@ -7,7 +6,7 @@
  * @return void
  */
 function bcr_uninstall() {
-    bcr_remove_tables();
+    //bcr_remove_tables();
 }
 
 /**

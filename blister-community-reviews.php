@@ -24,11 +24,13 @@ function bcr_activation() {
     require_once( plugin_dir_path( __FILE__ ) . '/admin/activation.php');
 }
 
+
 /**
  * Load Blister Community Reviews deactivation functions
  * 
  * @return void
  */
+
 function bcr_deactivation() {
     require_once( plugin_dir_path( __FILE__ ) . '/admin/deactivation.php');
 }
