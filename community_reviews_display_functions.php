@@ -16,12 +16,12 @@ function bcr_filter_posts() {
 
     $meta_query = array();
 
-    // if ( ! empty( $_POST['product'] ) ) {
-    //     array_push($meta_query, array('key' => 'product_tested', 'value' => sanitize_text_field( $_POST['product'] )));
-    // }
+    if ( ! empty( $_POST['product'] ) ) {
+        array_push($meta_query, array('key' => 'product_tested', 'value' => sanitize_text_field( $_POST['product'] )));
+    }
 
     if ( ! empty( $_POST['brand'] ) ) {
-        array_push($meta_query, array('key' => 'product_tested', 'value' => sanitize_text_field( $_POST['brand'] )));
+        array_push($meta_query, array('key' => 'brand', 'value' => sanitize_text_field( $_POST['brand'] )));
     }
 
     if ( ! empty( $_POST['category'] ) ) {

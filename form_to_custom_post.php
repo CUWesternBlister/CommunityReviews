@@ -44,6 +44,7 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
                                                   'weight'        => $userInfo->weight,
                                                   'skiAbility'    => $userInfo->skiAbility,
                                                   'product_tested'=> $header['productName'],
+                                                  'brand'=> $header['brandName'],
                                                   'category'      => $header['categoryName'],
                                                   'sport'         => $header['sportName']
                                                   ),
