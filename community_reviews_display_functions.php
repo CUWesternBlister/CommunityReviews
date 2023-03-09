@@ -41,6 +41,7 @@ function bcr_filter_posts() {
         echo '</ul>';
         wp_reset_postdata();
     }
+    wp_die();
 }
 
 add_action( 'wp_ajax_bcr_filter_posts', 'bcr_filter_posts' );
