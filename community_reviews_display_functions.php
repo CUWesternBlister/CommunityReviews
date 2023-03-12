@@ -28,6 +28,15 @@ function bcr_filter_posts() {
         array_push($meta_query, array('key' => 'category', 'value' => sanitize_text_field( $_POST['category'] )));
     }
 
+    if ( ! empty($_POST['min_weight']) And ! empty($_POST['max_weight']) ) {
+        echo '<p>' . esc_html(sanitize_text_field( $_POST['min_weight'] )) . ' - ' . esc_html(sanitize_text_field( $_POST['max_weight'] )) . '</p>';
+        // array_push($meta_query, array('key' => 'weight', 'value' => array(intval(sanitize_text_field( $_POST['min_weight'] )), intval(sanitize_text_field( $_POST['max_weight'] ))), 'compare' => 'BETWEEN', 'value' => 'numeric') );
+    }
+
+    if ( ! empty( $_POST['ski_ability'] ) ) {
+        array_push($meta_query, array('key' => 'skiAbility', 'value' => sanitize_text_field( $_POST['ski_ability'] )));
+    }
+
     $args['meta_query'] = $meta_query;
 
     $query = new \WP_Query( $args );
