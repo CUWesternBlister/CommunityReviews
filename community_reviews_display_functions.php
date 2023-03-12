@@ -56,6 +56,11 @@ function bcr_filter_posts() {
 add_action( 'wp_ajax_bcr_filter_posts', 'bcr_filter_posts' );
 add_action( 'wp_ajax_nopriv_bcr_filter_posts', 'bcr_filter_posts' );
 
+/**
+ * Filter the options for the products dropdown based on the currently selected brand
+ * 
+ * @return  HTML
+ */
 function bcr_filter_products() {
     global $wpdb;
 
