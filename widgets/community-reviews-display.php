@@ -175,6 +175,28 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				} );
 			} );
 		} );
+
+		jQuery( document ).ready( function( $ ) {
+			$( '#community-reviews-display-brand' ).on( 'change', function() {
+
+				var brand_selected = $( '#community-reviews-display-brand' ).val();
+
+				$.ajax( {
+					url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
+					method: 'POST',
+					data: {
+						action: 'bcr_filter_products',
+						brand_selected: brand_selected
+					},
+					success: function( data ) {
+						$( '.community-reviews-display-product-controls' ).html( data );
+					},
+					error: function( xhr, status, error ) {
+						console.error( xhr, status, error );
+					},
+				} );
+			} );
+		} );
 		</script>
 		<?php
     }
