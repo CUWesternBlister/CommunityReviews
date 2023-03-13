@@ -44,6 +44,7 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
                                                   'weight'        => $userInfo->weight,
                                                   'skiAbility'    => $userInfo->skiAbility,
                                                   'product_tested'=> $header['productName'],
+                                                  'brand'         => $header['brandName'],
                                                   'category'      => $header['categoryName'],
                                                   'sport'         => $header['sportName']
                                                   ),
@@ -650,6 +651,7 @@ function get_user_information($file){
     $user_table_name = $wpdb->prefix . "bcr_users";//i do not have this same able 
     $queryString = $wpdb->prepare("SELECT * FROM $user_table_name WHERE userID=%s", $userID);
     $userInformation = $wpdb->get_row($queryString);
+    //$userInformation['weight'] = intval($userInformation['weight']);
 
     return $userInformation;
 }
