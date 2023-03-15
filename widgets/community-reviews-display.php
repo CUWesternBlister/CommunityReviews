@@ -6,8 +6,8 @@ use ElementorPro\Modules\QueryControl\Module as Module_Query;
 use ElementorPro\Modules\QueryControl\Controls\Group_Control_Related;
 use ElementorPro\Modules\Posts\Skins;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+ if ( ! defined( 'ABSPATH' ) ) {
+ 	exit; // Exit if accessed directly
 }
 
 class Community_Reviews_Display extends \Elementor\Widget_Base {
@@ -104,11 +104,54 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					</select>
 				</div>
 
-				<div class="community-reviews-display-weight-controls">
-					<label for="community-reviews-display-min-weight">Weight</label>
-					<input id="community-reviews-display-min-weight" type="range" value="100" min="50" max="350"/>
-					<input id="community-reviews-display-max-weight" type="range" value="200" min="50" max="350"/>
+				
+				<div class="community-reviews-display-height-controls">
+					<label for="community-reviews-display-height">Height:</label>
+					<select id="community-reviews-display-heght">
+						<option value="">--No Height Filter--</option>
+						<?php
+							global $wpdb;
+							$user_table_name = $wpdb->prefix . "bcr_users";
+							$sql = $wpdb->prepare("SELECT DISTINCT heightFeet, heightInches FROM $user_table_name;");
+					
+							$results  = $wpdb->get_results($sql);
+
+							foreach ($results as $id => $height_obj) {
+								$height_feet = $height_obj->heightFeet;
+								$height_in = $height_obj->heightInches;
+
+								echo '<option value="' . esc_html($height_feet) . 'ft, ' . esc_html($height_in) . 'in' . '">' . esc_html($height_feet) . 'ft, ' . esc_html($height_in) . 'in' . '</option>';
+							}
+						?>
+					</select>
 				</div>
+
+				<div class="community-reviews-display-weight-controls">
+					<label for="community-reviews-display-weight">Weight</label>
+					<?php
+							global $wpdb;
+							$user_table_name = $wpdb->prefix . "bcr_users";
+
+							$sql = $wpdb->prepare("SELECT MAX(weight) FROM $user_table_name;");
+							$max_weight  = $wpdb->get_var($sql);
+							//$max_weight_str = strval($max_weight);
+							$sql = $wpdb->prepare("SELECT MIN(weight) FROM $user_table_name;");
+							$min_weight  = $wpdb->get_var($sql);
+							//$min_weight_str = strval($min_weight);
+							$avg_weight = ($max_weight+$min_weight)/2;
+					?>
+					<script>
+						function updateWeightValue() {
+							var slider = document.getElementById("community-reviews-display-min-weight");
+							var valueDisplay = document.getElementById("weight-value");
+							valueDisplay.innerHTML = slider.value;
+						}
+					</script>
+					<input id="community-reviews-display-weight" type="range" value="<?php echo $avg_weight?>"  min="<?php echo $min_weight ?>" max="<?php echo $max_weight ?>" onchange="updateWeightValue()">
+					<p id="weight-value"></p>
+				</div>
+
+				
 
 				<div class="community-reviews-display-ski-ability-controls">
 					<label for="community-reviews-display-ski-ability">Ski Ability</label>
@@ -157,8 +200,9 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				var product = $( '#community-reviews-display-product' ).val();
 				var brand = $( '#community-reviews-display-brand' ).val();
 				var category = $( '#community-reviews-display-category' ).val();
-				var min_weight = $( '#community-reviews-display-min-weight' ).val();
-				var max_weight = $( '#community-reviews-display-max-weight' ).val();
+				var weight = $( '#community-reviews-display-weight' ).val();
+				//var max_weight = $( '#community-reviews-display-max-weight' ).val();
+				var height = $( '#community-reviews-display-height' ).val();
 				var ski_ability = $( '#community-reviews-display-ski-ability' ).val();
 
 				$.ajax( {
@@ -169,8 +213,8 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						product: product,
 						brand: brand,
 						category: category,
-						min_weight: min_weight,
-						max_weight: max_weight,
+						weight: weight,
+						height: height,
 						ski_ability: ski_ability
 					},
 					success: function( data ) {

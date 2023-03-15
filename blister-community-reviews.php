@@ -53,10 +53,12 @@ add_action( 'plugins_loaded', 'bcr_include');
 
 function bcr_register_widgets( $widgets_manager ) {
     $bool = require_once( plugin_dir_path( __FILE__ ) . '/widgets/community-reviews-display.php');
-    // if ( ! class_exists('Community_Reviews_Display')) 
-    //     die('There is no hope!');
+    // if ( ! class_exists('Community_Reviews_Display')){
+    //     $namespace = print_r(get_declared_classes(), true);
+    //     die($namespace);
+    // }
     if($bool){
-        $temp = new \Community_Reviews_Display();
+        $temp = new ElementorPro\Modules\Posts\Widgets\Community_Reviews_Display();
         $widgets_manager->register($temp);
     }
 }
