@@ -196,6 +196,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				var min_weight = $( '#community-reviews-display-min-weight' ).val();
 				var max_weight = $( '#community-reviews-display-max-weight' ).val();
 				var ski_ability = $( '#community-reviews-display-ski-ability' ).val();
+				var sport = $( '#community-reviews-display-sport' ).val();
 
 				$.ajax( {
 					url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
@@ -207,7 +208,8 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						category: category,
 						min_weight: min_weight,
 						max_weight: max_weight,
-						ski_ability: ski_ability
+						ski_ability: ski_ability,
+						sport: sport
 					},
 					success: function( data ) {
 						$( '.community-reviews-display-show-posts' ).html( data );

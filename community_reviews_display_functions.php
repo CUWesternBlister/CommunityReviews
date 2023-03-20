@@ -5,6 +5,8 @@
  * @return  HTML
  */
 function bcr_filter_posts() {
+    global $wpdb;
+
     $args = array(
         'post_type'      => 'Community Reviews',
         'posts_per_page' => -1,
@@ -26,11 +28,30 @@ function bcr_filter_posts() {
 
     if ( ! empty( $_POST['category'] ) ) {
         array_push($meta_query, array('key' => 'category', 'value' => sanitize_text_field( $_POST['category'] )));
+    } else if ( ! empty( $_POST['sport'] ) ) {
+        $categories_table_name = $wpdb->prefix . "bcr_categories";
+
+        $sql = $wpdb->prepare("SELECT categoryID FROM $categories_table_name WHERE (categoryName=%s);", sanitize_text_field( $_POST['sport'] ));
+
+        $selected_sport_id = $wpdb->get_var($sql, 0, 0);
+
+        $sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name WHERE (parentID=%s);", $selected_sport_id);
+
+        $results  = $wpdb->get_results($sql);
+        
+        $categories = array(sanitize_text_field( $_POST['sport']));
+
+        foreach ($results as $id => $category_obj) {
+            $category_name = $category_obj->categoryName;
+            array_push($categories, $category_name);
+        }
+
+        array_push($meta_query, array('key' => 'category', 'value' => $categories));
     }
 
     if ( ! empty($_POST['min_weight']) And ! empty($_POST['max_weight']) ) {
         echo '<p>' . esc_html(sanitize_text_field( $_POST['min_weight'] )) . ' - ' . esc_html(sanitize_text_field( $_POST['max_weight'] )) . '</p>';
-        // array_push($meta_query, array('key' => 'weight', 'value' => array(intval(sanitize_text_field( $_POST['min_weight'] )), intval(sanitize_text_field( $_POST['max_weight'] ))), 'compare' => 'BETWEEN', 'value' => 'numeric') );
+        array_push($meta_query, array('key' => 'weight', 'value' => array(sanitize_text_field( $_POST['min_weight'] ), sanitize_text_field( $_POST['max_weight'] )), 'compare' => 'BETWEEN', 'type' => 'numeric') );
     }
 
     if ( ! empty( $_POST['ski_ability'] ) ) {
@@ -120,7 +141,7 @@ function bcr_filter_categories() {
 
         $sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name WHERE (parentID=%s);", $selected_sport_id);
     } else {
-        $sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name WHERE (parentID=0);");
+        $sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name WHERE (parentID!=0);");
     }
 
     $results  = $wpdb->get_results($sql);
