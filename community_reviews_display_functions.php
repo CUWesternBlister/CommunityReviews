@@ -102,6 +102,49 @@ add_action( 'wp_ajax_bcr_filter_products', 'bcr_filter_products' );
 add_action( 'wp_ajax_nopriv_bcr_filter_products', 'bcr_filter_products' );
 
 /**
+ * Filter the available category options based on selected sport
+ * 
+ * @return  HTML
+ */
+function bcr_filter_categories() {
+    global $wpdb;
+
+    $categories_table_name = $wpdb->prefix . "bcr_categories";
+
+    if ( ! empty( $_POST['sport_selected'] ) ) {
+        $selected_sport = sanitize_text_field( $_POST['sport_selected'] );
+
+        $sql = $wpdb->prepare("SELECT categoryID FROM $categories_table_name WHERE (categoryName=%s);", $selected_sport);
+
+        $selected_sport_id = $wpdb->get_var($sql, 0, 0);
+
+        $sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name WHERE (parentID=%s);", $selected_sport_id);
+    } else {
+        $sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name WHERE (parentID=0);");
+    }
+
+    $results  = $wpdb->get_results($sql);
+
+    echo '<label for="community-reviews-display-category">Category:</label>';
+    echo '<select id="community-reviews-display-category">';
+    
+    echo '<option value="">--No Category Filter--</option>';
+
+    foreach ($results as $id => $category_obj) {
+        $category_name = $category_obj->categoryName;
+
+        echo '<option value="' . esc_html($category_name) . '">' . esc_html($category_name) . '</option>';
+    }
+
+    echo '</select>';
+
+    wp_die();
+}
+
+add_action( 'wp_ajax_bcr_filter_categories', 'bcr_filter_categories' );
+add_action( 'wp_ajax_nopriv_bcr_filter_categories', 'bcr_filter_categories' );
+
+/**
  * Register a category called 'Community Reviews' on the elementor editor panel
  * 
  * @param   Object  elements_manager

@@ -240,6 +240,28 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				} );
 			} );
 		} );
+
+		jQuery( document ).ready( function( $ ) {
+			$( '#community-reviews-display-sport' ).on( 'change', function() {
+
+				var sport_selected = $( '#community-reviews-display-sport' ).val();
+
+				$.ajax( {
+					url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
+					method: 'POST',
+					data: {
+						action: 'bcr_filter_categories',
+						sport_selected: sport_selected
+					},
+					success: function( data ) {
+						$( '.community-reviews-display-category-controls' ).html( data );
+					},
+					error: function( xhr, status, error ) {
+						console.error( xhr, status, error );
+					},
+				} );
+			} );
+		} );
 		</script>
 		<?php
     }
