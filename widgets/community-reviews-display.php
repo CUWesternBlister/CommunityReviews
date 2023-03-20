@@ -31,30 +31,52 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 		<div class="community-reviews-display">
 			<div class="community-reviews-display-filter">
 
-				<div class="community-reviews-display-product-controls">
-					<label for="community-reviews-display-product">Product:</label>
-					<select id="community-reviews-display-product">
-						<option value="">--No Product Filter--</option>
+				<div class="community-reviews-display-sport-controls">
+					<label for="community-reviews-display-sport">Sport:</label>
+					<select id="community-reviews-display-sport">
+						<option value="">--No Sport Filter--</option>
 						<?php
 							global $wpdb;
 
-							$products_table_name = $wpdb->prefix . "bcr_products";
+							$categories_table_name = $wpdb->prefix . "bcr_categories";
 
-							$sql = $wpdb->prepare("SELECT productName FROM $products_table_name;");
+							$sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name WHERE (parentID=0);");
 					
 							$results  = $wpdb->get_results($sql);
 
-							foreach ($results as $id => $product_obj) {
-								$product_name = $product_obj->productName;
+							foreach ($results as $id => $category_obj) {
+								$category_name = $category_obj->categoryName;
 
-								echo '<option value="' . esc_html($product_name) . '">' . esc_html($product_name) . '</option>';
+								echo '<option value="' . esc_html($category_name) . '">' . esc_html($category_name) . '</option>';
 							}
 						?>
 					</select>
 				</div>
-				
+
+				<div class="community-reviews-display-category-controls">
+					<label for="community-reviews-display-category">Category:</label>
+					<select id="community-reviews-display-category">
+						<option value="">--No Category Filter--</option>
+						<?php
+							global $wpdb;
+
+							$categories_table_name = $wpdb->prefix . "bcr_categories";
+
+							$sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name WHERE (parentID!=0);");
+					
+							$results  = $wpdb->get_results($sql);
+
+							foreach ($results as $id => $category_obj) {
+								$category_name = $category_obj->categoryName;
+
+								echo '<option value="' . esc_html($category_name) . '">' . esc_html($category_name) . '</option>';
+							}
+						?>
+					</select>
+				</div>
+
 				<div class="community-reviews-display-brand-controls">
-				<label for="community-reviews-display-brand">Brand:</label>
+					<label for="community-reviews-display-brand">Brand:</label>
 					<select id="community-reviews-display-brand">
 						<option value="">--No Brand Filter--</option>
 						<?php
@@ -74,24 +96,24 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						?>
 					</select>
 				</div>
-				
-				<div class="community-reviews-display-category-controls">
-					<label for="community-reviews-display-category">Category:</label>
-					<select id="community-reviews-display-category">
-						<option value="">--No Category Filter--</option>
+
+				<div class="community-reviews-display-product-controls">
+					<label for="community-reviews-display-product">Product:</label>
+					<select id="community-reviews-display-product">
+						<option value="">--No Product Filter--</option>
 						<?php
 							global $wpdb;
 
-							$categories_table_name = $wpdb->prefix . "bcr_categories";
+							$products_table_name = $wpdb->prefix . "bcr_products";
 
-							$sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name;");
+							$sql = $wpdb->prepare("SELECT productName FROM $products_table_name;");
 					
 							$results  = $wpdb->get_results($sql);
 
-							foreach ($results as $id => $category_obj) {
-								$category_name = $category_obj->categoryName;
+							foreach ($results as $id => $product_obj) {
+								$product_name = $product_obj->productName;
 
-								echo '<option value="' . esc_html($category_name) . '">' . esc_html($category_name) . '</option>';
+								echo '<option value="' . esc_html($product_name) . '">' . esc_html($product_name) . '</option>';
 							}
 						?>
 					</select>
