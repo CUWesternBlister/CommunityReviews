@@ -31,6 +31,8 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 		<div class="community-reviews-display">
 			<div class="community-reviews-display-filter">
 
+				<p>Product Filters</p>
+
 				<div class="community-reviews-display-sport-controls">
 					<label for="community-reviews-display-sport">Sport:</label>
 					<select id="community-reviews-display-sport">
@@ -125,11 +127,13 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					<input id="community-reviews-display-max-length" type="range" value="200" min="50" max="250"/>
 				</div>
 
-				<div class="community-reviews-display-weight-controls">
-					<label for="community-reviews-display-min-weight">Weight</label>
-					<input id="community-reviews-display-min-weight" type="range" value="100" min="50" max="350"/>
-					<input id="community-reviews-display-max-weight" type="range" value="200" min="50" max="350"/>
+				<div class="community-reviews-display-year-controls">
+					<label for="community-reviews-display-min-year">Year</label>
+					<input id="community-reviews-display-min-year" type="range" value="2016" min="2000" max="2024"/>
+					<input id="community-reviews-display-max-year" type="range" value="2023" min="2000" max="2024"/>
 				</div>
+
+				<p>Reviewer Filters</p>
 
 				<div class="community-reviews-display-ski-ability-controls">
 					<label for="community-reviews-display-ski-ability">Ski Ability</label>
@@ -143,6 +147,11 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					</select>
 				</div>
 
+				<div class="community-reviews-display-weight-controls">
+					<label for="community-reviews-display-min-weight">Weight</label>
+					<input id="community-reviews-display-min-weight" type="range" value="100" min="50" max="350"/>
+					<input id="community-reviews-display-max-weight" type="range" value="200" min="50" max="350"/>
+				</div>
 
 				<button id="community-reviews-display-submit">Filter</button>
 			</div>
