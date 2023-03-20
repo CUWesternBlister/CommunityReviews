@@ -21,7 +21,8 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
                     <div id= "userHeight" class = "userInfo">Height: '.esc_html($userInfo->heightFeet).' ft, '.esc_html($userInfo->heightInches).' in</div>
                     <div id "userWeight" class = "userInfo">Weight: '.esc_html($userInfo->weight).' lbs</div>
                     <div id= "userAbility" class = "userInfo">Reviewer Ability: '.esc_html($userInfo->skiAbility).'</div>';
-        $html = $user_html . $html;
+        $user_info_html = format_reviewerInfo($userInfo, $userName);
+        $html = $user_info_html . $html;
 
         $title_arr = $header["questions_and_answers"]["title"];
         //$custom_post_input = print_r($title_arr, true);
@@ -87,6 +88,18 @@ function get_userName_by_userID($userID, $file){
     return $res->display_name;
 }
 
+function format_reviewerInfo($userInfo, $userName){
+    $html .= '<div id = "reviewerInfoContainer" class = "whole_container">
+        <div id= " userName" class = "short_container">Reviewer: '.esc_html($userName). '</div>
+        <div id= "userHeight" class = "short_container">Height: '.esc_html($userInfo->heightFeet).' ft, '.esc_html($userInfo->heightInches).' in</div>
+        <div id "userWeight" class = "short_container">Weight: '.esc_html($userInfo->weight).' lbs</div>
+        <div id= "userAbility" class = "short_container">Ability: '.esc_html($userInfo->skiAbility).'</div>
+        </div>';
+    return $html;
+
+
+}
+
 function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 
     $titleQuestions = $qs_and_ans['title'];
@@ -104,9 +117,11 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 
     if ($form_name == 'Ski Review Form'){//ski
 
-        $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
-        $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
+        $html .= '<div id = "testimonyAndTestingContainer" class = "whole_container">';
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
+        $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
+        $html .= '</div>';
+        $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
         //$html .= '<div class = "whole_container_version" hidden="hidden">
         //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
         //    </div>';
@@ -114,9 +129,11 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 
     if ($form_name == 'Summit_Ski_Boot_Review_Form'){//boot
 
-        $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
-        $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
+        $html .= '<div id = "testimonyAndTestingContainer" class = "whole_container">';
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
+        $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
+        $html .= '</div>';
+        $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
         //$html .= '<div class = "whole_container_version" hidden="hidden">
         //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
         //    </div>';
@@ -124,17 +141,19 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 
     if ($form_name == 'Summit_Apparel_Form'){//apparel
 
-        $html .= gen_HTML_for_multiple_choice_qs2($multipleChoiceQuestions, $form_name);
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
+        $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
         //$html .= '<div class = "whole_container_version" hidden="hidden">
         //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
         //    </div>';
     }
     if ($form_name == 'Snowboard Review'){//snowboard
 
-        $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
-        $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
+        $html .= '<div id = "testimonyAndTestingContainer" class = "whole_container">';
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
+        $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
+        $html .= '</div>';
+        $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
         //$html .= '<div class = "whole_container_version" hidden="hidden">
         //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
         //    </div>';
@@ -142,8 +161,8 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 
         if ($form_name == 'Climbing Skin Review'){//apparel
 
-        $html .= gen_HTML_for_multiple_choice_qs2($multipleChoiceQuestions, $form_name);
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
+        $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
         //$html .= '<div class = "whole_container_version" hidden="hidden">
         //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
         //    </div>';
@@ -151,8 +170,8 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
 
         if ($form_name == 'Backpack review'){//apparel
 
-        $html .= gen_HTML_for_multiple_choice_qs2($multipleChoiceQuestions, $form_name);
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
+        $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
         //$html .= '<div class = "whole_container_version" hidden="hidden">
         //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
         //    </div>';
@@ -166,13 +185,65 @@ function gen_HTML_for_multiple_choice_qs($mulipleChoiceQs, $formName){
     //the object is now: ["id" => $id, "question" => $display, "answer" => $answer];
     //not question=>answer
     //below should sort of be the update to these fucntions:
-    $html = '<div id = "multipleChoice" class = "long_container">
-            <div id = "multipleChoiceTitle" class = "section_title">Product Review</div>';
+    $html = '<div id = "multipleChoice" class = "whole_container_justified">';
     foreach($mulipleChoiceQs as $arr){
-            $html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
-                    <div id = "'.esc_html($formName).'_answer_'.esc_html($arr['id']).'"  class = "answer">'.esc_html($arr['answer']).'</div>';    
+            //$html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
+            //        <div id = "'.esc_html($formName).'_answer_'.esc_html($arr['id']).'"  class = "answer">'.esc_html($arr['answer']).'</div>';   
+            if ($arr['answer'] == 'Terrible'){
+                $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['id']).'" class = circle_container">
+                    <div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
+                    <div id = "circle1'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                    <div id = "circle2'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
+                    <div id = "circle3'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
+                    <div id = "circle4'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
+                    <div id = "circle5'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
+                    </div>';
+            } 
+            if ($arr['answer'] == 'Not very good'){
+                $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['id']).'" class = circle_container">
+                    <div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
+                    <div id = "circle1'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                    <div id = "circle2'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                    <div id = "circle3'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
+                    <div id = "circle4'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
+                    <div id = "circle5'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
+                    </div>';
+            } 
+            if ($arr['answer'] == 'Average / Okay'){
+                $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['id']).'" class = circle_container"> 
+                    <div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
+                    <div id = "circle1'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                    <div id = "circle2'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                    <div id = "circle3'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                    <div id = "circle4'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
+                    <div id = "circle5'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
+                    </div>';
+            } 
+            if ($arr['answer'] == 'Pretty good'){
+                $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['id']).'" class = circle_container">
+                    <div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
+                    <div id = "circle1'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                    <div id = "circle2'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                    <div id = "circle3'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                    <div id = "circle4'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                    <div id = "circle5'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
+                    </div>';
+            } 
+            if ($arr['answer'] == 'Excellent'){
+                $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['id']).'" class = circle_container">
+                    <div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
+                    <div id = "circle1'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                    <div id = "circle2'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                    <div id = "circle3'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                    <div id = "circle4'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                    <div id = "circle5'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                    </div>';
+            } 
+
+
     }
     return $html.'</div>';
+    //return $html;
 }
 
 function gen_HTML_for_multiple_choice_qs2($mulipleChoiceQs, $formName ){
@@ -186,8 +257,7 @@ function gen_HTML_for_multiple_choice_qs2($mulipleChoiceQs, $formName ){
 }
 
 function gen_HTML_for_testing_conditions_qs($testingConditions, $formName){
-    $html = '<div id = "testingConditions" class = "short_container">
-            <div id = "testingConditionsTitle" class = "section_title">Testing Conditions</div>';
+    $html = '<div id = "testingConditions" class = "short_container">';
     foreach($testingConditions as $arr){
             $html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
                     <div id = "'.esc_html($formName).'_answer_'.esc_html($arr['id']).'" class = "answer">'.esc_html($arr['answer']).'</div>';    
@@ -196,9 +266,9 @@ function gen_HTML_for_testing_conditions_qs($testingConditions, $formName){
 }
 
 function gen_HTML_for_testimony_qs($testimony, $formName){
-    $html = '<div id = "testimony" class = "whole_container">
-            <div id = "testimonyTitle" class = "section_title">Testimony</div>';
-    foreach($testimony as $arr){
+    $html = '<div id = "testimony" class = "long_container">';
+    $reversed_list = array_reverse($testimony, true);
+    foreach($reversed_list as $arr){
         if($arr['answer'] != ""){
             $html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
                     <div id = "'.esc_html($formName).'_answer_'.esc_html($arr['id']).'" class = "answer">'.esc_html($arr['answer']).'</div>';    

@@ -2,10 +2,43 @@
 	#userHeight {
 		font-wight: bold;
 	}
+	.clip-circle{
+		background: red;
+		clip-path: circle(6px);
+		display: inline-block;
+		height: 12px;
+		width: 12px;
+	}
+
+	.clip-circle-grey{
+		background: darkgray;
+		clip-path: circle(6px);
+		display: inline-block;
+		height: 12px;
+		width: 12px;
+	}
+
+	.circle_containter{
+		width: 30%;
+		margin-left: 10px;
+		padding-top: 10px;
+		float: left;
+		display: block;
+	}
+
+	.question_title_no_padding{
+		width: 100%;
+		flex: 1;
+		display: inline-block;
+		float: left;
+		font-weight: bold;
+	}
 
 	.question_title {
 		width: 100%;
 		padding-left: 10px;
+		flex: 1;
+		display: inline-block;
 		float: left;
 		font-weight: bold;
 	}
@@ -19,8 +52,10 @@
 	.short_container {
 		width: 30%;
 		padding-right: 10px;
-		float: left;
+		padding-left: 10px;
 		display: block;
+		height: 100%;
+		background-color: rgb(227, 227, 227);
 	}
 
 	.long_container {
@@ -28,35 +63,26 @@
 		padding-right: 10px;
 		float: left;
 		display: block;
-		background-color: rgb(227, 227, 227);
-	}
-
-	.section_title {
-		width: 100%;
-		padding-left: 10px;
-		float: left;
-		font-weight: bold;
-		font-size: 20px;
-		color: white;
-		background-color: rgb(240, 36, 44);
-	}
-
-	.section_title2 {
-		width: 100%;
-		padding-left: 10px;
-		padding-right: 10px;
-		float: left;
-		font-weight: bold;
-		font-size: 20px;
-		color: white;
-		background-color: rgb(240, 36, 44);
+		background-color: white;
 	}
 
 	.whole_container {
 		width: 90%;
 		padding-right: 20px;
+		margin-top: 10px;
 		float: left;
-		display: block;
+		display: flex;
+		background-color: rgb(227, 227, 227);
+	}
+
+	.whole_container_justified {
+		width: 90%;
+		padding-top: 10px;
+		margin-top: 10px;
+		float: left;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
 		background-color: rgb(227, 227, 227);
 	}
 
@@ -64,41 +90,48 @@
 		width: 90%;
 		padding-right: 20px;
 		float: left;
-		display: block;
+		display: table;
 		background-color: white;
 	}
 
-	.short_question {
-		width: 30%;
-		padding-left: 10px;
-		float: left;
-		font-weight: bold;
-	}
-
-	.short_answer {
-		width: 30%;
-		padding-left: 10px;
-		float: left;
-	}
-
-	.long_answer {
-		width: 60%;
-		padding-left: 10px;
-		float: left;
-	}
-
-	.long_question {
-		width: 60%;
-		padding-left: 10px;
-		float: left;
-		font-weight: bold;
-	}
 }
 @media only screen and (max-width: 768px) {
 	#userHeight {
 		font-wight: bold;
 	}
 
+	.clip-circle{
+		background: red;
+		clip-path: circle(6px);
+		display: inline-block;
+		height: 12px;
+		width: 12px;
+	}
+
+	.clip-circle-grey{
+		background: darkgray;
+		clip-path: circle(6px);
+		display: inline-block;
+		height: 12px;
+		width: 12px;
+	}
+
+	.circle_containter{
+		width: 30%;
+		margin-left: 10px;
+		padding-top: 10px;
+		float: left;
+		display: block;
+	}
+
+	.question_title_no_padding{
+		width: 100%;
+		flex: 1;
+		display: inline-block;
+		float: left;
+		font-weight: bold;
+	}
+
 	.question_title {
 		width: 100%;
 		padding-left: 10px;
@@ -127,32 +160,22 @@
 		background-color: rgb(227, 227, 227);
 	}
 
-	.section_title {
-		width: 100%;
-		padding-left: 10px;
-		float: left;
-		font-weight: bold;
-		font-size: 20px;
-		color: white;
-		background-color: rgb(240, 36, 44);
-	}
-
-	.section_title2 {
-		width: 100%;
-		padding-left: 10px;
-		padding-right: 10px;
-		float: left;
-		font-weight: bold;
-		font-size: 20px;
-		color: white;
-		background-color: rgb(240, 36, 44);
-	}
-
 	.whole_container {
 		width: 90%;
 		padding-right: 20px;
+		margin-bottom: 10px;
 		float: left;
 		display: block;
+		background-color: rgb(227, 227, 227);
+	}
+	.whole_container_justified {
+		width: 90%;
+		padding-top: 10px;
+		margin-top: 10px;
+		float: left;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
 		background-color: rgb(227, 227, 227);
 	}
 
@@ -164,29 +187,5 @@
 		background-color: white;
 	}
 
-	.short_question {
-		width: 30%;
-		padding-left: 10px;
-		float: left;
-		font-weight: bold;
-	}
-
-	.short_answer {
-		width: 30%;
-		padding-left: 10px;
-		float: left;
-	}
-
-	.long_answer {
-		width: 60%;
-		padding-left: 10px;
-		float: left;
-	}
-
-	.long_question {
-		width: 60%;
-		padding-left: 10px;
-		float: left;
-		font-weight: bold;
-	}
+	
 }
