@@ -31,7 +31,18 @@
 		flex: 1;
 		display: inline-block;
 		float: left;
+		color: black;
 		font-weight: bold;
+	}
+
+	.section_title {
+		width: 100%;
+		padding-left: 10px;
+		float: left;
+		font-weight: bold;
+		font-size: 20px;
+		color: white;
+		background-color: rgb(240, 36, 44);
 	}
 
 	.question_title {
@@ -40,6 +51,7 @@
 		flex: 1;
 		display: inline-block;
 		float: left;
+		color: black;
 		font-weight: bold;
 	}
 
@@ -55,6 +67,7 @@
 		padding-left: 10px;
 		display: block;
 		height: 100%;
+		color:black;
 		background-color: rgb(227, 227, 227);
 	}
 
@@ -137,6 +150,16 @@
 		padding-left: 10px;
 		float: left;
 		font-weight: bold;
+	}
+
+	.section_title {
+		width: 100%;
+		padding-left: 10px;
+		float: left;
+		font-weight: bold;
+		font-size: 20px;
+		color: white;
+		background-color: rgb(240, 36, 44);
 	}
 
 	.answer {

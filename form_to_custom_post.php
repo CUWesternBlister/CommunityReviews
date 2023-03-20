@@ -17,10 +17,7 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
         
         $html = format_questions_answers_post_content($header["questions_and_answers"],$formName,$file);
         
-        $user_html.='<div id= "userName" class = "userInfo">Reviewer: '.esc_html($userName). '</div>
-                    <div id= "userHeight" class = "userInfo">Height: '.esc_html($userInfo->heightFeet).' ft, '.esc_html($userInfo->heightInches).' in</div>
-                    <div id "userWeight" class = "userInfo">Weight: '.esc_html($userInfo->weight).' lbs</div>
-                    <div id= "userAbility" class = "userInfo">Reviewer Ability: '.esc_html($userInfo->skiAbility).'</div>';
+        $user_html.= format_review_excerpt($userInfo, $userName, $header["questions_and_answers"]);
         $user_info_html = format_reviewerInfo($userInfo, $userName);
         $html = $user_info_html . $html;
 
@@ -74,7 +71,7 @@ function get_post_title($title_arr){
             }  
         }
     }
-    $html = $year . $str; 
+    $html = $str . $year; 
     return $html;
 }
 
@@ -97,7 +94,33 @@ function format_reviewerInfo($userInfo, $userName){
         </div>';
     return $html;
 
+}
 
+function format_review_excerpt($userInfo, $userName, $qs_and_ans){
+    $testimonyQuestions = $qs_and_ans['testimony'];
+    $reversed_testimony_list = array_reverse($testimonyQuestions, true);
+    $personal_testimony = $reversed_testimony_list[0];
+
+    /*if($personal_testimony['question'] == 'About Product'){
+        $html .= '<div id = "excerpt_container" class = whole_container>
+            <div id = "excerpt_testimony_container" class = "long_container">'.esc_html($personal_testimony['answer']).'</div>
+            <div id = "excerpt_attributes_container" class = "short_container">
+            <div id= "userName" class = "userInfo">Reviewer: '.esc_html($userName).'</div>
+            <div id= "userHeight" class = "userInfo">Height: '.esc_html($userInfo->heightFeet).' ft, '.esc_html($userInfo->heightInches).' in</div>
+            <div id "userWeight" class = "userInfo">Weight: '.esc_html($userInfo->weight).' lbs</div>
+            <div id= "userAbility" class = "userInfo">Reviewer Ability: '.esc_html($userInfo->skiAbility).'</div>
+            </div>
+            </div>';
+        return $html;
+    }else{*/
+
+        $html .= '<div id= "userName" class = "userInfo">Reviewer: '.esc_html($userName).'</div>
+            <div id= "userHeight" class = "userInfo">Height: '.esc_html($userInfo->heightFeet).' ft, '.esc_html($userInfo->heightInches).' in</div>
+            <div id "userWeight" class = "userInfo">Weight: '.esc_html($userInfo->weight).' lbs</div>
+            <div id= "userAbility" class = "userInfo">Reviewer Ability: '.esc_html($userInfo->skiAbility).'</div>';
+        return $html;
+
+    /*}*/
 }
 
 function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
