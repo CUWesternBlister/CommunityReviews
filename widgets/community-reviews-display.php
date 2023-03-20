@@ -147,6 +147,12 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					</select>
 				</div>
 
+				<div class="community-reviews-display-height-controls">
+					<label for="community-reviews-display-min-height">Height</label>
+					<input id="community-reviews-display-min-height" type="range" value="65" min="36" max="84"/>
+					<input id="community-reviews-display-max-height" type="range" value="74" min="36" max="84"/>
+				</div>
+
 				<div class="community-reviews-display-weight-controls">
 					<label for="community-reviews-display-min-weight">Weight</label>
 					<input id="community-reviews-display-min-weight" type="range" value="100" min="50" max="350"/>
