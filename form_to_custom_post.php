@@ -86,11 +86,11 @@ function get_userName_by_userID($userID, $file){
 }
 
 function format_reviewerInfo($userInfo, $userName){
-    $html .= '<div id = "reviewerInfoContainer" class = "whole_container">
-        <div id= " userName" class = "short_container">Reviewer: '.esc_html($userName). '</div>
-        <div id= "userHeight" class = "short_container">Height: '.esc_html($userInfo->heightFeet).' ft, '.esc_html($userInfo->heightInches).' in</div>
-        <div id "userWeight" class = "short_container">Weight: '.esc_html($userInfo->weight).' lbs</div>
-        <div id= "userAbility" class = "short_container">Ability: '.esc_html($userInfo->skiAbility).'</div>
+    $html .= '<div id = "reviewerInfoContainer" class = "whole_container_flex">
+        <div id= " userName" class = "short_container_no_float">Reviewer: '.esc_html($userName). '</div>
+        <div id= "userHeight" class = "short_container_no_float">Height: '.esc_html($userInfo->heightFeet).' ft, '.esc_html($userInfo->heightInches).' in</div>
+        <div id "userWeight" class = "short_container_no_float">Weight: '.esc_html($userInfo->weight).' lbs</div>
+        <div id= "userAbility" class = "short_container_no_float">Ability: '.esc_html($userInfo->skiAbility).'</div>
         </div>';
     return $html;
 

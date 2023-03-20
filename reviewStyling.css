@@ -66,6 +66,17 @@
 		padding-right: 10px;
 		padding-left: 10px;
 		display: block;
+		float: left;
+		height: 100%;
+		color:black;
+		background-color: rgb(227, 227, 227);
+	}
+
+	.short_container_no_float{
+		width: 30%;
+		padding-right: 10px;
+		padding-left: 10px;
+		display: block;
 		height: 100%;
 		color:black;
 		background-color: rgb(227, 227, 227);
@@ -80,6 +91,15 @@
 	}
 
 	.whole_container {
+		width: 90%;
+		padding-right: 20px;
+		margin-top: 10px;
+		float: left;
+		display: block;
+		background-color: rgb(227, 227, 227);
+	}
+
+	.whole_container_flex {
 		width: 90%;
 		padding-right: 20px;
 		margin-top: 10px;
@@ -142,6 +162,7 @@
 		flex: 1;
 		display: inline-block;
 		float: left;
+		color: black;
 		font-weight: bold;
 	}
 
@@ -149,6 +170,7 @@
 		width: 100%;
 		padding-left: 10px;
 		float: left;
+		color: black;
 		font-weight: bold;
 	}
 
@@ -174,6 +196,15 @@
 		float: left;
 		display: block;
 	}
+	.short_container_no_float{
+		width: 30%;
+		padding-right: 10px;
+		padding-left: 10px;
+		display: block;
+		height: 100%;
+		color:black;
+		background-color: rgb(227, 227, 227);
+	}
 
 	.long_container {
 		width: 90%;
@@ -189,6 +220,16 @@
 		margin-bottom: 10px;
 		float: left;
 		display: block;
+		background-color: rgb(227, 227, 227);
+	}
+
+	.whole_container_flex {
+		width: 90%;
+		padding-right: 20px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		float: left;
+		display: flex;
 		background-color: rgb(227, 227, 227);
 	}
 	.whole_container_justified {
