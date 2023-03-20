@@ -28,6 +28,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
         $settings = $this->get_settings();
 
 		?>
+
 		<div class="community-reviews-display">
 			<div class="community-reviews-display-filter">
 
