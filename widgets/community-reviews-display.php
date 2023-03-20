@@ -171,7 +171,6 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 					$query = new \WP_Query( $args );
 					
-					global $post;
 					if ( $query->have_posts() ) {
 						echo '<ul>';
 						while ( $query->have_posts() ) {
@@ -197,6 +196,8 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				var max_weight = $( '#community-reviews-display-max-weight' ).val();
 				var ski_ability = $( '#community-reviews-display-ski-ability' ).val();
 				var sport = $( '#community-reviews-display-sport' ).val();
+				var min_height = $( '#community-reviews-display-min-height' ).val();
+				var max_height = $( '#community-reviews-display-max-height' ).val();
 
 				$.ajax( {
 					url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
@@ -209,7 +210,9 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						min_weight: min_weight,
 						max_weight: max_weight,
 						ski_ability: ski_ability,
-						sport: sport
+						sport: sport,
+						min_height: min_height,
+						max_height: max_height
 					},
 					success: function( data ) {
 						$( '.community-reviews-display-show-posts' ).html( data );

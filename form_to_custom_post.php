@@ -29,6 +29,8 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
         
         $postTitle = get_post_title($title_arr);
 
+        $height = intval($userInfo->heightFeet) * 12 + intval($userInfo->heightInches); 
+
         //fwrite($file, "\n".$html."\n");
         //fetch user name to insert
         ////wp_strip_all_tags( $header['brandName'] . ' ' . $header['productName']),
@@ -39,8 +41,7 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
                                                   'id'            => $header['reviewID'],
                                                   'userID'        => $userInfo->userID,
                                                   'userName'      => $userName,
-                                                  'heightFeet'    => $userInfo->heightFeet,
-                                                  'heightInches'  => $userInfo->heightInches,
+                                                  'height'        => $height,
                                                   'weight'        => $userInfo->weight,
                                                   'skiAbility'    => $userInfo->skiAbility,
                                                   'product_tested'=> $header['productName'],

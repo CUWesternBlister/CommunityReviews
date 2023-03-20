@@ -50,8 +50,11 @@ function bcr_filter_posts() {
     }
 
     if ( ! empty($_POST['min_weight']) And ! empty($_POST['max_weight']) ) {
-        echo '<p>' . esc_html(sanitize_text_field( $_POST['min_weight'] )) . ' - ' . esc_html(sanitize_text_field( $_POST['max_weight'] )) . '</p>';
         array_push($meta_query, array('key' => 'weight', 'value' => array(sanitize_text_field( $_POST['min_weight'] ), sanitize_text_field( $_POST['max_weight'] )), 'compare' => 'BETWEEN', 'type' => 'numeric') );
+    }
+
+    if ( ! empty($_POST['min_height']) And ! empty($_POST['max_height']) ) {
+        array_push($meta_query, array('key' => 'height', 'value' => array(sanitize_text_field( $_POST['min_height'] ), sanitize_text_field( $_POST['max_height'] )), 'compare' => 'BETWEEN', 'type' => 'numeric') );
     }
 
     if ( ! empty( $_POST['ski_ability'] ) ) {
