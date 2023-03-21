@@ -65,20 +65,34 @@ function bcr_filter_posts() {
 
     $query = new \WP_Query( $args );
 
-    if ( $query->have_posts() ) {
-        echo '<ul>';
-        while ( $query->have_posts() ) {
-            $query->the_post();
-            echo '<li>' . get_the_title() . get_the_excerpt() . '</li>';
-        }
-        echo '</ul>';
-        wp_reset_postdata();
-    }
+    bcr_display_posts( $query );
+    
     wp_die();
 }
 
 add_action( 'wp_ajax_bcr_filter_posts', 'bcr_filter_posts' );
 add_action( 'wp_ajax_nopriv_bcr_filter_posts', 'bcr_filter_posts' );
+
+/**
+ * Use a query to display the posts for the filtering widget
+ * 
+ * @param   WP_Query    $query
+ * 
+ * @return  void
+ */
+function bcr_display_posts( $query ) {
+    if ( $query->have_posts() ) {
+        while ( $query->have_posts() ) {
+            echo '<div class="community_review_excerpt">';
+            $query->the_post();
+            echo '<div class="excerpt_title">' . '<a href=' . get_the_permalink() . '>' . get_the_title() . '</a></div>';
+            echo '<div class="excerpt_content">' . get_the_excerpt() . '</div>';
+            echo '</div>';
+        }
+
+        wp_reset_postdata();
+    }
+}
 
 /**
  * Filter the options for the products dropdown based on the currently selected brand
