@@ -131,11 +131,11 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					
 					<div class="community-reviews-number-boxes">
 						<div class="community-reviews-number-box-left">
-							<input class="community-reviews-display-number-box" type="text" id="min_length" value="100 cm"/>
+							<input class="community-reviews-display-number-box" type="text" id="min_length" value="100 cm" readonly/>
 						</div>
 
 						<div class="community-reviews-number-box-right">
-							<input class="community-reviews-display-number-box" type="text" id="max_length" value="200 cm"/>
+							<input class="community-reviews-display-number-box" type="text" id="max_length" value="200 cm" readonly/>
 						</div>
 					</div>
 				</div>
@@ -149,11 +149,11 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 					<div class="community-reviews-number-boxes">
 						<div class="community-reviews-number-box-left">
-							<input class="community-reviews-display-number-box" type="text" id="min_year" value="2000-2001"/>
+							<input class="community-reviews-display-number-box" type="text" id="min_year" value="2000-2001" readonly/>
 						</div>
 
 						<div class="community-reviews-number-box-right">
-							<input class="community-reviews-display-number-box" type="text" id="max_year" value="2023-2024"/>
+							<input class="community-reviews-display-number-box" type="text" id="max_year" value="2023-2024" readonly/>
 						</div>
 					</div>
 				</div>
@@ -181,11 +181,11 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 					<div class="community-reviews-number-boxes">
 						<div class="community-reviews-number-box-left">
-							<input class="community-reviews-display-number-box" type="text" id="min_height" value="3'0&quot;"/>
+							<input class="community-reviews-display-number-box" type="text" id="min_height" value="3'0&quot;" readonly/>
 						</div>
 
 						<div class="community-reviews-number-box-right">
-							<input class="community-reviews-display-number-box" type="text" id="max_height" value="7'0&quot;"/>
+							<input class="community-reviews-display-number-box" type="text" id="max_height" value="7'0&quot;" readonly/>
 						</div>
 					</div>
 				</div>
@@ -199,11 +199,11 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 					<div class="community-reviews-number-boxes">
 						<div class="community-reviews-number-box-left">
-							<input class="community-reviews-display-number-box" type="text" id="min_weight" value="50 lbs"/>
+							<input class="community-reviews-display-number-box" type="text" id="min_weight" value="50 lbs" readonly/>
 						</div>
 
 						<div class="community-reviews-number-box-right">
-							<input class="community-reviews-display-number-box" type="text" id="max_height" value="350 lbs"/>
+							<input class="community-reviews-display-number-box" type="text" id="max_height" value="350 lbs" readonly/>
 						</div>
 					</div>
 				</div>
