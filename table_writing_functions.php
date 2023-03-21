@@ -1,4 +1,4 @@
-<?php
+git status<?php
 /*
 require 'table_utils.php';
 function profile_info_sub( $record, $ajax_handler ){
