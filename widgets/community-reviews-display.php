@@ -129,69 +129,6 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					</select>
 				</div>
 
-<<<<<<< HEAD
-				
-				<div class="community-reviews-display-height-controls">
-					<label for="community-reviews-display-height">Height:</label>
-					<select id="community-reviews-display-heght">
-						<option value="">--No Height Filter--</option>
-						<?php
-							global $wpdb;
-							$user_table_name = $wpdb->prefix . "bcr_users";
-							$sql = $wpdb->prepare("SELECT DISTINCT heightFeet, heightInches FROM $user_table_name;");
-					
-							$results  = $wpdb->get_results($sql);
-
-							foreach ($results as $id => $height_obj) {
-								$height_feet = $height_obj->heightFeet;
-								$height_in = $height_obj->heightInches;
-
-								echo '<option value="' . esc_html($height_feet) . 'ft, ' . esc_html($height_in) . 'in' . '">' . esc_html($height_feet) . 'ft, ' . esc_html($height_in) . 'in' . '</option>';
-							}
-						?>
-					</select>
-				</div>
-
-				<div class="community-reviews-display-weight-controls">
-					<label for="community-reviews-display-weight">Select Weight Range</label>
-					<?php
-							global $wpdb;
-							$user_table_name = $wpdb->prefix . "bcr_users";
-
-							$sql = $wpdb->prepare("SELECT MAX(weight) FROM $user_table_name;");
-							$max_weight  = $wpdb->get_var($sql);
-							$sql = $wpdb->prepare("SELECT MIN(weight) FROM $user_table_name;");
-							$min_weight  = $wpdb->get_var($sql);
-							$avg_weight = ($max_weight+$min_weight)/2;
-					?>
-					<script>
-						function updateWeightValue_min() {
-							var max = document.getElementById("community-reviews-display-max-weight").max;
-							var slider = document.getElementById("community-reviews-display-min-weight");
-							var new_min = slider.value;
-							document.getElementById("min-weight-value").innerHTML = new_min;
-							document.getElementById("community-reviews-display-max-weight").min = new_min;
-						}
-						function updateWightValue_max(){
-							var slider = document.getElementById("community-reviews-display-max-weight");
-							var new_max = slider.value;
-							document.getElementById("max-weight-value").innerHTML = new_max;
-						}
-					</script>
-					<div class="weight-input">
-						<label for="min">Enter Min Weight: </label>
-						<input id="community-reviews-display-min-weight" type="range" value="<?php echo $avg_weight?>"  min="<?php echo $min_weight ?>" max="<?php echo $max_weight ?>" onchange="updateWeightValue_min()">
-						<p id="min-weight-value"></p>
-					</div>
-					<div class="weight-input">
-						<label for="max">Enter Max Weight: </label>
-						<input id="community-reviews-display-max-weight" type="range" value="<?php echo $avg_weight?>"  min="<?php echo $min_weight ?>" max="<?php echo $max_weight ?>" onchange="updateWightValue_max()">
-						<p id="max-weight-value"></p>
-					</div>
-				</div>
-
-				
-=======
 				<div class="community-reviews-display-length-controls">
 					<div class="community-reviews-display-title">Length</div>
 					<div class="community-reviews-display-slider">
@@ -221,7 +158,6 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				</div>
 
 				<strong>Reviewer Filters</strong>
->>>>>>> 0d872582ccc33fc1dc4feb58d68ede2f98fa826e
 
 				<div class="community-reviews-display-ski-ability-controls">
 					<div class="community-reviews-display-title">Ski Ability</div>
@@ -238,19 +174,39 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-height-controls">
 					<div class="community-reviews-display-title">Height</div>
 					<div class="community-reviews-display-slider">
-						<input id="community-reviews-display-slider-min-height" type="range" value="65" min="36" max="84"/>
-						<input id="community-reviews-display-slider-max-height" type="range" value="74" min="36" max="84"/>
+						<input id="community-reviews-display-slider-min-height" type="range" value="65" min = 36 max = 84/>
+						<input id="community-reviews-display-slider-max-height" type="range" value="74" min = 36 max = 84/>
 					</div>
 				</div>
 
 				<div class="community-reviews-display-weight-controls">
 					<div class="community-reviews-display-title">Weight</div>
 					<div class="community-reviews-display-slider">
-						<input id="community-reviews-display-slider-min-weight" type="range" value="100" min="50" max="350"/>
-						<input id="community-reviews-display-slider-max-weight" type="range" value="200" min="50" max="350"/>
+					<?php
+							global $wpdb;
+							$user_table_name = $wpdb->prefix . "bcr_users";
+							$sql = $wpdb->prepare("SELECT MAX(weight) FROM $user_table_name;");
+							$max_weight  = $wpdb->get_var($sql);
+							$sql = $wpdb->prepare("SELECT MIN(weight) FROM $user_table_name;");
+							$min_weight  = $wpdb->get_var($sql);
+							$avg_weight = ($max_weight+$min_weight)/2;
+					?>
+					<!-- <script>
+						function updateWeightValue_maxSlider_min() {
+							var slider = document.getElementById("community-reviews-display-min-weight");
+							var new_min = slider.value;
+							document.getElementById("community-reviews-display-slider-max-weight").min = new_min;
+						}
+						function updateWightValue_minSlider_max(){
+							var slider = document.getElementById("community-reviews-display-max-weight");
+							var new_max = slider.value;
+							document.getElementById("community-reviews-display-slider-min-weight").max = new_max;
+						}
+					</script> -->
+						<input id="community-reviews-display-slider-min-weight" type="range" value="100" min=<?php echo $min_weight ?> max= <?php echo $max_weight ?>/>
+						<input id="community-reviews-display-slider-max-weight" type="range" value="200" min=<?php echo $min_weight ?> max= <?php echo $max_weight ?>/>
 					</div>
 				</div>
-
 				<button id="community-reviews-display-submit">Filter</button>
 			</div>
 
@@ -302,15 +258,10 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						category: category,
 						min_weight: min_weight,
 						max_weight: max_weight,
-<<<<<<< HEAD
-						height: height,
-						ski_ability: ski_ability
-=======
 						ski_ability: ski_ability,
 						sport: sport,
 						min_height: min_height,
 						max_height: max_height
->>>>>>> 0d872582ccc33fc1dc4feb58d68ede2f98fa826e
 					},
 					success: function( data ) {
 						$( '.community-reviews-display-show-posts' ).html( data );
