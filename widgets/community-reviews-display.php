@@ -131,13 +131,11 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					
 					<div class="community-reviews-number-boxes">
 						<div class="community-reviews-number-box-left">
-							<!-- <div class="community-reviews-display-length-input-title">Min</div> -->
-							<input class="community-reviews-display-number-box" type="text" id="min_length" value="100" min="50" max="250"/>
+							<input class="community-reviews-display-number-box" type="text" id="min_length" value="100 cm"/>
 						</div>
 
 						<div class="community-reviews-number-box-right">
-							<!-- <div class="community-reviews-display-length-input-title">Max</div> -->
-							<input class="community-reviews-display-number-box" type="text" id="max_length" value="200" min="50" max="250"/>
+							<input class="community-reviews-display-number-box" type="text" id="max_length" value="200 cm"/>
 						</div>
 					</div>
 				</div>
@@ -145,8 +143,18 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-year-controls">
 					<div class="community-reviews-display-title">Year</div>
 					<div class="community-reviews-display-slider">
-						<input id="community-reviews-display-slider-min-year" type="range" value="2016" min="2000" max="2024"/>
-						<input id="community-reviews-display-slider-max-year" type="range" value="2023" min="2000" max="2024"/>
+						<input id="community-reviews-display-slider-min-year" type="range" value="2016" min="2000" max="2023"/>
+						<input id="community-reviews-display-slider-max-year" type="range" value="2023" min="2000" max="2023"/>
+					</div>
+
+					<div class="community-reviews-number-boxes">
+						<div class="community-reviews-number-box-left">
+							<input class="community-reviews-display-number-box" type="text" id="min_year" value="2000-2001"/>
+						</div>
+
+						<div class="community-reviews-number-box-right">
+							<input class="community-reviews-display-number-box" type="text" id="max_year" value="2023-2024"/>
+						</div>
 					</div>
 				</div>
 
@@ -170,6 +178,16 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						<input id="community-reviews-display-slider-min-height" type="range" value="65" min="36" max="84"/>
 						<input id="community-reviews-display-slider-max-height" type="range" value="74" min="36" max="84"/>
 					</div>
+
+					<div class="community-reviews-number-boxes">
+						<div class="community-reviews-number-box-left">
+							<input class="community-reviews-display-number-box" type="text" id="min_height" value="3'0&quot;"/>
+						</div>
+
+						<div class="community-reviews-number-box-right">
+							<input class="community-reviews-display-number-box" type="text" id="max_height" value="7'0&quot;"/>
+						</div>
+					</div>
 				</div>
 
 				<div class="community-reviews-display-weight-controls">
@@ -177,6 +195,16 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					<div class="community-reviews-display-slider">
 						<input id="community-reviews-display-slider-min-weight" type="range" value="100" min="50" max="350"/>
 						<input id="community-reviews-display-slider-max-weight" type="range" value="200" min="50" max="350"/>
+					</div>
+
+					<div class="community-reviews-number-boxes">
+						<div class="community-reviews-number-box-left">
+							<input class="community-reviews-display-number-box" type="text" id="min_weight" value="50 lbs"/>
+						</div>
+
+						<div class="community-reviews-number-box-right">
+							<input class="community-reviews-display-number-box" type="text" id="max_height" value="350 lbs"/>
+						</div>
 					</div>
 				</div>
 
