@@ -219,7 +219,6 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					);
 
 					$query = new \WP_Query( $args );
-					
 					bcr_display_posts( $query );
 				?>
 			</div>
