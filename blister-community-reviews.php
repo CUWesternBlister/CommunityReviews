@@ -49,6 +49,11 @@ function bcr_include() {
 
 add_action( 'plugins_loaded', 'bcr_include');
 
+/**
+ * Register widgets contained in the Community Reviews
+ * 
+ * @return  void
+ */
 function bcr_register_widgets( $widgets_manager ) {
     require_once( plugin_dir_path( __FILE__ ) . '/widgets/community-reviews-display.php');
 
