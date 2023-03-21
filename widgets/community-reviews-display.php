@@ -144,8 +144,10 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 				<div class="community-reviews-display-year-controls">
 					<div class="community-reviews-display-title">Year</div>
-					<input id="community-reviews-display-slider-min-year" type="range" value="2016" min="2000" max="2024"/>
-					<input id="community-reviews-display-slider-max-year" type="range" value="2023" min="2000" max="2024"/>
+					<div class="community-reviews-display-slider">
+						<input id="community-reviews-display-slider-min-year" type="range" value="2016" min="2000" max="2024"/>
+						<input id="community-reviews-display-slider-max-year" type="range" value="2023" min="2000" max="2024"/>
+					</div>
 				</div>
 
 				<strong>Reviewer Filters</strong>
@@ -164,14 +166,18 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 				<div class="community-reviews-display-height-controls">
 					<div class="community-reviews-display-title">Height</div>
-					<input id="community-reviews-display-slider-min-height" type="range" value="65" min="36" max="84"/>
-					<input id="community-reviews-display-slider-max-height" type="range" value="74" min="36" max="84"/>
+					<div class="community-reviews-display-slider">
+						<input id="community-reviews-display-slider-min-height" type="range" value="65" min="36" max="84"/>
+						<input id="community-reviews-display-slider-max-height" type="range" value="74" min="36" max="84"/>
+					</div>
 				</div>
 
 				<div class="community-reviews-display-weight-controls">
 					<div class="community-reviews-display-title">Weight</div>
-					<input id="community-reviews-display-slider-min-weight" type="range" value="100" min="50" max="350"/>
-					<input id="community-reviews-display-slider-max-weight" type="range" value="200" min="50" max="350"/>
+					<div class="community-reviews-display-slider">
+						<input id="community-reviews-display-slider-min-weight" type="range" value="100" min="50" max="350"/>
+						<input id="community-reviews-display-slider-max-weight" type="range" value="200" min="50" max="350"/>
+					</div>
 				</div>
 
 				<button id="community-reviews-display-submit">Filter</button>

@@ -20,6 +20,14 @@ input[type="range"] {
     background-color: #C6C6C6;
 }
 
+.community-reviews-display-slider {
+    padding: 10px;
+}
+
+select {
+    width: 80%;
+}
+
 #community-reviews-display-slider-min-length,
 #community-reviews-display-slider-min-year,
 #community-reviews-display-slider-min-height,
