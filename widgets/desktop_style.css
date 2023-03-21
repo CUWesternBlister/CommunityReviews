@@ -2,3 +2,28 @@
     display: grid;
     grid-template-columns: 30% 70%;
 }
+
+.community-reviews-display-title {
+    text-align: center;
+}
+
+.community-reviews-display-filter {
+    text-align: center;
+}
+
+input[type="range"] {
+    appearance: none;
+    height: 2px;
+    width: 20%;
+    position: absolute;
+    left: 5%;
+    background-color: #C6C6C6;
+}
+
+#community-reviews-display-slider-min-length,
+#community-reviews-display-slider-min-year,
+#community-reviews-display-slider-min-height,
+#community-reviews-display-slider-min-weight {
+    height: 0;
+    z-index: 1;
+}
