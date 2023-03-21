@@ -11,6 +11,28 @@
     text-align: center;
 }
 
+.community-reviews-number-boxes {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.community-reviews-number-box-left {
+    text-align: left;
+}
+
+.community-reviews-number-box-right {
+    text-align: right;
+}
+
+.community-reviews-display-number-box {
+    appearance: none;
+    height: 10px;
+    width: 50px;
+    margin: 0 20%;
+    font-size: 10px;
+    text-align: center;
+}
+
 input[type="range"] {
     appearance: none;
     height: 2px;

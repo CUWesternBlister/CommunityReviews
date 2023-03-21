@@ -129,17 +129,17 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						<input id="community-reviews-display-slider-max-length" type="range" value="200" min="50" max="250"/>
 					</div>
 					
-					<!-- <div class="community-reviews-number-boxes">
-						<div class="community-reviews-number-box">
-							<div class="community-reviews-display-length-input-title">Min</div>
-							<input class="community-reviews-display-length-input" type="number" id="min_length" value="100" min="50" max="250"/>
+					<div class="community-reviews-number-boxes">
+						<div class="community-reviews-number-box-left">
+							<!-- <div class="community-reviews-display-length-input-title">Min</div> -->
+							<input class="community-reviews-display-number-box" type="text" id="min_length" value="100" min="50" max="250"/>
 						</div>
 
-						<div class="community-reviews-number-box">
-							<div class="community-reviews-display-length-input-title">Max</div>
-							<input class="community-reviews-display-length-input" type="number" id="max_length" value="200" min="50" max="250"/>
+						<div class="community-reviews-number-box-right">
+							<!-- <div class="community-reviews-display-length-input-title">Max</div> -->
+							<input class="community-reviews-display-number-box" type="text" id="max_length" value="200" min="50" max="250"/>
 						</div>
-					</div> -->
+					</div>
 				</div>
 
 				<div class="community-reviews-display-year-controls">
