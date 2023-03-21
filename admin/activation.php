@@ -5,7 +5,7 @@
  * @return void
  */
 function bcr_activate() {
-    //bcr_setup_tables();
+    bcr_setup_tables();
     require_once( plugin_dir_path( __FILE__ ) . 'uploadInitialData.php');
     require_once( plugin_dir_path( __FILE__ ) . 'align_form_ids.php');
 }
