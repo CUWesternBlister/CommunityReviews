@@ -118,7 +118,7 @@ function bcr_filter_products() {
 
     $results  = $wpdb->get_results($sql);
 
-    echo '<label for="community-reviews-display-product">Product:</label>';
+    echo '<div class="community-reviews-display-title">Product</div>';
     echo '<select id="community-reviews-display-product">';
     
     echo '<option value="">--No Product Filter--</option>';
@@ -161,7 +161,7 @@ function bcr_filter_categories() {
 
     $results  = $wpdb->get_results($sql);
 
-    echo '<label for="community-reviews-display-category">Category:</label>';
+    echo '<div class="community-reviews-display-title">Category</div>';
     echo '<select id="community-reviews-display-category">';
     
     echo '<option value="">--No Category Filter--</option>';
@@ -208,5 +208,16 @@ function bcr_load_filter_widget_css() {
     $plugin_url = plugin_dir_url( __FILE__ );
     wp_enqueue_style( 'filter_widget_desktop_style', $plugin_url . 'widgets/desktop_style.css' );
 }
-add_action( 'wp_enqueue_scripts', 'bcr_load_filter_widget_css' )
+add_action( 'wp_enqueue_scripts', 'bcr_load_filter_widget_css' );
+
+/**
+ * Load the JS for the filtering widget
+ * 
+ * @return  void
+ */
+function bcr_load_filter_widget_js() {
+    wp_enqueue_script( 'filter_widget_js', plugin_dir_url( __FILE__ ) . '/widgets/scripts.js', array( 'jquery' ), 1.1, true);
+}
+
+add_action( 'wp_enqueue_scripts', 'bcr_load_filter_widget_js' );
 ?>
