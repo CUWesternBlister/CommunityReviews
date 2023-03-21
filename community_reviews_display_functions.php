@@ -34,9 +34,10 @@ function bcr_filter_posts() {
         echo '<p>' . esc_html(sanitize_text_field( $_POST['height'] )) . '</p>';
         // array_push($meta_query, array('key' => 'weight', 'value' => array(intval(sanitize_text_field( $_POST['min_weight'] )), intval(sanitize_text_field( $_POST['max_weight'] ))), 'compare' => 'BETWEEN', 'value' => 'numeric') );
     }
-    if ( ! empty($_POST['weight'])) {
-        echo '<p>' . esc_html(sanitize_text_field( $_POST['weight'] )) . '</p>';
-        // array_push($meta_query, array('key' => 'weight', 'value' => array(intval(sanitize_text_field( $_POST['min_weight'] )), intval(sanitize_text_field( $_POST['max_weight'] ))), 'compare' => 'BETWEEN', 'value' => 'numeric') );
+    if ( ! empty($_POST['min_weight']) AND ! empty($_POST['max_weight'])) {
+        //echo '<p>' . esc_html(sanitize_text_field( $_POST['min_weight'] )) . '</p>';
+        //echo '<p>' . esc_html(sanitize_text_field( $_POST['max_weight'] )) . '</p>';
+        array_push($meta_query, array('key' => 'weight', 'value' => array(intval(sanitize_text_field( $_POST['min_weight'] - 1)), intval(sanitize_text_field( $_POST['max_weight'] - 1))), 'compare' => 'BETWEEN', 'value' => 'numeric') );
     }
 
     if ( ! empty( $_POST['ski_ability'] ) ) {

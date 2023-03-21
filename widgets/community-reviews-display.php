@@ -127,28 +127,41 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				</div>
 
 				<div class="community-reviews-display-weight-controls">
-					<label for="community-reviews-display-weight">Weight</label>
+					<label for="community-reviews-display-weight">Select Weight Range</label>
 					<?php
 							global $wpdb;
 							$user_table_name = $wpdb->prefix . "bcr_users";
 
 							$sql = $wpdb->prepare("SELECT MAX(weight) FROM $user_table_name;");
 							$max_weight  = $wpdb->get_var($sql);
-							//$max_weight_str = strval($max_weight);
 							$sql = $wpdb->prepare("SELECT MIN(weight) FROM $user_table_name;");
 							$min_weight  = $wpdb->get_var($sql);
-							//$min_weight_str = strval($min_weight);
 							$avg_weight = ($max_weight+$min_weight)/2;
 					?>
 					<script>
-						function updateWeightValue() {
+						function updateWeightValue_min() {
+							var max = document.getElementById("community-reviews-display-max-weight").max;
 							var slider = document.getElementById("community-reviews-display-min-weight");
-							var valueDisplay = document.getElementById("weight-value");
-							valueDisplay.innerHTML = slider.value;
+							var new_min = slider.value;
+							document.getElementById("min-weight-value").innerHTML = new_min;
+							document.getElementById("community-reviews-display-max-weight").min = new_min;
+						}
+						function updateWightValue_max(){
+							var slider = document.getElementById("community-reviews-display-max-weight");
+							var new_max = slider.value;
+							document.getElementById("max-weight-value").innerHTML = new_max;
 						}
 					</script>
-					<input id="community-reviews-display-weight" type="range" value="<?php echo $avg_weight?>"  min="<?php echo $min_weight ?>" max="<?php echo $max_weight ?>" onchange="updateWeightValue()">
-					<p id="weight-value"></p>
+					<div class="weight-input">
+						<label for="min">Enter Min Weight: </label>
+						<input id="community-reviews-display-min-weight" type="range" value="<?php echo $avg_weight?>"  min="<?php echo $min_weight ?>" max="<?php echo $max_weight ?>" onchange="updateWeightValue_min()">
+						<p id="min-weight-value"></p>
+					</div>
+					<div class="weight-input">
+						<label for="max">Enter Max Weight: </label>
+						<input id="community-reviews-display-max-weight" type="range" value="<?php echo $avg_weight?>"  min="<?php echo $min_weight ?>" max="<?php echo $max_weight ?>" onchange="updateWightValue_max()">
+						<p id="max-weight-value"></p>
+					</div>
 				</div>
 
 				
@@ -200,8 +213,8 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				var product = $( '#community-reviews-display-product' ).val();
 				var brand = $( '#community-reviews-display-brand' ).val();
 				var category = $( '#community-reviews-display-category' ).val();
-				var weight = $( '#community-reviews-display-weight' ).val();
-				//var max_weight = $( '#community-reviews-display-max-weight' ).val();
+				var min_weight = $( '#community-reviews-display-min-weight' ).val();
+				var max_weight = $( '#community-reviews-display-max-weight' ).val();
 				var height = $( '#community-reviews-display-height' ).val();
 				var ski_ability = $( '#community-reviews-display-ski-ability' ).val();
 
@@ -213,7 +226,8 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						product: product,
 						brand: brand,
 						category: category,
-						weight: weight,
+						min_weight: min_weight,
+						max_weight: max_weight,
 						height: height,
 						ski_ability: ski_ability
 					},
