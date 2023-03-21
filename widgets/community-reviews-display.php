@@ -221,12 +221,15 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					$query = new \WP_Query( $args );
 					
 					if ( $query->have_posts() ) {
-						echo '<ul>';
+
 						while ( $query->have_posts() ) {
+                            echo '<div class="community_review_excerpt">';
 							$query->the_post();
-							echo '<li>' . get_the_title() . get_the_excerpt() . '</li>';
+							echo '<div class="excerpt_title">' . '<a href=' . get_the_permalink() . '>' . get_the_title() . '</a></div>';
+                            echo '<div class="excerpt_content">' . get_the_excerpt() . '</div>';
+                            echo '</div>';
 						}
-						echo '</ul>';
+
 						wp_reset_postdata();
 					}
 				?>
