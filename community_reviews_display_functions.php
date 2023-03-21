@@ -65,6 +65,22 @@ function bcr_filter_posts() {
 
     $query = new \WP_Query( $args );
 
+    bcr_display_posts( $query );
+    
+    wp_die();
+}
+
+add_action( 'wp_ajax_bcr_filter_posts', 'bcr_filter_posts' );
+add_action( 'wp_ajax_nopriv_bcr_filter_posts', 'bcr_filter_posts' );
+
+/**
+ * Use a query to display the posts for the filtering widget
+ * 
+ * @param   WP_Query    $query
+ * 
+ * @return  void
+ */
+function bcr_display_posts( $query ) {
     if ( $query->have_posts() ) {
         echo '<ul>';
         while ( $query->have_posts() ) {
@@ -74,11 +90,7 @@ function bcr_filter_posts() {
         echo '</ul>';
         wp_reset_postdata();
     }
-    wp_die();
 }
-
-add_action( 'wp_ajax_bcr_filter_posts', 'bcr_filter_posts' );
-add_action( 'wp_ajax_nopriv_bcr_filter_posts', 'bcr_filter_posts' );
 
 /**
  * Filter the options for the products dropdown based on the currently selected brand
