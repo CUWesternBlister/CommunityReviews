@@ -93,27 +93,6 @@
 		float: left;
 		font-weight: bold;
 	}
-
-	.community_review_excerpt {
-		width: 30%;
-		padding-right: 10px;
-		padding-top: 15px;
-		float: left;
-	}
-
-	.excerpt_title {
-		width: 100%;
-		padding-left: 10px;
-		float: left;
-		font-weight: bold;
-	}
-
-	.excerpt_content {
-		width: 100%;
-		padding-left: 10px;
-		float: left;
-		color: #222;
-	}
 }
 @media only screen and (max-width: 768px) {
 	#userHeight {
