@@ -43,4 +43,24 @@
 		return $str_ids;
 	}
 */
+
+function print_to_test_file($input, $message, $file){
+	$input_p = print_r($input, true);
+    fwrite($file, $message."\n".$input_p."\n\n");
+}
+
+function get_all_form_names($file){
+    global $wpdb;
+    //$start = "\n\n SUMMIT get all form names \n";
+    //fwrite($file, $start);
+    $review_forms_table = $wpdb->prefix . "bcr_review_forms";
+    $q = $wpdb->prepare("SELECT reviewFormName FROM $review_forms_table;");
+    $res = $wpdb->get_results($q);
+    $return_array = [];
+    foreach ($res as $value) {
+        $return_array[] = $value->reviewFormName;
+    }
+    return $return_array;
+}
+
 ?>

@@ -1,6 +1,5 @@
 <?php
 
-
 function create_community_review() {
 
     $labels = array(
