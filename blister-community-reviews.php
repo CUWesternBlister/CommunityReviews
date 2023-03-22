@@ -3,7 +3,7 @@
  * Plugin Name: Blister Community Reviews
  * Description: A plugin to facilitate Blister community created reviews.
  * Author: Gunnar Marquardt, Jayden Omi, Izak Litte, Jacob Vogel, Tristan Riggan
- * Version: 1.2.5
+ * Version: 1.3.1
  */
 
 // Exit if accessed directily
@@ -25,11 +25,13 @@ function bcr_activation() {
     require_once( plugin_dir_path( __FILE__ ) . '/admin/activation.php');
 }
 
+
 /**
  * Load Blister Community Reviews deactivation functions
  * 
  * @return void
  */
+
 function bcr_deactivation() {
     require_once( plugin_dir_path( __FILE__ ) . '/admin/deactivation.php');
 }
@@ -45,6 +47,7 @@ function bcr_include() {
     require_once( plugin_dir_path( __FILE__ ) . 'form_to_custom_post.php');
     require_once( plugin_dir_path( __FILE__ ) . 'show_users_reviews.php');
     require_once( plugin_dir_path( __FILE__ ) . '/admin/adminPage.php');
+    require_once( plugin_dir_path( __FILE__ ) . 'generate_taxonomies.php');
 }
 
 add_action( 'plugins_loaded', 'bcr_include');

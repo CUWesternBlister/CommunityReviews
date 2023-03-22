@@ -53,7 +53,7 @@ function create_community_review() {
         'query_var' => true,//truzoome
         'capability_type' => 'post',
     );
-    register_post_type( 'Community Reviews', $args );
+    register_post_type( 'community_reviews', $args );
 
 }
 add_action( 'init', 'create_community_review', 0 );
