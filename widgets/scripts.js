@@ -59,7 +59,7 @@ const weight_max_box = document.querySelector('#max_weight');
 
 
 length_min_slider.oninput = () => bcr_alter_slider(length_min_slider, length_max_slider, true, length_min_box, "cm");
-length_max_slider.oninput = () => bcr_alter_slider(length_max_slider, length_min_slider, false), length_max_box, "cm";
+length_max_slider.oninput = () => bcr_alter_slider(length_max_slider, length_min_slider, false, length_max_box, "cm");
 
 year_min_slider.oninput = () => bcr_alter_slider(year_min_slider, year_max_slider, true, year_min_box, "year");
 year_max_slider.oninput = () => bcr_alter_slider(year_max_slider, year_min_slider, false, year_max_box, "year");

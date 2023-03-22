@@ -203,7 +203,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						</div>
 
 						<div class="community-reviews-number-box-right">
-							<input class="community-reviews-display-number-box" type="text" id="max_height" value="350 lbs" readonly/>
+							<input class="community-reviews-display-number-box" type="text" id="max_weight" value="350 lbs" readonly/>
 						</div>
 					</div>
 				</div>
