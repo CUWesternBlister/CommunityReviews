@@ -25,44 +25,54 @@ function add_metadata_to_custom_posts( $post_id ) {
     $post_type = get_post_type( $post_id );
     $height_in_inches = get_post_meta( $post_id, 'height_in_inches', true );
     
-    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
-    $file = fopen($file_path, "a") or die('fopen failed');
+    // $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
+    // $file = fopen($file_path, "a") or die('fopen failed');
    
-    //if (empty($height_in_inches)) { //($post_type == 'Community Reviews') &
+    if (empty($height_in_inches)) {
         //get length from title
         $post_title = get_the_title( $post_id );
+
+        //get brand
+        $post_title_substrs = explode(" ", $post_title);
+        $brand = "";
+        if(preg_match('/\d{4}-\d{4}/', $post_title_substrs[0]) | preg_match('/\d{4}/', $post_title_substrs[0])){
+          $brand = $post_title_substrs[1];
+        }else{
+          $brand = $post_title_substrs[0];
+        } 
+
+        //get ski length
+        $lastString = end($post_title_substrs);
         $ski_length_num = "";
-        if (preg_match('/\d+cm/', $post_title, $matches)) {
-            $ski_length = $matches[0];
-            preg_match('/\d+/', $ski_length, $matches);
-            $ski_length_num = $matches[0];
+        if (preg_match('/\d+cm/', $lastString)) {
+          $ski_length_num = intval(preg_replace('/[^0-9]/', '', $lastString));
         }
+
         //get year from title
         $year = "";
         if (preg_match('/\d{4}/', $post_title, $matches)) {
             $year = (int) $matches[0];
         }
-        $year = $year;
+        
         //get user height and convert
-
         $feet_str = get_post_meta( $post_id, 'heightFeet', true );
         $inch_str = get_post_meta( $post_id, 'heightInches', true );
-        fwrite($file, "feet str:\n".$feet_str."\ninch str\n".$inch_str);
-        $feet = (int) $feet_str;
-        $inches = (int) $inch_str;  
-        //$form_name_str = print_r($existing_form_n, true);
-        fwrite($file, "\nyear1:\n".strval($year).
-                    "\nski_length:\n".strval($ski_length_num).
-                    "\nheigh in inches:\n".strval(($feet*12)+$inches).
-                    "\n\n------------------------------\n\n");
+        
+        $height_in_inches = (intval($feet_str)*12)+intval($inch_str);  
+        
+        // fwrite($file, "\nbrand:\n".$brand.
+        //               "\nyear:\n".strval($year).
+        //               "\nski_length:\n".strval($ski_length_num).
+        //               "\nheight in inches:\n".strval($height_in_inches).
+        //               "\n\n------------------------------\n\n");
         
         // add meta data  to post
-        update_post_meta( $post_id, 'height_in_inches', ($feet*12)+$inches);
-        update_post_meta( $post_id, 'year1', $year);
-        //update_post_meta( $post_id, 'year2', $year2);
+        update_post_meta( $post_id, 'brand', $brand);
+        update_post_meta( $post_id, 'height_in_inches', $height_in_inches);
+        update_post_meta( $post_id, 'year', $year);
         update_post_meta( $post_id, 'ski_length',  $ski_length_num);
-    //}
-    fclose($file);
+    }
+    //fclose($file);
 }
 //add_action( 'save_post', 'add_metadata_to_custom_posts' );
 ?>
