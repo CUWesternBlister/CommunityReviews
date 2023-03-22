@@ -1,5 +1,5 @@
 <?php
-add_action('init', 'update_existing_custom_posts');
+//add_action('init', 'update_existing_custom_posts');
 
 function update_existing_custom_posts() {
   $args = array(
@@ -28,7 +28,7 @@ function add_metadata_to_custom_posts( $post_id ) {
     // $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
     // $file = fopen($file_path, "a") or die('fopen failed');
    
-    if (empty($height_in_inches)) {
+    //if (empty($height_in_inches)) {
         //get length from title
         $post_title = get_the_title( $post_id );
 
@@ -68,10 +68,10 @@ function add_metadata_to_custom_posts( $post_id ) {
         
         // add meta data  to post
         update_post_meta( $post_id, 'brand', $brand);
-        update_post_meta( $post_id, 'height_in_inches', $height_in_inches);
+        update_post_meta( $post_id, 'height', $height_in_inches);
         update_post_meta( $post_id, 'year', $year);
         update_post_meta( $post_id, 'ski_length',  $ski_length_num);
-    }
+    //}
     //fclose($file);
 }
 //add_action( 'save_post', 'add_metadata_to_custom_posts' );

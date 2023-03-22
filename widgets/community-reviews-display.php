@@ -182,10 +182,6 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-height-controls">
 					<div class="community-reviews-display-title">Height</div>
 					<div class="community-reviews-display-slider">
-<<<<<<< HEAD
-						<input id="community-reviews-display-slider-min-height" type="range" value="65" min = 36 max = 84/>
-						<input id="community-reviews-display-slider-max-height" type="range" value="74" min = 36 max = 84/>
-=======
 						<input id="community-reviews-display-slider-min-height" type="range" value="36" min="36" max="84"/>
 						<input id="community-reviews-display-slider-max-height" type="range" value="84" min="36" max="84"/>
 					</div>
@@ -198,38 +194,12 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						<div class="community-reviews-number-box-right">
 							<input class="community-reviews-display-number-box" type="text" id="max_height" value="7'0&quot;" readonly/>
 						</div>
->>>>>>> 5b494c159887b07914cabfc3a8cb42d46ad5cbd3
 					</div>
 				</div>
 
 				<div class="community-reviews-display-weight-controls">
 					<div class="community-reviews-display-title">Weight</div>
 					<div class="community-reviews-display-slider">
-<<<<<<< HEAD
-					<?php
-							global $wpdb;
-							$user_table_name = $wpdb->prefix . "bcr_users";
-							$sql = $wpdb->prepare("SELECT MAX(weight) FROM $user_table_name;");
-							$max_weight  = $wpdb->get_var($sql);
-							$sql = $wpdb->prepare("SELECT MIN(weight) FROM $user_table_name;");
-							$min_weight  = $wpdb->get_var($sql);
-							$avg_weight = ($max_weight+$min_weight)/2;
-					?>
-					<!-- <script>
-						function updateWeightValue_maxSlider_min() {
-							var slider = document.getElementById("community-reviews-display-min-weight");
-							var new_min = slider.value;
-							document.getElementById("community-reviews-display-slider-max-weight").min = new_min;
-						}
-						function updateWightValue_minSlider_max(){
-							var slider = document.getElementById("community-reviews-display-max-weight");
-							var new_max = slider.value;
-							document.getElementById("community-reviews-display-slider-min-weight").max = new_max;
-						}
-					</script> -->
-						<input id="community-reviews-display-slider-min-weight" type="range" value="100" min=<?php echo $min_weight ?> max= <?php echo $max_weight ?>/>
-						<input id="community-reviews-display-slider-max-weight" type="range" value="200" min=<?php echo $min_weight ?> max= <?php echo $max_weight ?>/>
-=======
 						<input id="community-reviews-display-slider-min-weight" type="range" value="50" min="50" max="350"/>
 						<input id="community-reviews-display-slider-max-weight" type="range" value="350" min="50" max="350"/>
 					</div>
@@ -242,7 +212,6 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						<div class="community-reviews-number-box-right">
 							<input class="community-reviews-display-number-box" type="text" id="max_weight" value="350 lbs" readonly/>
 						</div>
->>>>>>> 5b494c159887b07914cabfc3a8cb42d46ad5cbd3
 					</div>
 				</div>
 				<button id="community-reviews-display-submit">Filter</button>
