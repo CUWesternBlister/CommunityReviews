@@ -132,28 +132,36 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-length-controls">
 					<div class="community-reviews-display-title">Length</div>
 					<div class="community-reviews-display-slider">
-						<input id="community-reviews-display-slider-min-length" type="range" value="100" min="50" max="250"/>
-						<input id="community-reviews-display-slider-max-length" type="range" value="200" min="50" max="250"/>
+						<input id="community-reviews-display-slider-min-length" type="range" value="50" min="50" max="250"/>
+						<input id="community-reviews-display-slider-max-length" type="range" value="250" min="50" max="250"/>
 					</div>
 					
-					<!-- <div class="community-reviews-number-boxes">
-						<div class="community-reviews-number-box">
-							<div class="community-reviews-display-length-input-title">Min</div>
-							<input class="community-reviews-display-length-input" type="number" id="min_length" value="100" min="50" max="250"/>
+					<div class="community-reviews-number-boxes">
+						<div class="community-reviews-number-box-left">
+							<input class="community-reviews-display-number-box" type="text" id="min_length" value="100 cm" readonly/>
 						</div>
 
-						<div class="community-reviews-number-box">
-							<div class="community-reviews-display-length-input-title">Max</div>
-							<input class="community-reviews-display-length-input" type="number" id="max_length" value="200" min="50" max="250"/>
+						<div class="community-reviews-number-box-right">
+							<input class="community-reviews-display-number-box" type="text" id="max_length" value="200 cm" readonly/>
 						</div>
-					</div> -->
+					</div>
 				</div>
 
 				<div class="community-reviews-display-year-controls">
 					<div class="community-reviews-display-title">Year</div>
 					<div class="community-reviews-display-slider">
-						<input id="community-reviews-display-slider-min-year" type="range" value="2016" min="2000" max="2024"/>
-						<input id="community-reviews-display-slider-max-year" type="range" value="2023" min="2000" max="2024"/>
+						<input id="community-reviews-display-slider-min-year" type="range" value="2000" min="2000" max="2023"/>
+						<input id="community-reviews-display-slider-max-year" type="range" value="2023" min="2000" max="2023"/>
+					</div>
+
+					<div class="community-reviews-number-boxes">
+						<div class="community-reviews-number-box-left">
+							<input class="community-reviews-display-number-box" type="text" id="min_year" value="2000-2001" readonly/>
+						</div>
+
+						<div class="community-reviews-number-box-right">
+							<input class="community-reviews-display-number-box" type="text" id="max_year" value="2023-2024" readonly/>
+						</div>
 					</div>
 				</div>
 
@@ -174,14 +182,30 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-height-controls">
 					<div class="community-reviews-display-title">Height</div>
 					<div class="community-reviews-display-slider">
+<<<<<<< HEAD
 						<input id="community-reviews-display-slider-min-height" type="range" value="65" min = 36 max = 84/>
 						<input id="community-reviews-display-slider-max-height" type="range" value="74" min = 36 max = 84/>
+=======
+						<input id="community-reviews-display-slider-min-height" type="range" value="36" min="36" max="84"/>
+						<input id="community-reviews-display-slider-max-height" type="range" value="84" min="36" max="84"/>
+					</div>
+
+					<div class="community-reviews-number-boxes">
+						<div class="community-reviews-number-box-left">
+							<input class="community-reviews-display-number-box" type="text" id="min_height" value="3'0&quot;" readonly/>
+						</div>
+
+						<div class="community-reviews-number-box-right">
+							<input class="community-reviews-display-number-box" type="text" id="max_height" value="7'0&quot;" readonly/>
+						</div>
+>>>>>>> 5b494c159887b07914cabfc3a8cb42d46ad5cbd3
 					</div>
 				</div>
 
 				<div class="community-reviews-display-weight-controls">
 					<div class="community-reviews-display-title">Weight</div>
 					<div class="community-reviews-display-slider">
+<<<<<<< HEAD
 					<?php
 							global $wpdb;
 							$user_table_name = $wpdb->prefix . "bcr_users";
@@ -205,6 +229,20 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					</script> -->
 						<input id="community-reviews-display-slider-min-weight" type="range" value="100" min=<?php echo $min_weight ?> max= <?php echo $max_weight ?>/>
 						<input id="community-reviews-display-slider-max-weight" type="range" value="200" min=<?php echo $min_weight ?> max= <?php echo $max_weight ?>/>
+=======
+						<input id="community-reviews-display-slider-min-weight" type="range" value="50" min="50" max="350"/>
+						<input id="community-reviews-display-slider-max-weight" type="range" value="350" min="50" max="350"/>
+					</div>
+
+					<div class="community-reviews-number-boxes">
+						<div class="community-reviews-number-box-left">
+							<input class="community-reviews-display-number-box" type="text" id="min_weight" value="50 lbs" readonly/>
+						</div>
+
+						<div class="community-reviews-number-box-right">
+							<input class="community-reviews-display-number-box" type="text" id="max_weight" value="350 lbs" readonly/>
+						</div>
+>>>>>>> 5b494c159887b07914cabfc3a8cb42d46ad5cbd3
 					</div>
 				</div>
 				<button id="community-reviews-display-submit">Filter</button>
@@ -218,16 +256,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					);
 
 					$query = new \WP_Query( $args );
-					
-					if ( $query->have_posts() ) {
-						echo '<ul>';
-						while ( $query->have_posts() ) {
-							$query->the_post();
-							echo '<li>' . get_the_title() . get_the_excerpt() . '</li>';
-						}
-						echo '</ul>';
-						wp_reset_postdata();
-					}
+					bcr_display_posts( $query );
 				?>
 			</div>
 		</div>

@@ -70,20 +70,35 @@ function bcr_filter_posts() {
 
     $query = new \WP_Query( $args );
 
-    if ( $query->have_posts() ) {
-        echo '<ul>';
-        while ( $query->have_posts() ) {
-            $query->the_post();
-            echo '<li>' . get_the_title() . get_the_excerpt() . '</li>';
-        }
-        echo '</ul>';
-        wp_reset_postdata();
-    }
+    bcr_display_posts( $query );
+    
     wp_die();
 }
 
 add_action( 'wp_ajax_bcr_filter_posts', 'bcr_filter_posts' );
 add_action( 'wp_ajax_nopriv_bcr_filter_posts', 'bcr_filter_posts' );
+
+/**
+ * Use a query to display the posts for the filtering widget
+ * 
+ * @param   WP_Query    $query
+ * 
+ * @return  void
+ */
+function bcr_display_posts( $query ) {
+    if ( $query->have_posts() ) {
+        while ( $query->have_posts() ) {
+            echo '<div class="community_review_excerpt">';
+            $query->the_post();
+            echo '<div class="excerpt_title">' . '<a href=' . get_the_permalink() . '>' . get_the_title() . '</a></div>';
+            echo '<div class="community_review_postdate">' . get_the_date() . '</div>';
+            echo '<div class="excerpt_content">' . get_the_excerpt() . '</div>';
+            echo '</div>';
+        }
+
+        wp_reset_postdata();
+    }
+}
 
 /**
  * Filter the options for the products dropdown based on the currently selected brand
@@ -111,7 +126,7 @@ function bcr_filter_products() {
 
     $results  = $wpdb->get_results($sql);
 
-    echo '<label for="community-reviews-display-product">Product:</label>';
+    echo '<div class="community-reviews-display-title">Product</div>';
     echo '<select id="community-reviews-display-product">';
     
     echo '<option value="">--No Product Filter--</option>';
@@ -154,7 +169,7 @@ function bcr_filter_categories() {
 
     $results  = $wpdb->get_results($sql);
 
-    echo '<label for="community-reviews-display-category">Category:</label>';
+    echo '<div class="community-reviews-display-title">Category</div>';
     echo '<select id="community-reviews-display-category">';
     
     echo '<option value="">--No Category Filter--</option>';
@@ -201,5 +216,16 @@ function bcr_load_filter_widget_css() {
     $plugin_url = plugin_dir_url( __FILE__ );
     wp_enqueue_style( 'filter_widget_desktop_style', $plugin_url . 'widgets/desktop_style.css' );
 }
-add_action( 'wp_enqueue_scripts', 'bcr_load_filter_widget_css' )
+add_action( 'wp_enqueue_scripts', 'bcr_load_filter_widget_css' );
+
+/**
+ * Load the JS for the filtering widget
+ * 
+ * @return  void
+ */
+function bcr_load_filter_widget_js() {
+    wp_enqueue_script( 'filter_widget_js', plugin_dir_url( __FILE__ ) . '/widgets/scripts.js', array( 'jquery' ), 1.1, true);
+}
+
+add_action( 'wp_enqueue_scripts', 'bcr_load_filter_widget_js' );
 ?>
