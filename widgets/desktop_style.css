@@ -104,7 +104,7 @@ select {
     }
 
     .community-reviews-display-filter {
-        /* display: none; */
+        display: none;
         background-color: #D6D6D6;
         position: absolute;
         height: fit-content;
