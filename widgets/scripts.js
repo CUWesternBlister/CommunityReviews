@@ -13,6 +13,9 @@ function bcr_alter_slider(cur_slider, other_slider, is_min_slider, box, prefix) 
     }
 
     bcr_update_display_box(box, cur_slider, prefix);
+    if(!is_min_slider) {
+        bcr_set_max_slider_z_val(other_slider, cur_slider);
+    }
 }
 
 function bcr_update_display_box(box, slider, prefix) {
@@ -31,6 +34,15 @@ function bcr_update_display_box(box, slider, prefix) {
         box.value = slider.value + " " + prefix;
     }
 }
+
+function bcr_set_max_slider_z_val(min_slider, max_slider) {
+    min = Number(min_slider.min); 
+    if (Number(max_slider.value) <= min ) {
+      max_slider.style.zIndex = 2;
+    } else {
+      max_slider.style.zIndex = 0;
+    }
+  }
 
 const length_min_slider = document.querySelector('#community-reviews-display-slider-min-length');
 const length_max_slider = document.querySelector('#community-reviews-display-slider-max-length');
