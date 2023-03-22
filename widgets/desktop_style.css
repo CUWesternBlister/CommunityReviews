@@ -33,6 +33,11 @@
     text-align: center;
 }
 
+#min_year,
+#max_year {
+    width: 100px;
+}
+
 input[type="range"] {
     appearance: none;
     height: 2px;
