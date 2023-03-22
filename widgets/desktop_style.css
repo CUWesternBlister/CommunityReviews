@@ -61,12 +61,23 @@ select {
 #community-reviews-display-submit {
     margin: 10px;
 }
+@media only screen and (min-width: 768px) {
+    .community_review_excerpt {
+        width: 220px;
+        height: 220px;
+        padding-right: 10px;
+        padding-top: 15px;
+        float: left;
+    }
+}
 
-.community_review_excerpt {
-    width: 30%;
-    padding-right: 10px;
-    padding-top: 15px;
-    float: left;
+@media only screen and (max-width: 768px) {
+    .community_review_excerpt {
+        width: 100%;
+        padding-right: 10px;
+        padding-top: 15px;
+        float: left;
+    }
 }
 
 .excerpt_title {
