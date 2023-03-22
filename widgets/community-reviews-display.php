@@ -37,6 +37,9 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 		?>
 
 		<div class="community-reviews-display">
+			<div class="community-reviews-display-mobile-only">
+				<button id="community-reviews-display-mobile-button"></button>
+			</div>
 			<div class="community-reviews-display-filter">
 
 				<strong>Product Filters</strong>
