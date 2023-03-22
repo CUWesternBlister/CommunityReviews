@@ -138,11 +138,11 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					
 					<div class="community-reviews-number-boxes">
 						<div class="community-reviews-number-box-left">
-							<input class="community-reviews-display-number-box" type="text" id="min_length" value="100 cm" readonly/>
+							<input class="community-reviews-display-number-box" type="text" id="min_length" value="50 cm" readonly/>
 						</div>
 
 						<div class="community-reviews-number-box-right">
-							<input class="community-reviews-display-number-box" type="text" id="max_length" value="200 cm" readonly/>
+							<input class="community-reviews-display-number-box" type="text" id="max_length" value="250 cm" readonly/>
 						</div>
 					</div>
 				</div>
@@ -243,14 +243,22 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 		jQuery( document ).ready( function( $ ) {
 			$( '#community-reviews-display-submit' ).on( 'click', function( event ) {
 				event.preventDefault();
-
-				var product = $( '#community-reviews-display-product' ).val();
-				var brand = $( '#community-reviews-display-brand' ).val();
-				var category = $( '#community-reviews-display-category' ).val();
-				var min_weight = $( '#community-reviews-display-slider-min-weight' ).val();
-				var max_weight = $( '#community-reviews-display-max-slider-weight' ).val();
-				var ski_ability = $( '#community-reviews-display-ski-ability' ).val();
 				var sport = $( '#community-reviews-display-sport' ).val();
+				var category = $( '#community-reviews-display-category' ).val();
+				var brand = $( '#community-reviews-display-brand' ).val();
+				var product = $( '#community-reviews-display-product' ).val();
+
+				var min_length = $( '#community-reviews-display-slider-min-length' ).val();
+				var max_length = $( '#community-reviews-display-slider-max-length' ).val();
+
+				var min_year = $( '#community-reviews-display-slider-min-year' ).val();
+				var max_year = $( '#community-reviews-display-slider-max-year' ).val();
+
+				var ski_ability = $( '#community-reviews-display-ski-ability' ).val();
+				
+				var min_weight = $( '#community-reviews-display-slider-min-weight' ).val();
+				var max_weight = $( '#community-reviews-display-slider-max-weight' ).val();
+				
 				var min_height = $( '#community-reviews-display-slider-min-height' ).val();
 				var max_height = $( '#community-reviews-display-slider-max-height' ).val();
 
@@ -259,15 +267,19 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					method: 'POST',
 					data: {
 						action: 'bcr_filter_posts',
-						product: product,
-						brand: brand,
-						category: category,
-						min_weight: min_weight,
-						max_weight: max_weight,
-						ski_ability: ski_ability,
 						sport: sport,
+						category: category,
+						brand: brand,
+						product: product,
+						min_length: min_length,
+						max_length: max_length,
+						min_year: min_year,
+						max_year: max_year,
+						ski_ability: ski_ability,
 						min_height: min_height,
-						max_height: max_height
+						max_height: max_height,
+						min_weight: min_weight,
+						max_weight: max_weight
 					},
 					success: function( data ) {
 						$( '.community-reviews-display-show-posts' ).html( data );
