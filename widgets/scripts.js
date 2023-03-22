@@ -16,6 +16,8 @@ function bcr_alter_slider(cur_slider, other_slider, is_min_slider, box, prefix) 
     if(!is_min_slider) {
         bcr_set_max_slider_z_val(other_slider, cur_slider);
     }
+
+    bcr_color_slider(cur_slider, other_slider);  
 }
 
 function bcr_update_display_box(box, slider, prefix) {
@@ -42,7 +44,34 @@ function bcr_set_max_slider_z_val(min_slider, max_slider) {
     } else {
       max_slider.style.zIndex = 0;
     }
-  }
+}
+
+function bcr_color_slider(slider_1, slider_2) {
+    const total_range = slider_1.max-slider_1.min;
+    const slider_1_val = Number(slider_1.value);
+    const sldier_2_val = Number(slider_2.value);
+
+    const low_range = Math.min(slider_1_val, sldier_2_val) - slider_1.min;
+    const high_range = Math.max(slider_1_val, sldier_2_val) - slider_1.min;
+
+    slider_1.style.background = `linear-gradient(
+        to right,
+        ${'#C6C6C6'} 0%,
+        ${'#C6C6C6'} ${(low_range)/(total_range)*100}%,
+        ${'#D82129'} ${((low_range)/(total_range))*100}%,
+        ${'#D82129'} ${(high_range)/(total_range)*100}%, 
+        ${'#C6C6C6'} ${(high_range)/(total_range)*100}%, 
+        ${'#C6C6C6'} 100%)`;
+
+    slider_2.style.background = `linear-gradient(
+        to right,
+        ${'#C6C6C6'} 0%,
+        ${'#C6C6C6'} ${(low_range)/(total_range)*100}%,
+        ${'#D82129'} ${((low_range)/(total_range))*100}%,
+        ${'#D82129'} ${(high_range)/(total_range)*100}%, 
+        ${'#C6C6C6'} ${(high_range)/(total_range)*100}%, 
+        ${'#C6C6C6'} 100%)`;
+}
 
 const length_min_slider = document.querySelector('#community-reviews-display-slider-min-length');
 const length_max_slider = document.querySelector('#community-reviews-display-slider-max-length');
@@ -68,6 +97,12 @@ const height_max_box = document.querySelector('#max_height');
 
 const weight_min_box = document.querySelector('#min_weight');
 const weight_max_box = document.querySelector('#max_weight');
+
+
+bcr_color_slider(length_max_slider, length_min_slider);
+bcr_color_slider(year_max_slider, year_min_slider);
+bcr_color_slider(height_max_slider, height_min_slider);
+bcr_color_slider(weight_max_slider, weight_min_slider);
 
 
 length_min_slider.oninput = () => bcr_alter_slider(length_min_slider, length_max_slider, true, length_min_box, "cm");
