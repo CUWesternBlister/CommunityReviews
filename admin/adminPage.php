@@ -1,4 +1,7 @@
 <?php
+
+include 'update_community_reviews_custom_posts.php';
+
 add_action( 'admin_menu', 'bcr_admin_page');
 
 /**
@@ -42,6 +45,7 @@ function bcr_admin_page_html() {
             
             bcr_display_version();
             bcr_display_user_reset();
+            bcr_update_custom_posts_metadata();
 
             foreach($table_names_array as $table_name) {
                 bcr_display_table_contents($table_name);
@@ -96,6 +100,24 @@ function bcr_display_user_reset() {
         }
     }
 }
+
+function bcr_update_custom_posts_metadata() {
+
+        if(array_key_exists('update_custom_post_metadata_button', $_POST)) {
+            update_existing_custom_posts();
+        }
+
+        ?>
+            <div id="update_custom_post_metadata">
+                <form method="post">
+                    <input type="submit" name="update_custom_post_metadata_button" class="button" value="Update BCR Custom Post Metadata"/>
+                </form>
+            </div>
+        <?php
+    
+}
+
+
 
 /**
  * Displays the given table as an html table for debugging
