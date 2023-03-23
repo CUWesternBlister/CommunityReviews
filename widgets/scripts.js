@@ -119,12 +119,15 @@ weight_max_slider.oninput = () => bcr_alter_slider(weight_max_slider, weight_min
 
 function bcr_show_mobile_filters() {
     const all_filters = document.getElementById('community-reviews-display-filter');
-    all_filters.style.display = 'inherit';
+    all_filters.style.display = 'initial';
 }
 
 function bcr_hide_mobile_filters() {
-    const all_filters = document.getElementById('community-reviews-display-filter');
-    all_filters.style.display = 'none';
+    var is_mobile = window.matchMedia("(max-width: 400px)");
+    if(is_mobile.matches) {
+        const all_filters = document.getElementById('community-reviews-display-filter');
+        all_filters.style.display = 'none';
+    }
 }
 
 const mobile_button = document.getElementById('community-reviews-display-mobile-button');

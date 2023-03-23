@@ -60,6 +60,7 @@ select {
 
 #community-reviews-display-submit {
     margin: 10px;
+    width: 150px;
 }
 
 .community_review_excerpt {
@@ -112,6 +113,7 @@ select {
         right: 0px;
         bottom: 0px;
         left: 0px;
+        text-align: center;
     }
 
     #min_year {
@@ -121,13 +123,35 @@ select {
     #max_year {
         margin-left: 0%;
     }
+
+    #community-reviews-display-submit {
+        margin: 10px;
+        width: 150px;
+    }
 }
 
 @media screen and (min-width: 400px) {
     .community-reviews-display {
         display: grid;
         grid-template-columns: 0% 30% 70%;
-        text-align:center;
+        text-align: center;
+    }
+
+    #community-reviews-display-submit {
+        margin: 10px;
+        width: 150px;
+    }
+
+    .community-reviews-display-filter {
+        display: initial;
+        background-color: initial;
+        position: initial;
+        height: initial;
+        top: initial;
+        right: initial;
+        bottom: initial;
+        left: initial;
+        text-align: center;
     }
 
     #community-reviews-display-mobile-button {
