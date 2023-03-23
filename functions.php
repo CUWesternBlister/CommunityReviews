@@ -133,7 +133,7 @@ function summit_redirects() {
     if ( is_page(array('Backpack Review', 'Community Reviews Profile', 'Ski Review', 'Apparel Review',
         'Ski Boot Review', 'Skiing Know Thyself', 'Climbing Skins Review', 'Snowboard Review', 'Backpack Review'))){
 
-        session_start();
+       session_start();
         // Set the previous URL session variable
         global $wp;
 

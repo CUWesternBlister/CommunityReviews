@@ -1,6 +1,13 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+namespace ElementorPro\Modules\Posts\Widgets;
+
+use Elementor\Controls_Manager;
+use ElementorPro\Modules\QueryControl\Module as Module_Query;
+use ElementorPro\Modules\QueryControl\Controls\Group_Control_Related;
+use ElementorPro\Modules\Posts\Skins;
+
+ if ( ! defined( 'ABSPATH' ) ) {
+ 	exit; // Exit if accessed directly
 }
 
 class Community_Reviews_Display extends \Elementor\Widget_Base {
@@ -131,11 +138,11 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					
 					<div class="community-reviews-number-boxes">
 						<div class="community-reviews-number-box-left">
-							<input class="community-reviews-display-number-box" type="text" id="min_length" value="100 cm" readonly/>
+							<input class="community-reviews-display-number-box" type="text" id="min_length" value="50 cm" readonly/>
 						</div>
 
 						<div class="community-reviews-number-box-right">
-							<input class="community-reviews-display-number-box" type="text" id="max_length" value="200 cm" readonly/>
+							<input class="community-reviews-display-number-box" type="text" id="max_length" value="250 cm" readonly/>
 						</div>
 					</div>
 				</div>
@@ -193,21 +200,29 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-weight-controls">
 					<div class="community-reviews-display-title">Weight</div>
 					<div class="community-reviews-display-slider">
-						<input id="community-reviews-display-slider-min-weight" type="range" value="50" min="50" max="350"/>
-						<input id="community-reviews-display-slider-max-weight" type="range" value="350" min="50" max="350"/>
+						<?php
+							global $wpdb;
+							$user_table_name = $wpdb->prefix . "bcr_users";
+							$sql = $wpdb->prepare("SELECT MAX(weight) FROM $user_table_name;");
+							$max_weight  = $wpdb->get_var($sql);
+							$sql = $wpdb->prepare("SELECT MIN(weight) FROM $user_table_name;");
+							$min_weight  = $wpdb->get_var($sql);
+							$avg_weight = ($max_weight+$min_weight)/2;
+						?>
+						<input id="community-reviews-display-slider-min-weight" type="range" value="<?php echo $min_weight ?>" min="<?php echo $min_weight ?>" max= "<?php echo $max_weight ?>"/>
+						<input id="community-reviews-display-slider-max-weight" type="range" value="<?php echo $max_weight ?>" min="<?php echo $min_weight ?>" max= "<?php echo $max_weight ?>"/>
 					</div>
 
 					<div class="community-reviews-number-boxes">
 						<div class="community-reviews-number-box-left">
-							<input class="community-reviews-display-number-box" type="text" id="min_weight" value="50 lbs" readonly/>
+							<input class="community-reviews-display-number-box" type="text" id="min_weight" value="<?php echo $min_weight ?> lbs" readonly/>
 						</div>
 
 						<div class="community-reviews-number-box-right">
-							<input class="community-reviews-display-number-box" type="text" id="max_height" value="350 lbs" readonly/>
+							<input class="community-reviews-display-number-box" type="text" id="max_weight" value="<?php echo $max_weight ?> lbs" readonly/>
 						</div>
 					</div>
 				</div>
-
 				<button id="community-reviews-display-submit">Filter</button>
 			</div>
 
@@ -228,31 +243,43 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 		jQuery( document ).ready( function( $ ) {
 			$( '#community-reviews-display-submit' ).on( 'click', function( event ) {
 				event.preventDefault();
-
-				var product = $( '#community-reviews-display-product' ).val();
-				var brand = $( '#community-reviews-display-brand' ).val();
-				var category = $( '#community-reviews-display-category' ).val();
-				var min_weight = $( '#community-reviews-display-min-weight' ).val();
-				var max_weight = $( '#community-reviews-display-max-weight' ).val();
-				var ski_ability = $( '#community-reviews-display-ski-ability' ).val();
 				var sport = $( '#community-reviews-display-sport' ).val();
-				var min_height = $( '#community-reviews-display-min-height' ).val();
-				var max_height = $( '#community-reviews-display-max-height' ).val();
+				var category = $( '#community-reviews-display-category' ).val();
+				var brand = $( '#community-reviews-display-brand' ).val();
+				var product = $( '#community-reviews-display-product' ).val();
+
+				var min_length = $( '#community-reviews-display-slider-min-length' ).val();
+				var max_length = $( '#community-reviews-display-slider-max-length' ).val();
+
+				var min_year = $( '#community-reviews-display-slider-min-year' ).val();
+				var max_year = $( '#community-reviews-display-slider-max-year' ).val();
+
+				var ski_ability = $( '#community-reviews-display-ski-ability' ).val();
+				
+				var min_weight = $( '#community-reviews-display-slider-min-weight' ).val();
+				var max_weight = $( '#community-reviews-display-slider-max-weight' ).val();
+				
+				var min_height = $( '#community-reviews-display-slider-min-height' ).val();
+				var max_height = $( '#community-reviews-display-slider-max-height' ).val();
 
 				$.ajax( {
 					url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
 					method: 'POST',
 					data: {
 						action: 'bcr_filter_posts',
-						product: product,
-						brand: brand,
-						category: category,
-						min_weight: min_weight,
-						max_weight: max_weight,
-						ski_ability: ski_ability,
 						sport: sport,
+						category: category,
+						brand: brand,
+						product: product,
+						min_length: min_length,
+						max_length: max_length,
+						min_year: min_year,
+						max_year: max_year,
+						ski_ability: ski_ability,
 						min_height: min_height,
-						max_height: max_height
+						max_height: max_height,
+						min_weight: min_weight,
+						max_weight: max_weight
 					},
 					success: function( data ) {
 						$( '.community-reviews-display-show-posts' ).html( data );

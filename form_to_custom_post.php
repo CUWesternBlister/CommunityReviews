@@ -29,6 +29,20 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
         
         $postTitle = get_post_title($title_arr);
 
+        $year = "";
+        if(array_key_exists(9, $title_arr)){
+            preg_match('/\d{4}/', $title_arr[9], $matches);
+            $year = intval($matches[0]);
+        }
+
+        $length = "";
+        $ski_boot_size = "";
+        if(array_key_exists(3, $title_arr)){
+            $length = intval(preg_replace('/[^0-9]/', '', $title_arr[3]));
+        }else if(array_key_exists(22, $title_arr)){
+            $ski_boot_size = intval($title_arr[22]);
+        }
+
         $height = intval($userInfo->heightFeet) * 12 + intval($userInfo->heightInches); 
 
         //fwrite($file, "\n".$html."\n");
@@ -47,7 +61,10 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
                                                   'product_tested'=> $header['productName'],
                                                   'brand'         => $header['brandName'],
                                                   'category'      => $header['categoryName'],
-                                                  'sport'         => $header['sportName']
+                                                  'sport'         => $header['sportName'],
+                                                  'length'        => $length,
+                                                  'year'          => $year,
+                                                  'ski_boot_size' => $ski_boot_size
                                                   ),
                             'post_type'   => 'Community Reviews',
                             'post_excerpt' => $user_html,

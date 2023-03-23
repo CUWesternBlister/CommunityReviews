@@ -49,6 +49,10 @@ function bcr_filter_posts() {
         array_push($meta_query, array('key' => 'category', 'value' => $categories));
     }
 
+    if ( ! empty( $_POST['ski_ability'] ) ) {
+        array_push($meta_query, array('key' => 'skiAbility', 'value' => sanitize_text_field( $_POST['ski_ability'] )));
+    }
+
     if ( ! empty($_POST['min_weight']) And ! empty($_POST['max_weight']) ) {
         array_push($meta_query, array('key' => 'weight', 'value' => array(sanitize_text_field( $_POST['min_weight'] ), sanitize_text_field( $_POST['max_weight'] )), 'compare' => 'BETWEEN', 'type' => 'numeric') );
     }
@@ -57,8 +61,16 @@ function bcr_filter_posts() {
         array_push($meta_query, array('key' => 'height', 'value' => array(sanitize_text_field( $_POST['min_height'] ), sanitize_text_field( $_POST['max_height'] )), 'compare' => 'BETWEEN', 'type' => 'numeric') );
     }
 
-    if ( ! empty( $_POST['ski_ability'] ) ) {
-        array_push($meta_query, array('key' => 'skiAbility', 'value' => sanitize_text_field( $_POST['ski_ability'] )));
+    if ( ! empty($_POST['min_length']) And ! empty($_POST['max_length']) And ! empty($_POST['category']) ) {
+        if(sanitize_text_field( $_POST['category'] ) == 'Skis') {
+            array_push($meta_query, array('key' => 'ski_length', 'value' => array(sanitize_text_field( $_POST['min_length'] ), sanitize_text_field( $_POST['max_length'] )), 'compare' => 'BETWEEN', 'type' => 'numeric') );
+        }
+    }
+
+    if ( ! empty($_POST['min_year']) And ! empty($_POST['max_year']) ) {
+        $year_query = array('relation' => 'OR', array('key' => 'year', 'value' => ''));
+        array_push($year_query, array('key' => 'year', 'value' => array(sanitize_text_field( $_POST['min_year'] ), sanitize_text_field( $_POST['max_year'] )), 'compare' => 'BETWEEN', 'type' => 'numeric') );
+        array_push($meta_query, $year_query);
     }
 
     $args['meta_query'] = $meta_query;
