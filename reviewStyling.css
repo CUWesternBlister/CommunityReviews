@@ -3,7 +3,7 @@
 		font-wight: bold;
 	}
 	.clip-circle{
-		background: red;
+		background: #61CE70;
 		clip-path: circle(6px);
 		display: inline-block;
 		height: 12px;
@@ -69,7 +69,7 @@
 		float: left;
 		height: 100%;
 		color:black;
-		background-color: rgb(227, 227, 227);
+		background-color: rgb(240, 240, 240);
 	}
 
 	.short_container_no_float{
@@ -79,7 +79,7 @@
 		display: block;
 		height: 100%;
 		color:black;
-		background-color: rgb(227, 227, 227);
+		background-color: rgb(240, 240, 240);
 	}
 
 	.long_container {
@@ -96,7 +96,7 @@
 		margin-top: 10px;
 		float: left;
 		display: block;
-		background-color: rgb(227, 227, 227);
+		background-color: rgb(240, 240, 240);
 	}
 
 	.whole_container_flex {
@@ -105,7 +105,7 @@
 		margin-top: 10px;
 		float: left;
 		display: flex;
-		background-color: rgb(227, 227, 227);
+		background-color: rgb(240, 240, 240);
 	}
 
 	.whole_container_justified {
@@ -116,7 +116,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		background-color: rgb(227, 227, 227);
+		background-color: rgb(240, 240, 240);
 	}
 
 	.whole_container_version {
@@ -134,7 +134,7 @@
 	}
 
 	.clip-circle{
-		background: red;
+		background: #61CE70;
 		clip-path: circle(6px);
 		display: inline-block;
 		height: 12px;
@@ -203,7 +203,7 @@
 		display: block;
 		height: 100%;
 		color:black;
-		background-color: rgb(227, 227, 227);
+		background-color: rgb(240, 240, 240);
 	}
 
 	.long_container {
@@ -211,7 +211,7 @@
 		padding-right: 10px;
 		float: left;
 		display: block;
-		background-color: rgb(227, 227, 227);
+		background-color: white;
 	}
 
 	.whole_container {
@@ -220,7 +220,7 @@
 		margin-bottom: 10px;
 		float: left;
 		display: block;
-		background-color: rgb(227, 227, 227);
+		background-color: white;
 	}
 
 	.whole_container_flex {
@@ -230,7 +230,7 @@
 		margin-bottom: 10px;
 		float: left;
 		display: flex;
-		background-color: rgb(227, 227, 227);
+		background-color: rgb(240, 240, 240);
 	}
 	.whole_container_justified {
 		width: 90%;
@@ -240,7 +240,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		background-color: rgb(227, 227, 227);
+		background-color: rgb(240, 240, 240);
 	}
 
 	.whole_container_version {
