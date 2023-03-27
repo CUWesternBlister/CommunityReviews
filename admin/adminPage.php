@@ -101,6 +101,11 @@ function bcr_display_user_reset() {
     }
 }
 
+/**
+ * Displays button to update the metadata of all custom posts
+ * 
+ * @return  void
+ */
 function bcr_update_custom_posts_metadata() {
 
         if(array_key_exists('update_custom_post_metadata_button', $_POST)) {
