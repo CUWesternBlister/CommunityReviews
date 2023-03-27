@@ -16,7 +16,7 @@ function update_existing_custom_posts() {
       add_metadata_to_custom_posts($post_id);
     }
     wp_reset_postdata();
-  }
+  } 
 }
 
 
@@ -49,7 +49,10 @@ function add_metadata_to_custom_posts( $post_id ) {
     //get user height and convert
     $feet_str = get_post_meta( $post_id, 'heightFeet', true );
     $inch_str = get_post_meta( $post_id, 'heightInches', true );
-    $height_in_inches = (intval($feet_str)*12)+intval($inch_str);  
+    $height_in_inches = (intval($feet_str)*12)+intval($inch_str);
+
+    //get category id
+    $category_id = get  
   
     // add meta data  to post
     update_post_meta( $post_id, 'brand', $brand);
