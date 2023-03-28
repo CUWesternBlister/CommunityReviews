@@ -1,8 +1,3 @@
-.community-reviews-display {
-    display: grid;
-    grid-template-columns: 30% 70%;
-}
-
 .community-reviews-display-title {
     text-align: center;
 }
@@ -65,13 +60,35 @@ select {
 
 #community-reviews-display-submit {
     margin: 10px;
+    width: 150px;
+}
+@media only screen and (min-width: 800px) {
+    .community_review_excerpt {
+        width: 45%;
+        height: 220px;
+        border: 1px solid #C6C6C6;
+        border-radius: 5px;
+        background-color: #EFEFEF;
+        padding-right: 10px;
+        padding-top: 15px;
+        float: left;
+    }
 }
 
-.community_review_excerpt {
-    width: 30%;
-    padding-right: 10px;
-    padding-top: 15px;
-    float: left;
+@media only screen and (max-width: 800px) {
+    .community_review_excerpt {
+        width: 100%;
+        border: 1px solid #C6C6C6;
+        border-radius: 5px;
+        background-color: #EFEFEF;
+        padding-right: 10px;
+        padding-top: 15px;
+        float: left;
+    }
+}
+
+.community_review_excerpt:hover {
+    background-color: #C6C6C6;
 }
 
 .excerpt_title {
@@ -94,4 +111,71 @@ select {
     padding-left: 10px;
     float: left;
     color: #222;
+}
+
+@media screen and (max-width: 400px) {
+    .community-reviews-display {
+        display: grid;
+        grid-template-columns: 100%;
+        text-align: center;
+    }
+
+    input[type="range"] {
+        width: 80%;
+        left: 10%;
+    }
+
+    .community-reviews-display-filter {
+        display: none;
+        background-color: #D6D6D6;
+        position: absolute;
+        height: fit-content;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        text-align: center;
+    }
+
+    #min_year {
+        margin-right: 0%;
+    }
+
+    #max_year {
+        margin-left: 0%;
+    }
+
+    #community-reviews-display-submit {
+        margin: 10px;
+        width: 150px;
+    }
+}
+
+@media screen and (min-width: 400px) {
+    .community-reviews-display {
+        display: grid;
+        grid-template-columns: 0% 30% 70%;
+        text-align: center;
+    }
+
+    #community-reviews-display-submit {
+        margin: 10px;
+        width: 150px;
+    }
+
+    .community-reviews-display-filter {
+        display: initial;
+        background-color: initial;
+        position: initial;
+        height: initial;
+        top: initial;
+        right: initial;
+        bottom: initial;
+        left: initial;
+        text-align: center;
+    }
+
+    #community-reviews-display-mobile-button {
+        display: none;
+    }
 }
