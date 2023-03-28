@@ -2,7 +2,7 @@
 
 include 'generate_html.php';
 
-function insert_into_ski_review($header, $file, $formName) {
+function insert_into_ski_review($header, $file, $formName, $form_id) {
     //$start = "\n\n INSERT INTO SKI REVIEW \n";
     //fwrite($file, $start);
     global $wpdb;
@@ -25,20 +25,26 @@ function insert_into_ski_review($header, $file, $formName) {
     
     $postTitle = get_post_title($title_arr);
 
+    $height = intval($userInfo->heightFeet) * 12 + intval($userInfo->heightInches);
+
     $ski_review = array(
                         'post_title' => wp_strip_all_tags($postTitle), 
                         'post_content' => $html,
                         'meta_input' => array(
                                               'id'            => $header['reviewID'],
+                                              'formID'        => $form_id,
                                               'userID'        => $userInfo->userID,
                                               'userName'      => $userName,
-                                              'heightFeet'    => $userInfo->heightFeet,
-                                              'heightInches'  => $userInfo->heightInches,
+                                              //'heightFeet'    => $userInfo->heightFeet,
+                                              //'heightInches'  => $userInfo->heightInches,
+                                              'height'        => $height,
                                               'weight'        => $userInfo->weight,
                                               'skiAbility'    => $userInfo->skiAbility,
                                               'product_tested'=> $header['productName'],
+                                              'brand'         => $header['brandName'],
                                               'category'      => $header['categoryName'],
-                                              'sport'         => $header['sportName']
+                                              'sport'         => $header['sportName'],
+                                              'qs_and_as_arr' => $header["questions_and_answers"]
                                               ),
                         'post_type'   => 'Community Reviews',
                         'post_excerpt' => $user_html,

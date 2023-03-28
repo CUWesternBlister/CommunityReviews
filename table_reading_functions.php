@@ -50,19 +50,18 @@ function get_category_info($form_id, $file){//may just want to return res !!!!!!
     return $res;
 }
 
-/*
-//this may be removed from the structure 
-function get_sport_info($sport_id){ //may just want to return res !!!!!!
+/*this may be removed from the structure */
+function get_sport_info($category_name){ //may just want to return res !!!!!!
 	global $wpdb;
-	$sports_table = $wpdb->prefix . "bcr_sports";
-	$q = $wpdb->prepare("SELECT * FROM $sports_table WHERE sportID = %s;", $sport_id);
-	$res = $wpdb->get_row($q);
-	$return_array = [];
-	$return_array['sportID'] = $sport_id;
-	$return_array['sportName'] = $res->sportName;
-	return $return_array;
+    $cate_table_name = $wpdb->prefix . "bcr_categories";
+    $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryName = %s;", $category_name);
+    $res = $wpdb->query($q);
+    $parent_id = $res->parentID;
+    $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryID = %s;", $parent_id);
+    $res = $wpdb->query($q);
+    return $res;
 }
-*/
+
 
 function get_user_information($file){
     global $wpdb;
