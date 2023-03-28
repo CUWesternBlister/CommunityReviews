@@ -103,7 +103,8 @@ function bcr_display_user_reset() {
 
 function bcr_update_custom_posts_metadata() {
 
-        if(array_key_exists('update_custom_post_metadata_button', $_POST)) {
+        if(array_key_exists("update_custom_post_metadata_button", $_POST)) {
+            //echo "hello world <br>";
             update_existing_custom_posts();
         }
 

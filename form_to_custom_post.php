@@ -61,7 +61,7 @@ function insert_into_ski_review($header, $questions, $answers, $file, $formName)
                                                   'product_tested'=> $header['productName'],
                                                   'brand'         => $header['brandName'],
                                                   'category'      => $header['categoryName'],
-                                                  //'sport'         => $header['sportName'],
+                                                  'sport'         => $header['sportName'],
                                                   'length'        => $length,
                                                   'year'          => $year,
                                                   'ski_boot_size' => $ski_boot_size
