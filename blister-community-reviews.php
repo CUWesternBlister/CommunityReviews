@@ -45,6 +45,11 @@ function bcr_include() {
     require_once( plugin_dir_path( __FILE__ ) . 'form_to_custom_post.php');
     require_once( plugin_dir_path( __FILE__ ) . 'show_users_reviews.php');
     require_once( plugin_dir_path( __FILE__ ) . '/admin/adminPage.php');
+    require_once(plugin_dir_path(__FILE__). '/fluent-form-widget/bcr_ff_widget.php');
 }
 
 add_action( 'plugins_loaded', 'bcr_include');
+
+add_action('plugins_loaded',function (){
+    new bcr_ff_field();
+});
