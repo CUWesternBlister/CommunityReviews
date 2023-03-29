@@ -9,18 +9,29 @@ function update_existing_custom_posts() {
 
   $query = new WP_Query($args);
 
+  // $file = fopen("testfile.txt", "a");
+  // fwrite($file, "here\n\n");
   if ($query->have_posts()) {
     while ($query->have_posts()) {
       $query->the_post();
       $post_id = get_the_ID();
-      add_metadata_to_custom_posts($post_id);
+      $sport = get_post_meta( $post_id, 'category', true );
+      //fwrite($file, "Sport: ".$sport."\n\n");
+      //echo $sport."<br>";
+      if(empty($sport)){
+        add_metadata_to_custom_posts($post_id);
+      }
+      //echo "<br>";
     }
     wp_reset_postdata();
-  }
+  } 
+  //fclose($file);
 }
 
 
-function add_metadata_to_custom_posts( $post_id ) {    
+function add_metadata_to_custom_posts( $post_id ) { 
+    //fwrite($file, "In add metadata \n\n");   
+    //echo "In add metadata<br>";
     //get length from title
     $post_title = get_the_title( $post_id );
 
@@ -49,13 +60,24 @@ function add_metadata_to_custom_posts( $post_id ) {
     //get user height and convert
     $feet_str = get_post_meta( $post_id, 'heightFeet', true );
     $inch_str = get_post_meta( $post_id, 'heightInches', true );
-    $height_in_inches = (intval($feet_str)*12)+intval($inch_str);  
-  
+    $height_in_inches = (intval($feet_str)*12)+intval($inch_str);
+
+    //get category id
+    global $wpdb;
+    $cate_table_name = $wpdb->prefix . "bcr_categories";
+    $category = get_post_meta( $post_id, 'category', true );
+    $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryName = %s;", $category);
+    $res = $wpdb->query($q);
+    $parent_id = $res->parentID;
+    $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryID = %s;", $parent_id);
+    $res = $wpdb->query($q);
+    $sport_name = $res->categoryName;
+      
     // add meta data  to post
     update_post_meta( $post_id, 'brand', $brand);
     update_post_meta( $post_id, 'height', $height_in_inches);
     update_post_meta( $post_id, 'year', $year);
     update_post_meta( $post_id, 'ski_length',  $ski_length_num);
-    
+    update_post_meta( $post_id, 'sport',  $sport_name);    
 }
 ?>
