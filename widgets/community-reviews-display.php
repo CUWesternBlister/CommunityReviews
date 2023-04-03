@@ -132,7 +132,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					</select>
 				</div>
 
-				<div class="community-reviews-display-length-controls">
+				<div id="community-reviews-display-length-controls" class="community-reviews-display-length-controls">
 					<div class="community-reviews-display-title">Length</div>
 					<div class="community-reviews-display-slider">
 						<input id="community-reviews-display-slider-min-length" type="range" value="50" min="50" max="250"/>

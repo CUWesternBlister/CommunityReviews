@@ -223,7 +223,7 @@ add_action( 'elementor/elements/categories_registered', 'bcr_register_widget_cat
  */
 function bcr_load_filter_widget_css() {
     $plugin_url = plugin_dir_url( __FILE__ );
-    wp_enqueue_style( 'filter_widget_desktop_style', $plugin_url . 'widgets/desktop_style.css' );
+    wp_enqueue_style( 'filter_widget_style', $plugin_url . 'widgets/community_reviews_display_widget_style.css' );
 }
 add_action( 'wp_enqueue_scripts', 'bcr_load_filter_widget_css' );
 

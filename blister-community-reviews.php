@@ -45,9 +45,6 @@ function bcr_include() {
     require_once( plugin_dir_path( __FILE__ ) . 'show_users_reviews.php');
     require_once( plugin_dir_path( __FILE__ ) . '/admin/adminPage.php');
     require_once( plugin_dir_path( __FILE__ ) . 'community_reviews_display_functions.php');
-    //require_once(plugin_dir_path( __FILE__ ) . 'update_community_reviews_custom_posts.php');
-    //require_once( plugin_dir_path( __FILE__ ) . '/widgets/community-reviews-display.php');
-    // if ( ! class_exists('Community_Reviews_Display')) 
 }
 
 add_action( 'plugins_loaded', 'bcr_include');
@@ -59,10 +56,6 @@ add_action( 'plugins_loaded', 'bcr_include');
  */
 function bcr_register_widgets( $widgets_manager ) {
     $bool = require_once( plugin_dir_path( __FILE__ ) . '/widgets/community-reviews-display.php');
-    // if ( ! class_exists('Community_Reviews_Display')){
-    //     $namespace = print_r(get_declared_classes(), true);
-    //     die($namespace);
-    // }
     if($bool){
         $temp = new ElementorPro\Modules\Posts\Widgets\Community_Reviews_Display();
         $widgets_manager->register($temp);

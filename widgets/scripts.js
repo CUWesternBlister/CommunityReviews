@@ -136,3 +136,16 @@ const filter_button = document.getElementById('community-reviews-display-submit'
 mobile_button.onclick = () => bcr_show_mobile_filters();
 
 filter_button.onclick = () => bcr_hide_mobile_filters();
+
+function bcr_hide_length_selector(category_dropdown) {
+    const length_div = document.getElementById('community-reviews-display-length-controls');
+    if(category_dropdown.value == "Skis" || category_dropdown.value == "Snowboards") {
+        length_div.style.display = 'initial';
+    } else {
+        length_div.style.display = 'none';
+    }
+}
+
+const categories_dropdown = document.getElementById('community-reviews-display-category');
+
+categories_dropdown.onchange = () => bcr_hide_length_selector(categories_dropdown);
