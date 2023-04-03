@@ -63,7 +63,7 @@ function bcr_filter_posts() {
 
     if ( ! empty($_POST['min_length']) And ! empty($_POST['max_length']) And ! empty($_POST['category']) ) {
         if(sanitize_text_field( $_POST['category'] ) == 'Skis') {
-            array_push($meta_query, array('key' => 'ski_length', 'value' => array(sanitize_text_field( $_POST['min_length'] ), sanitize_text_field( $_POST['max_length'] )), 'compare' => 'BETWEEN', 'type' => 'numeric') );
+            array_push($meta_query, array('key' => 'length', 'value' => array(sanitize_text_field( $_POST['min_length'] ), sanitize_text_field( $_POST['max_length'] )), 'compare' => 'BETWEEN', 'type' => 'numeric') );
         }
     }
 
@@ -101,6 +101,7 @@ function bcr_display_posts( $query ) {
             echo '<div class="excerpt_title">' . get_the_title() . '</div>';
             echo '<div class="community_review_postdate">' . get_the_date() . '</div>';
             echo '<div class="excerpt_content">' . get_the_excerpt() . '</div>';
+            echo '<div>' . the_meta() . '</div>';
             echo '</a>';
             echo '</div>';
         }
