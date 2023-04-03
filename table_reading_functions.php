@@ -55,15 +55,12 @@ function get_sport_info($category_name){ //may just want to return res !!!!!!
 	global $wpdb;
     $cate_table_name = $wpdb->prefix . "bcr_categories";
     $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryName = %s;", $category_name);
-    $res = $wpdb->query($q);
-    if($res){
+    $res = $wpdb->get_row($q);
+    if($res->parentID != 0){
         $parent_id = $res->parentID;
         $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryID = %s;", $parent_id);
-        $res = $wpdb->query($q);
-    }else{
-        echo "empty query<br>";
+        $res = $wpdb->get_row($q);
     }
-    echo "help: ".strval($res)."<br>";
     return $res;
 }
 
@@ -85,7 +82,7 @@ function get_flagged_reviews(){
     echo "get_flagged_reviews<br>";
     $review_table_name = $wpdb->prefix . "bcr_reviews";
     $sql = $wpdb->prepare("SELECT * FROM $review_table_name WHERE FlaggedForReview=1");
-    $flagged_reviews = $wpdb->get_row($sql);
+    $flagged_reviews = $wpdb->query($sql);
     return $flagged_reviews;
 }
 ?>
