@@ -2,16 +2,17 @@
 	#userHeight {
 		font-wight: bold;
 	}
-	.clip-circle{
-		background: #61CE70;
+
+	.clip-circle-grey{
+		background-color: darkgray;
 		clip-path: circle(6px);
 		display: inline-block;
 		height: 12px;
 		width: 12px;
 	}
 
-	.clip-circle-grey{
-		background: darkgray;
+	.clip-circle{
+		background-color: #61CE70;
 		clip-path: circle(6px);
 		display: inline-block;
 		height: 12px;
@@ -33,6 +34,7 @@
 		float: left;
 		color: black;
 		font-weight: bold;
+		font-family: "Roboto";
 	}
 
 	.section_title {
@@ -43,6 +45,7 @@
 		font-size: 20px;
 		color: white;
 		background-color: rgb(240, 36, 44);
+		font-family: "Roboto";
 	}
 
 	.question_title {
@@ -53,12 +56,14 @@
 		float: left;
 		color: black;
 		font-weight: bold;
+		font-family: "Roboto";
 	}
 
 	.answer {
 		width: 100%;
 		padding-left: 10px;
 		float: left;
+		font-family: "Roboto";
 	}
 
 	.short_container {
@@ -70,16 +75,20 @@
 		height: 100%;
 		color:black;
 		background-color: rgb(240, 240, 240);
+		font-family: "Roboto";
 	}
 
 	.short_container_no_float{
 		width: 30%;
 		padding-right: 10px;
 		padding-left: 10px;
+		margin-left: 10px;
 		display: block;
 		height: 100%;
 		color:black;
+		font-weight: bold;
 		background-color: rgb(240, 240, 240);
+		font-family: "Roboto";
 	}
 
 	.long_container {
@@ -88,15 +97,18 @@
 		float: left;
 		display: block;
 		background-color: white;
+		font-family: "Roboto";
 	}
 
 	.whole_container {
 		width: 90%;
 		padding-right: 20px;
-		margin-top: 10px;
+		margin-top: 20px;
 		float: left;
 		display: block;
 		background-color: rgb(240, 240, 240);
+		font-family: "Roboto";
+		outline: 3px solid rgb(190, 190, 190);
 	}
 
 	.whole_container_flex {
@@ -106,17 +118,21 @@
 		float: left;
 		display: flex;
 		background-color: rgb(240, 240, 240);
+		font-family: "Roboto";
+		outline: 3px solid rgb(190, 190, 190);
 	}
 
 	.whole_container_justified {
 		width: 90%;
 		padding-top: 10px;
-		margin-top: 10px;
+		margin-top: 20px;
 		float: left;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
 		background-color: rgb(240, 240, 240);
+		font-family: "Roboto";
+		outline: 3px solid rgb(190, 190, 190);
 	}
 
 	.whole_container_version {
@@ -125,6 +141,7 @@
 		float: left;
 		display: table;
 		background-color: white;
+		font-family: "Roboto";
 	}
 
 }
@@ -139,6 +156,7 @@
 		display: inline-block;
 		height: 12px;
 		width: 12px;
+
 	}
 
 	.clip-circle-grey{
@@ -164,6 +182,7 @@
 		float: left;
 		color: black;
 		font-weight: bold;
+		font-family: "Roboto";
 	}
 
 	.question_title {
@@ -172,6 +191,7 @@
 		float: left;
 		color: black;
 		font-weight: bold;
+		font-family: "Roboto";
 	}
 
 	.section_title {
@@ -182,12 +202,14 @@
 		font-size: 20px;
 		color: white;
 		background-color: rgb(240, 36, 44);
+		font-family: "Roboto";
 	}
 
 	.answer {
 		width: 100%;
 		padding-left: 10px;
 		float: left;
+		font-family: "Roboto";
 	}
 
 	.short_container {
@@ -195,6 +217,7 @@
 		padding-right: 10px;
 		float: left;
 		display: block;
+		font-family: "Roboto";
 	}
 	.short_container_no_float{
 		width: 30%;
@@ -203,7 +226,9 @@
 		display: block;
 		height: 100%;
 		color:black;
+		font-weight: bold;
 		background-color: rgb(240, 240, 240);
+		font-family: "Roboto";
 	}
 
 	.long_container {
@@ -212,15 +237,18 @@
 		float: left;
 		display: block;
 		background-color: white;
+		font-family: "Roboto";
 	}
 
 	.whole_container {
 		width: 90%;
 		padding-right: 20px;
-		margin-bottom: 10px;
+		margin-bottom: 20px;
 		float: left;
 		display: block;
 		background-color: white;
+		font-family: "Roboto";
+		outline: 3px solid rgb(190, 190, 190);
 	}
 
 	.whole_container_flex {
@@ -231,16 +259,20 @@
 		float: left;
 		display: flex;
 		background-color: rgb(240, 240, 240);
+		font-family: "Roboto";
+		outline: 3px solid rgb(190, 190, 190);
 	}
 	.whole_container_justified {
 		width: 90%;
-		padding-top: 10px;
+		padding-top: 20px;
 		margin-top: 10px;
 		float: left;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
 		background-color: rgb(240, 240, 240);
+		font-family: "Roboto";
+		outline: 3px solid rgb(190, 190, 190);
 	}
 
 	.whole_container_version {
