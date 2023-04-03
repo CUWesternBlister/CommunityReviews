@@ -3,7 +3,7 @@
  * Plugin Name: Blister Community Reviews
  * Description: A plugin to facilitate Blister community created reviews.
  * Author: Gunnar Marquardt, Jayden Omi, Izak Litte, Jacob Vogel, Tristan Riggan
- * Version: 1.2.5
+ * Version: 1.3.1
  */
 
 // Exit if accessed directily
@@ -11,6 +11,7 @@ if (!defined('ABSPATH')) exit;
 
 // Register activation and deactivation procedures
 register_activation_hook(__FILE__, 'bcr_activation');
+
 register_deactivation_hook(__FILE__, 'bcr_deactivation');
 
 define( 'BCR_PATH', plugin_dir_path( __FILE__ ));

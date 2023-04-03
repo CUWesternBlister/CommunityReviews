@@ -7,7 +7,7 @@
  * @return void
  */
 function bcr_uninstall() {
-    bcr_remove_tables();
+    //bcr_remove_tables();
 }
 
 /**
