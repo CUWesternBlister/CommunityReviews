@@ -56,9 +56,14 @@ function get_sport_info($category_name){ //may just want to return res !!!!!!
     $cate_table_name = $wpdb->prefix . "bcr_categories";
     $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryName = %s;", $category_name);
     $res = $wpdb->query($q);
-    $parent_id = $res->parentID;
-    $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryID = %s;", $parent_id);
-    $res = $wpdb->query($q);
+    if($res){
+        $parent_id = $res->parentID;
+        $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryID = %s;", $parent_id);
+        $res = $wpdb->query($q);
+    }else{
+        echo "empty query<br>";
+    }
+    echo "help: ".strval($res)."<br>";
     return $res;
 }
 

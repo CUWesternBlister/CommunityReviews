@@ -53,8 +53,6 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
     wp_insert_post( $ski_review );     
 }
 
-
-
 function get_answer_and_question_content($record,$file){
     global $wpdb;
     //$start = "\n\n GET ANSWERS AND QUESTIONS \n";
