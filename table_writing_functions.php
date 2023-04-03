@@ -27,7 +27,7 @@ function insert_into_answer_table($record,$file){
     return $answer_ids;
 }
 
-function insert_into_review_table($RF_id, $file){
+function insert_into_review_table($RF_id, $product_name, $brand_name, $file){
        //insert review 
         //echo "in review table functions!<br>";
         global $wpdb;
@@ -38,9 +38,15 @@ function insert_into_review_table($RF_id, $file){
         $fields_review = [];
 
         $current_userID = get_current_userID($file);
-        if(gettype($current_userID)=="string"){
+        if(gettype($current_userID) == "string"){
             die("user not found"); //should be a redirct to another page
         }
+        echo "insert_into_review_table() with Falgged_for_review <br>";
+        if(check_for_product($product_name) || check_for_brand($brand_name)){
+            $fields_review['FlaggedForReview'] = 1;
+            echo "review flagged<br>";
+        }
+
         $fields_review['userID'] = $current_userID;
         
         $fields_review['reviewFormID'] = $RF_id;

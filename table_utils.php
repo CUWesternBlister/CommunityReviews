@@ -1,4 +1,38 @@
 <?php
+
+	function check_for_product($product_name){
+		echo "check_for_product()<br>";
+		global $wpdb;
+		$prod_table = $wpdb->prefix . "bcr_products";
+		$sql = $wpdb->prepare("SELECT * FROM $prod_table WHERE productName = $product_name;");
+		$res = $wpdb->query($sql);
+		if ($res === false || $wpdb->num_rows === 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	function check_for_brand($brand_name){
+		echo "check_for_brand()<br>";
+		global $wpdb;
+		$brand_table = $wpdb->prefix . "bcr_brands";
+		$sql = $wpdb->prepare("SELECT * FROM $brand_table WHERE productName = $brand_name;");
+		$res = $wpdb->query($sql);
+		if ($res === false || $wpdb->num_rows === 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	// function check_for_category($product_name){
+		
+	// }
+	// function check_for_sport($product_name){
+		
+	// }
+
+
 	function get_current_userID($file){
 	    global $wpdb;
 	    //$start = "          SUMMIT get user id \n";

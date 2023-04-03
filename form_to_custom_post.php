@@ -124,7 +124,7 @@ function summit_form_submission_write_to_tables($current_form_id, $record, $file
     //$start = "\n\n start summit_form_submission_write_to_tabless \n";
     //fwrite($file, $start);
     $answer_ids = insert_into_answer_table($record, $file);
-    $id = insert_into_review_table($current_form_id,$file);
+    $id = insert_into_review_table($current_form_id,$record[1], $record[2], $file);
     insert_into_review_answer_table($id, $answer_ids, $file);
     return $id;
 }

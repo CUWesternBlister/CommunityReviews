@@ -73,4 +73,14 @@ function get_user_information($file){
     $userInformation = $wpdb->get_row($queryString);
     return $userInformation;
 }
+
+
+function get_flagged_reviews(){
+    global $wpdb;
+    echo "get_flagged_reviews<br>";
+    $review_table_name = $wpdb->prefix . "bcr_reviews";
+    $sql = $wpdb->prepare("SELECT * FROM $review_table_name WHERE FlaggedForReview=1");
+    $flagged_reviews = $wpdb->get_row($sql);
+    return $flagged_reviews;
+}
 ?>
