@@ -4,22 +4,25 @@ function bcr_flagged_reviews_callback() {
     echo "bcr_flagged_reviews_callback<br>";
     $flagged_reviews = get_flagged_reviews();
     $file = "";
-    foreach ($flagged_reviews as $review) {
-        $review_id = $review->reviewID;
-        $form_id = $review->reviewFormID;
-        
-        $category_row = get_category_info($form_id, $file);
-        $category_name = $category_row->categoryName;
-        
-        $sport_row = get_sport_info($category_name); 
-        $sport_name = $sport_row->categoryName;
+    if ($flagged_reviews) {
+        foreach ($flagged_reviews as $review) {
+            $review_id = $review->reviewID;
+            $form_id = $review->reviewFormID;
+            
+            $category_row = get_category_info($form_id, $file);
+            $category_name = $category_row->categoryName;
+            
+            $sport_row = get_sport_info($category_name); 
+            $sport_name = $sport_row->categoryName;
 
-        //$review_post = get_flagged_review_post($review_id);
+            //$review_post = get_flagged_review_post($review_id);
 
-        echo "Review ID: $review_id, Sport: $sport_name, Category: $category_name, <br>";
-        
+            echo "Review ID: $review_id, Sport: $sport_name, Category: $category_name, <br>";
+            
+        }
+    }else{
+        echo "no flagged reviews found";
     }
-    
 }
 
 function get_flagged_review_post($review_id){
