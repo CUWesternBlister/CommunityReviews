@@ -28,33 +28,92 @@ function bcr_flagged_reviews_callback() {
     }else{
         echo "no flagged reviews found";
     }
-    dispaly();
+    display($flagged_reviews);
 }
 
 function display($flaggedReviews){
     ?>
 
     <div class="community-reviews-add-remove-products-display">
-        <div class="community-reviews-display-brand-dropdown">
-                        <div class="community-reviews-display-title">Brand</div>
-                        <select id="community-reviews-display-brand-dropdown">
-                            <option value="">--No Brand Filter--</option>
-                            <?php
+
+    <!--
+    Add remove product/brand dropdown
+        -->
+        <div class="community-reviews-add-remove-dropdown">
+        <div class="community-reviews-display-title">Add/Remove Product or Brand:</div>
+        <!--<div class="community-reviews-display-title">Brand           Product:</div>-->
+                        <strong>Category:</strong>
+                        <select id="community-reviews-display-category-dropdown">
+                        
+                        <?$category_selected = "Ski";
+                            echo '<option value="' . esc_html($category_selected) . '">' . esc_html($category_selected) . '</option>';
+            
                                 global $wpdb;
+
+                                $categories_table_name = $wpdb->prefix . "bcr_categories";
+                                $zero = 0;
+                                $sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name WHERE parentID=0");
+                                
+                                $results  = $wpdb->get_results($sql);
+                                //$str = print_r($results, true);
+                                
+                                
+                                
+                                foreach ($results as $id => $category_obj) {
+                                    $category_name = $category_obj->categoryName;
+                                    if($category_name != $category_selected){
+                                        echo '<option value="' . esc_html($category_name) . '">' . esc_html($category_name) . '</option>';
+                                    }
+                                }
+                            ?>
+                        </select>
+                        <strong>Brand:</strong>
+                        <select id="community-reviews-display-brand-dropdown">
+                        
+                        <?$brand_selected =  "K2";
+                            echo '<option value="' . esc_html($brand_selected) . '">' . esc_html($brand_selected) . '</option>';
+            
+                                //global $wpdb;
 
                                 $brands_table_name = $wpdb->prefix . "bcr_brands";
 
                                 $sql = $wpdb->prepare("SELECT brandName FROM $brands_table_name;");
                         
                                 $results  = $wpdb->get_results($sql);
-
+                                
                                 foreach ($results as $id => $brand_obj) {
                                     $brand_name = $brand_obj->brandName;
-
-                                    echo '<option value="' . esc_html($brand_name) . '">' . esc_html($brand_name) . '</option>';
+                                    if($brand_name != $brand_selected){
+                                        echo '<option value="' . esc_html($brand_name) . '">' . esc_html($brand_name) . '</option>';
+                                    }
                                 }
                             ?>
                         </select>
+                        <!--<div class="community-reviews-display-title">Product:</div>-->
+                        <strong>Product:</strong>
+                        <select id="community-reviews-display-product-dropdown">
+                        
+                        <?$product_selected = "Brahma 88";
+                            echo '<option value="' . esc_html($product_selected) . '">' . esc_html($product_selected) . '</option>';
+            
+                                //global $wpdb;
+
+                                $products_table_name = $wpdb->prefix . "bcr_products";
+
+                                $sql = $wpdb->prepare("SELECT productName FROM $products_table_name;");
+                        
+                                $results  = $wpdb->get_results($sql);
+                                
+                                foreach ($results as $id => $product_obj) {
+                                    $product_name = $product_obj->productName;
+                                    if($product_name != $product_selected){
+                                        echo '<option value="' . esc_html($product_name) . '">' . esc_html($product_name) . '</option>';
+                                    }
+                                }
+                            ?>
+                        </select>
+                        
+
                     </div>
 
     <?
