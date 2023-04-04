@@ -79,7 +79,6 @@ function get_answer_and_question_content($record,$file){
         $return_array[$type][] = $obj;
         $answer_arr_i += 1;
     }
-   
     return $return_array;
 }
 
