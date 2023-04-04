@@ -20,7 +20,7 @@ function bcr_flagged_reviews_callback() {
             $review_meta_data = get_flagged_review_meta_data($review_id);
             //$str = print_r($review_meta_data, true);
             $str = "Review ID: $review_meta_data[id], Category: $review_meta_data[category], Brand: $review_meta_data[brand], Product: $review_meta_data[product], URL: $review_meta_data[url]";
-            $flagged_reviews_arr[$review_meta_data['id']] = $review_meta_data;
+            $flagged_reviews_arr[$review_id] = $review_meta_data;
             
             //echo "$str";
             //$brand = "brand_placeholder";
@@ -132,17 +132,16 @@ function display($flaggedReviews){
                 
                 <label for="flagged_reviews">Select flagged review:</label>
                         <?php foreach ($flaggedReviews as $key => $arr) : ?>
-                            <?php $str = "Review ID: $arr[id], Category: $arr[category], Brand: $arr[brand], Product: $arr[product]" ?>
+                            <?php $str = "Review ID: $key, Post ID: $arr[post_id], Category: $arr[category], Brand: $arr[brand], Product: $arr[product]" ?>
                             <br>
                             <input type="radio" name="flagged_review" id="FR_<?php echo $key ?>" value="<?php echo $key?>" />
-                            <label for="FR_<?php echo $key ?>"><?php echo $str ?></label>
-                            <br>
-                            <a href="<?php echo  $arr['url']?>"><?php echo "URL: Review $arr[id]"?></a>
+                            <label for="FR_<?php echo $key ?>"><?php echo $str.", " ?></label>
+                            <a href="<?php echo  $arr['url']?>"><?php echo "URL: BCR Post $arr[post_id]"?></a>
                         <?php endforeach ?>
                         <div>
                             <?php
                                 $myArrJson = json_encode($flaggedReviews);
-                                echo $myArrJson;
+                                //echo $myArrJson;
                             ?>
                             <input type="hidden" id="myArr" value='<?php echo strval($myArrJson);?>'>
                             <button type="submit" id="submit-button" onclick="submitButtonClicked()" >Submit</button>
@@ -397,7 +396,7 @@ function get_flagged_review_meta_data($review_id){
             'sport' => $sport,
             'url' => $url,
             'title' => $title,
-            'id' => $id
+            'post_id' => $id
         );
 
 
