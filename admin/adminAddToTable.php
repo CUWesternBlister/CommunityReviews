@@ -39,15 +39,93 @@ function bcr_flagged_reviews_callback() {
 
 function display($flaggedReviews){
     ?>
+
     <div class="flagged-community-reviews-admin-display">
         <div class="community-reviews-admin-display" id="community-reviews-admin-display">
-        
-            <strong>Flagged Reviews</strong>
-            
-                <div class="community-reviews-display-flagged-reviews-radio">
-                        
-                        <label for="flagged_reviews">Select flagged review:</label>
 
+    <!--
+    Add remove product/brand dropdown
+        -->
+        <div class="community-reviews-add-remove-dropdown">
+        <div class="community-reviews-display-title">Add/Remove Product or Brand:</div>
+        <!--<div class="community-reviews-display-title">Brand           Product:</div>-->
+                        <strong>Category:</strong>
+                        <select id="community-reviews-display-category-dropdown">
+                        
+                        <?$category_selected = "Ski";
+                            echo '<option value="' . esc_html($category_selected) . '">' . esc_html($category_selected) . '</option>';
+            
+                                global $wpdb;
+
+                                $categories_table_name = $wpdb->prefix . "bcr_categories";
+                                $zero = 0;
+                                $sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name WHERE parentID!=0");
+                                
+                                $results  = $wpdb->get_results($sql);
+                                //$str = print_r($results, true);
+                                
+                                
+                                
+                                foreach ($results as $id => $category_obj) {
+                                    $category_name = $category_obj->categoryName;
+                                    if($category_name != $category_selected){
+                                        echo '<option value="' . esc_html($category_name) . '">' . esc_html($category_name) . '</option>';
+                                    }
+                                }
+                            ?>
+                        </select>
+                        <strong>Brand:</strong>
+                        <select id="community-reviews-display-brand-dropdown">
+                        
+                        <?$brand_selected =  "K2";
+                            echo '<option value="' . esc_html($brand_selected) . '">' . esc_html($brand_selected) . '</option>';
+            
+                                //global $wpdb;
+
+                                $brands_table_name = $wpdb->prefix . "bcr_brands";
+
+                                $sql = $wpdb->prepare("SELECT brandName FROM $brands_table_name;");
+                        
+                                $results  = $wpdb->get_results($sql);
+                                
+                                foreach ($results as $id => $brand_obj) {
+                                    $brand_name = $brand_obj->brandName;
+                                    if($brand_name != $brand_selected){
+                                        echo '<option value="' . esc_html($brand_name) . '">' . esc_html($brand_name) . '</option>';
+                                    }
+                                }
+                            ?>
+                        </select>
+                        <!--<div class="community-reviews-display-title">Product:</div>-->
+                        <strong>Product:</strong>
+                        <select id="community-reviews-display-product-dropdown">
+                        
+                        <?$product_selected = "Brahma 88";
+                            echo '<option value="' . esc_html($product_selected) . '">' . esc_html($product_selected) . '</option>';
+            
+                                //global $wpdb;
+
+                                $products_table_name = $wpdb->prefix . "bcr_products";
+
+                                $sql = $wpdb->prepare("SELECT productName FROM $products_table_name;");
+                        
+                                $results  = $wpdb->get_results($sql);
+                                
+                                foreach ($results as $id => $product_obj) {
+                                    $product_name = $product_obj->productName;
+                                    if($product_name != $product_selected){
+                                        echo '<option value="' . esc_html($product_name) . '">' . esc_html($product_name) . '</option>';
+                                    }
+                                }
+                            ?>
+                        </select>
+        <br>
+        <br>                
+        <strong>Flagged Reviews</strong>
+                    
+        <div class="community-reviews-display-flagged-reviews-radio">
+                
+                <label for="flagged_reviews">Select flagged review:</label>
                         <?php foreach ($flaggedReviews as $key => $arr) : ?>
                             <?php $str = "Review ID: $arr[id], Category: $arr[category], Brand: $arr[brand], Product: $arr[product]" ?>
                             <br>
@@ -66,15 +144,22 @@ function display($flaggedReviews){
     <script>
         const submitButton = document.getElementById('submit-button');
             submitButton.addEventListener('click', () => {
-                const selectedRadio = document.querySelector('input[name="flagged_review"]:checked');
-                if (selectedRadio) {
-                    const selectedValue = selectedRadio.value;
-                    console.log(`Selected value: ${selectedValue}`);
-                    const reviewId = selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1];
-                    //set defualt values for each drop down based off id
-                } else {
-                    console.log('No radio button selected');
-                }
+                            const selectedRadio = document.querySelector('input[name="flagged_review"]:checked');
+                            if (selectedRadio) {
+                                const selectedValue = selectedRadio.value;
+                                console.log(`Selected value: ${selectedValue}`);
+                                const reviewId = selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1];
+                                $flagged_review_arr = $flaggedReviews[reviewId];
+                                //set defualt values for each drop down based off id
+                                const categoryElement = document.getElementById("community-reviews-display-category-dropdown");
+                                categoryElement.value = $flagged_review_arr['category'];
+                                const brandElement = document.getElementById("community-reviews-display-brand-dropdown");
+                                brandElement.value = $flagged_review_arr['brand'];
+                                const productElement = document.getElementById("community-reviews-display-product-dropdown");
+                                productElement.value = $flagged_review_arr['product'];
+                            } else {
+                                console.log('No radio button selected');
+                            }
             });
     </script>
     <?
