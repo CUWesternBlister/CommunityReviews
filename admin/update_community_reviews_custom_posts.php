@@ -66,13 +66,15 @@ function add_metadata_to_custom_posts( $post_id ) {
     global $wpdb;
     $cate_table_name = $wpdb->prefix . "bcr_categories";
     $category = get_post_meta( $post_id, 'category', true );
+    echo "categrory: ".$category."<br>";
     $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryName = %s;", $category);
-    $res = $wpdb->query($q);
-    $parent_id = $res->parentID;
-    $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryID = %s;", $parent_id);
-    $res = $wpdb->query($q);
+    $res = $wpdb->get_row($q);
+    if($res->parentID != 0){
+        $parent_id = $res->parentID;
+        $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryID = %s;", $parent_id);
+        $res = $wpdb->get_row($q);
+    }
     $sport_name = $res->categoryName;
-      
     // add meta data  to post
     update_post_meta( $post_id, 'brand', $brand);
     update_post_meta( $post_id, 'height', $height_in_inches);

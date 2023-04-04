@@ -25,8 +25,8 @@ function insert_into_ski_review($header, $file, $formName) {
     
     $postTitle = get_post_title($title_arr);
 
-    $str = print_r($title_arr, true);
-    echo $str."<br>";
+    //$str = print_r($title_arr, true);
+    //echo $str."<br>";
 
     $year = "";
     $length = "";
@@ -40,9 +40,9 @@ function insert_into_ski_review($header, $file, $formName) {
     preg_match('/\d{4}/', $year, $matches);
     $year = intval($matches[0]);
 
-    echo "year: ".strval($year)."<br>";
-    echo "Length: ".strval($length)."<br>";
-    echo "Bootsize: ".strval($ski_boot_size)."<br>";
+    // echo "year: ".strval($year)."<br>";
+    // echo "Length: ".strval($length)."<br>";
+    // echo "Bootsize: ".strval($ski_boot_size)."<br>";
 
     $height = intval($userInfo->heightFeet) * 12 + intval($userInfo->heightInches);
 

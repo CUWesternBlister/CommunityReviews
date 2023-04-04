@@ -1,7 +1,5 @@
 @media only screen and (min-width: 768px) {
-	#userHeight {
-		font-weight: bold;
-	}
+
 	.clip-circle{
 		background: #61CE70;
 		clip-path: circle(6px);
