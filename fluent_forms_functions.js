@@ -1,24 +1,16 @@
 
 
 jQuery( document ).ready( function( $ ) {
-    // const current_form = $( '.fluentform-step active' ).attr( 'data-name' );
-    // const current_form_id = current_form.split('-')[1].split('_')[0];
-
-    // console.log(current_form_id);
-
-    // const brand_selector_name = '#ff_' + current_form_id + '_brand';
-    // const product_selector_name = '#ff_' + current_form_id + '_product';
-
     $( 'select' ).on( 'change', function() {
         const selector_name = $( this ).attr( 'id' );
-        if(selector_name.split('_')[2] != 'brand') {
+        if(selector_name.split('_')[2] != '1' || selector_name.split('_')[3] != 1) {
             return;
         }
 
         const current_form_id = selector_name.split('_')[1];
 
-        const brand_selector_name = '#ff_' + current_form_id + '_brand';
-        const product_selector_name = '#ff_' + current_form_id + '_product';
+        const brand_selector_name = '#ff_' + current_form_id + '_1_1';
+        const product_selector_name = '#ff_' + current_form_id + '_2';
 
         var brand_selected = $( brand_selector_name ).val();
 

@@ -19,7 +19,7 @@ function bcr_set_form_dropdowns( $data, $form ) {
 
     $new_dropdown = array();
 
-    if($input_name == 'brand') {
+    if($input_name == '1_1') {
         $brands_table_name = $wpdb->prefix . "bcr_brands";
 
         $sql = $wpdb->prepare("SELECT brandName FROM $brands_table_name;");
@@ -33,7 +33,7 @@ function bcr_set_form_dropdowns( $data, $form ) {
             ];
             array_push($new_dropdown, $dropdown_entry);
         }
-    } else if($input_name == 'product') {
+    } else if($input_name == '2') {
         $products_table_name = $wpdb->prefix . "bcr_products";
 
         $sql = $wpdb->prepare("SELECT productName FROM $products_table_name WHERE categoryID = %s;", $category_id);
