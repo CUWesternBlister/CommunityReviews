@@ -2,7 +2,7 @@
 
 include 'generate_html.php';
 
-function insert_into_ski_review($header, $file, $formName) {
+function insert_into_ski_review($header, $file, $formName, $form_id) {
     //$start = "\n\n INSERT INTO SKI REVIEW \n";
     //fwrite($file, $start);
     global $wpdb;
@@ -24,6 +24,7 @@ function insert_into_ski_review($header, $file, $formName) {
     $title_arr = $header["questions_and_answers"]["title"];
     
     $postTitle = get_post_title($title_arr);
+
 
     //$str = print_r($title_arr, true);
     //echo $str."<br>";
@@ -50,20 +51,21 @@ function insert_into_ski_review($header, $file, $formName) {
                         'post_title' => wp_strip_all_tags($postTitle), 
                         'post_content' => $html,
                         'meta_input' => array(
-                            'id'            => $header['reviewID'],
-                            'userID'        => $userInfo->userID,
-                            'userName'      => $userName,
-                            'height'        => $height,
-                            'weight'        => $userInfo->weight,
-                            'skiAbility'    => $userInfo->skiAbility,
-                            'product_tested'=> $header['productName'],
-                            'brand'         => $header['brandName'],
-                            'category'      => $header['categoryName'],
-                            'sport'         => $header['sportName'],
-                            'length'        => $length,
-                            'year'          => $year,
-                            'ski_boot_size' => $ski_boot_size
-                            ),
+                                              'id'            => $header['reviewID'],
+                                              'formID'        => $form_id,
+                                              'userID'        => $userInfo->userID,
+                                              'userName'      => $userName,
+                                              //'heightFeet'    => $userInfo->heightFeet,
+                                              //'heightInches'  => $userInfo->heightInches,
+                                              'height'        => $height,
+                                              'weight'        => $userInfo->weight,
+                                              'skiAbility'    => $userInfo->skiAbility,
+                                              'product_tested'=> $header['productName'],
+                                              'brand'         => $header['brandName'],
+                                              'category'      => $header['categoryName'],
+                                              'sport'         => $header['sportName'],
+                                              'qs_and_as_arr' => $header["questions_and_answers"]
+                                              ),
                         'post_type'   => 'Community Reviews',
                         'post_excerpt' => $user_html,
                         'post_status' => 'publish',
