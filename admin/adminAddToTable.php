@@ -4,59 +4,79 @@ function bcr_flagged_reviews_callback() {
     //echo "bcr_flagged_reviews_callback<br>";
     $flagged_reviews = get_flagged_reviews();
     $file = "";
+    $flagged_reviews_arr = array();
     if ($flagged_reviews) {
         //echo "flagged reviews: $flagged_reviews <br>";
         foreach ($flagged_reviews as $review) {
             $review_id = $review->reviewID;
-            $form_id = $review->reviewFormID;
+            //$form_id = $review->reviewFormID;
             
-            $category_row = get_category_info($form_id, $file);
-            $category_name = $category_row->categoryName;
+            //$category_row = get_category_info($form_id, $file);
+            //$category_name = $category_row->categoryName;
             
             //$sport_row = get_sport_info($category_name); 
             //$sport_name = $sport_row->categoryName;
 
             $review_meta_data = get_flagged_review_meta_data($review_id);
-            $str = print_r($review_meta_data, true);
+            //$str = print_r($review_meta_data, true);
+            $str = "Review ID: $review_meta_data[id], Category: $review_meta_data[category], Brand: $review_meta_data[brand], Product: $review_meta_data[product], URL: $review_meta_data[url]";
+            $flagged_reviews_arr[$review_meta_data['id']] = $review_meta_data;
+            
             //echo "$str";
             //$brand = "brand_placeholder";
             //$product = "product_placeholder";
 
-            echo "Review ID: $review_meta_data[id], Category: $review_meta_data[category], Brand: $review_meta_data[brand], Product: $review_meta_data[product], URL: $review_meta_data[url]<br>";
+            //echo "Review ID: $review_meta_data[id], Category: $review_meta_data[category], Brand: $review_meta_data[brand], Product: $review_meta_data[product], URL: $review_meta_data[url]<br>";
             
         }
     }else{
         echo "no flagged reviews found";
     }
-    dispaly();
+    display($flagged_reviews_arr);
 }
+
+
 
 function display($flaggedReviews){
     ?>
-
-    <div class="community-reviews-add-remove-products-display">
-        <div class="community-reviews-display-brand-dropdown">
-                        <div class="community-reviews-display-title">Brand</div>
-                        <select id="community-reviews-display-brand-dropdown">
-                            <option value="">--No Brand Filter--</option>
-                            <?php
-                                global $wpdb;
-
-                                $brands_table_name = $wpdb->prefix . "bcr_brands";
-
-                                $sql = $wpdb->prepare("SELECT brandName FROM $brands_table_name;");
+    <div class="flagged-community-reviews-admin-display">
+        <div class="community-reviews-admin-display" id="community-reviews-admin-display">
+        
+            <strong>Flagged Reviews</strong>
+            
+                <div class="community-reviews-display-flagged-reviews-radio">
                         
-                                $results  = $wpdb->get_results($sql);
+                        <label for="flagged_reviews">Select flagged review:</label>
 
-                                foreach ($results as $id => $brand_obj) {
-                                    $brand_name = $brand_obj->brandName;
-
-                                    echo '<option value="' . esc_html($brand_name) . '">' . esc_html($brand_name) . '</option>';
-                                }
-                            ?>
-                        </select>
-                    </div>
-
+                        <?php foreach ($flaggedReviews as $key => $arr) : ?>
+                            <?php $str = "Review ID: $arr[id], Category: $arr[category], Brand: $arr[brand], Product: $arr[product]" ?>
+                            <br>
+                            <input type="radio" name="flagged_review" id="FR_<?php echo $key ?>" value="<?php echo $key?>" />
+                            <label for="FR_<?php echo $key ?>"><?php echo $str ?></label>
+                            <br>
+                            <a href="<?php echo  $arr['url']?>"><?php echo "URL: Review $arr[id]"?></a>
+                        <?php endforeach ?>
+                        <div>
+                            <button type="submit" id="submit-button">Submit</button>
+                        </div>
+                        
+                </div>
+        </div>
+    </div>
+    <script>
+        const submitButton = document.getElementById('submit-button');
+            submitButton.addEventListener('click', () => {
+                const selectedRadio = document.querySelector('input[name="flagged_review"]:checked');
+                if (selectedRadio) {
+                    const selectedValue = selectedRadio.value;
+                    console.log(`Selected value: ${selectedValue}`);
+                    const reviewId = selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1];
+                    //set defualt values for each drop down based off id
+                } else {
+                    console.log('No radio button selected');
+                }
+            });
+    </script>
     <?
 }
 

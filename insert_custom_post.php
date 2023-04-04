@@ -45,7 +45,7 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
                                               'category'      => $header['categoryName'],
                                               'sport'         => $header['sportName'],
                                               'qs_and_as_arr' => $header["questions_and_answers"]
-                                              ),
+                                              ),    
                         'post_type'   => 'Community Reviews',
                         'post_excerpt' => $user_html,
                         'post_status' => 'publish',
