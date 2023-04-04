@@ -189,9 +189,14 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						<input id="community-reviews-display-slider-max-height" type="range" value="84" min="36" max="84"/>
 					</div>
 
-					<div class="community-reviews-number-boxes">
+					<div class="community-reviews-number-boxes community-reviews-display-number-boxes-with-toggle">
 						<div class="community-reviews-number-box-left">
 							<input class="community-reviews-display-number-box" type="text" id="min_height" value="3'0&quot;" readonly/>
+						</div>
+
+						<div class="community-reviews-unit-toggle">
+							<input class="community-reviews-toggle" id="community-reviews-toggle-height" type="checkbox">
+							<label class="community-reviews-toggle-label" for="community-reviews-toggle-height"></label>
 						</div>
 
 						<div class="community-reviews-number-box-right">
@@ -216,9 +221,14 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						<input id="community-reviews-display-slider-max-weight" type="range" value="<?php echo $max_weight ?>" min="<?php echo $min_weight ?>" max= "<?php echo $max_weight ?>"/>
 					</div>
 
-					<div class="community-reviews-number-boxes">
+					<div class="community-reviews-number-boxes community-reviews-display-number-boxes-with-toggle">
 						<div class="community-reviews-number-box-left">
 							<input class="community-reviews-display-number-box" type="text" id="min_weight" value="<?php echo $min_weight ?> lbs" readonly/>
+						</div>
+
+						<div class="community-reviews-unit-toggle">
+							<input class="community-reviews-toggle" id="community-reviews-toggle-weight" type="checkbox">
+							<label class="community-reviews-toggle-label" for="community-reviews-toggle-weight"></label>
 						</div>
 
 						<div class="community-reviews-number-box-right">

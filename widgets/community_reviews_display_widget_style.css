@@ -11,6 +11,10 @@
     grid-template-columns: 50% 50%;
 }
 
+.community-reviews-display-number-boxes-with-toggle {
+    grid-template-columns: 45% 10% 45%;
+}
+
 .community-reviews-number-box-left {
     text-align: left;
 }
@@ -66,6 +70,75 @@ select {
 .community-reviews-display-length-controls {
     display: none;
 }
+
+.community-reviews-unit-toggle {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+    margin: 10px;
+  }
+  
+  .community-reviews-unit-toggle .community-reviews-toggle {
+    display: none;
+  }
+  
+  .community-reviews-unit-toggle .community-reviews-toggle-label {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    width: 40px;
+    height: 24px;
+    background-color: #2196F3;
+    border-radius: 34px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .community-reviews-unit-toggle .community-reviews-toggle-label::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    background-color: #fff;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+  }
+  
+  .community-reviews-unit-toggle .community-reviews-toggle:checked + .community-reviews-toggle-label {
+    background-color: #4CAF50;
+  }
+  
+  .community-reviews-unit-toggle .community-reviews-toggle:checked + .community-reviews-toggle-label::before {
+    transform: translateX(16px);
+  }
+  
+  .community-reviews-unit-toggle.light .community-reviews-toggle-label {
+    background-color: #BEBEBE;
+  }
+  
+  .community-reviews-unit-toggle.light .community-reviews-toggle:checked + .community-reviews-toggle-label {
+    background-color: #9B9B9B;
+  }
+  
+  .community-reviews-unit-toggle.light .community-reviews-toggle:checked + .community-reviews-toggle-label::before {
+    transform: translateX(6px);
+  }
+  
+  .community-reviews-unit-toggle.dark .community-reviews-toggle-label {
+    background-color: #4B4B4B;
+  }
+  
+  .community-reviews-unit-toggle.dark .community-reviews-toggle:checked + .community-reviews-toggle-label {
+    background-color: #717171;
+  }
+  
+  .community-reviews-unit-toggle.dark .community-reviews-toggle:checked + .community-reviews-toggle-label::before {
+    transform: translateX(16px);
+  }
 
 @media only screen and (min-width: 800px) {
     .community_review_excerpt {
