@@ -115,30 +115,6 @@ select {
   .community-reviews-unit-toggle .community-reviews-toggle:checked + .community-reviews-toggle-label::before {
     transform: translateX(16px);
   }
-  
-  .community-reviews-unit-toggle.light .community-reviews-toggle-label {
-    background-color: #BEBEBE;
-  }
-  
-  .community-reviews-unit-toggle.light .community-reviews-toggle:checked + .community-reviews-toggle-label {
-    background-color: #9B9B9B;
-  }
-  
-  .community-reviews-unit-toggle.light .community-reviews-toggle:checked + .community-reviews-toggle-label::before {
-    transform: translateX(6px);
-  }
-  
-  .community-reviews-unit-toggle.dark .community-reviews-toggle-label {
-    background-color: #4B4B4B;
-  }
-  
-  .community-reviews-unit-toggle.dark .community-reviews-toggle:checked + .community-reviews-toggle-label {
-    background-color: #717171;
-  }
-  
-  .community-reviews-unit-toggle.dark .community-reviews-toggle:checked + .community-reviews-toggle-label::before {
-    transform: translateX(16px);
-  }
 
 @media only screen and (min-width: 800px) {
     .community_review_excerpt {
