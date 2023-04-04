@@ -39,7 +39,9 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
     }
 
     preg_match('/\d{4}/', $year, $matches);
-    $year = intval($matches[0]);
+    if($matches){
+        $year = intval($matches[0]);
+    }
 
     // echo "year: ".strval($year)."<br>";
     // echo "Length: ".strval($length)."<br>";
@@ -94,8 +96,14 @@ function get_answer_and_question_content($record,$file){
     $answer_arr_i = 0;
     foreach($question_ids as $id){
         $q_content = get_question_read_content($id);
-        $type = $q_content->questionType;
-        $display = $q_content->questionDisplayContent;
+        $type = "";
+        if(is_null($q_content->questionType) == false){
+            $type = $q_content->questionType;
+        }
+        $display = "";
+        if(is_null($q_content->questionDisplayContent) == false){
+            $display = $q_content->questionDisplayContent;
+        }
         $answer = $answer_content[$answer_arr_i];
         $obj = ["id" => $id, "question" => $display, "answer" => $answer];
         $return_array[$type][] = $obj;
