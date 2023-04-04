@@ -39,6 +39,12 @@ function bcr_flagged_reviews_callback() {
 
 function display($flaggedReviews){
     ?>
+    <script src="
+        https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js
+        "></script>
+        <link href="
+        https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css
+        " rel="stylesheet">
 
     <div class="flagged-community-reviews-admin-display">
         <div class="community-reviews-admin-display" id="community-reviews-admin-display">
@@ -50,7 +56,7 @@ function display($flaggedReviews){
         <div class="community-reviews-display-title">Add/Remove Product or Brand:</div>
         <!--<div class="community-reviews-display-title">Brand           Product:</div>-->
                         <strong>Category:</strong>
-                        <select id="community-reviews-display-category-dropdown">
+                        <select id="community-reviews-display-category-dropdown" class="select2">
                         
                         <?$category_selected = "Ski";
                             echo '<option value="' . esc_html($category_selected) . '">' . esc_html($category_selected) . '</option>';
@@ -75,7 +81,7 @@ function display($flaggedReviews){
                             ?>
                         </select>
                         <strong>Brand:</strong>
-                        <select id="community-reviews-display-brand-dropdown">
+                        <select id="community-reviews-display-brand-dropdown" class="select2">
                         
                         <?$brand_selected =  "K2";
                             echo '<option value="' . esc_html($brand_selected) . '">' . esc_html($brand_selected) . '</option>';
@@ -98,7 +104,7 @@ function display($flaggedReviews){
                         </select>
                         <!--<div class="community-reviews-display-title">Product:</div>-->
                         <strong>Product:</strong>
-                        <select id="community-reviews-display-product-dropdown">
+                        <select id="community-reviews-display-product-dropdown" class="select2">
                         
                         <?$product_selected = "Brahma 88";
                             echo '<option value="' . esc_html($product_selected) . '">' . esc_html($product_selected) . '</option>';
@@ -119,6 +125,8 @@ function display($flaggedReviews){
                                 }
                             ?>
                         </select>
+                        <button type="submit" id="approve-button">Approve</button>
+                        <button type="submit" id="deny-button">Deny</button>
         <br>
         <br>                
         <strong>Flagged Reviews</strong>
@@ -142,21 +150,126 @@ function display($flaggedReviews){
         </div>
     </div>
     <script>
+        jQuery(document).ready(function($) {
+            $('#community-reviews-display-category-dropdown').select2({
+                tags: true,
+                placeholder: 'Select or create a category'
+            });
+        });
+
+        jQuery(document).ready(function($) {
+            $('#community-reviews-display-brand-dropdown').select2({
+                tags: true,
+                placeholder: 'Select or create a brand'
+            });
+        });
+
+        jQuery(document).ready(function($) {
+            $('#community-reviews-display-product-dropdown').select2({
+                tags: true,
+                placeholder: 'Select or create a product'
+            });
+        });
+
         const submitButton = document.getElementById('submit-button');
             submitButton.addEventListener('click', () => {
                             const selectedRadio = document.querySelector('input[name="flagged_review"]:checked');
                             if (selectedRadio) {
                                 const selectedValue = selectedRadio.value;
+                                console.log(`SelectedRadio Text?: ${selectedRadio.nextElementSibling.textContent}`);
                                 console.log(`Selected value: ${selectedValue}`);
-                                const reviewId = selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1];
-                                $flagged_review_arr = $flaggedReviews[reviewId];
+                                const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1]);
+                                const responseText = selectedRadio.nextElementSibling.textContent;
+
+                                const categoryStartIndex = responseText.indexOf("Category: ") + "Category :".length;
+                                const categoryEndIndex = responseText.indexOf(",", categoryStartIndex);
+                                const category = responseText.slice(categoryStartIndex, categoryEndIndex).trim();
+                                console.log(category); 
+
+                                const brandStartIndex = responseText.indexOf("Brand: ") + "Brand: ".length;
+                                const brandEndIndex = responseText.indexOf(",", brandStartIndex);
+                                const brand= responseText.slice(brandStartIndex, brandEndIndex).trim();
+                                console.log(brand);
+
+                                const productStartIndex = responseText.indexOf("Product: ") + "Product: ".length;
+                                //const productEndIndex = responseText.indexOf(",", productStartIndex);
+                                const product = responseText.slice(productStartIndex).trim();
+                                console.log(product); 
+                                //const category = Number(selectedRadio.nextElementSibling.textContent.match(/Category: (\d+)/)[1]);
+                                //console.log(`category: ${category}`);
+
+
+                                //$flagged_review_arr = $flaggedReviews[reviewId];
+                                //$strArr = print_r($flagged_review_arr);
+                                //console.log(`array: ${flagged_review_arr['category']}`);
                                 //set defualt values for each drop down based off id
                                 const categoryElement = document.getElementById("community-reviews-display-category-dropdown");
-                                categoryElement.value = $flagged_review_arr['category'];
+                                if(categoryElement){
+                                    let exists = false;
+                                    for (let i = 0; i < categoryElement.options.length; i++) {
+                                        if (categoryElement.options[i].value === category) {
+                                            exists = true;
+                                            //break;
+                                        }
+                                    }
+                                    if(!exists){
+                                        const newOptionCat = document.createElement("option");
+                                        newOptionCat.value = category;
+                                        newOptionCat.text = category;
+                                        categoryElement.appendChild(newOptionCat);
+                                        //categoryElement.value = category;
+                                        console.log(`Added option with value "${category}" to category dropdown.`);
+                                    }
+                                    categoryElement.value = category;
+                                    console.log(`Selected "${category}" in the category dropdown`);
+                                } else{
+                                    console.error("Could not find category dropdown with ID: community-reviews-display-category-dropdown");
+                                }
+                                //$flagged_review_arr['category'];
                                 const brandElement = document.getElementById("community-reviews-display-brand-dropdown");
-                                brandElement.value = $flagged_review_arr['brand'];
+                                if(brandElement){
+                                    let exists = false;
+                                    for (let i = 0; i < brandElement.options.length; i++) {
+                                        if (brandElement.options[i].value === brand) {
+                                            exists = true;
+                                            //break;
+                                        }
+                                    }
+                                    if(!exists){
+                                        const newOptionBrand = document.createElement("option");
+                                        newOptionBrand.value = brand;
+                                        newOptionBrand.text = brand;
+                                        brandElement.appendChild(newOptionBrand);
+                                        console.log(`Added option with value "${brand}" to brand dropdown.`);
+                                    }
+                                    brandElement.value = brand;
+                                    console.log(`Selected "${brand}" in the brand dropdown`);
+                                } else{
+                                    console.error("Could not find category dropdown with ID: community-reviews-display-brand-dropdown");
+                                }
+                                //brandElement.value = brand//$flagged_review_arr['brand'];
                                 const productElement = document.getElementById("community-reviews-display-product-dropdown");
-                                productElement.value = $flagged_review_arr['product'];
+                                if(productElement){
+                                    let exists = false;
+                                    for (let i = 0; i < productElement.options.length; i++) {
+                                        if (productElement.options[i].value === product) {
+                                            exists = true;
+                                            //break;
+                                        }
+                                    }
+                                    if(!exists){
+                                        const newOptionProduct = document.createElement("option");
+                                        newOptionProduct.value = product;
+                                        newOptionProduct.text = product;
+                                        productElement.appendChild(newOptionProduct);
+                                        console.log(`Added option with value "${product}" to product dropdown.`);
+                                    }
+                                    console.log(`Selected "${product}" in the product dropdown`);
+                                    productElement.value = product;
+                                } else{
+                                    console.error("Could not find category dropdown with ID: community-reviews-display-product-dropdown");
+                                }
+                                //productElement.value = product//$flagged_review_arr['product'];
                             } else {
                                 console.log('No radio button selected');
                             }
