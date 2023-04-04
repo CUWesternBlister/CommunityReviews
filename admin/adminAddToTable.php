@@ -38,17 +38,13 @@ function bcr_flagged_reviews_callback() {
 
 
 function display($flaggedReviews){
+    // $str = print_r($flaggedReviews, true);
+    // echo "flagged reviews: ". $str;
     ?>
-
     <div class="flagged-community-reviews-admin-display">
         <div class="community-reviews-admin-display" id="community-reviews-admin-display">
-
-    <!--
-    Add remove product/brand dropdown
-        -->
         <div class="community-reviews-add-remove-dropdown">
         <div class="community-reviews-display-title">Add/Remove Product or Brand:</div>
-        <!--<div class="community-reviews-display-title">Brand           Product:</div>-->
                         <strong>Category:</strong>
                         <select id="community-reviews-display-category-dropdown">
                         
@@ -135,32 +131,68 @@ function display($flaggedReviews){
                             <a href="<?php echo  $arr['url']?>"><?php echo "URL: Review $arr[id]"?></a>
                         <?php endforeach ?>
                         <div>
-                            <button type="submit" id="submit-button">Submit</button>
+                            <?php
+                                $myArrJson = json_encode($flaggedReviews);
+                                echo $myArrJson;
+                            ?>
+                            <input type="hidden" id="myArr" value='<?php echo strval($myArrJson);?>'>
+                            <button type="submit" id="submit-button" onclick="submitButtonClicked()" >Submit</button>
                         </div>
                         
                 </div>
         </div>
     </div>
     <script>
-        const submitButton = document.getElementById('submit-button');
-            submitButton.addEventListener('click', () => {
-                            const selectedRadio = document.querySelector('input[name="flagged_review"]:checked');
-                            if (selectedRadio) {
-                                const selectedValue = selectedRadio.value;
-                                console.log(`Selected value: ${selectedValue}`);
-                                const reviewId = selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1];
-                                $flagged_review_arr = $flaggedReviews[reviewId];
-                                //set defualt values for each drop down based off id
-                                const categoryElement = document.getElementById("community-reviews-display-category-dropdown");
-                                categoryElement.value = $flagged_review_arr['category'];
-                                const brandElement = document.getElementById("community-reviews-display-brand-dropdown");
-                                brandElement.value = $flagged_review_arr['brand'];
-                                const productElement = document.getElementById("community-reviews-display-product-dropdown");
-                                productElement.value = $flagged_review_arr['product'];
-                            } else {
-                                console.log('No radio button selected');
-                            }
-            });
+        
+            function submitButtonClicked() { 
+                const submitButton = document.getElementById('submit-button');
+                const myArrJson = document.getElementById('myArr').value;
+                console.log(`JSON: ${myArrJson}`);
+                const myArr = JSON.parse(myArrJson);
+                submitButton.addEventListener('click', update_dropdowns(myArr));
+            }
+
+            function update_dropdowns(myArr){
+                    const selectedRadio = document.querySelector('input[name="flagged_review"]:checked');
+                    if (selectedRadio) {
+
+                        const selectedValue = selectedRadio.value;
+                        console.log(`Selected value: ${selectedValue}`);
+                        const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1]);
+                        const flagged_review_arr = myArr[reviewId];
+                        console.log(`flagged review arr category : ${flagged_review_arr['category']}`);
+                        //set defualt values for each drop down based off id
+                        const categoryElement = document.getElementById("community-reviews-display-category-dropdown");
+                        categoryElement.value = flagged_review_arr['category'];
+                        const brandElement = document.getElementById("community-reviews-display-brand-dropdown");
+                        brandElement.value = flagged_review_arr['brand'];
+                        const productElement = document.getElementById("community-reviews-display-product-dropdown");
+                        productElement.value = flagged_review_arr['product'];
+                    } else {
+                        console.log('No radio button selected');
+                    }
+            }
+
+
+         //    const submitButton = document.getElementById('submit-button');
+        //     submitButton.addEventListener('click', () => {
+        //                     const selectedRadio = document.querySelector('input[name="flagged_review"]:checked');
+        //                     if (selectedRadio) {
+        //                         const selectedValue = selectedRadio.value;
+        //                         console.log(`Selected value: ${selectedValue}`);
+        //                         const reviewId = selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1];
+        //                         $flagged_review_arr = $flaggedReviews[reviewId];
+        //                         //set defualt values for each drop down based off id
+        //                         const categoryElement = document.getElementById("community-reviews-display-category-dropdown");
+        //                         categoryElement.value = $flagged_review_arr['category'];
+        //                         const brandElement = document.getElementById("community-reviews-display-brand-dropdown");
+        //                         brandElement.value = $flagged_review_arr['brand'];
+        //                         const productElement = document.getElementById("community-reviews-display-product-dropdown");
+        //                         productElement.value = $flagged_review_arr['product'];
+        //                     } else {
+        //                         console.log('No radio button selected');
+        //                     }
+        //     });
     </script>
     <?
 }
