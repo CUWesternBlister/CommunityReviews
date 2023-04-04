@@ -2,7 +2,7 @@
 
 include 'generate_html.php';
 
-function insert_into_ski_review($header, $file, $formName) {
+function insert_into_ski_review($header, $file, $formName, $form_id) {
     //$start = "\n\n INSERT INTO SKI REVIEW \n";
     //fwrite($file, $start);
     global $wpdb;
@@ -25,6 +25,7 @@ function insert_into_ski_review($header, $file, $formName) {
     
     $postTitle = get_post_title($title_arr);
 
+
     //$str = print_r($title_arr, true);
     //echo $str."<br>";
 
@@ -38,7 +39,9 @@ function insert_into_ski_review($header, $file, $formName) {
     }
 
     preg_match('/\d{4}/', $year, $matches);
-    $year = intval($matches[0]);
+    if($matches){
+        $year = intval($matches[0]);
+    }
 
     // echo "year: ".strval($year)."<br>";
     // echo "Length: ".strval($length)."<br>";
@@ -50,20 +53,21 @@ function insert_into_ski_review($header, $file, $formName) {
                         'post_title' => wp_strip_all_tags($postTitle), 
                         'post_content' => $html,
                         'meta_input' => array(
-                            'id'            => $header['reviewID'],
-                            'userID'        => $userInfo->userID,
-                            'userName'      => $userName,
-                            'height'        => $height,
-                            'weight'        => $userInfo->weight,
-                            'skiAbility'    => $userInfo->skiAbility,
-                            'product_tested'=> $header['productName'],
-                            'brand'         => $header['brandName'],
-                            'category'      => $header['categoryName'],
-                            'sport'         => $header['sportName'],
-                            'length'        => $length,
-                            'year'          => $year,
-                            'ski_boot_size' => $ski_boot_size
-                            ),
+                                              'id'            => $header['reviewID'],
+                                              'formID'        => $form_id,
+                                              'userID'        => $userInfo->userID,
+                                              'userName'      => $userName,
+                                              //'heightFeet'    => $userInfo->heightFeet,
+                                              //'heightInches'  => $userInfo->heightInches,
+                                              'height'        => $height,
+                                              'weight'        => $userInfo->weight,
+                                              'skiAbility'    => $userInfo->skiAbility,
+                                              'product_tested'=> $header['productName'],
+                                              'brand'         => $header['brandName'],
+                                              'category'      => $header['categoryName'],
+                                              'sport'         => $header['sportName'],
+                                              'qs_and_as_arr' => $header["questions_and_answers"]
+                                              ),
                         'post_type'   => 'Community Reviews',
                         'post_excerpt' => $user_html,
                         'post_status' => 'publish',
@@ -92,8 +96,14 @@ function get_answer_and_question_content($record,$file){
     $answer_arr_i = 0;
     foreach($question_ids as $id){
         $q_content = get_question_read_content($id);
-        $type = $q_content->questionType;
-        $display = $q_content->questionDisplayContent;
+        $type = "";
+        if(is_null($q_content->questionType) == false){
+            $type = $q_content->questionType;
+        }
+        $display = "";
+        if(is_null($q_content->questionDisplayContent) == false){
+            $display = $q_content->questionDisplayContent;
+        }
         $answer = $answer_content[$answer_arr_i];
         $obj = ["id" => $id, "question" => $display, "answer" => $answer];
         $return_array[$type][] = $obj;

@@ -19,6 +19,8 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
     $pluginData = get_plugin_data(plugin_dir_path( __FILE__ ).'/blister-community-reviews.php');
     $pluginVersion = $pluginData['Version'];
 
+    $html = "";
+
 
     if ($form_name == 'Ski Review Form'){//ski
 
@@ -173,7 +175,7 @@ function gen_HTML_for_testimony_qs($testimony, $formName){
 }
 
 function format_reviewerInfo($userInfo, $userName){
-    $html .= '<div id = "reviewerInfoContainer" class = "whole_container_flex">
+    $html = '<div id = "reviewerInfoContainer" class = "whole_container_flex">
         <div id= " userName" class = "short_container_no_float">Reviewer: '.esc_html($userName). '</div>
         <div id= "userHeight" class = "short_container_no_float">Height: '.esc_html($userInfo->heightFeet).' ft, '.esc_html($userInfo->heightInches).' in</div>
         <div id "userWeight" class = "short_container_no_float">Weight: '.esc_html($userInfo->weight).' lbs</div>
@@ -201,7 +203,7 @@ function format_review_excerpt($userInfo, $userName, $qs_and_ans){
         return $html;
     }else{*/
 
-        $html .= '<div id= "userName" class = "userInfo">Reviewer: '.esc_html($userName).'</div>
+        $html = '<div id= "userName" class = "userInfo">Reviewer: '.esc_html($userName).'</div>
             <div id= "userHeight" class = "userInfo">Height: '.esc_html($userInfo->heightFeet).' ft, '.esc_html($userInfo->heightInches).' in</div>
             <div id "userWeight" class = "userInfo">Weight: '.esc_html($userInfo->weight).' lbs</div>
             <div id= "userAbility" class = "userInfo">Reviewer Ability: '.esc_html($userInfo->skiAbility).'</div>';

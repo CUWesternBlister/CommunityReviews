@@ -63,7 +63,7 @@ function fluent_summit_review_from_sub($entryId, $formData, $form) {
         $header = summit_form_submission_custom_post_content($review_id, $current_form_id, $qs_and_as, $file);
         //$header_info_read = print_r($header, true);
         //fwrite($file, "HEADER: \n".$header_info_read."\n\n");
-        insert_into_ski_review($header, $file, $current_form_name);
+        insert_into_ski_review($header, $file, $current_form_name, $current_form_id);
     }
     fclose($file);
 }
@@ -129,7 +129,7 @@ function summit_form_submission_write_to_tables($current_form_id, $record, $file
     return $id;
 }
 
-function summit_form_submission_custom_post_content($current_review_id, $current_form_id,$record,$file){
+function summit_form_submission_custom_post_content($current_review_id, $current_form_id, $record, $file){
     //$start = "\n\n summit_form_submission_custom_post_content \n";
     //fwrite($file, $start);
     $product_info = [];
@@ -139,6 +139,8 @@ function summit_form_submission_custom_post_content($current_review_id, $current
     //$brand_info = get_brand_info($brand_name, $file);
 
     $category_info = get_category_info($current_form_id, $file);
+
+    $sport_info = get_sport_info($category_info->categoryName);
 
     $q_and_a_content = get_answer_and_question_content($record,$file);
     
@@ -151,7 +153,8 @@ function summit_form_submission_custom_post_content($current_review_id, $current
         'brandName' => $brand_name,
         'categoryName' => $category_info->categoryName,
         'questions_and_answers' => $q_and_a_content,
-        'userInfo' => $user_info
+        'userInfo' => $user_info,
+        'sportName' => $sport_info->categoryName
     );
     
     return $header;
