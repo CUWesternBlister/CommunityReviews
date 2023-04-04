@@ -25,19 +25,24 @@ function insert_into_ski_review($header, $file, $formName) {
     
     $postTitle = get_post_title($title_arr);
 
-    $year = "";
-    if(array_key_exists(9, $title_arr)){
-        preg_match('/\d{4}/', $title_arr[9], $matches);
-        $year = intval($matches[0]);
-    }
+    $str = print_r($title_arr, true);
+    echo $str."<br>";
 
+    $year = "";
     $length = "";
     $ski_boot_size = "";
-    if(array_key_exists(3, $title_arr)){
-        $length = intval(preg_replace('/[^0-9]/', '', $title_arr[3]));
-    }else if(array_key_exists(22, $title_arr)){
-        $ski_boot_size = intval($title_arr[22]);
+    foreach($title_arr as $key => $arr){
+        if($arr['id']==9){$year = $arr['answer'];}
+        else if($arr['id']==3){$length = intval($arr['answer']);}
+        else if($arr['id']==22){$ski_boot_size = intval($arr['answer']);}
     }
+
+    preg_match('/\d{4}/', $year, $matches);
+    $year = intval($matches[0]);
+
+    echo "year: ".strval($year)."<br>";
+    echo "Length: ".strval($length)."<br>";
+    echo "Bootsize: ".strval($ski_boot_size)."<br>";
 
     $height = intval($userInfo->heightFeet) * 12 + intval($userInfo->heightInches);
 
