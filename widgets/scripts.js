@@ -94,6 +94,11 @@ function bcr_color_slider(slider_1, slider_2) {
         ${'#C6C6C6'} 100%)`;
 }
 
+function bcr_update_units(min_slider, max_slider, min_box, max_box, prefix) {
+    bcr_update_display_box(min_box, min_slider, prefix);
+    bcr_update_display_box(max_box, max_slider, prefix);
+}
+
 const length_min_slider = document.querySelector('#community-reviews-display-slider-min-length');
 const length_max_slider = document.querySelector('#community-reviews-display-slider-max-length');
 
@@ -125,6 +130,14 @@ bcr_color_slider(year_max_slider, year_min_slider);
 bcr_color_slider(height_max_slider, height_min_slider);
 bcr_color_slider(weight_max_slider, weight_min_slider);
 
+bcr_update_units(height_min_slider, height_max_slider, height_min_box, height_max_box, "height");
+bcr_update_units(weight_min_slider, weight_max_slider, weight_min_box, weight_max_box, "lbs");
+
+const weight_unit_toggle = document.querySelector('#community-reviews-toggle-weight');
+const height_unit_toggle = document.querySelector('#community-reviews-toggle-height');
+
+weight_unit_toggle.oninput = () => bcr_update_units(weight_min_slider, weight_max_slider, weight_min_box, weight_max_box, "lbs");
+height_unit_toggle.oninput = () => bcr_update_units(height_min_slider, height_max_slider, height_min_box, height_max_box, "height");
 
 length_min_slider.oninput = () => bcr_alter_slider(length_min_slider, length_max_slider, true, length_min_box, "cm");
 length_max_slider.oninput = () => bcr_alter_slider(length_max_slider, length_min_slider, false, length_max_box, "cm");
