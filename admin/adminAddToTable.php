@@ -42,21 +42,45 @@ function display($flaggedReviews){
     // $str = print_r($flaggedReviews, true);
     // echo "flagged reviews: ". $str;
     ?>
-    <script src="
-        https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js
-        "></script>
-        <link href="
-        https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css
-        " rel="stylesheet">
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+        <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+</head>
 
     <div class="flagged-community-reviews-admin-display">
         <div class="community-reviews-admin-display" id="community-reviews-admin-display">
         <div class="community-reviews-add-remove-dropdown">
         <div class="community-reviews-display-title">Add/Remove Product or Brand:</div>
+                        <strong>Sport:</strong>
+                        <select id="community-reviews-display-sport-dropdown" class="select2">
+                        
+                        <?$sport_selected = "Ski";
+                            echo '<option value="' . esc_html($sport_selected) . '">' . esc_html($sport_selected) . '</option>';
+            
+                                global $wpdb;
+
+                                $sport_table_name = $wpdb->prefix . "bcr_categories";
+                                $zero = 0;
+                                $sql = $wpdb->prepare("SELECT categoryName FROM $sport_table_name WHERE parentID=0");
+                                
+                                $results  = $wpdb->get_results($sql);
+                                //$str = print_r($results, true);
+                                
+                                
+                                
+                                foreach ($results as $id => $sport_obj) {
+                                    $sport_name = $sport_obj->categoryName;
+                                    if($sport_name != $sport_selected){
+                                        echo '<option value="' . esc_html($sport_name) . '">' . esc_html($sport_name) . '</option>';
+                                    }
+                                }
+                            ?>
+                        </select>
                         <strong>Category:</strong>
                         <select id="community-reviews-display-category-dropdown" class="select2">
                         
-                        <?$category_selected = "Ski";
+                        <?$category_selected = "Skis";
                             echo '<option value="' . esc_html($category_selected) . '">' . esc_html($category_selected) . '</option>';
             
                                 global $wpdb;
@@ -133,7 +157,13 @@ function display($flaggedReviews){
                 
                 <label for="flagged_reviews">Select flagged review:</label>
                         <?php foreach ($flaggedReviews as $key => $arr) : ?>
-                            <?php $str = "Review ID: $key, Post ID: $arr[post_id], Category: $arr[category], Brand: $arr[brand], Product: $arr[product]" ?>
+                            <?php 
+                            if($arr['sport']){
+                                $str = "Review ID: $key, Post ID: $arr[post_id], Sport: $arr[sport], Category: $arr[category], Brand: $arr[brand], Product: $arr[product]";
+                            } else{
+                                $str = "Review ID: $key, Post ID: $arr[post_id], Sport: $arr[category], Category: $arr[category], Brand: $arr[brand], Product: $arr[product]";
+                            }
+                            ?>
                             <br>
                             <input type="radio" name="flagged_review" id="FR_<?php echo $key ?>" value="<?php echo $key?>" />
                             <label for="FR_<?php echo $key ?>"><?php echo $str ?></label>
@@ -143,6 +173,7 @@ function display($flaggedReviews){
                         <div>
                             <?php
                                 $myArrJson = json_encode($flaggedReviews);
+                                //echo $myArrJson;
                             ?>
                             <input type="hidden" id="myArr" value='<?php echo strval($myArrJson);?>'>
                             <button type="submit" id="submit-button" onclick="submitButtonClicked()" >Submit</button>
@@ -152,26 +183,35 @@ function display($flaggedReviews){
         </div>
     </div>
     <script>
-        jQuery(document).ready(function($) {
-            $('#community-reviews-display-category-dropdown').select2({
+        jQuery(document).ready(function(jQuery) {
+            jQuery('#community-reviews-display-sport-dropdown').select2({
+                tags: true,
+                placeholder: 'Select or create a sport'
+            });
+        });
+
+        jQuery(document).ready(function(jQuery) {
+            jQuery('#community-reviews-display-category-dropdown').select2({
                 tags: true,
                 placeholder: 'Select or create a category'
             });
         });
 
-        jQuery(document).ready(function($) {
-            $('#community-reviews-display-brand-dropdown').select2({
+        jQuery(document).ready(function(jQuery) {
+            jQuery('#community-reviews-display-brand-dropdown').select2({
                 tags: true,
                 placeholder: 'Select or create a brand'
             });
         });
 
-        jQuery(document).ready(function($) {
-            $('#community-reviews-display-product-dropdown').select2({
+        jQuery(document).ready(function(jQuery) {
+            jQuery('#community-reviews-display-product-dropdown').select2({
                 tags: true,
                 placeholder: 'Select or create a product'
             });
         });
+
+        
     
         function approveButtonClicked(){
             const selectedRadio = document.querySelector('input[name="flagged_review"]:checked');
@@ -179,7 +219,28 @@ function display($flaggedReviews){
             const myArrJson = document.getElementById('myArr').value;
             const myArr = JSON.parse(myArrJson);
             const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1]);
-            removeValueFromRadio(reviewId);
+            removeValueFromRadio(reviewId, 0);
+            //addProductBrand(myArr['product'], myArr['brand']);
+        }
+
+        function addProductBrand(product, brand){
+            jQuery.ajax({
+                url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
+                method: 'POST',
+                data: {
+                    action: 'removeReview',
+                    reviewID: reviewId,
+                    flag: flag
+                },
+                success: function(result) {
+                    if(result){
+                        console.log(`Successfully changed the flag on the approved/denied review`);
+                        location.reload();
+                    } else{
+                        console.error(`Unable to change the flag on review with id: "${reviewId}"`);
+                    }
+                }
+            });
         }
 
         function denyButtonClicked(){
@@ -188,21 +249,31 @@ function display($flaggedReviews){
             const myArrJson = document.getElementById('myArr').value;
             const myArr = JSON.parse(myArrJson);
             const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1]);
-            removeValueFromRadio(reviewId);
+            removeValueFromRadio(reviewId, 2);
         }
 
-        function removeValueFromRadio(reviewId){
-            const selectedRadio = document.querySelector('input[name="flagged_review"]:checked');
-            <?php
-                global $wpdb;
-
-                $review_table_name = $wpdb->prefix . "bcr_reviews";
-                echo $reviewId;
-            ?>
-            location.reload();
+        
+        function removeValueFromRadio(reviewId, flag){
+            jQuery.ajax({
+                url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
+                method: 'POST',
+                data: {
+                    action: 'removeReview',
+                    reviewID: reviewId,
+                    flag: flag
+                },
+                success: function(result) {
+                    if(result){
+                        console.log(`Successfully changed the flag on the approved/denied review`);
+                        location.reload();
+                    } else{
+                        console.error(`Unable to change the flag on review with id: "${reviewId}"`);
+                    }
+                }
+            });
         }
 
-        function updateDropdown(dropdownElement, updateValue){
+        function updateDropdown(dropdownElement, $dropdownText, updateValue){
             //const dropdownElement = document.getElementById(id);
             if(dropdownElement){
                 let exists = false;
@@ -220,6 +291,13 @@ function display($flaggedReviews){
                     console.log(`Added option with value "${updateValue}" to one of the dropdowns.`);
                 }
                 dropdownElement.value = updateValue;
+                $dropdownText.title = updateValue;
+                $dropdownText.innerText = updateValue;
+                //var option = dropdownElement.find(`option[value="${updateValue}"]`);
+
+                // Set the text of the first option to "New Option"
+                //option.text('New Option');
+
                 console.log(`Selected "${updateValue}" in the one of the dropdowns`);
             } else{
                 console.error(`Could not find dropdown element: "${dropdownElement}"`);
@@ -246,11 +324,21 @@ function display($flaggedReviews){
                     console.log(`flagged review arr category : ${flagged_review_arr['category']}`);
                     //set defualt values for each drop down based off id
                     const categoryElement = document.getElementById("community-reviews-display-category-dropdown");
-                    updateDropdown(categoryElement, flagged_review_arr['category']);
+                    var $categoryText = document.getElementById("select2-community-reviews-display-category-dropdown-container");
+                    updateDropdown(categoryElement, $categoryText, flagged_review_arr['category']);
                     const brandElement = document.getElementById("community-reviews-display-brand-dropdown");
-                    updateDropdown(brandElement, flagged_review_arr['brand']);
+                    var $brandText = document.getElementById("select2-community-reviews-display-brand-dropdown-container");
+                    updateDropdown(brandElement, $brandText, flagged_review_arr['brand']);
                     const productElement = document.getElementById("community-reviews-display-product-dropdown");
-                    updateDropdown(productElement, flagged_review_arr['product']);
+                    var $productText = document.getElementById("select2-community-reviews-display-product-dropdown-container");
+                    updateDropdown(productElement, $productText, flagged_review_arr['product']);
+                    const sportElement = document.getElementById("community-reviews-display-sport-dropdown");
+                    var $sportText = document.getElementById("select2-community-reviews-display-sport-dropdown-container");
+                    if(flagged_review_arr['sport']){
+                        updateDropdown(sportElement, $sportText, flagged_review_arr['sport']);
+                    } else{
+                        updateDropdown(sportElement, $sportText, flagged_review_arr['category']);
+                    }
 
                 } else {
                     console.log('No radio button selected');
