@@ -1,5 +1,32 @@
 @media only screen and (min-width: 768px) {
 
+	.excerpt_long_container{
+		background: white;
+		width: 66%;
+		padding-right: 10px;
+		padding-left: 10px;
+		display: block;
+		float: left;
+		color:black;
+	}
+
+	.excerpt_short_container{
+		background-color: rgb(240, 240, 240);
+		width: 33%;
+		padding-left: 10px;
+		display: block;
+		float: left;
+		color:black;
+	}
+	.excerpt_whole_container{
+		width: 99%;
+		float: left;
+		display: block;
+		margin-left: 3px;
+		background-color: rgb(240, 240, 240);
+		outline: 3px solid rgb(190, 190, 190);
+	}
+
 	.clip-circle{
 		background: #61CE70;
 		clip-path: circle(6px);
@@ -127,8 +154,31 @@
 
 }
 @media only screen and (max-width: 768px) {
-	#userHeight {
-		font-wight: bold;
+	.excerpt_long_container{
+		background: white;
+		width: 66%;
+		padding-right: 10px;
+		padding-left: 10px;
+		display: block;
+		float: left;
+		color:black;
+	}
+
+	.excerpt_short_container{
+		background-color: rgb(240, 240, 240);
+		width: 33%;
+		padding-left: 10px;
+		display: block;
+		float: left;
+		color:black;
+	}
+	.excerpt_whole_container{
+		width: 99%;
+		float: left;
+		display: block;
+		margin-left: 3px;
+		background-color: rgb(240, 240, 240);
+		outline: 3px solid rgb(190, 190, 190);
 	}
 
 	.clip-circle{

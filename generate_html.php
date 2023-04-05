@@ -187,13 +187,18 @@ function format_reviewerInfo($userInfo, $userName){
 
 function format_review_excerpt($userInfo, $userName, $qs_and_ans){
     $testimonyQuestions = $qs_and_ans['testimony'];
-    $reversed_testimony_list = array_reverse($testimonyQuestions, true);
-    $personal_testimony = $reversed_testimony_list[0];
+    $testimony_populated = false;
+    foreach($testimonyQuestions as $arr){
+        if ($arr['question'] == 'Reviewer Feedback'){
+            $personal_testimony = $arr;
+            $testimony_populated = true;
+        }
+    }
 
-    /*if($personal_testimony['question'] == 'About Product'){
-        $html .= '<div id = "excerpt_container" class = whole_container>
-            <div id = "excerpt_testimony_container" class = "long_container">'.esc_html($personal_testimony['answer']).'</div>
-            <div id = "excerpt_attributes_container" class = "short_container">
+    if($testimony_populated == true){
+        $html = '<div id = "excerpt_container" class = "excerpt_whole_container">
+            <div id = "excerpt_testimony_container" class = "excerpt_long_container">'.esc_html($personal_testimony['answer']).'</div>
+            <div id = "excerpt_attributes_container" class = "excerpt_short_container">
             <div id= "userName" class = "userInfo">Reviewer: '.esc_html($userName).'</div>
             <div id= "userHeight" class = "userInfo">Height: '.esc_html($userInfo->heightFeet).' ft, '.esc_html($userInfo->heightInches).' in</div>
             <div id "userWeight" class = "userInfo">Weight: '.esc_html($userInfo->weight).' lbs</div>
@@ -201,7 +206,7 @@ function format_review_excerpt($userInfo, $userName, $qs_and_ans){
             </div>
             </div>';
         return $html;
-    }else{*/
+    }else{
 
         $html = '<div id= "userName" class = "userInfo">Reviewer: '.esc_html($userName).'</div>
             <div id= "userHeight" class = "userInfo">Height: '.esc_html($userInfo->heightFeet).' ft, '.esc_html($userInfo->heightInches).' in</div>
@@ -209,7 +214,7 @@ function format_review_excerpt($userInfo, $userName, $qs_and_ans){
             <div id= "userAbility" class = "userInfo">Reviewer Ability: '.esc_html($userInfo->skiAbility).'</div>';
         return $html;
 
-    /*}*/
+    }
 }
 
 function get_post_title($title_arr){
