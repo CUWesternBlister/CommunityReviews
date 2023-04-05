@@ -146,6 +146,12 @@ function summit_form_submission_custom_post_content($current_review_id, $current
     
     $user_info = get_user_information($file);
 
+    $flagForReview = 0;
+    if((!check_for_brand($brand_name)) || (!check_for_product($product_info['productName']))){
+        $flagForReview = 1;
+        //echo "review flagged<br>";
+    }
+
     $header = array(
         'reviewID' => $current_review_id, 
         'formID' => $current_form_id,
@@ -154,7 +160,8 @@ function summit_form_submission_custom_post_content($current_review_id, $current
         'categoryName' => $category_info->categoryName,
         'questions_and_answers' => $q_and_a_content,
         'userInfo' => $user_info,
-        'sportName' => $sport_info->categoryName
+        'sportName' => $sport_info->categoryName,
+        'flagForReview' => $flagForReview
     );
     
     return $header;

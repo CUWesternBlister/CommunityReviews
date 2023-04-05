@@ -32,6 +32,24 @@ function addRow(){
     $category = $_POST['category'];
     $sport = $_POST['sport'];
 
+    $brand_id = -1;
+    if(check_for_brand($brand)){
+        $brand_id = get_brand_id($brand);
+    }else{
+        $brand_id = insert_brand($brand);
+    }
+
+    $category_id = get_category_id($category);
+
+    $product_id = -1;
+    if($brand_id == -1 || !$brand_id || $category_id == -1){
+        //something
+    }else{
+        $product_id = insert_product($product, $brand_id, $category_id);
+    }
+
+    
+
     
 
 

@@ -5,14 +5,14 @@
 		global $wpdb;
 		$prod_table = $wpdb->prefix . "bcr_products";
 		$sql = $wpdb->prepare("SELECT * FROM $prod_table WHERE productName = '$product_name';");
-		echo "SELECT * FROM $prod_table WHERE productName = $product_name;<br>";
+		//echo "SELECT * FROM $prod_table WHERE productName = $product_name;<br>";
 		$res = $wpdb->get_row($sql);
-		echo print_r($res, true)."<br>";
+		//echo print_r($res, true)."<br>";
 		if ($res) {
-			echo "returning  prod ture<br>";
+			//echo "returning  prod ture<br>";
 			return true;
 		} else {
-			echo "returning prod false<br>";
+			//echo "returning prod false<br>";
 			return false;
 		}
 	}
@@ -21,14 +21,14 @@
 		global $wpdb;
 		$brand_table = $wpdb->prefix . "bcr_brands";
 		$sql = $wpdb->prepare("SELECT * FROM $brand_table WHERE brandName = '$brand_name';");
-		echo "SELECT * FROM $brand_table WHERE brandName = $brand_name;<br>"; 
+		//echo "SELECT * FROM $brand_table WHERE brandName = $brand_name;<br>"; 
 		$res = $wpdb->get_row($sql);
-		echo print_r($res, true)."<br>";
+		//echo print_r($res, true)."<br>";
 		if ($res) {
-			echo "returning brand true<br>";
+			//echo "returning brand true<br>";
 			return true;
 		} else {
-			echo "returning brand false<br>";
+			//echo "returning brand false<br>";
 			return false;
 		}
 	}
