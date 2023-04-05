@@ -99,11 +99,15 @@ function bcr_community_reviews_display_pagination($pages) {
     echo '<div class="community-reviews-display-pagination">';
 
     echo '<div class="community-reviews-display-pagination-prev">';
-    echo '<a href="' . get_pagenum_link($paged - 1) . '" id="community-reviews-display-pagination-prev-button"><< Prev</a>';
+    if($paged > 1) {
+        echo '<a href="' . get_pagenum_link($paged - 1) . '" id="community-reviews-display-pagination-prev-button"><< Prev</a>';
+    }
     echo '</div>';
 
     echo '<div class="community-reviews-display-pagination-next">';
-    echo '<a href="' . get_pagenum_link($paged + 1) . '" id="community-reviews-display-pagination-next-button">Next >></a>';
+    if($paged < $pages) {
+        echo '<a href="' . get_pagenum_link($paged + 1) . '" id="community-reviews-display-pagination-next-button">Next >></a>';
+    }
     echo '</div>';
 
     echo '</div>';
