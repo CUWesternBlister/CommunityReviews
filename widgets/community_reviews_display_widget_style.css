@@ -6,6 +6,16 @@
     text-align: center;
 }
 
+.community-reviews-display-show-posts {
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+.community-reviews-display-pagination {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
 .community-reviews-number-boxes {
     display: grid;
     grid-template-columns: 50% 50%;

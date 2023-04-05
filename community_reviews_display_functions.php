@@ -7,9 +7,11 @@
 function bcr_filter_posts() {
     global $wpdb;
 
+    $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
     $args = array(
         'post_type'      => 'Community Reviews',
-        'posts_per_page' => -1,
+        'posts_per_page' => 6,
+        'paged'          => $paged,
     );
 
     if ( ! empty( $_POST['author'] ) ) {
@@ -86,6 +88,28 @@ add_action( 'wp_ajax_bcr_filter_posts', 'bcr_filter_posts' );
 add_action( 'wp_ajax_nopriv_bcr_filter_posts', 'bcr_filter_posts' );
 
 /**
+ * Display the pagination controls for the filtering widget
+ * 
+ * @return  HTML
+ */
+function bcr_community_reviews_display_pagination($pages) {
+    global $paged;
+    if(empty($paged)) $paged = 1;
+
+    echo '<div class="community-reviews-display-pagination">';
+
+    echo '<div class="community-reviews-display-pagination-prev">';
+    echo '<a href="' . get_pagenum_link($paged - 1) . '" id="community-reviews-display-pagination-prev-button"><< Prev</a>';
+    echo '</div>';
+
+    echo '<div class="community-reviews-display-pagination-next">';
+    echo '<a href="' . get_pagenum_link($paged + 1) . '" id="community-reviews-display-pagination-next-button">Next >></a>';
+    echo '</div>';
+
+    echo '</div>';
+}
+
+/**
  * Use a query to display the posts for the filtering widget
  * 
  * @param   WP_Query    $query
@@ -94,6 +118,7 @@ add_action( 'wp_ajax_nopriv_bcr_filter_posts', 'bcr_filter_posts' );
  */
 function bcr_display_posts( $query ) {
     if ( $query->have_posts() ) {
+        echo '<div class="community-reviews-all-excerpts">';
         while ( $query->have_posts() ) {
             echo '<div class="community_review_excerpt">';
             echo '<a href=' . get_the_permalink() . '>';
@@ -104,6 +129,9 @@ function bcr_display_posts( $query ) {
             echo '</a>';
             echo '</div>';
         }
+        echo '</div>';
+
+        bcr_community_reviews_display_pagination($query->max_num_pages);
 
         wp_reset_postdata();
     }

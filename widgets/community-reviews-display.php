@@ -275,9 +275,12 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 			<div class="community-reviews-display-show-posts">
 				<?php
+					$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+
 					$args = array(
 						'post_type' 	 => 'Community Reviews',
-						'posts_per_page' => -1,
+						'posts_per_page' => 6,
+						'paged'          => $paged,
 					);
 
 					$query = new \WP_Query( $args );
