@@ -16,6 +16,18 @@
     grid-template-columns: 50% 50%;
 }
 
+.community-reviews-display-pagination-prev {
+    text-align: left;
+}
+
+.community-reviews-display-pagination-next {
+    text-align: right;
+}
+
+#community-reviews-display-pagination-next-button {
+    margin-right: 10%;
+}
+
 .community-reviews-number-boxes {
     display: grid;
     grid-template-columns: 50% 50%;
