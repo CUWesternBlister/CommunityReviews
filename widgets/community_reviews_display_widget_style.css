@@ -76,6 +76,11 @@ select {
     width: 80%;
 }
 
+.selectize-control { 
+    width: 80%; 
+    left: 10%;
+}
+
 #community-reviews-display-slider-min-length,
 #community-reviews-display-slider-min-year,
 #community-reviews-display-slider-min-height,

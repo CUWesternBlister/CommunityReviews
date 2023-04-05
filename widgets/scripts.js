@@ -205,3 +205,9 @@ function bcr_hide_length_selector(category_dropdown) {
 const categories_dropdown = document.getElementById('community-reviews-display-category');
 
 categories_dropdown.onchange = () => bcr_hide_length_selector(categories_dropdown);
+
+jQuery(document).ready(function ( $ ) {
+    $('select').selectize({
+        sortField: 'text'
+    });
+});
