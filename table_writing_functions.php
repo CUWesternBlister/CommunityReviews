@@ -42,9 +42,9 @@ function insert_into_review_table($RF_id, $product_name, $brand_name, $file){
             die("user not found"); //should be a redirct to another page
         }
         //echo "insert_into_review_table() with Falgged_for_review <br>";
-        if((!check_for_product($product_name)) || (!check_for_brand($brand_name))){
+        if((!check_for_brand($brand_name)) || (!check_for_product($product_name))){
             $fields_review['FlaggedForReview'] = 1;
-            //echo "review flagged<br>";
+            echo "review flagged<br>";
         }
 
         $fields_review['userID'] = $current_userID;

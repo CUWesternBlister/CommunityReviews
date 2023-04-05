@@ -167,9 +167,8 @@ function display($flaggedReviews){
                             ?>
                             <br>
                             <input type="radio" name="flagged_review" id="FR_<?php echo $key ?>" value="<?php echo $key?>" />
-                            <label for="FR_<?php echo $key ?>"><?php echo $str ?></label>
-                            <br>
-                            <a href="<?php echo  $arr['url']?>"><?php echo "URL: Review $arr[id]"?></a>
+                            <label for="FR_<?php echo $key ?>"><?php echo $str.", " ?></label>
+                            <a href="<?php echo  $arr['url']?>"><?php echo "URL: BCR Post $arr[post_id]"?></a>
                         <?php endforeach ?>
                         <div>
                             <?php
