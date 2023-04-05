@@ -32,7 +32,7 @@ function addRow(){
     $category = $_POST['category'];
     $sport = $_POST['sport'];
 
-
+    
 
 
     return -1;
