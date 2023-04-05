@@ -52,10 +52,11 @@ function display($flaggedReviews){
         <div class="community-reviews-admin-display" id="community-reviews-admin-display">
         <div class="community-reviews-add-remove-dropdown">
         <div class="community-reviews-display-title">Add/Remove Product or Brand:</div>
+        <!--
                         <strong>Sport:</strong>
                         <select id="community-reviews-display-sport-dropdown" class="select2">
                         
-                        <?$sport_selected = "Ski";
+                       <?/*$sport_selected = "Ski";
                             echo '<option value="' . esc_html($sport_selected) . '">' . esc_html($sport_selected) . '</option>';
             
                                 global $wpdb;
@@ -75,12 +76,12 @@ function display($flaggedReviews){
                                         echo '<option value="' . esc_html($sport_name) . '">' . esc_html($sport_name) . '</option>';
                                     }
                                 }
-                            ?>
+                            */?>
                         </select>
                         <strong>Category:</strong>
                         <select id="community-reviews-display-category-dropdown" class="select2">
                         
-                        <?$category_selected = "Skis";
+                        <?/*$category_selected = "Skis";
                             echo '<option value="' . esc_html($category_selected) . '">' . esc_html($category_selected) . '</option>';
             
                                 global $wpdb;
@@ -100,15 +101,15 @@ function display($flaggedReviews){
                                         echo '<option value="' . esc_html($category_name) . '">' . esc_html($category_name) . '</option>';
                                     }
                                 }
-                            ?>
-                        </select>
+                            */?>
+                        </select> -->
                         <strong>Brand:</strong>
                         <select id="community-reviews-display-brand-dropdown" class="select2">
                         
                         <?$brand_selected =  "K2";
                             echo '<option value="' . esc_html($brand_selected) . '">' . esc_html($brand_selected) . '</option>';
             
-                                //global $wpdb;
+                                global $wpdb;
 
                                 $brands_table_name = $wpdb->prefix . "bcr_brands";
 
@@ -220,25 +221,22 @@ function display($flaggedReviews){
             const myArr = JSON.parse(myArrJson);
             const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1]);
             removeValueFromRadio(reviewId, 0);
-            //addProductBrand(myArr['product'], myArr['brand']);
+            addRow(myArr['product'], myArr['brand'], myArr['category'], myArr['sport']);
         }
 
-        function addProductBrand(product, brand){
+        function addRow(product, brand, category, sport){
             jQuery.ajax({
                 url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
                 method: 'POST',
                 data: {
                     action: 'removeReview',
-                    reviewID: reviewId,
-                    flag: flag
+                    product: product,
+                    brand: brand,
+                    category: category,
+                    sport: sport
                 },
                 success: function(result) {
-                    if(result){
-                        console.log(`Successfully changed the flag on the approved/denied review`);
-                        location.reload();
-                    } else{
-                        console.error(`Unable to change the flag on review with id: "${reviewId}"`);
-                    }
+                    console.log(result);
                 }
             });
         }
@@ -323,22 +321,22 @@ function display($flaggedReviews){
                     const flagged_review_arr = myArr[reviewId];
                     console.log(`flagged review arr category : ${flagged_review_arr['category']}`);
                     //set defualt values for each drop down based off id
-                    const categoryElement = document.getElementById("community-reviews-display-category-dropdown");
+                    /*const categoryElement = document.getElementById("community-reviews-display-category-dropdown");
                     var $categoryText = document.getElementById("select2-community-reviews-display-category-dropdown-container");
-                    updateDropdown(categoryElement, $categoryText, flagged_review_arr['category']);
+                    updateDropdown(categoryElement, $categoryText, flagged_review_arr['category']);*/
                     const brandElement = document.getElementById("community-reviews-display-brand-dropdown");
                     var $brandText = document.getElementById("select2-community-reviews-display-brand-dropdown-container");
                     updateDropdown(brandElement, $brandText, flagged_review_arr['brand']);
                     const productElement = document.getElementById("community-reviews-display-product-dropdown");
                     var $productText = document.getElementById("select2-community-reviews-display-product-dropdown-container");
                     updateDropdown(productElement, $productText, flagged_review_arr['product']);
-                    const sportElement = document.getElementById("community-reviews-display-sport-dropdown");
+                    /*const sportElement = document.getElementById("community-reviews-display-sport-dropdown");
                     var $sportText = document.getElementById("select2-community-reviews-display-sport-dropdown-container");
                     if(flagged_review_arr['sport']){
                         updateDropdown(sportElement, $sportText, flagged_review_arr['sport']);
                     } else{
                         updateDropdown(sportElement, $sportText, flagged_review_arr['category']);
-                    }
+                    }*/
 
                 } else {
                     console.log('No radio button selected');
