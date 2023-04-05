@@ -49,7 +49,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-sport-controls">
 					<div class="community-reviews-display-title">Sport</div>
 					<select id="community-reviews-display-sport">
-						<option value="">--No Sport Filter--</option>
+						<option value="No Sport Filter">--No Sport Filter--</option>
 						<?php
 							global $wpdb;
 
@@ -71,7 +71,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-category-controls">
 					<div class="community-reviews-display-title">Category</div>
 					<select id="community-reviews-display-category">
-						<option value="">--No Category Filter--</option>
+						<option value="No Category Filter">--No Category Filter--</option>
 						<?php
 							global $wpdb;
 
@@ -93,7 +93,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-brand-controls">
 					<div class="community-reviews-display-title">Brand</div>
 					<select id="community-reviews-display-brand">
-						<option value="">--No Brand Filter--</option>
+						<option value="No Brand Filter">--No Brand Filter--</option>
 						<?php
 							global $wpdb;
 
@@ -115,7 +115,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-product-controls">
 					<div class="community-reviews-display-title">Product</div>
 					<select id="community-reviews-display-product">
-						<option value="">--No Product Filter--</option>
+						<option value="No Product Filter">--No Product Filter--</option>
 						<?php
 							global $wpdb;
 
@@ -175,7 +175,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-ski-ability-controls">
 					<div class="community-reviews-display-title">Ski Ability</div>
 					<select id="community-reviews-display-ski-ability">
-						<option value="">--No Ability Filter--</option>
+						<option value="No Ability Filter">--No Ability Filter--</option>
 						<option value="Beginner">Beginner</option>
 						<option value="Novice">Novice</option>
 						<option value="Intermediate">Intermediate</option>
