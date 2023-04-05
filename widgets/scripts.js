@@ -28,10 +28,31 @@ function bcr_update_display_box(box, slider, prefix) {
         box.value = year_1.toString() + "-" + year_2.toString();
     } else if(prefix ==="height") {
         height = parseInt(slider.value, 10);
-        feet = Math.floor(height/12);
-        inches = height % 12;
 
-        box.value = feet.toString() + "'" + inches.toString() + '"';
+        const checked = document.querySelector('#community-reviews-toggle-height:checked') !== null;
+
+        if(checked) {
+            const height_cm = Math.floor(height * 2.54);
+
+            box.value = height_cm.toString() + " cm";
+        } else {
+            feet = Math.floor(height/12);
+            inches = height % 12;
+
+            box.value = feet.toString() + "'" + inches.toString() + '"';
+        }
+    } else if(prefix === "lbs") {
+        weight = parseInt(slider.value, 10);
+
+        const checked = document.querySelector('#community-reviews-toggle-weight:checked') !== null;
+
+        if(checked) {
+            const weight_kg = Math.floor(weight * 0.453592);
+
+            box.value = weight_kg.toString() + " kg";
+        } else {
+            box.value = slider.value + " " + prefix;
+        }
     } else {
         box.value = slider.value + " " + prefix;
     }
