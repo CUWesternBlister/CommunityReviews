@@ -209,6 +209,17 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 							<input class="community-reviews-display-number-box" type="text" id="max_height" value="7'0&quot;" readonly/>
 						</div>
 					</div>
+
+					<div class="community-reviews-units-option-mobile">
+						<div class ="community-reviews-unit-label community-reviews-unit-label-left">in</div>
+					
+						<div class="community-reviews-unit-toggle">
+							<input class="community-reviews-toggle" id="community-reviews-toggle-height-mobile" type="checkbox">
+							<label class="community-reviews-toggle-label" for="community-reviews-toggle-height-mobile"></label>
+						</div>
+
+						<div class ="community-reviews-unit-label community-reviews-unit-label-right">cm</div>
+					</div>
 				</div>
 
 				<div class="community-reviews-display-weight-controls">
@@ -246,6 +257,17 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						<div class="community-reviews-number-box-right">
 							<input class="community-reviews-display-number-box" type="text" id="max_weight" value="<?php echo $max_weight ?> lbs" readonly/>
 						</div>
+					</div>
+
+					<div class="community-reviews-units-option-mobile">
+						<div class ="community-reviews-unit-label community-reviews-unit-label-left">lbs</div>
+
+						<div class="community-reviews-unit-toggle">
+							<input class="community-reviews-toggle" id="community-reviews-toggle-weight-mobile" type="checkbox">
+							<label class="community-reviews-toggle-label" for="community-reviews-toggle-weight-mobile"></label>
+						</div>
+
+						<div class ="community-reviews-unit-label community-reviews-unit-label-right">kg</div>
 					</div>
 				</div>
 				<button id="community-reviews-display-submit">Filter</button>

@@ -83,6 +83,10 @@ select {
     display: grid;
     grid-template-columns: 20% 60% 20%;
   }
+
+  .community-reviews-units-option-mobile {
+    display: none;
+  }
   
   .community-reviews-unit-toggle .community-reviews-toggle {
     display: none;
@@ -209,6 +213,33 @@ select {
         margin: 10px;
         width: 150px;
     }
+
+    .community-reviews-units-option-mobile {
+        display: grid;
+        grid-template-columns: 42.5% 15% 42.5%;
+    }
+
+    .community-reviews-number-box-center {
+        display: none;
+    }
+
+    .community-reviews-display-number-boxes-with-toggle {
+        grid-template-columns: 50% 50%;
+    }
+
+    .community-reviews-unit-label-left {
+        text-align: right;
+        margin-right: 5%;
+    }
+
+    .community-reviews-unit-label-right {
+        text-align: left;
+        margin-left: 5%;
+    }
+
+    .community-reviews-unit-toggle .community-reviews-toggle-label {
+        right: 20%;
+      }
 }
 
 @media screen and (min-width: 400px) {

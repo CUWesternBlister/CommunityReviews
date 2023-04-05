@@ -29,7 +29,15 @@ function bcr_update_display_box(box, slider, prefix) {
     } else if(prefix ==="height") {
         height = parseInt(slider.value, 10);
 
-        const checked = document.querySelector('#community-reviews-toggle-height:checked') !== null;
+        var is_mobile = window.matchMedia("(max-width: 400px)");
+
+        var checked = false;
+
+        if(is_mobile.matches) {
+            checked = document.querySelector('#community-reviews-toggle-height-mobile:checked') !== null;
+        } else {
+            checked = document.querySelector('#community-reviews-toggle-height:checked') !== null;
+        }
 
         if(checked) {
             const height_cm = Math.floor(height * 2.54);
@@ -44,7 +52,15 @@ function bcr_update_display_box(box, slider, prefix) {
     } else if(prefix === "lbs") {
         weight = parseInt(slider.value, 10);
 
-        const checked = document.querySelector('#community-reviews-toggle-weight:checked') !== null;
+        var is_mobile = window.matchMedia("(max-width: 400px)");
+
+        var checked = false;
+
+        if(is_mobile.matches) {
+            checked = document.querySelector('#community-reviews-toggle-weight-mobile:checked') !== null;
+        } else {
+            checked = document.querySelector('#community-reviews-toggle-weight:checked') !== null;
+        }
 
         if(checked) {
             const weight_kg = Math.floor(weight * 0.453592);
@@ -138,6 +154,12 @@ const height_unit_toggle = document.querySelector('#community-reviews-toggle-hei
 
 weight_unit_toggle.oninput = () => bcr_update_units(weight_min_slider, weight_max_slider, weight_min_box, weight_max_box, "lbs");
 height_unit_toggle.oninput = () => bcr_update_units(height_min_slider, height_max_slider, height_min_box, height_max_box, "height");
+
+const weight_unit_toggle_mobile = document.querySelector('#community-reviews-toggle-weight-mobile');
+const height_unit_toggle_mobile = document.querySelector('#community-reviews-toggle-height-mobile');
+
+weight_unit_toggle_mobile.oninput = () => bcr_update_units(weight_min_slider, weight_max_slider, weight_min_box, weight_max_box, "lbs");
+height_unit_toggle_mobile.oninput = () => bcr_update_units(height_min_slider, height_max_slider, height_min_box, height_max_box, "height");
 
 length_min_slider.oninput = () => bcr_alter_slider(length_min_slider, length_max_slider, true, length_min_box, "cm");
 length_max_slider.oninput = () => bcr_alter_slider(length_max_slider, length_min_slider, false, length_max_box, "cm");
