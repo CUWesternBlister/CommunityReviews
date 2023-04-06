@@ -10,7 +10,7 @@ function bcr_filter_posts() {
     $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
     $args = array(
         'post_type'      => 'Community Reviews',
-        'posts_per_page' => 6,
+        'posts_per_page' => 4,
         'paged'          => $paged,
     );
 
@@ -126,6 +126,7 @@ function bcr_display_posts( $query ) {
             echo '<div class="excerpt_title">' . get_the_title() . '</div>';
             echo '<div class="community_review_postdate">' . get_the_date() . '</div>';
             echo '<div class="excerpt_content">' . get_the_excerpt() . '</div>';
+            echo '<div>' . the_meta() . '</div>';
             echo '</a>';
             echo '</div>';
         }

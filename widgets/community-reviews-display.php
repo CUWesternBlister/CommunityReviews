@@ -281,7 +281,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 					$args = array(
 						'post_type' 	 => 'Community Reviews',
-						'posts_per_page' => 6,
+						'posts_per_page' => 4,
 						'paged'          => $paged,
 					);
 
@@ -357,6 +357,9 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					},
 					success: function( data ) {
 						$( '.community-reviews-display-product-controls' ).html( data );
+						$('select').selectize({
+							sortField: 'text'
+						});
 					},
 					error: function( xhr, status, error ) {
 						console.error( xhr, status, error );
