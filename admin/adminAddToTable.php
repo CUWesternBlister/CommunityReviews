@@ -228,6 +228,23 @@ function display($flaggedReviews){
                 url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
                 method: 'POST',
                 data: {
+                    action: 'addRow',
+                    product: product,
+                    brand: brand,
+                    category: category,
+                    sport: sport
+                },
+                success: function(result) {
+                    console.log(result);
+                }
+            });
+        }
+
+        function addRow(product, brand, category, sport){
+            jQuery.ajax({
+                url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
+                method: 'POST',
+                data: {
                     action: 'removeReview',
                     product: product,
                     brand: brand,

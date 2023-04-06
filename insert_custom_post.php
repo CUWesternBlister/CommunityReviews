@@ -24,6 +24,16 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
     $title_arr = $header["questions_and_answers"]["title"];
     
     $postTitle = get_post_title($title_arr);
+    
+    $years = "";
+    foreach($title_arr as $key => $arr){
+        if($arr['id'] == 9){
+            $years = $arr['answer'];
+            break;
+        }
+    }
+    $years_arr = explode("-", $years);
+    $year = $years_arr[0];
 
     $height = intval($userInfo->heightFeet) * 12 + intval($userInfo->heightInches);
 
@@ -35,8 +45,6 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
                                               'formID'        => $form_id,
                                               'userID'        => $userInfo->userID,
                                               'userName'      => $userName,
-                                              //'heightFeet'    => $userInfo->heightFeet,
-                                              //'heightInches'  => $userInfo->heightInches,
                                               'height'        => $height,
                                               'weight'        => $userInfo->weight,
                                               'skiAbility'    => $userInfo->skiAbility,
@@ -45,6 +53,7 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
                                               'category'      => $header['categoryName'],
                                               'sport'         => $header['sportName'],
                                               'FlaggedForReview' => $header['flagForReview'],
+                                              'year'          => $year,
                                               'qs_and_as_arr' => $header["questions_and_answers"]
                                               ),    
                         'post_type'   => 'Community Reviews',

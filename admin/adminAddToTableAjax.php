@@ -10,11 +10,18 @@ function removeReview(){
     $reviewID = $_POST['reviewID'];
     $flag = $_POST['flag'];
 
+    // $_POST['product'];
+    // $_POST['brand'];
+    // $_POST['category'];
+    // $_POST['sport'];
+
+    // addRow()
+
     if($reviewID){
         $sql = $wpdb->prepare("UPDATE $review_table_name SET FlaggedForReview = $flag WHERE reviewID = $reviewID;");
         $result = $wpdb->get_results($sql);
         return $result;
-    } else{
+    }else{
         return -1;
     }
 }
@@ -43,17 +50,11 @@ function addRow(){
 
     $product_id = -1;
     if($brand_id == -1 || !$brand_id || $category_id == -1){
-        //something
+        echo "brand id or category id was not found <br>";
     }else{
         $product_id = insert_product($product, $brand_id, $category_id);
     }
-
-    
-
-    
-
-
-    return -1;
+    return $product_id;
 }
 add_action( 'wp_ajax_addRow', 'addRow' );
 add_action( 'wp_ajax_nopriv_addRow', 'addRow' );
