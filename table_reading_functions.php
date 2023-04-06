@@ -85,4 +85,29 @@ function get_flagged_reviews(){
     $flagged_reviews = $wpdb->get_results($sql);
     return $flagged_reviews;
 }
+
+
+function get_brand_id($brand_name){
+    global $wpdb;
+    $brand_table = $wpdb->prefix . "bcr_brands";
+    $q_brand = $wpdb->prepare("SELECT * FROM $brand_table WHERE brandName = %s;", $brand_name);
+    $res_brand = $wpdb->get_row($q_brand);
+    $brand_id = -1;
+    if($res_brand){
+        $brand_id = $res_brand->brandID;
+    }
+    return $brand_id;
+}
+
+function get_category_id(){
+    global $wpdb;
+    $category_table = $wpdb->prefix . "bcr_categories";
+    $q_category = $wpdb->prepare("SELECT * FROM $category_table WHERE categoryName = %s;", $category_name);
+    $res_category = $wpdb->get_row($q_category);
+    $category_id = -1;
+    if($res_category){
+        $category_id = $res_category->categoryID;
+    }
+    return $category_id;
+}
 ?>
