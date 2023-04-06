@@ -301,18 +301,42 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				var product = $( '#community-reviews-display-product' ).val();
 
 				var min_length = $( '#community-reviews-display-slider-min-length' ).val();
+				var abs_min_length = $( '#community-reviews-display-slider-min-length' ).prop('min');
 				var max_length = $( '#community-reviews-display-slider-max-length' ).val();
+				var abs_max_length = $( '#community-reviews-display-slider-max-length' ).prop('max');
+				if(min_length == abs_min_length && max_length == abs_max_length) {
+					var min_length = "";
+					var max_length = "";
+				}
 
 				var min_year = $( '#community-reviews-display-slider-min-year' ).val();
+				var abs_min_year = $( '#community-reviews-display-slider-min-year' ).prop('min');
 				var max_year = $( '#community-reviews-display-slider-max-year' ).val();
+				var abs_max_year = $( '#community-reviews-display-slider-max-year' ).prop('max');
+				if(min_year == abs_min_year && max_year == abs_max_year) {
+					var min_year = "";
+					var max_year = "";
+				}
 
 				var ski_ability = $( '#community-reviews-display-ski-ability' ).val();
 				
 				var min_weight = $( '#community-reviews-display-slider-min-weight' ).val();
+				var abs_min_weight = $( '#community-reviews-display-slider-min-weight' ).prop('min');
 				var max_weight = $( '#community-reviews-display-slider-max-weight' ).val();
+				var abs_max_weight = $( '#community-reviews-display-slider-max-weight' ).prop('max');
+				if(min_weight == abs_min_weight && max_weight == abs_max_weight) {
+					var min_weight = "";
+					var max_weight = "";
+				}
 				
 				var min_height = $( '#community-reviews-display-slider-min-height' ).val();
+				var abs_min_height = $( '#community-reviews-display-slider-min-height' ).prop('min');
 				var max_height = $( '#community-reviews-display-slider-max-height' ).val();
+				var abs_max_height = $( '#community-reviews-display-slider-max-height' ).prop('max');
+				if(min_height == abs_min_height && max_height == abs_max_height) {
+					var min_height = "";
+					var max_height = "";
+				}
 
 				$.ajax( {
 					url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
