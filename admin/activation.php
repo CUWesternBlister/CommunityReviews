@@ -28,15 +28,26 @@ function bcr_setup_tables() {
 
     $sql = "CREATE TABLE $user_table_name (
         userID int(9) NOT NULL,
-        heightFeet int(9) NOT NULL,
-        heightInches int(9) NOT NULL,
+        unit_preference varchar(512) DEFAULT 'imperial' NOT NULL,
+        height int(9) NOT NULL,
         weight int(9) NOT NULL,
         skiAbility varchar(512) DEFAULT '' NOT NULL,
         PRIMARY KEY  (userID)
         ) $charset_collate;";
-
     dbDelta($sql);
 
+    $q = $wpdb->prepare("SELECT heightFeet FROM $user_table_name");
+    $res = $wpdb->query($q);
+    if ($res){
+        $sql = "UPDATE $user_table_name SET height = (12*heightFeet + heightInches) WHERE height = 0;";
+        $wpdb->query($sql);
+        $sql = "ALTER TABLE $user_table_name 
+        DROP COLUMN heightFeet,
+        DROP COLUMN heightInches;";
+        $wpdb->query($sql);
+    }
+
+    
     //Create Question table
     $questions_table_name = $wpdb->prefix . "bcr_questions";
 
@@ -49,13 +60,13 @@ function bcr_setup_tables() {
         ) $charset_collate;";
 
     dbDelta($sql);
-
+    
     //Create Answer table
     $answers_table_name = $wpdb->prefix . "bcr_answers";
 
     $sql = "CREATE TABLE $answers_table_name (
         answerID int(9) NOT NULL AUTO_INCREMENT,
-        answerContent varchar(512) DEFAULT '' NOT NULL,
+        answerContent TEXT(4000) DEFAULT '' NOT NULL,
         questionID int(9) NOT NULL,
         preDefinedAnswer int(1),
         PRIMARY KEY  (answerID),

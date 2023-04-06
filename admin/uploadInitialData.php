@@ -4,6 +4,8 @@
  * 
  * @return void
  */
+require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
 function bcr_init_tables() {
     $categories_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_categories.sql.gz';
     $brands_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_brands.sql.gz';

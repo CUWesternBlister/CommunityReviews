@@ -80,15 +80,15 @@ add_shortcode( 'form_submissions', 'get_record_from_form_submissions' );
 function display_user_info($atts){
     $userEntry = get_bcr_user();
     if ( $userEntry ) {
-        $heightF = array_map(
+        $unit = array_map(
             function( $form_sub_object ) {
-                return $form_sub_object->heightFeet;
+                return $form_sub_object->unit_preference;
             },
             $userEntry
         );
-        $heightI = array_map(
+        $height = array_map(
             function( $form_sub_object ) {
-                return $form_sub_object->heightInches;
+                return $form_sub_object->height;
             },
             $userEntry
         );
@@ -104,8 +104,17 @@ function display_user_info($atts){
             },
             $userEntry
         );
-        return "User Height: ".esc_html(implode( '  ', $heightF)) ."' ".esc_html(implode( '  ', $heightI)) .'"'.
-            "<br><br>User Weight: ".esc_html(implode('  ', $weight))." lbs".
+        $measurement = implode('  ', $unit);
+        if ($measurement == 'imperial'){
+            $Height = esc_html(implode('  ', $height)) . " inches";
+            $Weight = esc_html(implode('  ', $weight))." lbs";
+        }
+        else{
+            $Height = esc_html(implode('  ', $height)) . " cm";
+            $Weight = esc_html(implode('  ', $weight))." kg";
+        }
+        return "User Height: ".$Height.
+            "<br><br>User Weight: ".$Weight.
             "<br><br>User Experience: ".esc_html(implode('  ', $ability));
     }
     return '';
