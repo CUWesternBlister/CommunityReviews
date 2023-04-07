@@ -8,15 +8,10 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
   ?>
     <div class="wrap">
         <h1>BCR Update Custom Posts</h1>
+          <p id="postID">Post ID: </p>
+          <p id="reviewID">Review ID: </p>
+          <p id="formID">Form ID: </p>
         <form method="post" action="">
-            <label for="postID">Post ID:</label>
-            <input type="text" id="postID" name="postID"><br>
-
-            <label for="reviewID">Review ID:</label>
-            <input type="text" id="reviewID" name="reviewID"><br>
-
-            <label for="formID">Form ID:</label>
-            <input type="text" id="formID" name="formID"><br>
 
             <label for="height">Height:</label>
             <input type="text" id="height" name="height"><br>
@@ -50,28 +45,17 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
 
             <input type="submit" value="Update Meta Data">
         </form>
+        <input type="hidden" id="loadedPostMeta" name="load-post-meta" value="">
     </div><br><br>
         <?php
-          get_reviews();
+          $q = get_reviews();
+          makeRadioHTML($q);
         ?>
-        <input type="hidden" id="myArr" value='<?php echo strval($myArrJson);?>'>
     <script>
             const btn = document.querySelector('#btn');
             const postRadios = document.querySelectorAll('input[name="reviewRadio"]');
 
-            const postIdInput = document.querySelector('#postID');
-            const formIdInput = document.querySelector('#formID');
-            const heightInput = document.querySelector('#height');
-            const weightInput = document.querySelector('#weight');
-            const productTestedInput = document.querySelector('#product_tested');
-            const brandInput = document.querySelector('#brand');
-            const categoryInput = document.querySelector('#category');
-            const sportInput = document.querySelector('#sport');
-            const flaggedForReviewInput = document.querySelector('#FlaggedForReview');
-            const yearInput = document.querySelector('#year');
-            const lengthInput = document.querySelector('#length');
-            const bootInput = document.querySelector('#boot_size');
-            
+            const postIdInput = document.getElementById('postID');
 
             btn.addEventListener("click", () => {
               let selectedPostID;
@@ -81,37 +65,86 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
                       break;
                   }
               }
-              console.log(selectedPostID);
+              console.log(typeof selectedPostID);
+              
               // show the output:
-              getPostMetaData(selectedPostID);
-              //var metaData = data;
-              // console.log(typeof metaData);
-              // if(metaData == -1){
+               $metaData = getPostMetaData(Number(selectedPostID), function(metaData) {
+                    if('id' in metaData){
+                      document.getElementById('reviewID').innerHTML = "Review ID: "+metaData['id'];
+                    }
+                    if('formID' in metaData){
+                      document.getElementById('formID').innerHTML = "Form ID: "+metaData['formID'];
+                    }
+                    if('height' in metaData){
+                      document.getElementById('height').value = metaData['height'];
+                    }
+                    if('weight' in metaData){
+                      document.getElementById('weight').value = metaData['weight'];
+                    }
+                    if('product_tested' in metaData){
+                      document.getElementById('product_tested').value = metaData['product_tested'];
+                    }
+                    if('brand' in metaData){
+                      document.getElementById('brand').value = metaData['brand'];
+                    }
+                    if('category' in metaData){
+                      document.getElementById('category').value = metaData['category'];
+                    }
+                    if('sport' in metaData){
+                      document.getElementById('sport').value = metaData['sport'];
+                    }
+                    if('FlaggedForReview' in metaData){
+                      document.getElementById('FlaggedForReview').value = metaData['FlaggedForReview'];
+                    }else{
+                      document.getElementById('FlaggedForReview').value = 0;
+                    }
+                    if('year' in metaData){
+                      document.getElementById('year').value = metaData['year'];
+                    }
+                    if('length' in metaData){
+                      document.getElementById('length').value = metaData['length'];
+                    }
+                    if('boot_size' in metaData){
+                      document.getElementById('boot_size').value = metaData['boot_size'];
+                    }
+                    document.getElementById('loadedPostMeta').value = "1";
+              });
+              postIdInput.innerHTML = "Post ID: " + selectedPostID;
+              console.log(typeof metaData);
 
-              // }else{
-              //   postIdInput.value = selectedPost;
-              //   // if(metaData.length != 0){
-                  
-              //   // }
-              // } 
+              var hiddenInput = document.getElementById('loadedPostMeta');
+              var submitButton = document.querySelector('input[type="submit"]');
+
+              hiddenInput.addEventListener('input', function() {
+                if (hiddenInput.value !== '') {
+                  submitButton.removeAttribute('disabled');
+                  console.log("submit button enabled");
+                } else {
+                  submitButton.setAttribute('disabled', 'disabled');
+                  console.log("submit button disabled");
+                }
+              });
+
+              submitButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                console.log("submit button working");
+              });
+              
 
             });
 
-            function getPostMetaData(postID){
+            function getPostMetaData(postID, callback){
               jQuery.ajax({
                   url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
                   method: 'POST',
                   data: {
-                      action: 'getPostMetaData',
+                      action: 'getPostMetaDataCall',
                       postID: postID
                   },
                   dataType:"json",
                   success: function(result) {
-                    if(result.type == "success"){
-                      return result.metaData
-                    }else{
-                      return -1;
-                    }
+                    console.log(result);
+                    callback(result);
                   }
               });
             }
@@ -119,36 +152,41 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
     <?php
 }
 
-function getPostMetaData(){
+function getPostMetaDataCall(){
   header('Access-Control-Allow-Origin: *');
+   
+  $postID = intval($_POST['postID']);
 
-  $postID = $_POST['postID'];
+  // echo '<script>console.log("FUCKKKKKKKKKKKKKKKKKKKKK!"); </script>';
 
   if($postID){
     $args = array(
       'post_type' => 'Community Reviews', 
-      'p' => $postID 
+      'p' => intval($postID) 
     );
     $query = new WP_Query($args);
+    // $file = fopen('testfile.txt', "w");
+    // fwrite($file, "hello world\n");
+    // fclose($file);
     $result = [];
     if ($query->have_posts()) {
-      $meta_data = get_post_meta( $postID );
-      // if($meta_data){
-      //   $result['type'] = "success";
-      //   $result['metaData'] = $meta_data;
+      $meta_data = get_post_meta( $postID, '', false);
+      //if($meta_data){
+        $result['type'] = "success";
+        $result['metaData'] = $meta_data;
       // }else{
       //   $result['type'] = "fail";
       //   $result['metaData'] = -1;
       // }
-      // $result = json_decode($meta_data);
-      // echo $result;
+      $result = json_encode($meta_data);
+      echo $result;
     }
-  } 
+  }
   wp_die();
 }
 
-add_action( 'wp_ajax_removeReview', 'removeReview' );
-add_action( 'wp_ajax_nopriv_removeReview', 'removeReview' );
+ add_action( 'wp_ajax_getPostMetaDataCall', 'getPostMetaDataCall' );
+ add_action( 'wp_ajax_nopriv_getPostMetaDataCall', 'getPostMetaDataCall' );
 
 function get_reviews(){
   $args = array(
@@ -171,7 +209,11 @@ function get_reviews(){
   );
 
   $query = new WP_Query( $args );
-      ?>
+  return $query;
+}
+
+function makeRadioHTML($query){
+    ?>
         <div class="community-reviews-display-flagged-reviews-radio">           
             <label for="flagged_reviews">SELECT REVIEW TO UPDATE META DATA:</label><br>
                 <p>
@@ -194,8 +236,30 @@ function get_reviews(){
                 ?>
         </div>
       <?php
-
 }
+
+// function makeHiddenMetaDataArr($query){
+//   $arr = [];
+//   if ( $query->have_posts() ) {
+//     while ( $query->have_posts() ) {
+//       $query->the_post();
+//       $post_id = get_the_ID();
+//       $meta_data = get_post_meta( $post_id );
+//       $arr[$post_id] = $meta_data;
+//     }
+//     $jsonarr = json_decode() 
+//   }else{echo "<br><br>FAILED TO MAKE POST<br><br>";}
+// }
+
+
+
+
+
+
+
+
+
+
 
 function update_existing_custom_posts() {
   $args = array(
