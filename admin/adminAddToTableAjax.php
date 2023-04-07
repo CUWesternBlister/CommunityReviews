@@ -20,7 +20,7 @@ function removeReview(){
     if($reviewID){
         $sql = $wpdb->prepare("UPDATE $review_table_name SET FlaggedForReview = $flag WHERE reviewID = $reviewID;");
         $result = $wpdb->get_results($sql);
-        return $result;
+        return json_encode($result);
     }else{
         return -1;
     }

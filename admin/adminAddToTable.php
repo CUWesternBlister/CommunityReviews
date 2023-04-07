@@ -279,6 +279,7 @@ function display($flaggedReviews){
                 success: function(result) {
                     if(result){
                         console.log(`Successfully changed the flag on the approved/denied review`);
+                        console.log(result);
                         location.reload();
                     } else{
                         console.error(`Unable to change the flag on review with id: "${reviewId}"`);
