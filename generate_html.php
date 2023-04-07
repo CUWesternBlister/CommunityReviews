@@ -29,9 +29,6 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
         $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
         $html .= '</div>';
         $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
-        //$html .= '<div class = "whole_container_version" hidden="hidden">
-        //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
-        //    </div>';
     }
 
     if ($form_name == 'Summit_Ski_Boot_Review_Form'){//boot
@@ -41,18 +38,12 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
         $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
         $html .= '</div>';
         $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
-        //$html .= '<div class = "whole_container_version" hidden="hidden">
-        //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
-        //    </div>';
     }
 
     if ($form_name == 'Summit_Apparel_Form'){//apparel
 
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
         $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
-        //$html .= '<div class = "whole_container_version" hidden="hidden">
-        //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
-        //    </div>';
     }
     if ($form_name == 'Snowboard Review'){//snowboard
 
@@ -61,27 +52,18 @@ function format_questions_answers_post_content($qs_and_ans, $form_name, $file){
         $html .= gen_HTML_for_testing_conditions_qs($testingConditionsQuestions, $form_name);
         $html .= '</div>';
         $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
-        //$html .= '<div class = "whole_container_version" hidden="hidden">
-        //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
-        //    </div>';
     }
 
         if ($form_name == 'Climbing Skin Review'){//apparel
 
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
         $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
-        //$html .= '<div class = "whole_container_version" hidden="hidden">
-        //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
-        //    </div>';
     }
 
         if ($form_name == 'Backpack review'){//apparel
 
         $html .= gen_HTML_for_testimony_qs($testimonyQuestions, $form_name);
         $html .= gen_HTML_for_multiple_choice_qs($multipleChoiceQuestions, $form_name);
-        //$html .= '<div class = "whole_container_version" hidden="hidden">
-        //    <div> Blister Community Reviews Version: '.$pluginVersion.'</div>
-        //    </div>';
     }
     return $html;
 
@@ -93,9 +75,7 @@ function gen_HTML_for_multiple_choice_qs($mulipleChoiceQs, $formName){
     //not question=>answer
     //below should sort of be the update to these fucntions:
     $html = '<div id = "multipleChoice" class = "whole_container_justified">';
-    foreach($mulipleChoiceQs as $arr){
-            //$html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
-            //        <div id = "'.esc_html($formName).'_answer_'.esc_html($arr['id']).'"  class = "answer">'.esc_html($arr['answer']).'</div>';   
+    foreach($mulipleChoiceQs as $arr){  
             if ($arr['answer'] == 'Terrible'){
                 $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['id']).'" class = circle_container">
                     <div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
@@ -150,7 +130,6 @@ function gen_HTML_for_multiple_choice_qs($mulipleChoiceQs, $formName){
 
     }
     return $html.'</div>';
-    //return $html;
 }
 
 function gen_HTML_for_testing_conditions_qs($testingConditions, $formName){

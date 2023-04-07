@@ -130,7 +130,7 @@ function bcr_filter_products() {
 
         $sql = $wpdb->prepare("SELECT productName FROM $products_table_name WHERE (brandID = %s);", $selected_brand_id);
     } else {
-        $sql = $wpdb->prepare("SELECT productName FROM $products_table_name;");
+        $sql = "SELECT productName FROM $products_table_name;";
     }
 
     $results  = $wpdb->get_results($sql);
@@ -173,7 +173,7 @@ function bcr_filter_categories() {
 
         $sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name WHERE (parentID=%s);", $selected_sport_id);
     } else {
-        $sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name WHERE (parentID!=0);");
+        $sql = "SELECT categoryName FROM $categories_table_name WHERE (parentID!=0);";
     }
 
     $results  = $wpdb->get_results($sql);

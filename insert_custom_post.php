@@ -47,8 +47,6 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
                                               'formID'        => $form_id,
                                               'userID'        => $userInfo->userID,
                                               'userName'      => $userName,
-                                              //'heightFeet'    => $userInfo->heightFeet,
-                                              //'heightInches'  => $userInfo->heightInches,
                                               'height'        => $height,
                                               'weight'        => $userInfo->weight,
                                               'skiAbility'    => $userInfo->skiAbility,

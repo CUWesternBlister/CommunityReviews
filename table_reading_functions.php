@@ -17,8 +17,6 @@ function get_question_read_content($q_id){
 //another function that gets brand info and will change the custom post
 function get_brand_info($brand_name, $file){
     global $wpdb;
-    //$start = "\n\n GET BRAND INFORMATION \n";
-    //fwrite($file, $start);
     $brand_table = $wpdb->prefix . "bcr_brands";
     $q = "SELECT * FROM $brand_table WHERE brandName = '".$brand_name."';";
     $res = $wpdb->get_row($q);
@@ -27,8 +25,6 @@ function get_brand_info($brand_name, $file){
 
 function get_category_info($form_id, $file){//may just want to return res !!!!!!
     global $wpdb;
-    //$start = "\n\n GET CATEGORY INFORMATION \n";
-    //fwrite($file, $start);
     $form_table = $wpdb->prefix . "bcr_review_forms";
     $q1 = "SELECT * FROM $form_table WHERE reviewFormID = $form_id;";
     $res1 = $wpdb->get_row($q1);
@@ -55,8 +51,6 @@ function get_sport_info($category_name){ //may just want to return res !!!!!!
 
 function get_user_information($file){
     global $wpdb;
-    //$start = "\n\n GET USER INFORMATION \n";
-    //fwrite($file, $start);
     $userID = get_current_userID($file);
     $user_table_name = $wpdb->prefix . "bcr_users";
     $queryString = $wpdb->prepare("SELECT * FROM $user_table_name WHERE userID=%s", $userID);
