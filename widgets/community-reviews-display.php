@@ -27,7 +27,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 		return 'eicon-post-list';
 	}
 
-    protected function _register_controls() {
+    protected function register_controls() {
 
     }
 
