@@ -53,7 +53,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 							$categories_table_name = $wpdb->prefix . "bcr_categories";
 
-							$sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name WHERE (parentID=0);");
+							$sql = "SELECT categoryName FROM $categories_table_name WHERE (parentID=0);";
 					
 							$results  = $wpdb->get_results($sql);
 
@@ -75,7 +75,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 							$categories_table_name = $wpdb->prefix . "bcr_categories";
 
-							$sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name WHERE (parentID!=0);");
+							$sql = "SELECT categoryName FROM $categories_table_name WHERE (parentID!=0);";
 					
 							$results  = $wpdb->get_results($sql);
 
@@ -97,7 +97,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 							$brands_table_name = $wpdb->prefix . "bcr_brands";
 
-							$sql = $wpdb->prepare("SELECT brandName FROM $brands_table_name;");
+							$sql = "SELECT brandName FROM $brands_table_name;";
 					
 							$results  = $wpdb->get_results($sql);
 
@@ -119,7 +119,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 							$products_table_name = $wpdb->prefix . "bcr_products";
 
-							$sql = $wpdb->prepare("SELECT productName FROM $products_table_name;");
+							$sql = "SELECT productName FROM $products_table_name;";
 					
 							$results  = $wpdb->get_results($sql);
 
@@ -206,9 +206,9 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						<?php
 							global $wpdb;
 							$user_table_name = $wpdb->prefix . "bcr_users";
-							$sql = $wpdb->prepare("SELECT MAX(weight) FROM $user_table_name;");
+							$sql = "SELECT MAX(weight) FROM $user_table_name;";
 							$max_weight  = $wpdb->get_var($sql);
-							$sql = $wpdb->prepare("SELECT MIN(weight) FROM $user_table_name;");
+							$sql = "SELECT MIN(weight) FROM $user_table_name;";
 							$min_weight  = $wpdb->get_var($sql);
 							$avg_weight = ($max_weight+$min_weight)/2;
 						?>
