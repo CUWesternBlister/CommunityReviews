@@ -8,8 +8,4 @@ function get_answers_associated_with_question( $item, $index, $form ) {
 	}
 	return $item;
 }
-
-//add_filter('elementor_pro/forms/render/item/select', 'get_answers_associated_with_question', 10, 3 );
-
-
 ?>

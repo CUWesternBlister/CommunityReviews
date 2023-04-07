@@ -3,8 +3,6 @@
 include 'generate_html.php';
 
 function insert_into_ski_review($header, $file, $formName, $form_id) {
-    //$start = "\n\n INSERT INTO SKI REVIEW \n";
-    //fwrite($file, $start);
     global $wpdb;
     $userInfo = $header['userInfo'];
     
@@ -25,10 +23,6 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
     
     $postTitle = get_post_title($title_arr);
 
-
-    //$str = print_r($title_arr, true);
-    //echo $str."<br>";
-
     $year = "";
     $length = "";
     $ski_boot_size = "";
@@ -43,10 +37,6 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
         $year = intval($matches[0]);
     }
 
-    // echo "year: ".strval($year)."<br>";
-    // echo "Length: ".strval($length)."<br>";
-    // echo "Bootsize: ".strval($ski_boot_size)."<br>";
-
     $height = intval($userInfo->heightFeet) * 12 + intval($userInfo->heightInches);
 
     $ski_review = array(
@@ -57,8 +47,6 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
                                               'formID'        => $form_id,
                                               'userID'        => $userInfo->userID,
                                               'userName'      => $userName,
-                                              //'heightFeet'    => $userInfo->heightFeet,
-                                              //'heightInches'  => $userInfo->heightInches,
                                               'height'        => $height,
                                               'weight'        => $userInfo->weight,
                                               'skiAbility'    => $userInfo->skiAbility,
@@ -79,9 +67,6 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
 
 function get_answer_and_question_content($record,$file){
     global $wpdb;
-    //$start = "\n\n GET ANSWERS AND QUESTIONS \n";
-    //fwrite($file, $start);
-
     $return_array = array(
         'title' => array(),
         'testingConditions' => array(),
@@ -112,15 +97,4 @@ function get_answer_and_question_content($record,$file){
    
     return $return_array;
 }
-
-/*
-function get_userName_by_userID($userID, $file){
-global $wpdb;
-//fwrite($file, "userID to get userName: ".$userID."\n");
-$wp_user_table = $wpdb->prefix."users";
-$q = $wpdb->prepare("SELECT display_name FROM $wp_user_table WHERE ID = %s;", $userID);
-$res = $wpdb->get_row($q);
-return $res->display_name;
-}
-*/
 ?>

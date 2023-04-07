@@ -62,12 +62,7 @@ add_action( 'init', 'create_community_review', 0 );
 
 add_action( 'admin_init', 'ski_admin' );
 
-function ski_admin() {
-    
-    //global $myfile;
-    
-    //fwrite($myfile, "Function my_admin starting\n");
-    
+function ski_admin() {   
     add_meta_box(
         'community_review_meta_box',
         'Community Reviews Information',
@@ -76,7 +71,6 @@ function ski_admin() {
         'normal',
         'high'
     );
-    //fwrite($myfile, "Function my_admin ending\n");
 }
 
 add_action( 'wp_footer', 'display_community_review_meta_box');

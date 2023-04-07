@@ -37,10 +37,10 @@ function bcr_prepare_sql($fileName){
     $sql_command = "";
     $lines = gzfile($fileName);
     foreach($lines as $key => $line ){
-        $sql_command.= $wpdb->prepare($line);
+        $sql_command.= $line;
     }
-    $sql_command = $wpdb->prepare(str_replace("wp_", $wpdb->prefix, $sql_command));
-    $sql_command = $wpdb->prepare(str_replace("wp8o_", $wpdb->prefix, $sql_command));
+    $sql_command = str_replace("wp_", $wpdb->prefix, $sql_command);
+    $sql_command = str_replace("wp8o_", $wpdb->prefix, $sql_command);
 
     return $sql_command;
 }
