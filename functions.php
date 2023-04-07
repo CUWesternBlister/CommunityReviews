@@ -49,7 +49,7 @@ function get_record_from_form_submissions($atts) {
     );
     global $wpdb;
     $name = $atts['name'];
-    $nameget = $wpdb->prepare('SELECT * FROM KnowThySelfSkiing LIMIT 1');
+    $nameget = 'SELECT * FROM KnowThySelfSkiing LIMIT 1';
     $nameresults = $wpdb->get_results($nameget);
     if ( $nameresults ) {
         $skiingStyle_subs = array_map(
