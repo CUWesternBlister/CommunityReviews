@@ -9,26 +9,20 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
     <div class="wrap">
         <h1>BCR Update Custom Posts</h1>
         <form method="post" action="">
+            <label for="postID">Post ID:</label>
+            <input type="text" id="postID" name="postID"><br>
+
             <label for="reviewID">Review ID:</label>
             <input type="text" id="reviewID" name="reviewID"><br>
 
             <label for="formID">Form ID:</label>
             <input type="text" id="formID" name="formID"><br>
 
-            <label for="userID">User ID:</label>
-            <input type="text" id="userID" name="userID"><br>
-
-            <label for="userName">User Name:</label>
-            <input type="text" id="userName" name="userName"><br>
-
             <label for="height">Height:</label>
             <input type="text" id="height" name="height"><br>
 
             <label for="weight">Weight:</label>
             <input type="text" id="weight" name="weight"><br>
-
-            <label for="skiAbility">Ski Ability:</label>
-            <input type="text" id="skiAbility" name="skiAbility"><br>
 
             <label for="product_tested">Product Tested:</label>
             <input type="text" id="product_tested" name="product_tested"><br>
@@ -54,14 +48,107 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
             <label for="boot_size">Boot Size:</label>
             <input type="text" id="boot_size" name="boot_size"><br>
 
-            <input type="submit" value="Submit">
+            <input type="submit" value="Update Meta Data">
         </form>
-    </div>
-    <?php
-    get_reviews();
-    ?>
+    </div><br><br>
+        <?php
+          get_reviews();
+        ?>
+        <input type="hidden" id="myArr" value='<?php echo strval($myArrJson);?>'>
+    <script>
+            const btn = document.querySelector('#btn');
+            const postRadios = document.querySelectorAll('input[name="reviewRadio"]');
+
+            const postIdInput = document.querySelector('#postID');
+            const formIdInput = document.querySelector('#formID');
+            const heightInput = document.querySelector('#height');
+            const weightInput = document.querySelector('#weight');
+            const productTestedInput = document.querySelector('#product_tested');
+            const brandInput = document.querySelector('#brand');
+            const categoryInput = document.querySelector('#category');
+            const sportInput = document.querySelector('#sport');
+            const flaggedForReviewInput = document.querySelector('#FlaggedForReview');
+            const yearInput = document.querySelector('#year');
+            const lengthInput = document.querySelector('#length');
+            const bootInput = document.querySelector('#boot_size');
+            
+
+            btn.addEventListener("click", () => {
+              let selectedPostID;
+              for (const postRadio of postRadios) {
+                  if (postRadio.checked) {
+                      selectedPostID = postRadio.value;
+                      break;
+                  }
+              }
+              console.log(selectedPostID);
+              // show the output:
+              getPostMetaData(selectedPostID);
+              //var metaData = data;
+              // console.log(typeof metaData);
+              // if(metaData == -1){
+
+              // }else{
+              //   postIdInput.value = selectedPost;
+              //   // if(metaData.length != 0){
+                  
+              //   // }
+              // } 
+
+            });
+
+            function getPostMetaData(postID){
+              jQuery.ajax({
+                  url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
+                  method: 'POST',
+                  data: {
+                      action: 'getPostMetaData',
+                      postID: postID
+                  },
+                  dataType:"json",
+                  success: function(result) {
+                    if(result.type == "success"){
+                      return result.metaData
+                    }else{
+                      return -1;
+                    }
+                  }
+              });
+            }
+        </script>
     <?php
 }
+
+function getPostMetaData(){
+  header('Access-Control-Allow-Origin: *');
+
+  $postID = $_POST['postID'];
+
+  if($postID){
+    $args = array(
+      'post_type' => 'Community Reviews', 
+      'p' => $postID 
+    );
+    $query = new WP_Query($args);
+    $result = [];
+    if ($query->have_posts()) {
+      $meta_data = get_post_meta( $postID );
+      // if($meta_data){
+      //   $result['type'] = "success";
+      //   $result['metaData'] = $meta_data;
+      // }else{
+      //   $result['type'] = "fail";
+      //   $result['metaData'] = -1;
+      // }
+      // $result = json_decode($meta_data);
+      // echo $result;
+    }
+  } 
+  wp_die();
+}
+
+add_action( 'wp_ajax_removeReview', 'removeReview' );
+add_action( 'wp_ajax_nopriv_removeReview', 'removeReview' );
 
 function get_reviews(){
   $args = array(
@@ -86,7 +173,10 @@ function get_reviews(){
   $query = new WP_Query( $args );
       ?>
         <div class="community-reviews-display-flagged-reviews-radio">           
-            <label for="flagged_reviews">SELECT REVIEW TO UPDATE META DATA:</label><br><br>
+            <label for="flagged_reviews">SELECT REVIEW TO UPDATE META DATA:</label><br>
+                <p>
+                  <button id="btn">Load Selected Post</button>
+              </p>
                 <?php if ( $query->have_posts() ) {
                         while ( $query->have_posts() ) {
                           $query->the_post();
@@ -95,8 +185,8 @@ function get_reviews(){
                           $meta_data = get_post_meta( $post_id );
                           $url = get_the_guid($post_id);
                           $str = "Post ID: ".strval($post_id)."<br>Post Title: ".$post_title."<br> Post Meta Data: <br>". var_export($meta_data, true);
-                          echo '<input type="radio" name="review" id="FR_'.strval($parent_id).'" value="'.strval($parent_id).'" />';
-                          echo '<label for="FR_'.strval($parent_id).'">'.$str.'</label>';
+                          echo '<input type="radio" name="reviewRadio" id="FR_'.strval($post_id).'" value="'.strval($post_id).'" />';
+                          echo '<label for="FR_'.strval($post_id).'">'.$str.'</label>';
                           echo '<br><a href="'.$url.'">URL: BCR Post '.strval($post_id).'</a>';
                           echo '<br><br>';
                         }
@@ -104,7 +194,7 @@ function get_reviews(){
                 ?>
         </div>
       <?php
- 
+
 }
 
 function update_existing_custom_posts() {
