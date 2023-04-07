@@ -95,9 +95,9 @@ add_action( 'wp_ajax_nopriv_bcr_filter_posts', 'bcr_filter_posts' );
 function bcr_display_posts( $query ) {
     if ( $query->have_posts() ) {
         while ( $query->have_posts() ) {
+            $query->the_post();
             echo '<div class="community_review_excerpt">';
             echo '<a href=' . get_the_permalink() . '>';
-            $query->the_post();
             echo '<div class="excerpt_title">' . get_the_title() . '</div>';
             echo '<div class="community_review_postdate">' . get_the_date() . '</div>';
             echo '<div class="excerpt_content">' . get_the_excerpt() . '</div>';
