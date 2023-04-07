@@ -85,13 +85,13 @@ function display_community_review_meta_box() {
     
     $postmetas = get_post_meta(get_the_ID());
 
-    if ('skireviews' == get_post_type(get_the_ID())){
+    //if ('skireviews' == get_post_type(get_the_ID())){
 
-        foreach($postmetas as $meta_key=>$meta_value) {
-            echo esc_html($meta_key) . ' : ' . esc_html($meta_value[0]) . '<br/>';
-        }
-
+    foreach($postmetas as $meta_key=>$meta_value) {
+        //echo esc_html($meta_key) . ' : ' . esc_html($meta_value[0]) . '<br/>';
     }
+
+    //}
 
 }
 
