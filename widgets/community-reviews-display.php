@@ -227,17 +227,8 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-weight-controls">
 					<div class="community-reviews-display-title">Weight</div>
 					<div class="community-reviews-display-slider">
-						<?php
-							global $wpdb;
-							$user_table_name = $wpdb->prefix . "bcr_users";
-							$sql = "SELECT MAX(weight) FROM $user_table_name;";
-							$max_weight  = $wpdb->get_var($sql);
-							$sql = "SELECT MIN(weight) FROM $user_table_name;";
-							$min_weight  = $wpdb->get_var($sql);
-							$avg_weight = ($max_weight+$min_weight)/2;
-						?>
-						<input id="community-reviews-display-slider-min-weight" type="range" value="<?php echo $min_weight ?>" min="<?php echo $min_weight ?>" max= "<?php echo $max_weight ?>"/>
-						<input id="community-reviews-display-slider-max-weight" type="range" value="<?php echo $max_weight ?>" min="<?php echo $min_weight ?>" max= "<?php echo $max_weight ?>"/>
+						<input id="community-reviews-display-slider-min-weight" type="range" value="50" min="50" max= "400"/>
+						<input id="community-reviews-display-slider-max-weight" type="range" value="400" min="50" max= "400"/>
 					</div>
 
 					<div class="community-reviews-number-boxes community-reviews-display-number-boxes-with-toggle">
