@@ -7,28 +7,26 @@
 function bcr_filter_posts() {
     global $wpdb;
 
+    $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
     $args = array(
         'post_type'      => 'Community Reviews',
-        'posts_per_page' => -1,
+        'posts_per_page' => 4,
+        'paged'          => $paged,
     );
-
-    if ( ! empty( $_POST['author'] ) ) {
-        $args['author_name'] = sanitize_text_field( $_POST['author'] );
-    }
 
     $meta_query = array();
 
-    if ( ! empty( $_POST['product'] ) ) {
+    if ( ! empty( $_POST['product'] ) And sanitize_text_field( $_POST['product'] ) != "No Product Filter" ) {
         array_push($meta_query, array('key' => 'product_tested', 'value' => sanitize_text_field( $_POST['product'] )));
     }
 
-    if ( ! empty( $_POST['brand'] ) ) {
+    if ( ! empty( $_POST['brand'] ) And sanitize_text_field( $_POST['brand'] ) != "No Brand Filter" ) {
         array_push($meta_query, array('key' => 'brand', 'value' => sanitize_text_field( $_POST['brand'] )));
     }
 
-    if ( ! empty( $_POST['category'] ) ) {
+    if ( ! empty( $_POST['category'] ) And sanitize_text_field( $_POST['category'] ) != "No Category Filter" ) {
         array_push($meta_query, array('key' => 'category', 'value' => sanitize_text_field( $_POST['category'] )));
-    } else if ( ! empty( $_POST['sport'] ) ) {
+    } else if ( ! empty( $_POST['sport'] ) And sanitize_text_field( $_POST['sport'] ) != "No Sport Filter" ) {
         $categories_table_name = $wpdb->prefix . "bcr_categories";
 
         $sql = $wpdb->prepare("SELECT categoryID FROM $categories_table_name WHERE (categoryName=%s);", sanitize_text_field( $_POST['sport'] ));
@@ -49,7 +47,7 @@ function bcr_filter_posts() {
         array_push($meta_query, array('key' => 'category', 'value' => $categories));
     }
 
-    if ( ! empty( $_POST['ski_ability'] ) ) {
+    if ( ! empty( $_POST['ski_ability'] ) And sanitize_text_field( $_POST['ski_ability'] ) != "No Ability Filter" ) {
         array_push($meta_query, array('key' => 'skiAbility', 'value' => sanitize_text_field( $_POST['ski_ability'] )));
     }
 
@@ -86,6 +84,32 @@ add_action( 'wp_ajax_bcr_filter_posts', 'bcr_filter_posts' );
 add_action( 'wp_ajax_nopriv_bcr_filter_posts', 'bcr_filter_posts' );
 
 /**
+ * Display the pagination controls for the filtering widget
+ * 
+ * @return  HTML
+ */
+function bcr_community_reviews_display_pagination($pages) {
+    global $paged;
+    if(empty($paged)) $paged = 1;
+
+    echo '<div class="community-reviews-display-pagination">';
+
+    echo '<div class="community-reviews-display-pagination-prev">';
+    if($paged > 1) {
+        echo '<a href="' . get_pagenum_link($paged - 1) . '" id="community-reviews-display-pagination-prev-button"><< Prev</a>';
+    }
+    echo '</div>';
+
+    echo '<div class="community-reviews-display-pagination-next">';
+    if($paged < $pages) {
+        echo '<a href="' . get_pagenum_link($paged + 1) . '" id="community-reviews-display-pagination-next-button">Next >></a>';
+    }
+    echo '</div>';
+
+    echo '</div>';
+}
+
+/**
  * Use a query to display the posts for the filtering widget
  * 
  * @param   WP_Query    $query
@@ -94,6 +118,7 @@ add_action( 'wp_ajax_nopriv_bcr_filter_posts', 'bcr_filter_posts' );
  */
 function bcr_display_posts( $query ) {
     if ( $query->have_posts() ) {
+        echo '<div class="community-reviews-all-excerpts">';
         while ( $query->have_posts() ) {
             $query->the_post();
             echo '<div class="community_review_excerpt">';
@@ -104,6 +129,9 @@ function bcr_display_posts( $query ) {
             echo '</a>';
             echo '</div>';
         }
+        echo '</div>';
+
+        bcr_community_reviews_display_pagination($query->max_num_pages);
 
         wp_reset_postdata();
     }
@@ -119,7 +147,7 @@ function bcr_filter_products() {
 
     $products_table_name = $wpdb->prefix . "bcr_products";
 
-    if ( ! empty( $_POST['brand_selected'] ) ) {
+    if ( ! empty( $_POST['brand_selected'] ) And sanitize_text_field( $_POST['brand_selected'] ) != "No Brand Filter" ) {
         $selected_brand = sanitize_text_field( $_POST['brand_selected'] );
 
         $brands_table_name = $wpdb->prefix . "bcr_brands";
@@ -138,7 +166,7 @@ function bcr_filter_products() {
     echo '<div class="community-reviews-display-title">Product</div>';
     echo '<select id="community-reviews-display-product">';
     
-    echo '<option value="">--No Product Filter--</option>';
+    echo '<option value="No Product Filter">--No Product Filter--</option>';
 
     foreach ($results as $id => $product_obj) {
         $product_name = $product_obj->productName;
@@ -164,7 +192,7 @@ function bcr_filter_categories() {
 
     $categories_table_name = $wpdb->prefix . "bcr_categories";
 
-    if ( ! empty( $_POST['sport_selected'] ) ) {
+    if ( ! empty( $_POST['sport_selected'] ) And sanitize_text_field( $_POST['sport_selected'] ) != "No Sport Filter" ) {
         $selected_sport = sanitize_text_field( $_POST['sport_selected'] );
 
         $sql = $wpdb->prepare("SELECT categoryID FROM $categories_table_name WHERE (categoryName=%s);", $selected_sport);
@@ -181,7 +209,7 @@ function bcr_filter_categories() {
     echo '<div class="community-reviews-display-title">Category</div>';
     echo '<select id="community-reviews-display-category">';
     
-    echo '<option value="">--No Category Filter--</option>';
+    echo '<option value="No Category Filter">--No Category Filter--</option>';
 
     foreach ($results as $id => $category_obj) {
         $category_name = $category_obj->categoryName;
