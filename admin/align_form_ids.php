@@ -12,7 +12,7 @@ function align_form_ids() {
     $fluent_forms_table_name = $wpdb->prefix . "fluentform_forms";
     $review_forms_table_name = $wpdb->prefix . "bcr_review_forms";
 
-    $sql = $wpdb->prepare("SELECT id, title FROM $fluent_forms_table_name;");
+    $sql = "SELECT id, title FROM $fluent_forms_table_name;";
     $existing_forms = $wpdb->get_results($sql);
 
     foreach($existing_forms as $id => $form) {
