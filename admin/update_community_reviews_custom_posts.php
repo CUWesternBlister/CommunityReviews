@@ -128,10 +128,22 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
               submitButton.addEventListener('click', function(event) {
                 event.preventDefault();
                 console.log("submit button working");
+                //create metaData arr
+                //call updatePostMetaData(selectedPostID)
+                //print success res
               });
               
 
             });
+
+            function makeMetaDataArr(){
+              meta_data = {};
+              meta_data.height = document.getElementById('height').value;
+              meta_data.weight = document.getElementById('weight').value;
+              meta_data.product_tested = document.getElementById('product_tested').value;
+              meta_data.brand = document.getElementById('brand').value;
+              meta_data.category = document.getElementById('category').value;
+            }
 
             function getPostMetaData(postID, callback){
               jQuery.ajax({
@@ -148,6 +160,24 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
                   }
               });
             }
+
+            function updatePostMetaData(postID, metaData){
+              jQuery.ajax({
+                  url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
+                  method: 'POST',
+                  data: {
+                      action: 'updatePostMetaDataCall',
+                      postID: postID,
+                      metaData: metaData
+                  },
+                  //dataType:"json",
+                  success: function(result) {
+                    console.log(result);
+                    //callback(result);
+                  }
+              });
+            }
+
         </script>
     <?php
 }
