@@ -152,7 +152,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					</div>
 				</div>
 
-				<div class="community-reviews-display-year-controls">
+				<div id="community-reviews-display-year-controls" class="community-reviews-display-year-controls">
 					<div class="community-reviews-display-title">Year</div>
 					<div class="community-reviews-display-slider">
 						<input id="community-reviews-display-slider-min-year" type="range" value="2000" min="2000" max="2023"/>

@@ -202,9 +202,25 @@ function bcr_hide_length_selector(category_dropdown) {
     }
 }
 
+function bcr_hide_year_selector(category_dropdown) {
+    const year_div = document.getElementById('community-reviews-display-year-controls');
+    if(category_dropdown.value == "Skis" || category_dropdown.value == "Snowboards") {
+        year_div.style.display = 'initial';
+    } else {
+        year_div.style.display = 'none';
+    }
+}
+
+function bcr_hide_selectors(category_dropdown) {
+    bcr_hide_length_selector(category_dropdown);
+    bcr_hide_year_selector(category_dropdown);
+}
+
 const categories_dropdown = document.getElementById('community-reviews-display-category');
 
-categories_dropdown.onchange = () => bcr_hide_length_selector(categories_dropdown);
+categories_dropdown.onchange = () => bcr_hide_selectors(categories_dropdown);
+
+bcr_hide_selectors(categories_dropdown);
 
 jQuery(document).ready(function ( $ ) {
     $('select').selectize({
