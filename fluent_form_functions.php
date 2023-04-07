@@ -51,6 +51,8 @@ function bcr_set_form_dropdowns( $data, $form ) {
         return $data;
     }
 
+    array_push($new_dropdown, ["label" => 'Other (Not Listed)', "value"=> 'Other (Not Listed)']);
+
     $data['settings']['advanced_options'] = $new_dropdown;
 
     return $data;
@@ -94,6 +96,8 @@ function bcr_filter_fluent_forms_dropdown() {
 
         echo '<option value="' . esc_html($product_name) . '">' . esc_html($product_name) . '</option>';
     }
+
+    echo '<option value="Other (Not Listed)">Other (Not Listed)</option>';
 
     wp_die();
 }
