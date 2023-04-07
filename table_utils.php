@@ -28,7 +28,7 @@
         $userID = get_current_userID($myfile);
         //fwrite($myfile, $userID);
         $user_table_name = $wpdb->prefix . "bcr_users";
-        $q = $wpdb->prepare("SELECT * FROM $user_table_name WHERE userID = $userID LIMIT 1;");
+        $q = "SELECT * FROM $user_table_name WHERE userID = $userID LIMIT 1;";
         $userEntry = $wpdb->get_results($q);
         return $userEntry;
     }
@@ -54,7 +54,7 @@ function get_all_form_names($file){
     //$start = "\n\n SUMMIT get all form names \n";
     //fwrite($file, $start);
     $review_forms_table = $wpdb->prefix . "bcr_review_forms";
-    $q = $wpdb->prepare("SELECT reviewFormName FROM $review_forms_table;");
+    $q = "SELECT reviewFormName FROM $review_forms_table;";
     $res = $wpdb->get_results($q);
     $return_array = [];
     foreach ($res as $value) {
