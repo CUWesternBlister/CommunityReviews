@@ -17,7 +17,7 @@ function bcr_update_user_info( $data, $form ) {
 
     $user_table_name = $wpdb->prefix . "bcr_users";
 
-    $sql = $wpdb->prepare("SELECT * FROM $products_table_name;");
+    $sql = "SELECT * FROM $products_table_name;";
 
     $results  = $wpdb->get_results($sql);
 
