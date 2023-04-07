@@ -400,6 +400,9 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						$('select').selectize({
 							sortField: 'text'
 						});
+						$( '#community-reviews-display-category').on('change', function() {
+							bcr_hide_selectors();
+						});
 					},
 					error: function( xhr, status, error ) {
 						console.error( xhr, status, error );
