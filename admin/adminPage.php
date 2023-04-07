@@ -1,7 +1,5 @@
 <?php
-
-include 'update_community_reviews_custom_posts.php';
-
+require 'update_community_reviews_custom_posts.php';
 add_action( 'admin_menu', 'bcr_admin_page');
 
 /**
@@ -17,6 +15,14 @@ function bcr_admin_page() {
         'bcr_commuinty_reviews',
         'bcr_admin_page_html',
         'none'
+    );
+    add_submenu_page(
+        'bcr_commuinty_reviews',
+        'BCR Update Custom Posts',
+        'BCR Update Custom Posts',
+        'manage_options',
+        'bcr_admin_update_custom_post_submenu_page',
+        'bcr_admin_update_custom_post_submenu_page_callback'
     );
 }
 
@@ -45,7 +51,6 @@ function bcr_admin_page_html() {
             
             bcr_display_version();
             bcr_display_user_reset();
-            bcr_update_custom_posts_metadata();
 
             foreach($table_names_array as $table_name) {
                 bcr_display_table_contents($table_name);
@@ -99,28 +104,6 @@ function bcr_display_user_reset() {
            <?php
         }
     }
-}
-
-/**
- * Displays button to update the metadata of all custom posts
- * 
- * @return  void
- */
-function bcr_update_custom_posts_metadata() {
-
-        if(array_key_exists("update_custom_post_metadata_button", $_POST)) {
-            //echo "hello world <br>";
-            update_existing_custom_posts();
-        }
-
-        ?>
-            <div id="update_custom_post_metadata">
-                <form method="post">
-                    <input type="submit" name="update_custom_post_metadata_button" class="button" value="Update BCR Custom Post Metadata"/>
-                </form>
-            </div>
-        <?php
-    
 }
 
 

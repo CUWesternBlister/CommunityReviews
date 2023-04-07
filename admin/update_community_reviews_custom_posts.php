@@ -1,4 +1,88 @@
 <?php
+/**
+ * Displays button to update the metadata of all custom posts
+ * 
+ * @return  void
+ */
+function bcr_admin_update_custom_post_submenu_page_callback() {
+  ?>
+    <div class="wrap">
+        <h1>BCR Update Custom Posts</h1>
+        <form method="post" action="">
+            <label for="reviewID">Review ID:</label>
+            <input type="text" id="reviewID" name="reviewID"><br>
+
+            <label for="formID">Form ID:</label>
+            <input type="text" id="formID" name="formID"><br>
+
+            <label for="userID">User ID:</label>
+            <input type="text" id="userID" name="userID"><br>
+
+            <label for="userName">User Name:</label>
+            <input type="text" id="userName" name="userName"><br>
+
+            <label for="height">Height:</label>
+            <input type="text" id="height" name="height"><br>
+
+            <label for="weight">Weight:</label>
+            <input type="text" id="weight" name="weight"><br>
+
+            <label for="skiAbility">Ski Ability:</label>
+            <input type="text" id="skiAbility" name="skiAbility"><br>
+
+            <label for="product_tested">Product Tested:</label>
+            <input type="text" id="product_tested" name="product_tested"><br>
+
+            <label for="brand">Brand:</label>
+            <input type="text" id="brand" name="brand"><br>
+
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="category"><br>
+
+            <label for="sport">Sport:</label>
+            <input type="text" id="sport" name="sport"><br>
+
+            <label for="FlaggedForReview">Flagged for Review:</label>
+            <input type="text" id="FlaggedForReview" name="FlaggedForReview"><br>
+
+            <label for="year">Year:</label>
+            <input type="text" id="year" name="year"><br>
+
+            <label for="length">Length:</label>
+            <input type="text" id="length" name="length"><br>
+
+            <label for="boot_size">Boot Size:</label>
+            <input type="text" id="boot_size" name="boot_size"><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <?php
+}
+
+function get_reviews(){
+  $args = array(
+    'post_type' => 'Community Reviews',
+    'posts_per_page' => -1,
+    'orderby' => 'post_date',
+    'order' => 'ASC',
+    'meta_query' => array(
+      'relation' => 'OR',
+      array(
+        'key' => 'FlaggedForReview',
+        'compare' => 'NOT EXISTS'
+      ),
+      array(
+        'key' => 'FlaggedForReview',
+        'value' => '0',
+        'compare' => '!='
+      )
+    )
+);
+
+$query = new WP_Query( $args );
+}
+
 
 function update_existing_custom_posts() {
   $args = array(
