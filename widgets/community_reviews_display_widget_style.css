@@ -53,6 +53,11 @@
     font-size: 15px;
     text-align: center;
 }
+#max_height,
+#min_height{
+    width: 110px;
+}
+
 
 #min_year,
 #max_year {
@@ -85,9 +90,10 @@ select {
 #community-reviews-display-slider-min-year,
 #community-reviews-display-slider-min-height,
 #community-reviews-display-slider-min-weight {
-    height: 0;
+    height: 10px;
     z-index: 1;
 }
+
 
 #community-reviews-display-submit {
     margin: 10px;

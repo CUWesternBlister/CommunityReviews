@@ -233,7 +233,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 					<div class="community-reviews-number-boxes community-reviews-display-number-boxes-with-toggle">
 						<div class="community-reviews-number-box-left">
-							<input class="community-reviews-display-number-box" type="text" id="min_weight" value="<?php echo $min_weight ?> lbs" readonly/>
+							<input class="community-reviews-display-number-box" type="text" id="min_weight" value="<?php echo 0 ?> lbs" readonly/>
 						</div>
 						
 						<div class="community-reviews-number-box-center">
@@ -248,7 +248,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						</div>
 
 						<div class="community-reviews-number-box-right">
-							<input class="community-reviews-display-number-box" type="text" id="max_weight" value="<?php echo $max_weight ?> lbs" readonly/>
+							<input class="community-reviews-display-number-box" type="text" id="max_weight" value="<?php echo 400 ?> lbs" readonly/>
 						</div>
 					</div>
 
