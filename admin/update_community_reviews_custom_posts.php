@@ -58,6 +58,9 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
         </form>
     </div>
     <?php
+    get_reviews();
+    ?>
+    <?php
 }
 
 function get_reviews(){
@@ -78,11 +81,31 @@ function get_reviews(){
         'compare' => '!='
       )
     )
-);
+  );
 
-$query = new WP_Query( $args );
+  $query = new WP_Query( $args );
+      ?>
+        <div class="community-reviews-display-flagged-reviews-radio">           
+            <label for="flagged_reviews">SELECT REVIEW TO UPDATE META DATA:</label><br><br>
+                <?php if ( $query->have_posts() ) {
+                        while ( $query->have_posts() ) {
+                          $query->the_post();
+                          $post_id = get_the_ID();
+                          $post_title = get_the_title($post_id);
+                          $meta_data = get_post_meta( $post_id );
+                          $url = get_the_guid($post_id);
+                          $str = "Post ID: ".strval($post_id)."<br>Post Title: ".$post_title."<br> Post Meta Data: <br>". var_export($meta_data, true);
+                          echo '<input type="radio" name="review" id="FR_'.strval($parent_id).'" value="'.strval($parent_id).'" />';
+                          echo '<label for="FR_'.strval($parent_id).'">'.$str.'</label>';
+                          echo '<br><a href="'.$url.'">URL: BCR Post '.strval($post_id).'</a>';
+                          echo '<br><br>';
+                        }
+                      } 
+                ?>
+        </div>
+      <?php
+ 
 }
-
 
 function update_existing_custom_posts() {
   $args = array(
