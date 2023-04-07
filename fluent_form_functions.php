@@ -22,7 +22,7 @@ function bcr_set_form_dropdowns( $data, $form ) {
     if($input_name == '1_1') {
         $brands_table_name = $wpdb->prefix . "bcr_brands";
 
-        $sql = $wpdb->prepare("SELECT brandName FROM $brands_table_name;");
+        $sql = "SELECT brandName FROM $brands_table_name;";
 
         $results  = $wpdb->get_results($sql);
 
