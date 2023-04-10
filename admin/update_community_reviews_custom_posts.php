@@ -43,6 +43,9 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
             <label for="boot_size">Boot Size:</label>
             <input type="text" id="boot_size" name="boot_size"><br>
 
+            <label for="skiAbility">Ski Ability:</label>
+            <input type="text" id="skiAbility" name="skiAbility"><br>
+
             <input type="submit" value="Update Meta Data">
         </form>
         <input type="hidden" id="loadedPostMeta" name="load-post-meta" value="">
@@ -108,6 +111,9 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
                     if('boot_size' in metaData){
                       document.getElementById('boot_size').value = metaData['boot_size'];
                     }
+                    if('skiAbility' in metaData){
+                      document.getElementById('skiAbility').value = metaData['skiAbility'];
+                    }
                     document.getElementById('loadedPostMeta').value = "1";
               });
               postIdInput.innerHTML = "Post ID: " + selectedPostID;
@@ -151,6 +157,7 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
               meta_data.year = document.getElementById('year').value;
               meta_data.length = document.getElementById('length').value;
               meta_data.boot_size = document.getElementById('boot_size').value;
+              meta_data.skiAbility = document.getElementById('skiAbility').value;
               return meta_data;
             }
 
@@ -333,86 +340,86 @@ function makeRadioHTML($query){
 
 
 
-function update_existing_custom_posts() {
-  $args = array(
-    'post_type' => 'Community Reviews',
-    'post_status' => 'any',
-    'posts_per_page' => -1,
-  );
+// function update_existing_custom_posts() {
+//   $args = array(
+//     'post_type' => 'Community Reviews',
+//     'post_status' => 'any',
+//     'posts_per_page' => -1,
+//   );
 
-  $query = new WP_Query($args);
+//   $query = new WP_Query($args);
 
-  // $file = fopen("testfile.txt", "a");
-  // fwrite($file, "here\n\n");
-  if ($query->have_posts()) {
-    while ($query->have_posts()) {
-      $query->the_post();
-      $post_id = get_the_ID();
-      $sport = get_post_meta( $post_id, 'category', true );
-      //fwrite($file, "Sport: ".$sport."\n\n");
-      //echo $sport."<br>";
-      if(empty($sport)){
-        add_metadata_to_custom_posts($post_id);
-      }
-      //echo "<br>";
-    }
-    wp_reset_postdata();
-  } 
-  //fclose($file);
-}
+//   // $file = fopen("testfile.txt", "a");
+//   // fwrite($file, "here\n\n");
+//   if ($query->have_posts()) {
+//     while ($query->have_posts()) {
+//       $query->the_post();
+//       $post_id = get_the_ID();
+//       $sport = get_post_meta( $post_id, 'category', true );
+//       //fwrite($file, "Sport: ".$sport."\n\n");
+//       //echo $sport."<br>";
+//       if(empty($sport)){
+//         add_metadata_to_custom_posts($post_id);
+//       }
+//       //echo "<br>";
+//     }
+//     wp_reset_postdata();
+//   } 
+//   //fclose($file);
+// }
 
 
-function add_metadata_to_custom_posts( $post_id ) { 
-    //fwrite($file, "In add metadata \n\n");   
-    //echo "In add metadata<br>";
-    //get length from title
-    $post_title = get_the_title( $post_id );
+// function add_metadata_to_custom_posts( $post_id ) { 
+//     //fwrite($file, "In add metadata \n\n");   
+//     //echo "In add metadata<br>";
+//     //get length from title
+//     $post_title = get_the_title( $post_id );
 
-    //get brand
-    $post_title_substrs = explode(" ", $post_title);
-    $brand = "";
-    if(preg_match('/\d{4}-\d{4}/', $post_title_substrs[0]) | preg_match('/\d{4}/', $post_title_substrs[0])){
-      $brand = $post_title_substrs[1];
-    }else{
-      $brand = $post_title_substrs[0];
-    } 
+//     //get brand
+//     $post_title_substrs = explode(" ", $post_title);
+//     $brand = "";
+//     if(preg_match('/\d{4}-\d{4}/', $post_title_substrs[0]) | preg_match('/\d{4}/', $post_title_substrs[0])){
+//       $brand = $post_title_substrs[1];
+//     }else{
+//       $brand = $post_title_substrs[0];
+//     } 
 
-    //get ski length
-    $lastString = end($post_title_substrs);
-    $ski_length_num = "";
-    if (preg_match('/\d+cm/', $lastString)) {
-      $ski_length_num = intval(preg_replace('/[^0-9]/', '', $lastString));
-    }
+//     //get ski length
+//     $lastString = end($post_title_substrs);
+//     $ski_length_num = "";
+//     if (preg_match('/\d+cm/', $lastString)) {
+//       $ski_length_num = intval(preg_replace('/[^0-9]/', '', $lastString));
+//     }
 
-    //get year from title
-    $year = "";
-    if (preg_match('/\d{4}/', $post_title, $matches)) {
-        $year = (int) $matches[0];
-    }
+//     //get year from title
+//     $year = "";
+//     if (preg_match('/\d{4}/', $post_title, $matches)) {
+//         $year = (int) $matches[0];
+//     }
     
-    //get user height and convert
-    $feet_str = get_post_meta( $post_id, 'heightFeet', true );
-    $inch_str = get_post_meta( $post_id, 'heightInches', true );
-    $height_in_inches = (intval($feet_str)*12)+intval($inch_str);
+//     //get user height and convert
+//     $feet_str = get_post_meta( $post_id, 'heightFeet', true );
+//     $inch_str = get_post_meta( $post_id, 'heightInches', true );
+//     $height_in_inches = (intval($feet_str)*12)+intval($inch_str);
 
-    //get category id
-    global $wpdb;
-    $cate_table_name = $wpdb->prefix . "bcr_categories";
-    $category = get_post_meta( $post_id, 'category', true );
-    echo "categrory: ".$category."<br>";
-    $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryName = %s;", $category);
-    $res = $wpdb->get_row($q);
-    if($res->parentID != 0){
-        $parent_id = $res->parentID;
-        $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryID = %s;", $parent_id);
-        $res = $wpdb->get_row($q);
-    }
-    $sport_name = $res->categoryName;
-    // add meta data  to post
-    update_post_meta( $post_id, 'brand', $brand);
-    update_post_meta( $post_id, 'height', $height_in_inches);
-    update_post_meta( $post_id, 'year', $year);
-    update_post_meta( $post_id, 'ski_length',  $ski_length_num);
-    update_post_meta( $post_id, 'sport',  $sport_name);    
-}
+//     //get category id
+//     global $wpdb;
+//     $cate_table_name = $wpdb->prefix . "bcr_categories";
+//     $category = get_post_meta( $post_id, 'category', true );
+//     echo "categrory: ".$category."<br>";
+//     $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryName = %s;", $category);
+//     $res = $wpdb->get_row($q);
+//     if($res->parentID != 0){
+//         $parent_id = $res->parentID;
+//         $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryID = %s;", $parent_id);
+//         $res = $wpdb->get_row($q);
+//     }
+//     $sport_name = $res->categoryName;
+//     // add meta data  to post
+//     update_post_meta( $post_id, 'brand', $brand);
+//     update_post_meta( $post_id, 'height', $height_in_inches);
+//     update_post_meta( $post_id, 'year', $year);
+//     update_post_meta( $post_id, 'ski_length',  $ski_length_num);
+//     update_post_meta( $post_id, 'sport',  $sport_name);    
+// }
 ?>
