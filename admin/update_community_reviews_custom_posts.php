@@ -69,6 +69,7 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
               
               // show the output:
                $metaData = getPostMetaData(Number(selectedPostID), function(metaData) {
+                    console.log(JSON.stringify(metaData));
                     if('id' in metaData){
                       document.getElementById('reviewID').innerHTML = "Review ID: "+metaData['id'];
                     }
@@ -129,7 +130,9 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
                 event.preventDefault();
                 console.log("submit button working");
                 //create metaData arr
-                //call updatePostMetaData(selectedPostID)
+                var meta = makeMetaDataArr();
+                console.log(JSON.stringify(meta));
+                updatePostMetaData(selectedPostID, meta);
                 //print success res
               });
               
@@ -143,6 +146,12 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
               meta_data.product_tested = document.getElementById('product_tested').value;
               meta_data.brand = document.getElementById('brand').value;
               meta_data.category = document.getElementById('category').value;
+              meta_data.sport = document.getElementById('sport').value;
+              meta_data.FlaggedForReview = document.getElementById('FlaggedForReview').value;
+              meta_data.year = document.getElementById('year').value;
+              meta_data.length = document.getElementById('length').value;
+              meta_data.boot_size = document.getElementById('boot_size').value;
+              return meta_data;
             }
 
             function getPostMetaData(postID, callback){
@@ -172,8 +181,12 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
                   },
                   //dataType:"json",
                   success: function(result) {
-                    console.log(result);
-                    //callback(result);
+                    var res = JSON.parse(result);
+                    if(res["type"] == "success"){
+                      console.log(JSON.stringify(res["metaData"]));
+                    }else{
+                      console.log("fail");
+                    }
                   }
               });
             }
@@ -182,12 +195,41 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
     <?php
 }
 
+function updatePostMetaDataCall(){
+  header('Access-Control-Allow-Origin: *');
+  $postID = intval($_POST['postID']);
+  $meta = $_POST['metaData'];
+  //echo strval($postID)."<br><br>".print_r($meta)."<br>";
+  $args = array(
+    'post_type' => 'Community Reviews', 
+    'p' => intval($postID) 
+  );
+  $query = new WP_Query($args);
+  
+  $result = [];
+  if ($query->have_posts()) {
+    foreach($meta as $key => $value){
+      //if(metadata_exists( 'post', $postID, $key)){
+        update_post_meta( $postID, $key, $value);
+      // }else{
+      //   update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' );
+      // }
+    }
+    $result['type'] = "success";
+    $result['metaData'] = get_post_meta( $postID, '', false);
+  }else{
+    $result['type'] = "fail";
+  }
+  echo json_encode($result);
+  wp_die();
+}
+add_action( 'wp_ajax_updatePostMetaDataCall', 'updatePostMetaDataCall' );
+add_action( 'wp_ajax_nopriv_updatePostMetaDataCall', 'updatePostMetaDataCall' );
+
 function getPostMetaDataCall(){
   header('Access-Control-Allow-Origin: *');
    
   $postID = intval($_POST['postID']);
-
-  // echo '<script>console.log("FUCKKKKKKKKKKKKKKKKKKKKK!"); </script>';
 
   if($postID){
     $args = array(
