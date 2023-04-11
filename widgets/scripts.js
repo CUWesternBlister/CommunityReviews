@@ -29,7 +29,7 @@ function bcr_update_display_box(box, slider, prefix) {
     } else if(prefix ==="height") {
         height = parseInt(slider.value, 10);
 
-        var is_mobile = window.matchMedia("(max-width: 400px)");
+        var is_mobile = window.matchMedia("(max-width: 1500px)");
 
         var checked = false;
 
@@ -52,7 +52,7 @@ function bcr_update_display_box(box, slider, prefix) {
     } else if(prefix === "lbs") {
         weight = parseInt(slider.value, 10);
 
-        var is_mobile = window.matchMedia("(max-width: 400px)");
+        var is_mobile = window.matchMedia("(max-width: 1500px)");
 
         var checked = false;
 
@@ -179,7 +179,7 @@ function bcr_show_mobile_filters() {
 }
 
 function bcr_hide_mobile_filters() {
-    var is_mobile = window.matchMedia("(max-width: 400px)");
+    var is_mobile = window.matchMedia("(max-width: 1500px)");
     if(is_mobile.matches) {
         const all_filters = document.getElementById('community-reviews-display-filter');
         all_filters.style.display = 'none';

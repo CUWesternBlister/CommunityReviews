@@ -163,7 +163,6 @@ select {
   .community-reviews-unit-toggle .community-reviews-toggle-label {
     position: absolute;
     top: -5px;
-    right: 0;
     width: 40px;
     height: 24px;
     background-color: #C6C6C6;
@@ -244,7 +243,7 @@ select {
     display: block;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 1500px) {
     .community-reviews-display {
         display: grid;
         grid-template-columns: 100%;
@@ -286,6 +285,17 @@ select {
         grid-template-columns: 42.5% 15% 42.5%;
     }
 
+    .community-reviews-display-mobile-center {
+        align-content: center;
+    }
+
+    .community-reviews-unit-toggle {
+        width: 40px;
+        height: 24px;
+        position: relative;
+        margin-right: 40%;
+    }
+
     .community-reviews-number-box-center {
         display: none;
     }
@@ -303,13 +313,23 @@ select {
         text-align: left;
         margin-left: 5%;
     }
-
-    .community-reviews-unit-toggle .community-reviews-toggle-label {
-        right: 20%;
-      }
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (max-width: 700px) {
+    .community-reviews-units-option-mobile {
+        display: grid;
+        grid-template-columns: 40% 20% 40%;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .community-reviews-units-option-mobile {
+        display: grid;
+        grid-template-columns: 35% 30% 35%;
+    }
+}
+
+@media screen and (min-width: 1500px) {
     .community-reviews-display {
         display: grid;
         grid-template-columns: 0% 30% 70%;

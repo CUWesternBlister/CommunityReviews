@@ -214,10 +214,12 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 					<div class="community-reviews-units-option-mobile">
 						<div class ="community-reviews-unit-label community-reviews-unit-label-left">in</div>
-					
-						<div class="community-reviews-unit-toggle">
-							<input class="community-reviews-toggle" id="community-reviews-toggle-height-mobile" type="checkbox">
-							<label class="community-reviews-toggle-label" for="community-reviews-toggle-height-mobile"></label>
+						
+						<div class="community-reviews-display-mobile-center">
+							<div class="community-reviews-unit-toggle">
+								<input class="community-reviews-toggle" id="community-reviews-toggle-height-mobile" type="checkbox">
+								<label class="community-reviews-toggle-label" for="community-reviews-toggle-height-mobile"></label>
+							</div>
 						</div>
 
 						<div class ="community-reviews-unit-label community-reviews-unit-label-right">cm</div>
@@ -254,10 +256,12 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 					<div class="community-reviews-units-option-mobile">
 						<div class ="community-reviews-unit-label community-reviews-unit-label-left">lbs</div>
-
-						<div class="community-reviews-unit-toggle">
-							<input class="community-reviews-toggle" id="community-reviews-toggle-weight-mobile" type="checkbox">
-							<label class="community-reviews-toggle-label" for="community-reviews-toggle-weight-mobile"></label>
+						
+						<div class="community-reviews-display-mobile-center">
+							<div class="community-reviews-unit-toggle">
+								<input class="community-reviews-toggle" id="community-reviews-toggle-weight-mobile" type="checkbox">
+								<label class="community-reviews-toggle-label" for="community-reviews-toggle-weight-mobile"></label>
+							</div>
 						</div>
 
 						<div class ="community-reviews-unit-label community-reviews-unit-label-right">kg</div>
