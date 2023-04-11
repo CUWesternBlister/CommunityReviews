@@ -172,7 +172,7 @@ function bcr_filter_products() {
     echo '<div class="community-reviews-display-title">Product</div>';
     echo '<select id="community-reviews-display-product">';
     
-    echo '<option value="No Product Filter">--No Product Filter--</option>';
+    echo '<option value="No Product Filter">- No Product Filter -</option>';
 
     foreach ($results as $id => $product_obj) {
         $product_name = $product_obj->productName;
@@ -215,7 +215,7 @@ function bcr_filter_categories() {
     echo '<div class="community-reviews-display-title">Category</div>';
     echo '<select id="community-reviews-display-category">';
     
-    echo '<option value="No Category Filter">--No Category Filter--</option>';
+    echo '<option value="No Category Filter">- No Category Filter -</option>';
 
     foreach ($results as $id => $category_obj) {
         $category_name = $category_obj->categoryName;
