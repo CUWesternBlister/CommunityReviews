@@ -152,6 +152,24 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					</div>
 				</div>
 
+				<div id="community-reviews-display-boot-size-controls" class="community-reviews-display-boot-size-controls">
+					<div class="community-reviews-display-title">Ski Boot Size</div>
+					<div class="community-reviews-display-slider">
+						<input id="community-reviews-display-slider-min-boot-size" type="range" value="15" min="15" max="34" step="0.5"/>
+						<input id="community-reviews-display-slider-max-boot-size" type="range" value="34" min="15" max="34" step="0.5"/>
+					</div>
+					
+					<div class="community-reviews-number-boxes">
+						<div class="community-reviews-number-box-left">
+							<input class="community-reviews-display-number-box" type="text" id="min_boot-size" value="15" readonly/>
+						</div>
+
+						<div class="community-reviews-number-box-right">
+							<input class="community-reviews-display-number-box" type="text" id="max_boot-size" value="34" readonly/>
+						</div>
+					</div>
+				</div>
+
 				<div id="community-reviews-display-year-controls" class="community-reviews-display-year-controls">
 					<div class="community-reviews-display-title">Year</div>
 					<div class="community-reviews-display-slider">
