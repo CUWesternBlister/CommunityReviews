@@ -2,23 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b7f7d63-d97f-4cf9-a559-1819a0d7cef8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/admin/update_user_information.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/generate_html.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/insert_custom_post.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/table_reading_functions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fluent_form_functions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fluent_forms_functions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fluent_forms_scripts.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/widgets/community_reviews_display_widget_style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Profile_Information_Form.php" beforeDir="false" afterPath="$PROJECT_DIR$/Profile_Information_Form.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/activation.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/activation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/deactivation.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/deactivation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/adminPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/adminPage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/align_form_ids.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/align_form_ids.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/update_community_reviews_custom_posts.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/update_community_reviews_custom_posts.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/update_user_information.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/uploadInitialData.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/uploadInitialData.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/wp_bcr_brands.sql.gz" beforeDir="false" afterPath="$PROJECT_DIR$/admin/wp_bcr_brands.sql.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/wp_bcr_products.sql.gz" beforeDir="false" afterPath="$PROJECT_DIR$/admin/wp_bcr_products.sql.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/wp_bcr_questions.sql.gz" beforeDir="false" afterPath="$PROJECT_DIR$/admin/wp_bcr_questions.sql.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blister-community-reviews.php" beforeDir="false" afterPath="$PROJECT_DIR$/blister-community-reviews.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/community_reviews_custom_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/community_reviews_custom_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/community_reviews_display_functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/community_reviews_display_functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/form_build_functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/form_build_functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/form_to_custom_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/form_to_custom_post.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate_html.php" beforeDir="false" afterPath="$PROJECT_DIR$/generate_html.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insert_custom_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/insert_custom_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/page_upon_opening_validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/page_upon_opening_validation.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reviewStyling.css" beforeDir="false" afterPath="$PROJECT_DIR$/reviewStyling.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/show_users_reviews.php" beforeDir="false" afterPath="$PROJECT_DIR$/show_users_reviews.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/table_reading_functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/table_reading_functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table_utils.php" beforeDir="false" afterPath="$PROJECT_DIR$/table_utils.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table_writing_functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/table_writing_functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/widgets/community-reviews-display.php" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/community-reviews-display.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/widgets/desktop_style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/widgets/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/write_to_database.php" beforeDir="false" afterPath="$PROJECT_DIR$/write_to_database.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

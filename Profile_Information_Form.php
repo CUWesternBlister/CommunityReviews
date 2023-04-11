@@ -1,7 +1,7 @@
 <?php
 function Profile_Information_Form($atts){
     ?>
-    <form id="Profile_Info_Form" action='/community-reviews-homepage/'  method="post">
+    <form id="Profile_Info_Form" action='/community-reviews-profile/'  method="post">
         <label>Preferred System of Measurement:</label><br>
         <input type="radio" id="metric" name="measurement" value="metric" onclick="changefields('metric')" required/>
         <label for="metric">Metric</label>
@@ -68,6 +68,7 @@ function Profile_Information_Form($atts){
                 form.insertBefore(height_inches, hlabel.nextSibling);
                 form.insertBefore(height_feet, hlabel.nextSibling);
             }
+            init()
         }
         function getHeight(){
             var form = document.getElementById("Profile_Info_Form");
@@ -82,10 +83,43 @@ function Profile_Information_Form($atts){
                 let height = document.getElementById("height");
                 height.value = Number(height_cm.value);
             }
-            let height = document.getElementById("height");
-            alert(height.value);
+        }
+        function init(){
+            <?php global $wpdb;
+            global $wpdb;
+            $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
+            $myfile = fopen($file_path, "a") or die('fopen failed');
+            $userID = get_current_userID($myfile);
+            $user_table_name = $wpdb->prefix . "bcr_users";
+            $q = "SELECT * FROM $user_table_name WHERE userID = $userID;";
+            $info = $wpdb->get_row($q);
+            if ($info) {
+                ?>
+                if(document.getElementById("imperial").checked) {
+                    let height_inches = document.getElementById("height_inches");
+                    let height_feet = document.getElementById("height_feet");
+                    let weight = document.getElementById("weight");
+                    var H_inch = parseInt(<?php echo ($info->height) % 12;?>, 10);
+                    var H_feet = parseInt(<?php echo (int)(($info->height) / 12);?>, 10);
+                    var W = parseInt(<?php echo $info->weight;?>, 10);
+                    height_inches.value = H_inch;
+                    height_feet.value = H_feet;
+                    weight.value = W;
+                }
+                else{
+                    let height_cm = document.getElementById("height_cm");
+                    let weight = document.getElementById("weight");
+                    var H = parseInt(<?php echo round(($info->height)*2.54);?>, 10);
+                    var W = parseInt(<?php echo round(($info->weight)*0.4536);?>, 10);
+                    height_cm.value = H;
+                    weight.value = W;
+                }
+                getHeight();
+        <?php
+            }?>
         }
         changefields('imperial')
+        init()
     </script>
     <?php
 }
@@ -97,9 +131,16 @@ if(isset($_POST['Submit_Profile'])){
     $userID = get_current_userID($file);
     $fields['userID'] = $userID;
     $fields['unit_preference'] = $_POST['measurement'];
-    $fields['height'] = (int)$_POST['height'];
-    $fields['weight'] = $_POST["weight"];
     $fields['skiAbility'] = $_POST["experience"];
+
+    if($_POST['measurement'] == "metric"){
+        $fields['height'] = round(0.3937*(int)$_POST['height']);
+        $fields['weight'] = round(2.2046*$_POST["weight"]);
+    }
+    else{
+        $fields['height'] = (int)$_POST['height'];
+        $fields['weight'] = $_POST["weight"];
+    }
 
     global $wpdb;
     $user_table_name = $wpdb->prefix . "bcr_users";
@@ -107,9 +148,9 @@ if(isset($_POST['Submit_Profile'])){
     $res = $wpdb->query($q);
 
     if($res){
-        $output['success'] = $wpdb->update($user_table_name, $fields, array("userID"=>$userID));
+        $wpdb->update($user_table_name, $fields, array("userID"=>$userID));
     }else {
-        $output['success'] = $wpdb->insert($user_table_name, $fields);
+        $wpdb->insert($user_table_name, $fields);
     }
 }
 ?>

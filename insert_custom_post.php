@@ -2,9 +2,7 @@
 
 include 'generate_html.php';
 
-function insert_into_ski_review($header, $file, $formName) {
-    //$start = "\n\n INSERT INTO SKI REVIEW \n";
-    //fwrite($file, $start);
+function insert_into_ski_review($header, $file, $formName, $form_id) {
     global $wpdb;
     $userInfo = $header['userInfo'];
     
@@ -25,19 +23,40 @@ function insert_into_ski_review($header, $file, $formName) {
     
     $postTitle = get_post_title($title_arr);
 
+    $year = "";
+    $length = "";
+    $ski_boot_size = "";
+    foreach($title_arr as $key => $arr){
+        if($arr['id']==9){$year = $arr['answer'];}
+        else if($arr['id']==3){$length = intval($arr['answer']);}
+        else if($arr['id']==22){$ski_boot_size = intval($arr['answer']);}
+    }
+
+    preg_match('/\d{4}/', $year, $matches);
+    if($matches){
+        $year = intval($matches[0]);
+    }
+
+
     $ski_review = array(
                         'post_title' => wp_strip_all_tags($postTitle), 
                         'post_content' => $html,
                         'meta_input' => array(
                                               'id'            => $header['reviewID'],
+                                              'formID'        => $form_id,
                                               'userID'        => $userInfo->userID,
                                               'userName'      => $userName,
+                                              'year'          => $year,
+                                              'length'        => $length,
+                                              'ski_boot_size' => $ski_boot_size,
                                               'height'        => $userInfo->height,
                                               'weight'        => $userInfo->weight,
                                               'skiAbility'    => $userInfo->skiAbility,
                                               'product_tested'=> $header['productName'],
+                                              'brand'         => $header['brandName'],
                                               'category'      => $header['categoryName'],
-                                              'sport'         => $header['sportName']
+                                              'sport'         => $header['sportName'],
+                                              'qs_and_as_arr' => $header["questions_and_answers"]
                                               ),
                         'post_type'   => 'Community Reviews',
                         'post_excerpt' => $user_html,
@@ -50,9 +69,6 @@ function insert_into_ski_review($header, $file, $formName) {
 
 function get_answer_and_question_content($record,$file){
     global $wpdb;
-    //$start = "\n\n GET ANSWERS AND QUESTIONS \n";
-    //fwrite($file, $start);
-
     $return_array = array(
         'title' => array(),
         'testingConditions' => array(),
@@ -67,8 +83,14 @@ function get_answer_and_question_content($record,$file){
     $answer_arr_i = 0;
     foreach($question_ids as $id){
         $q_content = get_question_read_content($id);
-        $type = $q_content->questionType;
-        $display = $q_content->questionDisplayContent;
+        $type = "";
+        if(is_null($q_content->questionType) == false){
+            $type = $q_content->questionType;
+        }
+        $display = "";
+        if(is_null($q_content->questionDisplayContent) == false){
+            $display = $q_content->questionDisplayContent;
+        }
         $answer = $answer_content[$answer_arr_i];
         $obj = ["id" => $id, "question" => $display, "answer" => $answer];
         $return_array[$type][] = $obj;
@@ -77,15 +99,4 @@ function get_answer_and_question_content($record,$file){
    
     return $return_array;
 }
-
-/*
-function get_userName_by_userID($userID, $file){
-global $wpdb;
-//fwrite($file, "userID to get userName: ".$userID."\n");
-$wp_user_table = $wpdb->prefix."users";
-$q = $wpdb->prepare("SELECT display_name FROM $wp_user_table WHERE ID = %s;", $userID);
-$res = $wpdb->get_row($q);
-return $res->display_name;
-}
-*/
 ?>

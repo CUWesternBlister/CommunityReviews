@@ -28,10 +28,47 @@ function bcr_update_display_box(box, slider, prefix) {
         box.value = year_1.toString() + "-" + year_2.toString();
     } else if(prefix ==="height") {
         height = parseInt(slider.value, 10);
-        feet = Math.floor(height/12);
-        inches = height % 12;
 
-        box.value = feet.toString() + "'" + inches.toString() + '"';
+        var is_mobile = window.matchMedia("(max-width: 400px)");
+
+        var checked = false;
+
+        if(is_mobile.matches) {
+            checked = document.querySelector('#community-reviews-toggle-height-mobile:checked') !== null;
+        } else {
+            checked = document.querySelector('#community-reviews-toggle-height:checked') !== null;
+        }
+
+        if(checked) {
+            const height_cm = Math.floor(height * 2.54);
+
+            box.value = height_cm.toString() + " cm";
+        } else {
+            feet = Math.floor(height/12);
+            inches = height % 12;
+
+            box.value = feet.toString() + "'" + inches.toString() + '"';
+        }
+    } else if(prefix === "lbs") {
+        weight = parseInt(slider.value, 10);
+
+        var is_mobile = window.matchMedia("(max-width: 400px)");
+
+        var checked = false;
+
+        if(is_mobile.matches) {
+            checked = document.querySelector('#community-reviews-toggle-weight-mobile:checked') !== null;
+        } else {
+            checked = document.querySelector('#community-reviews-toggle-weight:checked') !== null;
+        }
+
+        if(checked) {
+            const weight_kg = Math.floor(weight * 0.453592);
+
+            box.value = weight_kg.toString() + " kg";
+        } else {
+            box.value = slider.value + " " + prefix;
+        }
     } else {
         box.value = slider.value + " " + prefix;
     }
@@ -73,6 +110,11 @@ function bcr_color_slider(slider_1, slider_2) {
         ${'#C6C6C6'} 100%)`;
 }
 
+function bcr_update_units(min_slider, max_slider, min_box, max_box, prefix) {
+    bcr_update_display_box(min_box, min_slider, prefix);
+    bcr_update_display_box(max_box, max_slider, prefix);
+}
+
 const length_min_slider = document.querySelector('#community-reviews-display-slider-min-length');
 const length_max_slider = document.querySelector('#community-reviews-display-slider-max-length');
 
@@ -104,6 +146,20 @@ bcr_color_slider(year_max_slider, year_min_slider);
 bcr_color_slider(height_max_slider, height_min_slider);
 bcr_color_slider(weight_max_slider, weight_min_slider);
 
+bcr_update_units(height_min_slider, height_max_slider, height_min_box, height_max_box, "height");
+bcr_update_units(weight_min_slider, weight_max_slider, weight_min_box, weight_max_box, "lbs");
+
+const weight_unit_toggle = document.querySelector('#community-reviews-toggle-weight');
+const height_unit_toggle = document.querySelector('#community-reviews-toggle-height');
+
+weight_unit_toggle.oninput = () => bcr_update_units(weight_min_slider, weight_max_slider, weight_min_box, weight_max_box, "lbs");
+height_unit_toggle.oninput = () => bcr_update_units(height_min_slider, height_max_slider, height_min_box, height_max_box, "height");
+
+const weight_unit_toggle_mobile = document.querySelector('#community-reviews-toggle-weight-mobile');
+const height_unit_toggle_mobile = document.querySelector('#community-reviews-toggle-height-mobile');
+
+weight_unit_toggle_mobile.oninput = () => bcr_update_units(weight_min_slider, weight_max_slider, weight_min_box, weight_max_box, "lbs");
+height_unit_toggle_mobile.oninput = () => bcr_update_units(height_min_slider, height_max_slider, height_min_box, height_max_box, "height");
 
 length_min_slider.oninput = () => bcr_alter_slider(length_min_slider, length_max_slider, true, length_min_box, "cm");
 length_max_slider.oninput = () => bcr_alter_slider(length_max_slider, length_min_slider, false, length_max_box, "cm");
@@ -136,3 +192,47 @@ const filter_button = document.getElementById('community-reviews-display-submit'
 mobile_button.onclick = () => bcr_show_mobile_filters();
 
 filter_button.onclick = () => bcr_hide_mobile_filters();
+
+function bcr_hide_length_selector(category_dropdown) {
+    const length_div = document.getElementById('community-reviews-display-length-controls');
+    if(category_dropdown.value == "Skis" || category_dropdown.value == "Snowboards") {
+        length_div.style.display = 'initial';
+    } else {
+        length_div.style.display = 'none';
+    }
+}
+
+function bcr_hide_year_selector(category_dropdown) {
+    const year_div = document.getElementById('community-reviews-display-year-controls');
+    if(category_dropdown.value == "Skis" || category_dropdown.value == "Snowboards") {
+        year_div.style.display = 'initial';
+    } else {
+        year_div.style.display = 'none';
+    }
+}
+
+function bcr_hide_selectors() {
+    const category_dropdown = document.getElementById('community-reviews-display-category');
+    bcr_hide_length_selector(category_dropdown);
+    bcr_hide_year_selector(category_dropdown);
+}
+
+const categories_dropdown = document.getElementById('community-reviews-display-category');
+
+function bcr_set_categories_dropdown() {
+    const categories_dropdown = document.getElementById('community-reviews-display-category');
+}
+
+const sport_dropdown = document.getElementById('community-reviews-display-sport');
+
+sport_dropdown.onchange = () => bcr_set_categories_dropdown();
+
+categories_dropdown.onchange = () => bcr_hide_selectors();
+
+bcr_hide_selectors(categories_dropdown);
+
+jQuery(document).ready(function ( $ ) {
+    $('select').selectize({
+        sortField: 'text'
+    });
+});

@@ -3,7 +3,7 @@
  * Plugin Name: Blister Community Reviews
  * Description: A plugin to facilitate Blister community created reviews.
  * Author: Gunnar Marquardt, Jayden Omi, Izak Litte, Jacob Vogel, Tristan Riggan
- * Version: 1.3.1
+ * Version: 1.3.3
  */
 
 // Exit if accessed directily
@@ -47,9 +47,8 @@ function bcr_include() {
     require_once( plugin_dir_path( __FILE__ ) . '/admin/adminPage.php');
     require_once( plugin_dir_path( __FILE__ ) . 'community_reviews_display_functions.php');
     require_once( plugin_dir_path( __FILE__ ) . 'Profile_Information_Form.php');
-    //require_once(plugin_dir_path( __FILE__ ) . 'update_community_reviews_custom_posts.php');
-    //require_once( plugin_dir_path( __FILE__ ) . '/widgets/community-reviews-display.php');
-    // if ( ! class_exists('Community_Reviews_Display')) 
+    require_once( plugin_dir_path( __FILE__ ) . 'fluent_form_functions.php');
+    require_once( plugin_dir_path( __FILE__ ) . 'fluent_forms_scripts.php');
 }
 
 add_action( 'plugins_loaded', 'bcr_include');
@@ -61,10 +60,6 @@ add_action( 'plugins_loaded', 'bcr_include');
  */
 function bcr_register_widgets( $widgets_manager ) {
     $bool = require_once( plugin_dir_path( __FILE__ ) . '/widgets/community-reviews-display.php');
-    // if ( ! class_exists('Community_Reviews_Display')){
-    //     $namespace = print_r(get_declared_classes(), true);
-    //     die($namespace);
-    // }
     if($bool){
         $temp = new ElementorPro\Modules\Posts\Widgets\Community_Reviews_Display();
         $widgets_manager->register($temp);

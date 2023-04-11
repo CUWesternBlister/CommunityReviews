@@ -11,7 +11,6 @@ function Summit_Review_Validation() {
         $current_userID = get_current_userID($myfile);
         if(strcmp(gettype($current_userID),"string")){
             fwrite($myfile,$current_userID."\n");
-            //die("user not found"); //should be a redirct to another page
         }
         fwrite($myfile,"userID = ".strval($current_userID)."\n");
         //see if user in user table
@@ -30,5 +29,4 @@ function Summit_Review_Validation() {
     fwrite($myfile, "\n\n-------------------------------------------\n\n") or die('fwrite 1 failed');
     fclose($myfile);
 }
-//add_action( 'wp_enqueue_scripts', 'Summit_Review_Validation' );
 ?>

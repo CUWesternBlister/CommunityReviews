@@ -14,7 +14,6 @@ function profile_info_sub( $record, $ajax_handler ){
     $fields = [];
     if($form_name == 'Profile Builder') {
         $userID = get_current_userID($file);
-        //fwrite($file,$userID);
         $fields['userID'] = $userID;
         $raw_fields = $record->get('fields');
         $fields['heightFeet'] = $raw_fields["height_feet"]['value'];
@@ -47,7 +46,6 @@ function fluent_summit_review_from_sub($entryId, $formData, $form) {
     global $wpdb;
     $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt'; 
     $file = fopen($file_path, "w") or die('fopen failed');
-    //fwrite($file,"fluent_summit_review_from_sub\n\n");
     $existing_form_names = get_all_form_names($file);
     
     $current_form_name = $form->title; 
@@ -61,9 +59,7 @@ function fluent_summit_review_from_sub($entryId, $formData, $form) {
         $review_id = summit_form_submission_write_to_tables($current_form_id, $qs_and_as, $file);
         //---------------create custom post (insert_custom_post)-----------------------------------
         $header = summit_form_submission_custom_post_content($review_id, $current_form_id, $qs_and_as, $file);
-        //$header_info_read = print_r($header, true);
-        //fwrite($file, "HEADER: \n".$header_info_read."\n\n");
-        insert_into_ski_review($header, $file, $current_form_name);
+        insert_into_ski_review($header, $file, $current_form_name, $current_form_id);
     }
     fclose($file);
 }
@@ -121,24 +117,21 @@ function elementor_get_fields_array($raw_fields, $file){
 
 //---------------------------------------
 function summit_form_submission_write_to_tables($current_form_id, $record, $file){
-    //$start = "\n\n start summit_form_submission_write_to_tabless \n";
-    //fwrite($file, $start);
     $answer_ids = insert_into_answer_table($record, $file);
     $id = insert_into_review_table($current_form_id,$file);
     insert_into_review_answer_table($id, $answer_ids, $file);
     return $id;
 }
 
-function summit_form_submission_custom_post_content($current_review_id, $current_form_id,$record,$file){
-    //$start = "\n\n summit_form_submission_custom_post_content \n";
-    //fwrite($file, $start);
+function summit_form_submission_custom_post_content($current_review_id, $current_form_id, $record, $file){
     $product_info = [];
     $product_info['productName'] = $record[2];
     
     $brand_name = $record[1];
-    //$brand_info = get_brand_info($brand_name, $file);
 
     $category_info = get_category_info($current_form_id, $file);
+
+    $sport_info = get_sport_info($category_info->categoryName);
 
     $q_and_a_content = get_answer_and_question_content($record,$file);
     
@@ -151,8 +144,11 @@ function summit_form_submission_custom_post_content($current_review_id, $current
         'brandName' => $brand_name,
         'categoryName' => $category_info->categoryName,
         'questions_and_answers' => $q_and_a_content,
-        'userInfo' => $user_info
+        'userInfo' => $user_info,
+        'sportName' => $sport_info->categoryName
     );
     
     return $header;
 }
+
+?>

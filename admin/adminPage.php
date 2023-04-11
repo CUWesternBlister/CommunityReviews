@@ -143,7 +143,7 @@ function bcr_display_table_contents($table_name) {
 
                 $esc_table_name = esc_sql($table_name);
 
-                $sql = $wpdb->prepare("SELECT * FROM $esc_table_name");
+                $sql = "SELECT * FROM $esc_table_name";
 
                 $table_data = $wpdb->get_results($sql, ARRAY_A);
 

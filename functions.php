@@ -49,7 +49,7 @@ function get_record_from_form_submissions($atts) {
     );
     global $wpdb;
     $name = $atts['name'];
-    $nameget = $wpdb->prepare('SELECT * FROM KnowThySelfSkiing LIMIT 1');
+    $nameget = 'SELECT * FROM KnowThySelfSkiing LIMIT 1';
     $nameresults = $wpdb->get_results($nameget);
     if ( $nameresults ) {
         $skiingStyle_subs = array_map(
@@ -110,8 +110,8 @@ function display_user_info($atts){
             $Weight = esc_html(implode('  ', $weight))." lbs";
         }
         else{
-            $Height = esc_html(implode('  ', $height)) . " cm";
-            $Weight = esc_html(implode('  ', $weight))." kg";
+            $Height = esc_html(round(2.54*implode('  ', $height))) . " cm";
+            $Weight = esc_html(round(0.4535*implode('  ', $weight)))." kg";
         }
         return "User Height: ".$Height.
             "<br><br>User Weight: ".$Weight.
