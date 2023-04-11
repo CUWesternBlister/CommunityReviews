@@ -342,6 +342,8 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				var brand = $( '#community-reviews-display-brand' ).val();
 				var product = $( '#community-reviews-display-product' ).val();
 
+				var keyword = $( '#community-reviews-keyword-field' ).val();
+
 				var min_length = $( '#community-reviews-display-slider-min-length' ).val();
 				var abs_min_length = $( '#community-reviews-display-slider-min-length' ).prop('min');
 				var max_length = $( '#community-reviews-display-slider-max-length' ).val();
@@ -390,6 +392,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						category: category,
 						brand: brand,
 						product: product,
+						keyword: keyword,
 						min_length: min_length,
 						max_length: max_length,
 						min_year: min_year,

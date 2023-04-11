@@ -26,6 +26,10 @@ function bcr_filter_posts() {
         array_push($meta_query, array('key' => 'product_tested', 'value' => sanitize_text_field( $_POST['product'] )));
     }
 
+    if ( ! empty( $_POST['keyword'] ) ) {
+        $args['s'] = sanitize_text_field( $_POST['keyword'] );
+    }
+
     if ( ! empty( $_POST['brand'] ) And sanitize_text_field( $_POST['brand'] ) != "No Brand Filter" ) {
         array_push($meta_query, array('key' => 'brand', 'value' => sanitize_text_field( $_POST['brand'] )));
     }
