@@ -28,7 +28,27 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 	}
 
     protected function register_controls() {
+		$this->start_controls_section(
+			'content_section',
+			[
+				'label' => esc_html__( 'Content', 'textdomain' ),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
 
+		$this->add_control(
+			'show_filters',
+			[
+				'label' => esc_html__( 'Show Filters', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Show', 'textdomain' ),
+				'label_off' => esc_html__( 'Hide', 'textdomain' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
+
+		$this->end_controls_section();
     }
 
     protected function render() {
@@ -38,11 +58,24 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 
-		<div class="community-reviews-display">
-			<div class="community-reviews-display-mobile-only">
+		<?php
+			if('yes' === $settings['show_filters']) {
+				echo '<div class="community-reviews-display">';
+				echo '<div class="community-reviews-display-mobile-only">';
+			} else {
+				echo '<div class="community-reviews-display" style="display: grid; grid-template-columns: 100%;">';
+				echo '<div class="community-reviews-display-mobile-only" style="display: none;">';
+			}
+		?>
 				<button id="community-reviews-display-mobile-button">Filters</button>
 			</div>
-			<div class="community-reviews-display-filter" id="community-reviews-display-filter">
+			<?php
+				if('yes' === $settings['show_filters']) {
+					echo '<div class="community-reviews-display-filter" id="community-reviews-display-filter">';
+				} else {
+					echo '<div class="community-reviews-display-filter" id="community-reviews-display-filter" style="display: none;">';
+				}
+			?>
 
 				<strong>Product Filters</strong>
 
