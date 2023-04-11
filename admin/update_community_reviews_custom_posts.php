@@ -13,10 +13,10 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
           <p id="formID">Form ID: </p>
         <form method="post" action="">
 
-            <label for="height">Height:</label>
+            <label for="height">Height (in inches):</label>
             <input type="text" id="height" name="height"><br>
 
-            <label for="weight">Weight:</label>
+            <label for="weight">Weight (in lbs):</label>
             <input type="text" id="weight" name="weight"><br>
 
             <label for="product_tested">Product Tested:</label>
@@ -34,10 +34,10 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
             <label for="FlaggedForReview">Flagged for Review:</label>
             <input type="text" id="FlaggedForReview" name="FlaggedForReview"><br>
 
-            <label for="year">Year:</label>
+            <label for="year">Year (start year of product):</label>
             <input type="text" id="year" name="year"><br>
 
-            <label for="length">Length:</label>
+            <label for="length">Length (cm):</label>
             <input type="text" id="length" name="length"><br>
 
             <label for="boot_size">Boot Size:</label>
@@ -139,6 +139,7 @@ function bcr_admin_update_custom_post_submenu_page_callback() {
                 var meta = makeMetaDataArr();
                 console.log(JSON.stringify(meta));
                 updatePostMetaData(selectedPostID, meta);
+                location.reload();
                 //print success res
               });
               
