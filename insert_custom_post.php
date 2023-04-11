@@ -23,19 +23,21 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
     
     $postTitle = get_post_title($title_arr);
 
-    $year = "";
+
+    //$str = print_r($title_arr, true);
+    //echo $str."<br>";
+
+    $years = "";
     $length = "";
     $ski_boot_size = "";
     foreach($title_arr as $key => $arr){
-        if($arr['id']==9){$year = $arr['answer'];}
+        if($arr['id']==9){$years = $arr['answer'];}
         else if($arr['id']==3){$length = intval($arr['answer']);}
         else if($arr['id']==22){$ski_boot_size = intval($arr['answer']);}
     }
 
-    preg_match('/\d{4}/', $year, $matches);
-    if($matches){
-        $year = intval($matches[0]);
-    }
+    $years_arr = explode("-", $years);
+    $year = $years_arr[0];
 
     $height = intval($userInfo->heightFeet) * 12 + intval($userInfo->heightInches);
 
@@ -43,22 +45,23 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
                         'post_title' => wp_strip_all_tags($postTitle), 
                         'post_content' => $html,
                         'meta_input' => array(
-                                              'id'            => $header['reviewID'],
-                                              'formID'        => $form_id,
-                                              'userID'        => $userInfo->userID,
-                                              'userName'      => $userName,
-                                              'year'          => $year,
-                                              'length'        => $length,
-                                              'ski_boot_size' => $ski_boot_size,
-                                              'height'        => $height,
-                                              'weight'        => $userInfo->weight,
-                                              'skiAbility'    => $userInfo->skiAbility,
-                                              'product_tested'=> $header['productName'],
-                                              'brand'         => $header['brandName'],
-                                              'category'      => $header['categoryName'],
-                                              'sport'         => $header['sportName'],
-                                              'qs_and_as_arr' => $header["questions_and_answers"]
-                                              ),
+                                                'id'            => $header['reviewID'],
+                                                'formID'        => $form_id,
+                                                'userID'        => $userInfo->userID,
+                                                'userName'      => $userName,
+                                                'height'        => $height,
+                                                'weight'        => $userInfo->weight,
+                                                'skiAbility'    => $userInfo->skiAbility,
+                                                'product_tested'=> $header['productName'],
+                                                'brand'         => $header['brandName'],
+                                                'category'      => $header['categoryName'],
+                                                'sport'         => $header['sportName'],
+                                                'FlaggedForReview' => $header['flagForReview'],
+                                                'year'          => $year,
+                                                'length'        => $length,
+                                                'boot_size'     => $ski_boot_size,
+                                                'qs_and_as_arr' => $header["questions_and_answers"]
+                                            ), 
                         'post_type'   => 'Community Reviews',
                         'post_excerpt' => $user_html,
                         'post_status' => 'publish',
