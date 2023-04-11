@@ -7,10 +7,16 @@
 function bcr_filter_posts() {
     global $wpdb;
 
+    $posts_per_page = 4;
+
+    if ( ! empty( $_POST['posts_per_page'] ) ) {
+        $posts_per_page = intval(sanitize_text_field( $_POST['posts_per_page'] ) );
+    }
+
     $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
     $args = array(
         'post_type'      => 'Community Reviews',
-        'posts_per_page' => 4,
+        'posts_per_page' => $posts_per_page,
         'paged'          => $paged,
     );
 

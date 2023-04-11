@@ -48,6 +48,19 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'posts_per_page',
+			[
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'label' => esc_html__( 'Number of reviews per page', 'textdomain' ),
+				'placeholder' => '4',
+				'min' => 1,
+				'max' => 50,
+				'step' => 1,
+				'default' => 4,
+			]
+		);
+
 		$this->end_controls_section();
     }
 
@@ -305,7 +318,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 					$args = array(
 						'post_type' 	 => 'Community Reviews',
-						'posts_per_page' => 4,
+						'posts_per_page' => $settings['posts_per_page'],
 						'paged'          => $paged,
 					);
 
@@ -367,6 +380,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					method: 'POST',
 					data: {
 						action: 'bcr_filter_posts',
+						posts_per_page: <?php echo $settings['posts_per_page'];?>,
 						sport: sport,
 						category: category,
 						brand: brand,
