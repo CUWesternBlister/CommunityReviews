@@ -9,25 +9,11 @@ function bcr_flagged_reviews_callback() {
         //echo "flagged reviews: $flagged_reviews <br>";
         foreach ($flagged_reviews as $review) {
             $review_id = $review->reviewID;
-            //echo "$review_id";
-            //$form_id = $review->reviewFormID;
             
-            //$category_row = get_category_info($form_id, $file);
-            //$category_name = $category_row->categoryName;
-            
-            //$sport_row = get_sport_info($category_name); 
-            //$sport_name = $sport_row->categoryName;
-
             $review_meta_data = get_flagged_review_meta_data($review_id);
             //$str = print_r($review_meta_data, true);
             $str = "Review ID: $review_id, Post ID: $review_meta_data[id], Category: $review_meta_data[category], Brand: $review_meta_data[brand], Product: $review_meta_data[product], URL: $review_meta_data[url]";
             $flagged_reviews_arr[$review_id] = $review_meta_data;
-            
-            //echo "$str";
-            //$brand = "brand_placeholder";
-            //$product = "product_placeholder";
-
-            //echo "Review ID: $review_meta_data[id], Category: $review_meta_data[category], Brand: $review_meta_data[brand], Product: $review_meta_data[product], URL: $review_meta_data[url]<br>";
             
         }
     }else{
@@ -218,12 +204,16 @@ function display($flaggedReviews){
             const approveButton = document.getElementById('approve-button');
             const myArrJson = document.getElementById('myArr').value;
             const myArr = JSON.parse(myArrJson);
+            console.log(myArr);
             const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1]);
+            prodArr = myArr[reviewId];
+            console.log(prodArr);
+            console.log(prodArr['product'], prodArr['brand'], prodArr['category'], prodArr['sport']);
+            addRow(prodArr['product'], prodArr['brand'], prodArr['category'], prodArr['sport'], prodArr['post_id']);
             removeValueFromRadio(reviewId, 0);
-            addRow(myArr['product'], myArr['brand'], myArr['category'], myArr['sport']);
         }
 
-        function addRow(product, brand, category, sport){
+        function addRow(product, brand, category, sport, postID){
             jQuery.ajax({
                 url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
                 method: 'POST',
@@ -232,27 +222,12 @@ function display($flaggedReviews){
                     product: product,
                     brand: brand,
                     category: category,
-                    sport: sport
+                    sport: sport,
+                    postID: postID
                 },
                 success: function(result) {
                     console.log(result);
-                }
-            });
-        }
-
-        function addRow(product, brand, category, sport){
-            jQuery.ajax({
-                url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
-                method: 'POST',
-                data: {
-                    action: 'removeReview',
-                    product: product,
-                    brand: brand,
-                    category: category,
-                    sport: sport
-                },
-                success: function(result) {
-                    console.log(result);
+                    //location.reload();
                 }
             });
         }
@@ -267,23 +242,20 @@ function display($flaggedReviews){
         }
 
         
-        function removeValueFromRadio(reviewId, flag){
+        function removeValueFromRadio(reviewId, flag, postID){
             jQuery.ajax({
                 url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
                 method: 'POST',
                 data: {
                     action: 'removeReview',
                     reviewID: reviewId,
-                    flag: flag
+                    flag: flag,
+                    postID: postID
                 },
                 success: function(result) {
-                    if(result){
-                        console.log(`Successfully changed the flag on the approved/denied review`);
+                        //console.log(`Successfully changed the flag on the approved/denied review`);
                         console.log(result);
-                        location.reload();
-                    } else{
-                        console.error(`Unable to change the flag on review with id: "${reviewId}"`);
-                    }
+                        //location.reload();
                 }
             });
         }
@@ -394,6 +366,12 @@ function get_flagged_review_meta_data($review_id){
         $title = get_the_title(get_the_ID());
         $id = get_the_ID();
         //echo "$title<br>";
+
+        /*
+        
+        could all be replaced with get_post_meta, to get all meta data
+        
+        */
 
         $retArr = array(
             'brand' => $brand,

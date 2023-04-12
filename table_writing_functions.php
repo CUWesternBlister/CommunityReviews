@@ -88,14 +88,22 @@ function insert_brand($brand_name){
     global $wpdb;
     $brand_table = $wpdb->prefix . "bcr_brands";
     $success = $wpdb->insert($brand_table, array('brandName'=>$brand_name));
-    if(!$success){return $success;} 
+    if(!$success){
+        echo "brand insert failed <br>";
+        return -1;
+    } 
+    echo "brand insert succeded <br>";
     return $wpdb->insert_id;
 }
 function insert_product($product_name, $brand_id, $category_id){
     global $wpdb;
     $products_table = $wpdb->prefix . "bcr_products";
     $success = $wpdb->insert($products_table, array('categoryID'=>$category_id, 'brandID'=>$brand_id, 'productName'=>$product_name));
-    if(!$success){return $success;} 
+    if(!$success){
+        echo "product insert failed <br>";
+        return -1;
+    } 
+    echo "product insert succeded <br>";
     return $wpdb->insert_id;
 }
 ?>

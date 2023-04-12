@@ -99,7 +99,7 @@ function get_brand_id($brand_name){
     return $brand_id;
 }
 
-function get_category_id(){
+function get_category_id($category_name){
     global $wpdb;
     $category_table = $wpdb->prefix . "bcr_categories";
     $q_category = $wpdb->prepare("SELECT * FROM $category_table WHERE categoryName = %s;", $category_name);
