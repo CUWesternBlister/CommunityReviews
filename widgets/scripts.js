@@ -173,25 +173,24 @@ height_max_slider.oninput = () => bcr_alter_slider(height_max_slider, height_min
 weight_min_slider.oninput = () => bcr_alter_slider(weight_min_slider, weight_max_slider, true, weight_min_box, "lbs");
 weight_max_slider.oninput = () => bcr_alter_slider(weight_max_slider, weight_min_slider, false, weight_max_box, "lbs");
 
-function bcr_show_mobile_filters() {
-    const all_filters = document.getElementById('community-reviews-display-filter');
-    all_filters.style.display = 'initial';
-}
-
-function bcr_hide_mobile_filters() {
+function bcr_update_mobile_filter_display_state() {
     var is_mobile = window.matchMedia("(max-width: 1500px)");
     if(is_mobile.matches) {
         const all_filters = document.getElementById('community-reviews-display-filter');
-        all_filters.style.display = 'none';
+        if(all_filters.style.display == 'none') {
+            all_filters.style.display = 'initial';
+        } else {
+            all_filters.style.display = 'none';
+        }
     }
 }
 
 const mobile_button = document.getElementById('community-reviews-display-mobile-button');
 const filter_button = document.getElementById('community-reviews-display-submit');
 
-mobile_button.onclick = () => bcr_show_mobile_filters();
+mobile_button.onclick = () => bcr_update_mobile_filter_display_state();
 
-filter_button.onclick = () => bcr_hide_mobile_filters();
+filter_button.onclick = () => bcr_update_mobile_filter_display_state();
 
 function bcr_hide_length_selector(category_dropdown) {
     const length_div = document.getElementById('community-reviews-display-length-controls');
