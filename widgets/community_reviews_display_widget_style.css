@@ -59,6 +59,13 @@
     width: 110px;
 }
 
+#community-reviews-keyword-field {
+    width: 80%;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     pointer-events: all;

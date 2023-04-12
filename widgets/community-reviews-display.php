@@ -92,10 +92,15 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 				<strong>Product Filters</strong>
 
+				<div class="community-reviews-display-keyword-controls">
+					<div class="community-reviews-display-title">Keyword Search</div>
+					<input type="text" id="community-reviews-keyword-field" placeholder="- Enter some keyword -">
+				</div>
+
 				<div class="community-reviews-display-sport-controls">
 					<div class="community-reviews-display-title">Sport</div>
 					<select id="community-reviews-display-sport">
-						<option value="No Sport Filter">--No Sport Filter--</option>
+						<option value="No Sport Filter">- No Sport Filter -</option>
 						<?php
 							global $wpdb;
 
@@ -117,7 +122,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-category-controls">
 					<div class="community-reviews-display-title">Category</div>
 					<select id="community-reviews-display-category">
-						<option value="No Category Filter">--No Category Filter--</option>
+						<option value="No Category Filter">- No Category Filter -</option>
 						<?php
 							global $wpdb;
 
@@ -139,7 +144,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-brand-controls">
 					<div class="community-reviews-display-title">Brand</div>
 					<select id="community-reviews-display-brand">
-						<option value="No Brand Filter">--No Brand Filter--</option>
+						<option value="No Brand Filter">- No Brand Filter -</option>
 						<?php
 							global $wpdb;
 
@@ -161,7 +166,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-product-controls">
 					<div class="community-reviews-display-title">Product</div>
 					<select id="community-reviews-display-product">
-						<option value="No Product Filter">--No Product Filter--</option>
+						<option value="No Product Filter">- No Product Filter -</option>
 						<?php
 							global $wpdb;
 
@@ -239,7 +244,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-ski-ability-controls">
 					<div class="community-reviews-display-title">Ski Ability</div>
 					<select id="community-reviews-display-ski-ability">
-						<option value="No Ability Filter">--No Ability Filter--</option>
+						<option value="No Ability Filter">- No Ability Filter -</option>
 						<option value="Beginner">Beginner</option>
 						<option value="Novice">Novice</option>
 						<option value="Intermediate">Intermediate</option>
@@ -355,6 +360,8 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				var brand = $( '#community-reviews-display-brand' ).val();
 				var product = $( '#community-reviews-display-product' ).val();
 
+				var keyword = $( '#community-reviews-keyword-field' ).val();
+
 				var min_length = $( '#community-reviews-display-slider-min-length' ).val();
 				var abs_min_length = $( '#community-reviews-display-slider-min-length' ).prop('min');
 				var max_length = $( '#community-reviews-display-slider-max-length' ).val();
@@ -412,6 +419,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						category: category,
 						brand: brand,
 						product: product,
+						keyword: keyword,
 						min_length: min_length,
 						max_length: max_length,
 						min_year: min_year,
