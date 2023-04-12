@@ -42,6 +42,7 @@ function Profile_Information_Form($atts){
             <option value="Advanced">Advanced</option>
             <option value="Expert">Expert</option>
         </select><br><br>
+        <label><strong>TERMS & CONDITIONS</strong></label>
         <div class="user_agreement">
             <p>This website is referred to in these notices as the “Site,” and when “we”, “our” or “us” are used below, blisterreview.com (Blister) is referred to. End users are referred to as “you” below.</p>
 
@@ -80,7 +81,7 @@ function Profile_Information_Form($atts){
                 For European Residents, our legal basis for collecting and using the information described above will depend on the specific information concerned and the context in which we collect it. We, however, will normally collect personal information from you only where we have your consent to do so, where we need the personal information to perform a contract with you, or where the processing is in our legitimate interests and not overridden by your data protection interests or fundamental rights and freedoms. In some cases, we may also have a legal obligation to collect personal information from you or may otherwise need the personal information to protect your vital interests or those of another person (for instance, to prevent, investigate, or identify possible wrongdoing in connection with the Site or to comply with legal obligations). If we ask you to provide personal information to comply with a legal requirement or to perform a contract with you, we will make this clear at the relevant time and advise you whether the provision of your personal information is mandatory or not (as well as of the possible consequences if you do not provide your personal information). If we collect and use your personal information in reliance on our legitimate interests (or those of any third party), this interest will typically be to operate our Site, communicate with you in relation to our Site, or for our other legitimate commercial interests, for instance, when responding to your queries, to analyze and improve our platform, engage in marketing, or for the purposes of detecting or preventing fraud. If you have questions about or need further information concerning the legal basis on which we collect and use your personal information, please contact us via the <a href="https://blisterreview.com/about/contact">Contact Us</a> form on our site.</p>
 
         </div>
-        <input type="checkbox" id ="accept" name="accept" class="user_acceptance" oninvalid="this.setCustomValidity('In order to continue you must accept our Terms and Conditions')" required>
+        <input type="checkbox" id ="accept" name="accept" class="user_acceptance" required>
         <label for="accept">Click here to indicate that you have read and agree to these <strong>Terms and Conditions</strong></label><br>
         <input type="hidden" id="height" name="height">
         <input type="Submit" id="submit" name="Submit_Profile" value="Submit" style="background-color: #6EC1E4">
