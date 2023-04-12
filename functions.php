@@ -78,44 +78,22 @@ function get_record_from_form_submissions($atts) {
 add_shortcode( 'form_submissions', 'get_record_from_form_submissions' );
 
 function display_user_info($atts){
-    $userEntry = get_bcr_user();
+    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
+    $myfile = fopen($file_path, "a") or die('fopen failed');
+    $userEntry = get_user_information($myfile);
     if ( $userEntry ) {
-        $unit = array_map(
-            function( $form_sub_object ) {
-                return $form_sub_object->unit_preference;
-            },
-            $userEntry
-        );
-        $height = array_map(
-            function( $form_sub_object ) {
-                return $form_sub_object->height;
-            },
-            $userEntry
-        );
-        $weight = array_map(
-            function( $form_sub_object ) {
-                return $form_sub_object->weight;
-            },
-            $userEntry
-        );
-        $ability = array_map(
-            function( $form_sub_object ) {
-                return $form_sub_object->skiAbility;
-            },
-            $userEntry
-        );
-        $measurement = implode('  ', $unit);
+        $measurement = $userEntry->unit_preference;
         if ($measurement == 'imperial'){
-            $Height = esc_html(implode('  ', $height)) . " inches";
-            $Weight = esc_html(implode('  ', $weight))." lbs";
+            $Height = esc_html($userEntry->height) . " inches";
+            $Weight = esc_html($userEntry->weight)." lbs";
         }
         else{
-            $Height = esc_html(round(2.54*implode('  ', $height))) . " cm";
-            $Weight = esc_html(round(0.4535*implode('  ', $weight)))." kg";
+            $Height = esc_html(round(2.54*$userEntry->height)) . " cm";
+            $Weight = esc_html(round(0.4535*$userEntry->weight))." kg";
         }
         return "User Height: ".$Height.
             "<br><br>User Weight: ".$Weight.
-            "<br><br>User Experience: ".esc_html(implode('  ', $ability));
+            "<br><br>User Experience: ".esc_html($userEntry->skiAbility);
     }
     return '';
 }
