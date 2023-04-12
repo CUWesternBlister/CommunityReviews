@@ -127,6 +127,9 @@ const height_max_slider = document.querySelector('#community-reviews-display-sli
 const weight_min_slider = document.querySelector('#community-reviews-display-slider-min-weight');
 const weight_max_slider = document.querySelector('#community-reviews-display-slider-max-weight');
 
+const boot_size_min_slider = document.querySelector('#community-reviews-display-slider-min-boot-size');
+const boot_size_max_slider = document.querySelector('#community-reviews-display-slider-max-boot-size');
+
 
 const length_min_box = document.querySelector('#min_length');
 const length_max_box = document.querySelector('#max_length');
@@ -140,11 +143,15 @@ const height_max_box = document.querySelector('#max_height');
 const weight_min_box = document.querySelector('#min_weight');
 const weight_max_box = document.querySelector('#max_weight');
 
+const boot_size_min_box = document.querySelector('#min_boot-size');
+const boot_size_max_box = document.querySelector('#max_boot-size');
+
 
 bcr_color_slider(length_max_slider, length_min_slider);
 bcr_color_slider(year_max_slider, year_min_slider);
 bcr_color_slider(height_max_slider, height_min_slider);
 bcr_color_slider(weight_max_slider, weight_min_slider);
+bcr_color_slider(boot_size_max_slider, boot_size_min_slider);
 
 bcr_update_units(height_min_slider, height_max_slider, height_min_box, height_max_box, "height");
 bcr_update_units(weight_min_slider, weight_max_slider, weight_min_box, weight_max_box, "lbs");
@@ -172,6 +179,9 @@ height_max_slider.oninput = () => bcr_alter_slider(height_max_slider, height_min
 
 weight_min_slider.oninput = () => bcr_alter_slider(weight_min_slider, weight_max_slider, true, weight_min_box, "lbs");
 weight_max_slider.oninput = () => bcr_alter_slider(weight_max_slider, weight_min_slider, false, weight_max_box, "lbs");
+
+boot_size_min_slider.oninput = () => bcr_alter_slider(boot_size_min_slider, boot_size_max_slider, true, boot_size_min_box, "");
+boot_size_max_slider.oninput = () => bcr_alter_slider(boot_size_max_slider, boot_size_min_slider, false, boot_size_max_box, "");
 
 function bcr_show_mobile_filters() {
     const all_filters = document.getElementById('community-reviews-display-filter');
@@ -211,10 +221,20 @@ function bcr_hide_year_selector(category_dropdown) {
     }
 }
 
+function bcr_hide_boot_size_selector(category_dropdown) {
+    const boot_size_div = document.getElementById('community-reviews-display-boot-size-controls');
+    if(category_dropdown.value == "Ski Boots") {
+        boot_size_div.style.display = 'initial';
+    } else {
+        boot_size_div.style.display = 'none';
+    }
+}
+
 function bcr_hide_selectors() {
     const category_dropdown = document.getElementById('community-reviews-display-category');
     bcr_hide_length_selector(category_dropdown);
     bcr_hide_year_selector(category_dropdown);
+    bcr_hide_boot_size_selector(category_dropdown);
 }
 
 const categories_dropdown = document.getElementById('community-reviews-display-category');
