@@ -203,53 +203,62 @@ mobile_button.onclick = () => bcr_show_mobile_filters();
 
 filter_button.onclick = () => bcr_hide_mobile_filters();
 
-function bcr_hide_length_selector(category_dropdown) {
+function bcr_hide_length_selector(category_dropdown, sport_dropdown, use_sport) {
     const length_div = document.getElementById('community-reviews-display-length-controls');
-    if(category_dropdown.value == "Skis" || category_dropdown.value == "Snowboards") {
+    if( (category_dropdown.value == "Skis" && ( use_sport == false || sport_dropdown.value == "Ski" ) ) 
+    || (category_dropdown.value == "Snowboards" &&  (use_sport == false || sport_dropdown.value == "Snowboard" ) ) ) {
         length_div.style.display = 'initial';
     } else {
         length_div.style.display = 'none';
     }
 }
 
-function bcr_hide_year_selector(category_dropdown) {
+function bcr_hide_year_selector(category_dropdown, sport_dropdown, use_sport) {
     const year_div = document.getElementById('community-reviews-display-year-controls');
-    if(category_dropdown.value == "Skis" || category_dropdown.value == "Snowboards") {
+    if( (category_dropdown.value == "Skis" && ( use_sport == false || sport_dropdown.value == "Ski" ) ) 
+    || (category_dropdown.value == "Snowboards" &&  (use_sport == false || sport_dropdown.value == "Snowboard" ) ) ) {
         year_div.style.display = 'initial';
     } else {
         year_div.style.display = 'none';
     }
 }
 
-function bcr_hide_boot_size_selector(category_dropdown) {
+function bcr_hide_boot_size_selector(category_dropdown, sport_dropdown, use_sport) {
     const boot_size_div = document.getElementById('community-reviews-display-boot-size-controls');
-    if(category_dropdown.value == "Ski Boots") {
+    if(category_dropdown.value == "Ski Boots" && (use_sport == false || sport_dropdown.value == "Ski") ) {
         boot_size_div.style.display = 'initial';
     } else {
         boot_size_div.style.display = 'none';
     }
 }
 
-function bcr_hide_selectors() {
+function bcr_hide_selectors(use_sport) {
     const category_dropdown = document.getElementById('community-reviews-display-category');
-    bcr_hide_length_selector(category_dropdown);
-    bcr_hide_year_selector(category_dropdown);
-    bcr_hide_boot_size_selector(category_dropdown);
+    const sport_dropdown = document.getElementById('community-reviews-display-sport');
+    bcr_hide_length_selector(category_dropdown, sport_dropdown, use_sport);
+    bcr_hide_year_selector(category_dropdown, sport_dropdown, use_sport);
+    bcr_hide_boot_size_selector(category_dropdown, sport_dropdown, use_sport);
 }
 
 const categories_dropdown = document.getElementById('community-reviews-display-category');
 
+function bcr_sport_dropdown_functions() {
+    bcr_set_categories_dropdown();
+    bcr_hide_selectors(true);
+}
+
 function bcr_set_categories_dropdown() {
     const categories_dropdown = document.getElementById('community-reviews-display-category');
+    categories_dropdown.onchange = () => bcr_hide_selectors(false);
 }
 
 const sport_dropdown = document.getElementById('community-reviews-display-sport');
 
-sport_dropdown.onchange = () => bcr_set_categories_dropdown();
+sport_dropdown.onchange = () => bcr_sport_dropdown_functions();
 
-categories_dropdown.onchange = () => bcr_hide_selectors();
+categories_dropdown.onchange = () => bcr_hide_selectors(false);
 
-bcr_hide_selectors(categories_dropdown);
+bcr_hide_selectors(true);
 
 jQuery(document).ready(function ( $ ) {
     $('select').selectize({
