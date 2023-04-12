@@ -286,14 +286,9 @@ select {
     }
 
     .community-reviews-display-mobile-center {
-        align-content: center;
-    }
-
-    .community-reviews-unit-toggle {
-        width: 40px;
-        height: 24px;
-        position: relative;
-        margin-right: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .community-reviews-number-box-center {
@@ -313,19 +308,18 @@ select {
         text-align: left;
         margin-left: 5%;
     }
-}
 
-@media screen and (max-width: 700px) {
-    .community-reviews-units-option-mobile {
-        display: grid;
-        grid-template-columns: 40% 20% 40%;
-    }
-}
-
-@media screen and (max-width: 350px) {
-    .community-reviews-units-option-mobile {
-        display: grid;
-        grid-template-columns: 35% 30% 35%;
+    .community-reviews-unit-toggle .community-reviews-toggle-label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 24px;
+        background-color: #C6C6C6;
+        border-radius: 34px;
+        cursor: pointer;
+        transition: background-color 0.3s;
     }
 }
 
