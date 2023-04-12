@@ -152,6 +152,24 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					</div>
 				</div>
 
+				<div id="community-reviews-display-boot-size-controls" class="community-reviews-display-boot-size-controls">
+					<div class="community-reviews-display-title">Ski Boot Size</div>
+					<div class="community-reviews-display-slider">
+						<input id="community-reviews-display-slider-min-boot-size" type="range" value="15" min="15" max="34" step="0.5"/>
+						<input id="community-reviews-display-slider-max-boot-size" type="range" value="34" min="15" max="34" step="0.5"/>
+					</div>
+					
+					<div class="community-reviews-number-boxes">
+						<div class="community-reviews-number-box-left">
+							<input class="community-reviews-display-number-box" type="text" id="min_boot-size" value="15" readonly/>
+						</div>
+
+						<div class="community-reviews-number-box-right">
+							<input class="community-reviews-display-number-box" type="text" id="max_boot-size" value="34" readonly/>
+						</div>
+					</div>
+				</div>
+
 				<div id="community-reviews-display-year-controls" class="community-reviews-display-year-controls">
 					<div class="community-reviews-display-title">Year</div>
 					<div class="community-reviews-display-slider">
@@ -329,6 +347,15 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					var max_height = "";
 				}
 
+				var min_boot_size = $( '#community-reviews-display-slider-min-boot-size' ).val();
+				var abs_min_boot_size = $( '#community-reviews-display-slider-min-boot-size' ).prop('min');
+				var max_boot_size = $( '#community-reviews-display-slider-max-boot-size' ).val();
+				var abs_max_boot_size = $( '#community-reviews-display-slider-max-boot-size' ).prop('max');
+				if(min_boot_size == abs_min_boot_size && max_boot_size == abs_max_boot_size) {
+					var min_boot_size = "";
+					var max_boot_size = "";
+				}
+
 				$.ajax( {
 					url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
 					method: 'POST',
@@ -346,7 +373,9 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						min_height: min_height,
 						max_height: max_height,
 						min_weight: min_weight,
-						max_weight: max_weight
+						max_weight: max_weight,
+						min_boot_size: min_boot_size,
+						max_boot_size: max_boot_size
 					},
 					success: function( data ) {
 						$( '.community-reviews-display-show-posts' ).html( data );

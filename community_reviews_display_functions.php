@@ -60,8 +60,14 @@ function bcr_filter_posts() {
     }
 
     if ( ! empty($_POST['min_length']) And ! empty($_POST['max_length']) And ! empty($_POST['category']) ) {
-        if(sanitize_text_field( $_POST['category'] ) == 'Skis') {
+        if(sanitize_text_field( $_POST['category'] ) == 'Skis' Or sanitize_text_field( $_POST['category'] ) == 'Snowboards') {
             array_push($meta_query, array('key' => 'length', 'value' => array(sanitize_text_field( $_POST['min_length'] ), sanitize_text_field( $_POST['max_length'] )), 'compare' => 'BETWEEN', 'type' => 'numeric') );
+        }
+    }
+
+    if ( ! empty($_POST['min_boot_size']) And ! empty($_POST['max_boot_size']) And ! empty($_POST['category']) ) {
+        if(sanitize_text_field( $_POST['category'] ) == 'Ski Boots' ) {
+            array_push($meta_query, array('key' => 'ski_boot_size', 'value' => array(sanitize_text_field( $_POST['min_boot_size'] ), sanitize_text_field( $_POST['max_boot_size'] )), 'compare' => 'BETWEEN', 'type' => 'numeric') );
         }
     }
 
