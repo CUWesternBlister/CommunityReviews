@@ -241,9 +241,11 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						<div class="community-reviews-number-box-center">
 							<div class ="community-reviews-unit-label">lbs</div>
 
-							<div class="community-reviews-unit-toggle">
-								<input class="community-reviews-toggle" id="community-reviews-toggle-weight" type="checkbox">
-								<label class="community-reviews-toggle-label" for="community-reviews-toggle-weight"></label>
+							<div class="community-reviews-unit-toggle-container">
+								<div class="community-reviews-unit-toggle">
+									<input class="community-reviews-toggle" id="community-reviews-toggle-weight" type="checkbox">
+									<label class="community-reviews-toggle-label" for="community-reviews-toggle-weight"></label>
+								</div>
 							</div>
 
 							<div class ="community-reviews-unit-label">kg</div>

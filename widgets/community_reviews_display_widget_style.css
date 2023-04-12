@@ -152,6 +152,13 @@ select {
     grid-template-columns: 20% 60% 20%;
   }
 
+.community-reviews-unit-toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
   .community-reviews-units-option-mobile {
     display: none;
   }
@@ -162,14 +169,16 @@ select {
   
   .community-reviews-unit-toggle .community-reviews-toggle-label {
     position: absolute;
-    top: -5px;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 40px;
     height: 24px;
     background-color: #C6C6C6;
     border-radius: 34px;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
+}
   
   .community-reviews-unit-toggle .community-reviews-toggle-label::before {
     content: "";
@@ -307,19 +316,6 @@ select {
     .community-reviews-unit-label-right {
         text-align: left;
         margin-left: 5%;
-    }
-
-    .community-reviews-unit-toggle .community-reviews-toggle-label {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 40px;
-        height: 24px;
-        background-color: #C6C6C6;
-        border-radius: 34px;
-        cursor: pointer;
-        transition: background-color 0.3s;
     }
 }
 
