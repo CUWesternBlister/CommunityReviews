@@ -133,10 +133,15 @@ select {
 #community-reviews-display-submit {
     margin: 10px;
     width: 150px;
+    border-radius: 5px;
 }
 
 .community-reviews-display-length-controls {
     display: none;
+}
+
+#community-reviews-display-mobile-button {
+    border-radius: 5px;
 }
 
 .community-reviews-unit-toggle {
