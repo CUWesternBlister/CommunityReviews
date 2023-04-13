@@ -16,15 +16,19 @@ function removeReview(){
     if($reviewID){
         $sql = $wpdb->prepare("UPDATE $review_table_name SET FlaggedForReview = $flag WHERE reviewID = $reviewID;");
         $res = $wpdb->get_results($sql);
-        $result['type'] = $res;
+        $result['type'] = json_encode($res);
         $args = array(
             'post_type' => 'Community Reviews', 
             'p' => intval($postID) 
         );
         $query = new WP_Query($args);
         if ($query->have_posts()){//} && metadata_exists( 'post', $postID, 'FlaggedForReview')) {
+            //$result['post id'] = $postID;
+            //$result['flag'] = $flag;
+            //$result['metaData before'] = json_encode(get_post_meta($postID, '',false));    
             $update_res = update_post_meta(intval($postID), 'FlaggedForReview', $flag);
             $result['metaData update'] = $update_res;
+            //$result['metaData after'] = json_encode(get_post_meta($postID, '',false));
         }    
     }
     echo json_encode($result);
@@ -52,6 +56,7 @@ function addRow(){
     $query = new WP_Query($args);
 
     $result = [];
+    $result['post id'] = $postID;
     $brand_id = -1;
     if(check_for_brand($brand)){
         $brand_id = get_brand_id($brand);
@@ -78,7 +83,9 @@ function addRow(){
         }else{
             $product_id = insert_product($product, $brand_id, $category_id);
             if ($query->have_posts()){
+                $result['metaData before'] = get_post_meta($postID, '',false);    
                 $update_res = update_post_meta(intval($postID), 'product_tested', $product);
+                $result['metaData after'] = get_post_meta($postID, '',false);
                 $result['post update product'] = $update_res;
             }
             $result['New Product ID'] = $product_id;

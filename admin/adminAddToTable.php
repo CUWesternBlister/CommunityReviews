@@ -208,9 +208,9 @@ function display($flaggedReviews){
             const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1]);
             prodArr = myArr[reviewId];
             console.log(prodArr);
-            console.log(prodArr['product'], prodArr['brand'], prodArr['category'], prodArr['sport']);
+            console.log(prodArr['product'], prodArr['brand'], prodArr['category'], prodArr['sport'], prodArr['post_id']);
             addRow(prodArr['product'], prodArr['brand'], prodArr['category'], prodArr['sport'], prodArr['post_id']);
-            removeValueFromRadio(reviewId, 0);
+            removeValueFromRadio(reviewId, 0,prodArr['post_id']);
         }
 
         function addRow(product, brand, category, sport, postID){
@@ -226,7 +226,7 @@ function display($flaggedReviews){
                     postID: postID
                 },
                 success: function(result) {
-                    console.log(result);
+                    console.log(JSON.stringify(result));
                     //location.reload();
                 }
             });
@@ -238,7 +238,8 @@ function display($flaggedReviews){
             const myArrJson = document.getElementById('myArr').value;
             const myArr = JSON.parse(myArrJson);
             const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1]);
-            removeValueFromRadio(reviewId, 2);
+            const postID = Number(selectedRadio.nextElementSibling.textContent.match(/Post ID: (\d+)/)[1]);
+            removeValueFromRadio(reviewId, 2, postID);
         }
 
         
@@ -254,7 +255,7 @@ function display($flaggedReviews){
                 },
                 success: function(result) {
                         //console.log(`Successfully changed the flag on the approved/denied review`);
-                        console.log(result);
+                        console.log(JSON.stringify(result));
                         //location.reload();
                 }
             });
@@ -294,8 +295,8 @@ function display($flaggedReviews){
         function submitButtonClicked() { 
             const submitButton = document.getElementById('submit-button');
             const myArrJson = document.getElementById('myArr').value;
-            console.log(`JSON: ${myArrJson}`);
             const myArr = JSON.parse(myArrJson);
+            console.log(`JSON: ${myArr}`);
             //submitButton.addEventListener('click', update_dropdowns(myArr));
             update_dropdowns(myArr);
         }
