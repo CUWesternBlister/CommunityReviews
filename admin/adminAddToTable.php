@@ -208,8 +208,11 @@ function display($flaggedReviews){
             const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1]);
             prodArr = myArr[reviewId];
             console.log(prodArr);
-            console.log(prodArr['product'], prodArr['brand'], prodArr['category'], prodArr['sport'], prodArr['post_id']);
-            addRow(prodArr['product'], prodArr['brand'], prodArr['category'], prodArr['sport'], prodArr['post_id']);
+            const productElement = document.getElementById("community-reviews-display-product-dropdown");
+            const brandElement = document.getElementById("community-reviews-display-brand-dropdown");
+            console.log(productElement.value, brandElement.value, prodArr['category'], prodArr['sport'], prodArr['post_id']);
+            addRow(productElement.value, brandElement.value, prodArr['category'], prodArr['sport'], prodArr['post_id']);
+            console.log(`These are the values in the dropdown: product-"${productElement.value}" brand-"${brandElement.value}"`);
             removeValueFromRadio(reviewId, 0,prodArr['post_id']);
         }
 
