@@ -59,6 +59,13 @@
     width: 110px;
 }
 
+#community-reviews-keyword-field {
+    width: 80%;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     pointer-events: all;
@@ -125,7 +132,8 @@ select {
 #community-reviews-display-slider-min-length,
 #community-reviews-display-slider-min-year,
 #community-reviews-display-slider-min-height,
-#community-reviews-display-slider-min-weight {
+#community-reviews-display-slider-min-weight,
+#community-reviews-display-slider-min-boot-size {
     height: 0;
     z-index: 1;
 }

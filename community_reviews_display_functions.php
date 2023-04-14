@@ -7,10 +7,16 @@
 function bcr_filter_posts() {
     global $wpdb;
 
+    $posts_per_page = 4;
+
+    if ( ! empty( $_POST['posts_per_page'] ) ) {
+        $posts_per_page = intval(sanitize_text_field( $_POST['posts_per_page'] ) );
+    }
+
     $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
     $args = array(
         'post_type'      => 'Community Reviews',
-        'posts_per_page' => 4,
+        'posts_per_page' => $posts_per_page,
         'paged'          => $paged,
     );
 
@@ -18,6 +24,10 @@ function bcr_filter_posts() {
 
     if ( ! empty( $_POST['product'] ) And sanitize_text_field( $_POST['product'] ) != "No Product Filter" ) {
         array_push($meta_query, array('key' => 'product_tested', 'value' => sanitize_text_field( $_POST['product'] )));
+    }
+
+    if ( ! empty( $_POST['keyword'] ) ) {
+        $args['s'] = sanitize_text_field( $_POST['keyword'] );
     }
 
     if ( ! empty( $_POST['brand'] ) And sanitize_text_field( $_POST['brand'] ) != "No Brand Filter" ) {
@@ -60,8 +70,14 @@ function bcr_filter_posts() {
     }
 
     if ( ! empty($_POST['min_length']) And ! empty($_POST['max_length']) And ! empty($_POST['category']) ) {
-        if(sanitize_text_field( $_POST['category'] ) == 'Skis') {
+        if(sanitize_text_field( $_POST['category'] ) == 'Skis' Or sanitize_text_field( $_POST['category'] ) == 'Snowboards') {
             array_push($meta_query, array('key' => 'length', 'value' => array(sanitize_text_field( $_POST['min_length'] ), sanitize_text_field( $_POST['max_length'] )), 'compare' => 'BETWEEN', 'type' => 'numeric') );
+        }
+    }
+
+    if ( ! empty($_POST['min_boot_size']) And ! empty($_POST['max_boot_size']) And ! empty($_POST['category']) ) {
+        if(sanitize_text_field( $_POST['category'] ) == 'Ski Boots' ) {
+            array_push($meta_query, array('key' => 'ski_boot_size', 'value' => array(sanitize_text_field( $_POST['min_boot_size'] ), sanitize_text_field( $_POST['max_boot_size'] )), 'compare' => 'BETWEEN', 'type' => 'numeric') );
         }
     }
 
@@ -166,7 +182,7 @@ function bcr_filter_products() {
     echo '<div class="community-reviews-display-title">Product</div>';
     echo '<select id="community-reviews-display-product">';
     
-    echo '<option value="No Product Filter">--No Product Filter--</option>';
+    echo '<option value="No Product Filter">- No Product Filter -</option>';
 
     foreach ($results as $id => $product_obj) {
         $product_name = $product_obj->productName;
@@ -209,7 +225,7 @@ function bcr_filter_categories() {
     echo '<div class="community-reviews-display-title">Category</div>';
     echo '<select id="community-reviews-display-category">';
     
-    echo '<option value="No Category Filter">--No Category Filter--</option>';
+    echo '<option value="No Category Filter">- No Category Filter -</option>';
 
     foreach ($results as $id => $category_obj) {
         $category_name = $category_obj->categoryName;
