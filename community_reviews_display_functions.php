@@ -266,6 +266,10 @@ add_action( 'elementor/elements/categories_registered', 'bcr_register_widget_cat
  * @return  void
  */
 function bcr_load_filter_widget_css() {
+    if( !is_page('read-community-reviews') ) {
+        return;
+    }
+
     $plugin_url = plugin_dir_url( __FILE__ );
     wp_enqueue_style( 'filter_widget_style', $plugin_url . 'widgets/community_reviews_display_widget_style.css' );
 }
@@ -277,6 +281,10 @@ add_action( 'wp_enqueue_scripts', 'bcr_load_filter_widget_css' );
  * @return  void
  */
 function bcr_load_filter_widget_js() {
+    if( !is_page('read-community-reviews') ) {
+        return;
+    }
+
     wp_enqueue_script( 'filter_widget_js', plugin_dir_url( __FILE__ ) . '/widgets/scripts.js', array( 'jquery' ), 1.1, true);
 }
 
