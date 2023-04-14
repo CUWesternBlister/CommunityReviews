@@ -3,8 +3,6 @@
 include 'generate_html.php';
 
 function insert_into_ski_review($header, $file, $formName, $form_id) {
-    //$start = "\n\n INSERT INTO SKI REVIEW \n";
-    //fwrite($file, $start);
     global $wpdb;
     $userInfo = $header['userInfo'];
     
@@ -35,27 +33,45 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
     $years_arr = explode("-", $years);
     $year = $years_arr[0];
 
+
+    //$str = print_r($title_arr, true);
+    //echo $str."<br>";
+
+    $years = "";
+    $length = "";
+    $ski_boot_size = "";
+    foreach($title_arr as $key => $arr){
+        if($arr['id']==9){$years = $arr['answer'];}
+        else if($arr['id']==3){$length = intval($arr['answer']);}
+        else if($arr['id']==22){$ski_boot_size = intval($arr['answer']);}
+    }
+
+    $years_arr = explode("-", $years);
+    $year = $years_arr[0];
+
     $height = intval($userInfo->heightFeet) * 12 + intval($userInfo->heightInches);
 
     $ski_review = array(
                         'post_title' => wp_strip_all_tags($postTitle), 
                         'post_content' => $html,
                         'meta_input' => array(
-                                              'id'            => $header['reviewID'],
-                                              'formID'        => $form_id,
-                                              'userID'        => $userInfo->userID,
-                                              'userName'      => $userName,
-                                              'height'        => $height,
-                                              'weight'        => $userInfo->weight,
-                                              'skiAbility'    => $userInfo->skiAbility,
-                                              'product_tested'=> $header['productName'],
-                                              'brand'         => $header['brandName'],
-                                              'category'      => $header['categoryName'],
-                                              'sport'         => $header['sportName'],
-                                              'FlaggedForReview' => $header['flagForReview'],
-                                              'year'          => $year,
-                                              'qs_and_as_arr' => $header["questions_and_answers"]
-                                              ),    
+                                                'id'            => $header['reviewID'],
+                                                'formID'        => $form_id,
+                                                'userID'        => $userInfo->userID,
+                                                'userName'      => $userName,
+                                                'height'        => $height,
+                                                'weight'        => $userInfo->weight,
+                                                'skiAbility'    => $userInfo->skiAbility,
+                                                'product_tested'=> $header['productName'],
+                                                'brand'         => $header['brandName'],
+                                                'category'      => $header['categoryName'],
+                                                'sport'         => $header['sportName'],
+                                                'FlaggedForReview' => $header['flagForReview'],
+                                                'year'          => $year,
+                                                'length'        => $length,
+                                                'boot_size'     => $ski_boot_size,
+                                                'qs_and_as_arr' => $header["questions_and_answers"]
+                                            ), 
                         'post_type'   => 'Community Reviews',
                         'post_excerpt' => $user_html,
                         'post_status' => 'publish',
@@ -65,9 +81,6 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
 
 function get_answer_and_question_content($record,$file){
     global $wpdb;
-    //$start = "\n\n GET ANSWERS AND QUESTIONS \n";
-    //fwrite($file, $start);
-
     $return_array = array(
         'title' => array(),
         'testingConditions' => array(),
@@ -82,8 +95,14 @@ function get_answer_and_question_content($record,$file){
     $answer_arr_i = 0;
     foreach($question_ids as $id){
         $q_content = get_question_read_content($id);
-        $type = $q_content->questionType;
-        $display = $q_content->questionDisplayContent;
+        $type = "";
+        if(is_null($q_content->questionType) == false){
+            $type = $q_content->questionType;
+        }
+        $display = "";
+        if(is_null($q_content->questionDisplayContent) == false){
+            $display = $q_content->questionDisplayContent;
+        }
         $answer = $answer_content[$answer_arr_i];
         $obj = ["id" => $id, "question" => $display, "answer" => $answer];
         $return_array[$type][] = $obj;
@@ -91,15 +110,4 @@ function get_answer_and_question_content($record,$file){
     }
     return $return_array;
 }
-
-/*
-function get_userName_by_userID($userID, $file){
-global $wpdb;
-//fwrite($file, "userID to get userName: ".$userID."\n");
-$wp_user_table = $wpdb->prefix."users";
-$q = $wpdb->prepare("SELECT display_name FROM $wp_user_table WHERE ID = %s;", $userID);
-$res = $wpdb->get_row($q);
-return $res->display_name;
-}
-*/
 ?>

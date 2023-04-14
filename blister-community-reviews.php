@@ -3,7 +3,7 @@
  * Plugin Name: Blister Community Reviews
  * Description: A plugin to facilitate Blister community created reviews.
  * Author: Gunnar Marquardt, Jayden Omi, Izak Litte, Jacob Vogel, Tristan Riggan
- * Version: 1.3.1
+ * Version: 1.3.3
  */
 
 // Exit if accessed directily
@@ -47,6 +47,26 @@ function bcr_include() {
     require_once( plugin_dir_path( __FILE__ ) . '/admin/adminPage.php');
     require_once(plugin_dir_path( __FILE__ ) . '/admin/adminAddToTable.php');
     require_once(plugin_dir_path( __FILE__ ) . '/admin/adminAddToTableAjax.php');
+    require_once( plugin_dir_path( __FILE__ ) . 'community_reviews_display_functions.php');
+    require_once( plugin_dir_path( __FILE__ ) . 'fluent_form_functions.php');
+    require_once( plugin_dir_path( __FILE__ ) . 'fluent_forms_scripts.php');
 }
 
 add_action( 'plugins_loaded', 'bcr_include');
+
+/**
+ * Register widgets contained in the Community Reviews
+ * 
+ * @return  void
+ */
+function bcr_register_widgets( $widgets_manager ) {
+    $bool = require_once( plugin_dir_path( __FILE__ ) . '/widgets/community-reviews-display.php');
+    if($bool){
+        $temp = new ElementorPro\Modules\Posts\Widgets\Community_Reviews_Display();
+        $widgets_manager->register($temp);
+    }
+}
+
+add_action( 'elementor/widgets/register', 'bcr_register_widgets' );
+
+?>

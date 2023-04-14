@@ -1,0 +1,420 @@
+.community-reviews-display-title {
+    text-align: center;
+}
+
+.community-reviews-display-filter {
+    text-align: center;
+}
+
+.community-reviews-display-show-posts {
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+.community-reviews-display-pagination {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.community-reviews-display-pagination-prev {
+    text-align: left;
+}
+
+.community-reviews-display-pagination-next {
+    text-align: right;
+}
+
+#community-reviews-display-pagination-next-button {
+    margin-right: 10%;
+}
+
+.community-reviews-number-boxes {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.community-reviews-display-number-boxes-with-toggle {
+    grid-template-columns: 37.5% 25% 37.5%;
+}
+
+.community-reviews-number-box-left {
+    text-align: left;
+}
+
+.community-reviews-number-box-right {
+    text-align: right;
+}
+
+.community-reviews-display-number-box {
+    appearance: none;
+    height: 10px;
+    width: 80px;
+    margin: 0 20%;
+    font-size: 15px;
+    text-align: center;
+}
+
+#min_year,
+#max_year {
+    width: 110px;
+}
+
+#community-reviews-keyword-field {
+    width: 80%;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    pointer-events: all;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #C6C6C6;
+    cursor: pointer;
+}
+
+input[type=range]::-moz-range-thumb {
+    -webkit-appearance: none;
+    pointer-events: all;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #C6C6C6;
+    cursor: pointer;  
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+    background: #f7f7f7;
+}
+
+input[type=range]::-webkit-slider-thumb:active {
+    box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
+    -webkit-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
+}
+
+input[type="range"] {
+    -webkit-appearance: none; 
+    appearance: none;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    background-color: #C6C6C6;
+    pointer-events: none;
+}
+
+input[type="range"] {
+    appearance: none;
+    height: 2px;
+    width: 24%;
+    position: absolute;
+    left: 3%;
+    background-color: #C6C6C6;
+}
+
+.community-reviews-display-slider {
+    padding: 10px;
+}
+
+select {
+    width: 80%;
+}
+
+.selectize-control { 
+    width: 80%; 
+    left: 10%;
+}
+
+#community-reviews-display-slider-min-length,
+#community-reviews-display-slider-min-year,
+#community-reviews-display-slider-min-height,
+#community-reviews-display-slider-min-weight,
+#community-reviews-display-slider-min-boot-size {
+    height: 0;
+    z-index: 1;
+}
+
+#community-reviews-display-submit {
+    margin: 10px;
+    width: 150px;
+    border-radius: 5px;
+}
+
+.community-reviews-display-length-controls {
+    display: none;
+}
+
+#community-reviews-display-mobile-button {
+    border-radius: 5px;
+}
+
+.community-reviews-unit-toggle {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+    margin: 10px;
+  }
+
+  .community-reviews-number-box-center {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+  }
+
+.community-reviews-unit-toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+  .community-reviews-units-option-mobile {
+    display: none;
+  }
+  
+  .community-reviews-unit-toggle .community-reviews-toggle {
+    display: none;
+  }
+  
+  .community-reviews-unit-toggle .community-reviews-toggle-label {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 24px;
+    background-color: #C6C6C6;
+    border-radius: 34px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+  
+  .community-reviews-unit-toggle .community-reviews-toggle-label::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    background-color: #fff;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+  }
+  
+  .community-reviews-unit-toggle .community-reviews-toggle:checked + .community-reviews-toggle-label {
+    background-color: #D82129;
+  }
+  
+  .community-reviews-unit-toggle .community-reviews-toggle:checked + .community-reviews-toggle-label::before {
+    transform: translateX(16px);
+  }
+
+@media only screen and (min-width: 800px) {
+    .community_review_excerpt {
+        width: 100%;
+        padding-right: 10px;
+        padding-top: 15px;
+        margin: 10px;
+        float: left;
+        display: block;
+        text-align: left;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .community_review_excerpt {
+        width: 100%;
+        padding-right: 10px;
+        padding-top: 15px;
+        float: left;
+        margin: 10px;
+        display: block;
+        text-align: left;
+    }
+}
+
+.community_review_excerpt:hover {
+    background-color: #C6C6C6;
+}
+
+.excerpt_title {
+    width: 100%;
+    padding-left: 10px;
+    float: left;
+    font-weight: bold;
+}
+
+.community_review_postdate {
+    width: 100%;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    float: left;
+    font-size: smaller;
+    color: #333;
+}
+
+.excerpt_content {
+    width: 100%;
+    padding-left: 10px;
+    float: left;
+    display: block;
+}
+
+@media screen and (max-width: 800px) {
+    .community-reviews-display {
+        display: grid;
+        grid-template-columns: 100%;
+        text-align: center;
+    }
+
+    input[type="range"] {
+        width: 80%;
+        left: 10%;
+    }
+
+    .community-reviews-display-filter {
+        display: none;
+        background-color: #D6D6D6;
+        position: absolute;
+        height: fit-content;
+        top: 50px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        text-align: center;
+    }
+
+    #min_year {
+        margin-right: 0%;
+    }
+
+    #max_year {
+        margin-left: 0%;
+    }
+
+    #community-reviews-display-submit {
+        margin: 10px;
+        width: 150px;
+    }
+
+    .community-reviews-units-option-mobile {
+        display: grid;
+        grid-template-columns: 42.5% 15% 42.5%;
+    }
+
+    .community-reviews-display-mobile-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .community-reviews-number-box-center {
+        display: none;
+    }
+
+    .community-reviews-display-number-boxes-with-toggle {
+        grid-template-columns: 50% 50%;
+    }
+
+    .community-reviews-unit-label-left {
+        text-align: right;
+        margin-right: 5%;
+    }
+
+    .community-reviews-unit-label-right {
+        text-align: left;
+        margin-left: 5%;
+    }
+}
+
+@media screen and (min-width: 800px) and (max-width:1500px) {
+    .community-reviews-display {
+        display: grid;
+        grid-template-columns: 0% 30% 70%;
+        text-align: center;
+    }
+
+    #community-reviews-display-submit {
+        margin: 10px;
+        width: 150px;
+    }
+
+    .community-reviews-display-filter {
+        display: initial;
+        background-color: initial;
+        position: initial;
+        height: initial;
+        top: initial;
+        right: initial;
+        bottom: initial;
+        left: initial;
+        text-align: center;
+    }
+
+    #community-reviews-display-mobile-button {
+        display: none;
+    }
+
+    .community-reviews-units-option-mobile {
+        display: grid;
+        grid-template-columns: 42.5% 15% 42.5%;
+    }
+
+    .community-reviews-display-mobile-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .community-reviews-number-box-center {
+        display: none;
+    }
+
+    .community-reviews-display-number-boxes-with-toggle {
+        grid-template-columns: 50% 50%;
+    }
+
+    .community-reviews-unit-label-left {
+        text-align: right;
+        margin-right: 5%;
+    }
+
+    .community-reviews-unit-label-right {
+        text-align: left;
+        margin-left: 5%;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .community-reviews-display {
+        display: grid;
+        grid-template-columns: 0% 30% 70%;
+        text-align: center;
+    }
+
+    #community-reviews-display-submit {
+        margin: 10px;
+        width: 150px;
+    }
+
+    .community-reviews-display-filter {
+        display: initial;
+        background-color: initial;
+        position: initial;
+        height: initial;
+        top: initial;
+        right: initial;
+        bottom: initial;
+        left: initial;
+        text-align: center;
+    }
+
+    #community-reviews-display-mobile-button {
+        display: none;
+    }
+}

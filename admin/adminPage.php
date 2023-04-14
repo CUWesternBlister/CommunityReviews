@@ -1,4 +1,5 @@
 <?php
+require 'update_community_reviews_custom_posts.php';
 add_action( 'admin_menu', 'bcr_admin_page');
 
 /**
@@ -14,6 +15,14 @@ function bcr_admin_page() {
         'bcr_commuinty_reviews',
         'bcr_admin_page_html',
         'none'
+    );
+    add_submenu_page(
+        'bcr_commuinty_reviews',
+        'BCR Update Custom Posts',
+        'BCR Update Custom Posts',
+        'manage_options',
+        'bcr_admin_update_custom_post_submenu_page',
+        'bcr_admin_update_custom_post_submenu_page_callback'
     );
 }
 
@@ -98,6 +107,7 @@ function bcr_display_user_reset() {
     }
 }
 
+
 //
 function bcr_run_table_structure_update() {
 
@@ -157,7 +167,7 @@ function bcr_display_table_contents($table_name) {
 
                 $esc_table_name = esc_sql($table_name);
 
-                $sql = $wpdb->prepare("SELECT * FROM $esc_table_name");
+                $sql = "SELECT * FROM $esc_table_name";
 
                 $table_data = $wpdb->get_results($sql, ARRAY_A);
 

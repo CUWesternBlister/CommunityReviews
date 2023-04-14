@@ -20,5 +20,5 @@ function bcr_view_current_user_reviews_only_query( $query ) {
     }
 }
 
-add_action( 'elementor/query/users_reviews', 'bcr_view_current_user_reviews_only_query');
+add_action( 'elementor/query/users_reviews', 'bcr_view_current_user_reviews_only_query' );
 ?>
