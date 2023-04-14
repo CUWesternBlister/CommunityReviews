@@ -182,7 +182,7 @@ weight_max_slider.oninput = () => bcr_alter_slider(weight_max_slider, weight_min
 
 
 function bcr_update_mobile_filter_display_state() {
-    var is_mobile = window.matchMedia("(max-width: 1500px)");
+    var is_mobile = window.matchMedia("(max-width: 800px)");
     if(is_mobile.matches) {
         const all_filters = document.getElementById('community-reviews-display-filter');
         if(all_filters.style.display == 'none') {
