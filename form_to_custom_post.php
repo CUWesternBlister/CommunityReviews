@@ -118,7 +118,7 @@ function elementor_get_fields_array($raw_fields, $file){
 //---------------------------------------
 function summit_form_submission_write_to_tables($current_form_id, $record, $file){
     $answer_ids = insert_into_answer_table($record, $file);
-    $id = insert_into_review_table($current_form_id,$file);
+    $id = insert_into_review_table($current_form_id, $record[2], $record[1], $file);
     insert_into_review_answer_table($id, $answer_ids, $file);
     return $id;
 }
@@ -137,6 +137,12 @@ function summit_form_submission_custom_post_content($current_review_id, $current
     
     $user_info = get_user_information($file);
 
+    $flagForReview = 0;
+    if((!check_for_brand($brand_name)) || (!check_for_product($product_info['productName']))){
+        $flagForReview = 1;
+        //echo "review flagged<br>";
+    }
+
     $header = array(
         'reviewID' => $current_review_id, 
         'formID' => $current_form_id,
@@ -145,7 +151,8 @@ function summit_form_submission_custom_post_content($current_review_id, $current
         'categoryName' => $category_info->categoryName,
         'questions_and_answers' => $q_and_a_content,
         'userInfo' => $user_info,
-        'sportName' => $sport_info->categoryName
+        'sportName' => $sport_info->categoryName,
+        'flagForReview' => $flagForReview
     );
     
     return $header;
