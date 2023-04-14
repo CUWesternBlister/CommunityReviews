@@ -47,7 +47,6 @@ function bcr_include() {
     require_once( plugin_dir_path( __FILE__ ) . '/admin/adminPage.php');
     require_once(plugin_dir_path( __FILE__ ) . '/admin/adminAddToTable.php');
     require_once(plugin_dir_path( __FILE__ ) . '/admin/adminAddToTableAjax.php');
-    require_once(plugin_dir_path( __FILE__ ) . '/admin/denied_reviews_submenu.php');
 }
 
 add_action( 'plugins_loaded', 'bcr_include');
