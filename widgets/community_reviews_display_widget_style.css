@@ -218,7 +218,6 @@ select {
     .community_review_excerpt {
         position: relative;
         width: 100%;
-        /*padding-right: 10px;*/
         padding-top: 10px;
         margin-bottom: 20px;
         float: left;
@@ -230,11 +229,11 @@ select {
 
 @media only screen and (max-width: 800px) {
     .community_review_excerpt {
-        width: 90%;
-        padding-right: 10px;
+        position: relative;
+        width: 100%;
         padding-top: 10px;
+        margin-bottom: 20px;
         float: left;
-        margin: 10px;
         display: block;
         text-align: left;
         outline:  3px solid rgb(190, 190, 190);
@@ -242,7 +241,7 @@ select {
 }
 
 .community-reviews-all-excerpts{
-    width: 90%;
+    width: 100%;
 
 }
 
@@ -271,7 +270,7 @@ select {
     right: 0;
     width: 34%;
     padding-right: 10px;
-    font-weight: bold;
+    font-weight: normal;
     float: right;
     text-align: right;
     background-color: rgb(240, 240, 240);
@@ -290,7 +289,6 @@ select {
     width: 100%;
     height: 150px;
     overflow: hidden;
-    /*padding-left: 10px;*/
     float: left;
     display: block;
 }
@@ -310,13 +308,11 @@ select {
     .community-reviews-display-filter {
         display: none;
         background-color: #D6D6D6;
-        position: absolute;
+        position: relative;
         height: fit-content;
-        top: 50px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
+        margin-bottom: 40px;
         text-align: center;
+        z-index: 1;
     }
 
     #min_year {
@@ -359,6 +355,13 @@ select {
     .community-reviews-unit-label-right {
         text-align: left;
         margin-left: 5%;
+    }
+    .excerpt_content {
+        width: 100%;
+        height: 180px;
+        overflow: hidden;
+        float: left;
+        display: block;
     }
 }
 
