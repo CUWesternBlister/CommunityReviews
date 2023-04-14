@@ -203,26 +203,34 @@ select {
 
 @media only screen and (min-width: 800px) {
     .community_review_excerpt {
+        position: relative;
         width: 100%;
-        padding-right: 10px;
-        padding-top: 15px;
-        margin: 10px;
+        /*padding-right: 10px;*/
+        padding-top: 10px;
+        margin-bottom: 20px;
         float: left;
         display: block;
         text-align: left;
+        outline:  3px solid rgb(190, 190, 190);
     }
 }
 
 @media only screen and (max-width: 800px) {
     .community_review_excerpt {
-        width: 100%;
+        width: 90%;
         padding-right: 10px;
-        padding-top: 15px;
+        padding-top: 10px;
         float: left;
         margin: 10px;
         display: block;
         text-align: left;
+        outline:  3px solid rgb(190, 190, 190);
     }
+}
+
+.community-reviews-all-excerpts{
+    width: 90%;
+
 }
 
 .community_review_excerpt:hover {
@@ -230,10 +238,30 @@ select {
 }
 
 .excerpt_title {
-    width: 100%;
+    width: 70%;
     padding-left: 10px;
     float: left;
     font-weight: bold;
+}
+
+.excerpt_category {
+    width: 30%;
+    float: right;
+    padding-right: 10px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.excerpt_read_more {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 34%;
+    padding-right: 10px;
+    font-weight: bold;
+    float: right;
+    text-align: right;
+    background-color: rgb(240, 240, 240);
 }
 
 .community_review_postdate {
@@ -247,7 +275,9 @@ select {
 
 .excerpt_content {
     width: 100%;
-    padding-left: 10px;
+    height: 150px;
+    overflow: hidden;
+    /*padding-left: 10px;*/
     float: left;
     display: block;
 }

@@ -3,6 +3,7 @@
 	.excerpt_long_container{
 		background: white;
 		width: 66%;
+		height: 150px;
 		padding-right: 10px;
 		padding-left: 10px;
 		display: block;
@@ -12,19 +13,20 @@
 
 	.excerpt_short_container{
 		background-color: rgb(240, 240, 240);
-		width: 33%;
+		width: 34%;
+		height: ;
 		padding-left: 10px;
 		display: block;
 		float: left;
 		color:black;
 	}
 	.excerpt_whole_container{
-		width: 99%;
+		width: 100%;
 		float: left;
 		display: block;
-		margin-left: 3px;
 		background-color: rgb(240, 240, 240);
-		outline: 3px solid rgb(190, 190, 190);
+		/*outline: 3px solid rgb(190, 190, 190);*/
+		border-top: 3px solid rgb(190, 190, 190);;
 	}
 
 	.clip-circle{
