@@ -84,12 +84,12 @@ function display_user_info($atts){
     if ( $userEntry ) {
         $measurement = $userEntry->unit_preference;
         if ($measurement == 'imperial'){
-            $Height = esc_html($userEntry->height) . " inches";
+            $Height = esc_html((int)($userEntry->height / 12)) . "' ". esc_html($userEntry->height % 12) . '"';
             $Weight = esc_html($userEntry->weight)." lbs";
         }
         else{
             $Height = esc_html(round(2.54*$userEntry->height)) . " cm";
-            $Weight = esc_html(round(0.4535*$userEntry->weight))." kg";
+            $Weight = esc_html(round(0.4536*$userEntry->weight))." kg";
         }
         return "User Height: ".$Height.
             "<br><br>User Weight: ".$Weight.

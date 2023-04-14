@@ -182,12 +182,12 @@ function format_review_excerpt($userInfo, $userName, $qs_and_ans){
         }
     }
     if ($userInfo->unit_preference == "imperial"){
-        $height = esc_html($userInfo->height) . " in";
+        $height = esc_html((int)($userInfo->height / 12)) . "' ". esc_html($userInfo->height % 12) . '"';
         $weight = esc_html($userInfo->weight) . " lbs";
     }
     else{
-        $height = esc_html($userInfo->height) . " cm";
-        $weight = esc_html($userInfo->weight) . " kg";
+        $height = esc_html(round(2.54 * $userInfo->height)) . " cm";
+        $weight = esc_html(round(.4536 * $userInfo->weight)) . " kg";
     }
     if($testimony_populated == true){
         $html = '<div id = "excerpt_container" class = "excerpt_whole_container">

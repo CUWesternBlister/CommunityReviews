@@ -126,6 +126,7 @@ function Profile_Information_Form($atts){
                 height_inches.type = "number";
                 height_inches.id = "height_inches";
                 height_inches.min = '0';
+                height_inches.max = '11';
                 height_inches.required = true;
                 height_inches.placeholder = "inches";
                 height_inches.className = "field-2";
