@@ -141,10 +141,15 @@ select {
 #community-reviews-display-submit {
     margin: 10px;
     width: 150px;
+    border-radius: 5px;
 }
 
 .community-reviews-display-length-controls {
     display: none;
+}
+
+#community-reviews-display-mobile-button {
+    border-radius: 5px;
 }
 
 .community-reviews-unit-toggle {
@@ -160,6 +165,13 @@ select {
     grid-template-columns: 20% 60% 20%;
   }
 
+.community-reviews-unit-toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
   .community-reviews-units-option-mobile {
     display: none;
   }
@@ -170,15 +182,16 @@ select {
   
   .community-reviews-unit-toggle .community-reviews-toggle-label {
     position: absolute;
-    top: -5px;
-    right: 0;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 40px;
     height: 24px;
     background-color: #C6C6C6;
     border-radius: 34px;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
+}
   
   .community-reviews-unit-toggle .community-reviews-toggle-label::before {
     content: "";
@@ -282,7 +295,7 @@ select {
     display: block;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 800px) {
     .community-reviews-display {
         display: grid;
         grid-template-columns: 100%;
@@ -299,7 +312,7 @@ select {
         background-color: #D6D6D6;
         position: absolute;
         height: fit-content;
-        top: 0px;
+        top: 50px;
         right: 0px;
         bottom: 0px;
         left: 0px;
@@ -324,6 +337,12 @@ select {
         grid-template-columns: 42.5% 15% 42.5%;
     }
 
+    .community-reviews-display-mobile-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .community-reviews-number-box-center {
         display: none;
     }
@@ -341,13 +360,67 @@ select {
         text-align: left;
         margin-left: 5%;
     }
-
-    .community-reviews-unit-toggle .community-reviews-toggle-label {
-        right: 20%;
-      }
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 800px) and (max-width:1500px) {
+    .community-reviews-display {
+        display: grid;
+        grid-template-columns: 0% 30% 70%;
+        text-align: center;
+    }
+
+    #community-reviews-display-submit {
+        margin: 10px;
+        width: 150px;
+    }
+
+    .community-reviews-display-filter {
+        display: initial;
+        background-color: initial;
+        position: initial;
+        height: initial;
+        top: initial;
+        right: initial;
+        bottom: initial;
+        left: initial;
+        text-align: center;
+    }
+
+    #community-reviews-display-mobile-button {
+        display: none;
+    }
+
+    .community-reviews-units-option-mobile {
+        display: grid;
+        grid-template-columns: 42.5% 15% 42.5%;
+    }
+
+    .community-reviews-display-mobile-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .community-reviews-number-box-center {
+        display: none;
+    }
+
+    .community-reviews-display-number-boxes-with-toggle {
+        grid-template-columns: 50% 50%;
+    }
+
+    .community-reviews-unit-label-left {
+        text-align: right;
+        margin-right: 5%;
+    }
+
+    .community-reviews-unit-label-right {
+        text-align: left;
+        margin-left: 5%;
+    }
+}
+
+@media screen and (min-width: 1500px) {
     .community-reviews-display {
         display: grid;
         grid-template-columns: 0% 30% 70%;
