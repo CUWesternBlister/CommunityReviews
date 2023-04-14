@@ -155,12 +155,12 @@ function gen_HTML_for_testimony_qs($testimony, $formName){
 
 function format_reviewerInfo($userInfo, $userName){
     if ($userInfo->unit_preference == "imperial"){
-        $height = esc_html($userInfo->height) . " in";
+        $height = esc_html((int)($userInfo->height / 12)) . "' ". esc_html($userInfo->height % 12) . '"';
         $weight = esc_html($userInfo->weight) . " lbs";
     }
     else{
-        $height = esc_html($userInfo->height) . " cm";
-        $weight = esc_html($userInfo->weight) . " kg";
+        $height = esc_html(round(2.54 * $userInfo->height)) . " cm";
+        $weight = esc_html(round(.4536 * $userInfo->weight)) . " kg";
     }
     $html = '<div id = "reviewerInfoContainer" class = "whole_container_flex">
         <div id= " userName" class = "short_container_no_float">Reviewer: '.esc_html($userName). '</div>
