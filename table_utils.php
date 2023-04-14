@@ -1,87 +1,63 @@
 <?php
 
-	function check_for_product($product_name){
-		//echo "check_for_product()<br>";
-		global $wpdb;
-		$prod_table = $wpdb->prefix . "bcr_products";
-		$sql = $wpdb->prepare("SELECT * FROM $prod_table WHERE productName = '$product_name';");
-		//echo "SELECT * FROM $prod_table WHERE productName = $product_name;<br>";
-		$res = $wpdb->get_row($sql);
-		//echo print_r($res, true)."<br>";
-		if ($res) {
-			//echo "returning  prod ture<br>";
-			return true;
-		} else {
-			//echo "returning prod false<br>";
-			return false;
-		}
+function check_for_product($product_name){
+	//echo "check_for_product()<br>";
+	global $wpdb;
+	$prod_table = $wpdb->prefix . "bcr_products";
+	$sql = $wpdb->prepare("SELECT * FROM $prod_table WHERE productName = '$product_name';");
+	//echo "SELECT * FROM $prod_table WHERE productName = $product_name;<br>";
+	$res = $wpdb->get_row($sql);
+	//echo print_r($res, true)."<br>";
+	if ($res) {
+		//echo "returning  prod ture<br>";
+		return true;
+	} else {
+		//echo "returning prod false<br>";
+		return false;
 	}
-	function check_for_brand($brand_name){
-		//echo "check_for_brand()<br>";
-		global $wpdb;
-		$brand_table = $wpdb->prefix . "bcr_brands";
-		$sql = $wpdb->prepare("SELECT * FROM $brand_table WHERE brandName = '$brand_name';");
-		//echo "SELECT * FROM $brand_table WHERE brandName = $brand_name;<br>"; 
-		$res = $wpdb->get_row($sql);
-		//echo print_r($res, true)."<br>";
-		if ($res) {
-			//echo "returning brand true<br>";
-			return true;
-		} else {
-			//echo "returning brand false<br>";
-			return false;
-		}
+}
+function check_for_brand($brand_name){
+	//echo "check_for_brand()<br>";
+	global $wpdb;
+	$brand_table = $wpdb->prefix . "bcr_brands";
+	$sql = $wpdb->prepare("SELECT * FROM $brand_table WHERE brandName = '$brand_name';");
+	//echo "SELECT * FROM $brand_table WHERE brandName = $brand_name;<br>"; 
+	$res = $wpdb->get_row($sql);
+	//echo print_r($res, true)."<br>";
+	if ($res) {
+		//echo "returning brand true<br>";
+		return true;
+	} else {
+		//echo "returning brand false<br>";
+		return false;
 	}
-	// function check_for_category($category_name){
-	// 	global $wpdb;
-	// 	$categories_table = $wpdb->prefix . "bcr_categories";
-	// 	$sql = $wpdb->prepare("SELECT * FROM $categories_table WHERE productName = $category_name;");
-	// 	$res = $wpdb->query($sql);
-	// 	if ($res == 0 || !$res ) {
-	// 		//echo "returning false<br>";
-	// 		return false;
-	// 	} else {
-	// 		//echo "returning true<br>";
-	// 		return true;
-	// 	}
-	// }
-	// function check_for_sport($sport_name){
-	// 	global $wpdb;
-	// 	$categories_table = $wpdb->prefix . "bcr_categories";
-	// 	$sql = $wpdb->prepare("SELECT * FROM $categories_table WHERE categoryName = $sport_name;");
-	// 	$res = $wpdb->query($sql);
-	// 	if ($res == 0 || !$res ) {
-	// 		//echo "returning false<br>";
-	// 		return false;
-	// 	} else {
-	// 		//echo "returning true<br>";
-	// 		return true;
-	// 	}
-	// }
-
-
-	function get_current_userID($file){
-	    global $wpdb;
-	    //$start = "          SUMMIT get user id \n";
-	    //fwrite($file, $start);
-	    if ( ! function_exists( 'get_current_user_id' ) ) {
-	        return 0;
-	    }
-	    $cur_userID = get_current_user_id();
-	    //$str = "-------- " . strval($cur_userID) . " ----------\n";
-	    //fwrite($file, $str);
-	    if($cur_userID == 0){
-	        //then not logged in
-	        //we should check this field when they click to start a review form.
-	        return "userID does not exist, or user is not logged in";
-	    }
-	    $user_table = $wpdb->prefix . "bcr_users";
-	    $q = $wpdb->prepare("SELECT 1 userID FROM $user_table WHERE userID = %s;", $cur_userID);
-	    $res = $wpdb->query($q);
-
-	    //check if user in wp bcr users
-	    return intval($cur_userID);
-	}
+}
+// function check_for_category($category_name){
+// 	global $wpdb;
+// 	$categories_table = $wpdb->prefix . "bcr_categories";
+// 	$sql = $wpdb->prepare("SELECT * FROM $categories_table WHERE productName = $category_name;");
+// 	$res = $wpdb->query($sql);
+// 	if ($res == 0 || !$res ) {
+// 		//echo "returning false<br>";
+// 		return false;
+// 	} else {
+// 		//echo "returning true<br>";
+// 		return true;
+// 	}
+// }
+// function check_for_sport($sport_name){
+// 	global $wpdb;
+// 	$categories_table = $wpdb->prefix . "bcr_categories";
+// 	$sql = $wpdb->prepare("SELECT * FROM $categories_table WHERE categoryName = $sport_name;");
+// 	$res = $wpdb->query($sql);
+// 	if ($res == 0 || !$res ) {
+// 		//echo "returning false<br>";
+// 		return false;
+// 	} else {
+// 		//echo "returning true<br>";
+// 		return true;
+// 	}
+// }
 
 function get_current_userID($file){
 	global $wpdb;
