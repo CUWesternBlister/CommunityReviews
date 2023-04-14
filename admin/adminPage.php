@@ -1,7 +1,5 @@
 <?php
-
-include 'update_community_reviews_custom_posts.php';
-
+require 'update_community_reviews_custom_posts.php';
 add_action( 'admin_menu', 'bcr_admin_page');
 
 /**
@@ -17,6 +15,14 @@ function bcr_admin_page() {
         'bcr_commuinty_reviews',
         'bcr_admin_page_html',
         'none'
+    );
+    add_submenu_page(
+        'bcr_commuinty_reviews',
+        'BCR Update Custom Posts',
+        'BCR Update Custom Posts',
+        'manage_options',
+        'bcr_admin_update_custom_post_submenu_page',
+        'bcr_admin_update_custom_post_submenu_page_callback'
     );
 }
 
@@ -45,7 +51,7 @@ function bcr_admin_page_html() {
             
             bcr_display_version();
             bcr_display_user_reset();
-            bcr_update_custom_posts_metadata();
+            bcr_run_table_structure_update();
 
             foreach($table_names_array as $table_name) {
                 bcr_display_table_contents($table_name);
@@ -101,29 +107,47 @@ function bcr_display_user_reset() {
     }
 }
 
-/**
- * Displays button to update the metadata of all custom posts
- * 
- * @return  void
- */
-function bcr_update_custom_posts_metadata() {
 
-        if(array_key_exists("update_custom_post_metadata_button", $_POST)) {
-            //echo "hello world <br>";
-            update_existing_custom_posts();
-        }
+//
+function bcr_run_table_structure_update() {
 
-        ?>
-            <div id="update_custom_post_metadata">
+            if(array_key_exists("table_structure_update_button", $_POST)) {
+                echo "here1<br>";
+                global $wpdb;
+                $reviews_table_name = $wpdb->prefix . "bcr_reviews";
+                $flagged_col = "FlaggedForReview";
+
+                $sql = "ALTER TABLE $reviews_table_name
+                        ADD FlaggedForReview tinyint(1) DEFAULT 0 NOT NULL;";
+
+                // $sql = "ALTER TABLE `{$reviews_table_name}`
+                //         ADD `FlaggedForReview` VARCHAR(20) tinyint(1) DEFAULT 0 NOT NULL;";
+
+                $query_result = $wpdb->query( $sql );
+                echo $query_result."<br>";
+                // $sql = "IF NOT EXISTS (
+                //     SELECT *
+                //     FROM INFORMATION_SCHEMA.COLUMNS
+                //     WHERE TABLE_NAME = $reviews_table_name AND COLUMN_NAME = $flagged_col
+                // ) 
+                // THEN
+                //     ALTER $reviews_table_name
+                //     ADD $flagged_col tinyint(1) NOT NULL DEFAULT '0';
+                // END IF;";
+
+                //require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+                //dbDelta( $sql );
+                echo "here2<br>";
+            }
+
+           ?>
+            <div id="table_update">
                 <form method="post">
-                    <input type="submit" name="update_custom_post_metadata_button" class="button" value="Update BCR Custom Post Metadata"/>
+                    <input type="submit" name="table_structure_update_button" class="button" value="Update Table Structure" />
                 </form>
             </div>
-        <?php
-    
+           <?php
 }
-
-
 
 /**
  * Displays the given table as an html table for debugging

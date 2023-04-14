@@ -28,7 +28,40 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 	}
 
     protected function register_controls() {
+		$this->start_controls_section(
+			'content_section',
+			[
+				'label' => esc_html__( 'Content', 'textdomain' ),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
 
+		$this->add_control(
+			'show_filters',
+			[
+				'label' => esc_html__( 'Show Filters', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Show', 'textdomain' ),
+				'label_off' => esc_html__( 'Hide', 'textdomain' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'posts_per_page',
+			[
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'label' => esc_html__( 'Number of reviews per page', 'textdomain' ),
+				'placeholder' => '4',
+				'min' => 1,
+				'max' => 50,
+				'step' => 1,
+				'default' => 4,
+			]
+		);
+
+		$this->end_controls_section();
     }
 
     protected function render() {
@@ -38,18 +71,36 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 
-		<div class="community-reviews-display">
-			<div class="community-reviews-display-mobile-only">
+		<?php
+			if('yes' === $settings['show_filters']) {
+				echo '<div class="community-reviews-display">';
+				echo '<div class="community-reviews-display-mobile-only">';
+			} else {
+				echo '<div class="community-reviews-display" style="display: grid; grid-template-columns: 100%;">';
+				echo '<div class="community-reviews-display-mobile-only" style="display: none;">';
+			}
+		?>
 				<button id="community-reviews-display-mobile-button">Filters</button>
 			</div>
-			<div class="community-reviews-display-filter" id="community-reviews-display-filter">
+			<?php
+				if('yes' === $settings['show_filters']) {
+					echo '<div class="community-reviews-display-filter" id="community-reviews-display-filter">';
+				} else {
+					echo '<div class="community-reviews-display-filter" id="community-reviews-display-filter" style="display: none;">';
+				}
+			?>
 
 				<strong>Product Filters</strong>
+
+				<div class="community-reviews-display-keyword-controls">
+					<div class="community-reviews-display-title">Keyword Search</div>
+					<input type="text" id="community-reviews-keyword-field" placeholder="- Enter some keyword -">
+				</div>
 
 				<div class="community-reviews-display-sport-controls">
 					<div class="community-reviews-display-title">Sport</div>
 					<select id="community-reviews-display-sport">
-						<option value="No Sport Filter">--No Sport Filter--</option>
+						<option value="No Sport Filter">- No Sport Filter -</option>
 						<?php
 							global $wpdb;
 
@@ -71,7 +122,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-category-controls">
 					<div class="community-reviews-display-title">Category</div>
 					<select id="community-reviews-display-category">
-						<option value="No Category Filter">--No Category Filter--</option>
+						<option value="No Category Filter">- No Category Filter -</option>
 						<?php
 							global $wpdb;
 
@@ -93,7 +144,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-brand-controls">
 					<div class="community-reviews-display-title">Brand</div>
 					<select id="community-reviews-display-brand">
-						<option value="No Brand Filter">--No Brand Filter--</option>
+						<option value="No Brand Filter">- No Brand Filter -</option>
 						<?php
 							global $wpdb;
 
@@ -115,7 +166,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-product-controls">
 					<div class="community-reviews-display-title">Product</div>
 					<select id="community-reviews-display-product">
-						<option value="No Product Filter">--No Product Filter--</option>
+						<option value="No Product Filter">- No Product Filter -</option>
 						<?php
 							global $wpdb;
 
@@ -152,6 +203,24 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					</div>
 				</div>
 
+				<div id="community-reviews-display-boot-size-controls" class="community-reviews-display-boot-size-controls">
+					<div class="community-reviews-display-title">Ski Boot Size</div>
+					<div class="community-reviews-display-slider">
+						<input id="community-reviews-display-slider-min-boot-size" type="range" value="15" min="15" max="34" step="0.5"/>
+						<input id="community-reviews-display-slider-max-boot-size" type="range" value="34" min="15" max="34" step="0.5"/>
+					</div>
+					
+					<div class="community-reviews-number-boxes">
+						<div class="community-reviews-number-box-left">
+							<input class="community-reviews-display-number-box" type="text" id="min_boot-size" value="15" readonly/>
+						</div>
+
+						<div class="community-reviews-number-box-right">
+							<input class="community-reviews-display-number-box" type="text" id="max_boot-size" value="34" readonly/>
+						</div>
+					</div>
+				</div>
+
 				<div id="community-reviews-display-year-controls" class="community-reviews-display-year-controls">
 					<div class="community-reviews-display-title">Year</div>
 					<div class="community-reviews-display-slider">
@@ -175,7 +244,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				<div class="community-reviews-display-ski-ability-controls">
 					<div class="community-reviews-display-title">Ski Ability</div>
 					<select id="community-reviews-display-ski-ability">
-						<option value="No Ability Filter">--No Ability Filter--</option>
+						<option value="No Ability Filter">- No Ability Filter -</option>
 						<option value="Beginner">Beginner</option>
 						<option value="Novice">Novice</option>
 						<option value="Intermediate">Intermediate</option>
@@ -214,10 +283,12 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 					<div class="community-reviews-units-option-mobile">
 						<div class ="community-reviews-unit-label community-reviews-unit-label-left">in</div>
-					
-						<div class="community-reviews-unit-toggle">
-							<input class="community-reviews-toggle" id="community-reviews-toggle-height-mobile" type="checkbox">
-							<label class="community-reviews-toggle-label" for="community-reviews-toggle-height-mobile"></label>
+						
+						<div class="community-reviews-display-mobile-center">
+							<div class="community-reviews-unit-toggle">
+								<input class="community-reviews-toggle" id="community-reviews-toggle-height-mobile" type="checkbox">
+								<label class="community-reviews-toggle-label" for="community-reviews-toggle-height-mobile"></label>
+							</div>
 						</div>
 
 						<div class ="community-reviews-unit-label community-reviews-unit-label-right">cm</div>
@@ -239,9 +310,11 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						<div class="community-reviews-number-box-center">
 							<div class ="community-reviews-unit-label">lbs</div>
 
-							<div class="community-reviews-unit-toggle">
-								<input class="community-reviews-toggle" id="community-reviews-toggle-weight" type="checkbox">
-								<label class="community-reviews-toggle-label" for="community-reviews-toggle-weight"></label>
+							<div class="community-reviews-unit-toggle-container">
+								<div class="community-reviews-unit-toggle">
+									<input class="community-reviews-toggle" id="community-reviews-toggle-weight" type="checkbox">
+									<label class="community-reviews-toggle-label" for="community-reviews-toggle-weight"></label>
+								</div>
 							</div>
 
 							<div class ="community-reviews-unit-label">kg</div>
@@ -254,10 +327,12 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 					<div class="community-reviews-units-option-mobile">
 						<div class ="community-reviews-unit-label community-reviews-unit-label-left">lbs</div>
-
-						<div class="community-reviews-unit-toggle">
-							<input class="community-reviews-toggle" id="community-reviews-toggle-weight-mobile" type="checkbox">
-							<label class="community-reviews-toggle-label" for="community-reviews-toggle-weight-mobile"></label>
+						
+						<div class="community-reviews-display-mobile-center">
+							<div class="community-reviews-unit-toggle">
+								<input class="community-reviews-toggle" id="community-reviews-toggle-weight-mobile" type="checkbox">
+								<label class="community-reviews-toggle-label" for="community-reviews-toggle-weight-mobile"></label>
+							</div>
 						</div>
 
 						<div class ="community-reviews-unit-label community-reviews-unit-label-right">kg</div>
@@ -272,7 +347,7 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 					$args = array(
 						'post_type' 	 => 'Community Reviews',
-						'posts_per_page' => 4,
+						'posts_per_page' => $settings['posts_per_page'],
 						'paged'          => $paged,
 					);
 
@@ -290,6 +365,8 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 				var category = $( '#community-reviews-display-category' ).val();
 				var brand = $( '#community-reviews-display-brand' ).val();
 				var product = $( '#community-reviews-display-product' ).val();
+
+				var keyword = $( '#community-reviews-keyword-field' ).val();
 
 				var min_length = $( '#community-reviews-display-slider-min-length' ).val();
 				var abs_min_length = $( '#community-reviews-display-slider-min-length' ).prop('min');
@@ -329,15 +406,26 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 					var max_height = "";
 				}
 
+				var min_boot_size = $( '#community-reviews-display-slider-min-boot-size' ).val();
+				var abs_min_boot_size = $( '#community-reviews-display-slider-min-boot-size' ).prop('min');
+				var max_boot_size = $( '#community-reviews-display-slider-max-boot-size' ).val();
+				var abs_max_boot_size = $( '#community-reviews-display-slider-max-boot-size' ).prop('max');
+				if(min_boot_size == abs_min_boot_size && max_boot_size == abs_max_boot_size) {
+					var min_boot_size = "";
+					var max_boot_size = "";
+				}
+
 				$.ajax( {
 					url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
 					method: 'POST',
 					data: {
 						action: 'bcr_filter_posts',
+						posts_per_page: <?php echo $settings['posts_per_page'];?>,
 						sport: sport,
 						category: category,
 						brand: brand,
 						product: product,
+						keyword: keyword,
 						min_length: min_length,
 						max_length: max_length,
 						min_year: min_year,
@@ -346,7 +434,9 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						min_height: min_height,
 						max_height: max_height,
 						min_weight: min_weight,
-						max_weight: max_weight
+						max_weight: max_weight,
+						min_boot_size: min_boot_size,
+						max_boot_size: max_boot_size
 					},
 					success: function( data ) {
 						$( '.community-reviews-display-show-posts' ).html( data );

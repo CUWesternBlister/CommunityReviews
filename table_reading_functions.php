@@ -41,8 +41,8 @@ function get_sport_info($category_name){ //may just want to return res !!!!!!
     $cate_table_name = $wpdb->prefix . "bcr_categories";
     $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryName = %s;", $category_name);
     $res = $wpdb->get_row($q);
-    if($res->parentID != 0){
-        $parent_id = $res->parentID;
+    $parent_id = $res->parentID;
+    if($parent_id != 0){
         $q = $wpdb->prepare("SELECT * FROM $cate_table_name WHERE categoryID = %s;", $parent_id);
         $res = $wpdb->get_row($q);
     }
@@ -56,5 +56,40 @@ function get_user_information($file){
     $queryString = $wpdb->prepare("SELECT * FROM $user_table_name WHERE userID=%s", $userID);
     $userInformation = $wpdb->get_row($queryString);
     return $userInformation;
+}
+
+
+function get_flagged_reviews(){
+    global $wpdb;
+    //echo "get_flagged_reviews<br>";
+    $review_table_name = $wpdb->prefix . "bcr_reviews";
+    $sql = $wpdb->prepare("SELECT * FROM $review_table_name WHERE FlaggedForReview=1");
+    $flagged_reviews = $wpdb->get_results($sql);
+    return $flagged_reviews;
+}
+
+
+function get_brand_id($brand_name){
+    global $wpdb;
+    $brand_table = $wpdb->prefix . "bcr_brands";
+    $q_brand = $wpdb->prepare("SELECT * FROM $brand_table WHERE brandName = %s;", $brand_name);
+    $res_brand = $wpdb->get_row($q_brand);
+    $brand_id = -1;
+    if($res_brand){
+        $brand_id = $res_brand->brandID;
+    }
+    return $brand_id;
+}
+
+function get_category_id($category_name){
+    global $wpdb;
+    $category_table = $wpdb->prefix . "bcr_categories";
+    $q_category = $wpdb->prepare("SELECT * FROM $category_table WHERE categoryName = %s;", $category_name);
+    $res_category = $wpdb->get_row($q_category);
+    $category_id = -1;
+    if($res_category){
+        $category_id = $res_category->categoryID;
+    }
+    return $category_id;
 }
 ?>

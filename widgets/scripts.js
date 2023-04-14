@@ -29,7 +29,7 @@ function bcr_update_display_box(box, slider, prefix) {
     } else if(prefix ==="height") {
         height = parseInt(slider.value, 10);
 
-        var is_mobile = window.matchMedia("(max-width: 400px)");
+        var is_mobile = window.matchMedia("(max-width: 1500px)");
 
         var checked = false;
 
@@ -52,7 +52,7 @@ function bcr_update_display_box(box, slider, prefix) {
     } else if(prefix === "lbs") {
         weight = parseInt(slider.value, 10);
 
-        var is_mobile = window.matchMedia("(max-width: 400px)");
+        var is_mobile = window.matchMedia("(max-width: 1500px)");
 
         var checked = false;
 
@@ -127,6 +127,9 @@ const height_max_slider = document.querySelector('#community-reviews-display-sli
 const weight_min_slider = document.querySelector('#community-reviews-display-slider-min-weight');
 const weight_max_slider = document.querySelector('#community-reviews-display-slider-max-weight');
 
+const boot_size_min_slider = document.querySelector('#community-reviews-display-slider-min-boot-size');
+const boot_size_max_slider = document.querySelector('#community-reviews-display-slider-max-boot-size');
+
 
 const length_min_box = document.querySelector('#min_length');
 const length_max_box = document.querySelector('#max_length');
@@ -140,11 +143,15 @@ const height_max_box = document.querySelector('#max_height');
 const weight_min_box = document.querySelector('#min_weight');
 const weight_max_box = document.querySelector('#max_weight');
 
+const boot_size_min_box = document.querySelector('#min_boot-size');
+const boot_size_max_box = document.querySelector('#max_boot-size');
+
 
 bcr_color_slider(length_max_slider, length_min_slider);
 bcr_color_slider(year_max_slider, year_min_slider);
 bcr_color_slider(height_max_slider, height_min_slider);
 bcr_color_slider(weight_max_slider, weight_min_slider);
+bcr_color_slider(boot_size_max_slider, boot_size_min_slider);
 
 bcr_update_units(height_min_slider, height_max_slider, height_min_box, height_max_box, "height");
 bcr_update_units(weight_min_slider, weight_max_slider, weight_min_box, weight_max_box, "lbs");
@@ -173,63 +180,85 @@ height_max_slider.oninput = () => bcr_alter_slider(height_max_slider, height_min
 weight_min_slider.oninput = () => bcr_alter_slider(weight_min_slider, weight_max_slider, true, weight_min_box, "lbs");
 weight_max_slider.oninput = () => bcr_alter_slider(weight_max_slider, weight_min_slider, false, weight_max_box, "lbs");
 
-function bcr_show_mobile_filters() {
-    const all_filters = document.getElementById('community-reviews-display-filter');
-    all_filters.style.display = 'initial';
-}
 
-function bcr_hide_mobile_filters() {
-    var is_mobile = window.matchMedia("(max-width: 400px)");
+function bcr_update_mobile_filter_display_state() {
+    var is_mobile = window.matchMedia("(max-width: 800px)");
     if(is_mobile.matches) {
         const all_filters = document.getElementById('community-reviews-display-filter');
-        all_filters.style.display = 'none';
+        if(all_filters.style.display == 'none') {
+            all_filters.style.display = 'initial';
+        } else {
+            all_filters.style.display = 'none';
+        }
     }
 }
+
+boot_size_min_slider.oninput = () => bcr_alter_slider(boot_size_min_slider, boot_size_max_slider, true, boot_size_min_box, "");
+boot_size_max_slider.oninput = () => bcr_alter_slider(boot_size_max_slider, boot_size_min_slider, false, boot_size_max_box, "");
 
 const mobile_button = document.getElementById('community-reviews-display-mobile-button');
 const filter_button = document.getElementById('community-reviews-display-submit');
 
-mobile_button.onclick = () => bcr_show_mobile_filters();
+mobile_button.onclick = () => bcr_update_mobile_filter_display_state();
 
-filter_button.onclick = () => bcr_hide_mobile_filters();
+filter_button.onclick = () => bcr_update_mobile_filter_display_state();
 
-function bcr_hide_length_selector(category_dropdown) {
+function bcr_hide_length_selector(category_dropdown, sport_dropdown, use_sport) {
     const length_div = document.getElementById('community-reviews-display-length-controls');
-    if(category_dropdown.value == "Skis" || category_dropdown.value == "Snowboards") {
+    if( (category_dropdown.value == "Skis" && ( use_sport == false || sport_dropdown.value == "Ski" ) ) 
+    || (category_dropdown.value == "Snowboards" &&  (use_sport == false || sport_dropdown.value == "Snowboard" ) ) ) {
         length_div.style.display = 'initial';
     } else {
         length_div.style.display = 'none';
     }
 }
 
-function bcr_hide_year_selector(category_dropdown) {
+function bcr_hide_year_selector(category_dropdown, sport_dropdown, use_sport) {
     const year_div = document.getElementById('community-reviews-display-year-controls');
-    if(category_dropdown.value == "Skis" || category_dropdown.value == "Snowboards") {
+    if( (category_dropdown.value == "Skis" && ( use_sport == false || sport_dropdown.value == "Ski" ) ) 
+    || (category_dropdown.value == "Snowboards" &&  (use_sport == false || sport_dropdown.value == "Snowboard" ) ) ) {
         year_div.style.display = 'initial';
     } else {
         year_div.style.display = 'none';
     }
 }
 
-function bcr_hide_selectors() {
+function bcr_hide_boot_size_selector(category_dropdown, sport_dropdown, use_sport) {
+    const boot_size_div = document.getElementById('community-reviews-display-boot-size-controls');
+    if(category_dropdown.value == "Ski Boots" && (use_sport == false || sport_dropdown.value == "Ski") ) {
+        boot_size_div.style.display = 'initial';
+    } else {
+        boot_size_div.style.display = 'none';
+    }
+}
+
+function bcr_hide_selectors(use_sport) {
     const category_dropdown = document.getElementById('community-reviews-display-category');
-    bcr_hide_length_selector(category_dropdown);
-    bcr_hide_year_selector(category_dropdown);
+    const sport_dropdown = document.getElementById('community-reviews-display-sport');
+    bcr_hide_length_selector(category_dropdown, sport_dropdown, use_sport);
+    bcr_hide_year_selector(category_dropdown, sport_dropdown, use_sport);
+    bcr_hide_boot_size_selector(category_dropdown, sport_dropdown, use_sport);
 }
 
 const categories_dropdown = document.getElementById('community-reviews-display-category');
 
+function bcr_sport_dropdown_functions() {
+    bcr_set_categories_dropdown();
+    bcr_hide_selectors(true);
+}
+
 function bcr_set_categories_dropdown() {
     const categories_dropdown = document.getElementById('community-reviews-display-category');
+    categories_dropdown.onchange = () => bcr_hide_selectors(false);
 }
 
 const sport_dropdown = document.getElementById('community-reviews-display-sport');
 
-sport_dropdown.onchange = () => bcr_set_categories_dropdown();
+sport_dropdown.onchange = () => bcr_sport_dropdown_functions();
 
-categories_dropdown.onchange = () => bcr_hide_selectors();
+categories_dropdown.onchange = () => bcr_hide_selectors(false);
 
-bcr_hide_selectors(categories_dropdown);
+bcr_hide_selectors(true);
 
 jQuery(document).ready(function ( $ ) {
     $('select').selectize({
