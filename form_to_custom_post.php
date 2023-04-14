@@ -185,23 +185,4 @@ function summit_form_submission_custom_post_content($current_review_id, $current
     return $header;
 }
 
-
-
-function fluent_form_sub($entryId, $formData, $form) {
-    // $current_form_name = $form->title; 
-    // if($current_form_name == "Blank Form (#22)"){
-    //     $fields = json_decode($form->form_fields)->fields;
-    //     // foreach($fields as $id => $obj){
-    //     //     $attributes = $obj->attributes;
-    //     //     echo "-------------$attributes->name---------------------- <br>";
-    //     //     echo "attributes: <br>".var_dump($attributes)."<br>";
-    //     //     echo "settings: <br>".var_dump($obj->settings)."<br>";
-    //     //     echo "editor_options: <br>".var_dump($obj->editor_options)."<br>";
-    //     // }
-    // //     echo "All fields: <br>".var_dump($fields)."<br><br>";
-    // //     echo "Form: <br>".var_dump($form)."<br><br>";
-    // //     echo "From Data: <br>".var_dump($formData)."<br><br>";
-    // // }
-}
-
 ?>

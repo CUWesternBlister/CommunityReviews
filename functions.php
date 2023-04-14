@@ -2,7 +2,6 @@
 add_action( 'elementor_pro/forms/new_record', 'elementor_summit_review_from_sub', 10, 2);
 add_action( 'elementor_pro/forms/new_record', 'profile_info_sub', 10, 2);
 add_action('fluentform_submission_inserted', 'fluent_summit_review_form_sub', 20, 3);
-add_action('fluentform_submission_inserted', 'fluent_form_sub', 20, 3);
 
 //BASIC INITIAL KNOW THYSELF POST
 
