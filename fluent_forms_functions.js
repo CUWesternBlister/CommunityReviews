@@ -3,7 +3,7 @@
 jQuery( document ).ready( function( $ ) {
     $( 'select' ).on( 'change', function() {
         const selector_name = $( this ).attr( 'id' );
-        if(selector_name.split('_')[2] != 'dropdown') {
+        if( !(selector_name.split('_')[2] == 'dropdown' && selector_name.split('_')[3] != 1) ) {
             return;
         }
 
