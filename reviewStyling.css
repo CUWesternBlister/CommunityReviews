@@ -3,6 +3,7 @@
 	.excerpt_long_container{
 		background: white;
 		width: 66%;
+		height: 150px;
 		padding-right: 10px;
 		padding-left: 10px;
 		display: block;
@@ -12,19 +13,18 @@
 
 	.excerpt_short_container{
 		background-color: rgb(240, 240, 240);
-		width: 33%;
+		width: 34%;
 		padding-left: 10px;
 		display: block;
 		float: left;
 		color:black;
 	}
 	.excerpt_whole_container{
-		width: 99%;
+		width: 100%;
 		float: left;
 		display: block;
-		margin-left: 3px;
 		background-color: rgb(240, 240, 240);
-		outline: 3px solid rgb(190, 190, 190);
+		border-top: 3px solid rgb(190, 190, 190);
 	}
 
 	.clip-circle{
@@ -47,7 +47,7 @@
 		width: 30%;
 		margin-left: 10px;
 		padding-top: 10px;
-		float: left;
+		float: center;
 		display: block;
 	}
 
@@ -91,7 +91,7 @@
 	}
 
 	.short_container {
-		width: 30%;
+		width: 20%;
 		padding-right: 10px;
 		padding-left: 10px;
 		display: block;
@@ -116,7 +116,7 @@
 	}
 
 	.long_container {
-		width: 60%;
+		width: 70%;
 		padding-right: 10px;
 		float: left;
 		display: block;
@@ -125,9 +125,8 @@
 	}
 
 	.whole_container {
-		width: 90%;
+		width: 100%;
 		padding-right: 20px;
-		margin-top: 20px;
 		float: left;
 		display: block;
 		background-color: rgb(240, 240, 240);
@@ -136,9 +135,10 @@
 	}
 
 	.whole_container_flex {
-		width: 90%;
+		width: 100%;
 		padding-right: 20px;
 		margin-top: 10px;
+		margin-bottom: 20px;
 		float: left;
 		display: flex;
 		background-color: rgb(240, 240, 240);
@@ -147,9 +147,10 @@
 	}
 
 	.whole_container_justified {
-		width: 90%;
+		width: 100%;
 		padding-top: 10px;
 		margin-top: 20px;
+		padding-left: 10px;
 		float: left;
 		display: flex;
 		flex-wrap: wrap;
@@ -160,7 +161,7 @@
 	}
 
 	.whole_container_version {
-		width: 90%;
+		width: 100%;
 		padding-right: 20px;
 		float: left;
 		display: table;
@@ -173,6 +174,7 @@
 	.excerpt_long_container{
 		background: white;
 		width: 66%;
+		height: 175px;
 		padding-right: 10px;
 		padding-left: 10px;
 		display: block;
@@ -182,19 +184,18 @@
 
 	.excerpt_short_container{
 		background-color: rgb(240, 240, 240);
-		width: 33%;
+		width: 34%;
 		padding-left: 10px;
 		display: block;
 		float: left;
 		color:black;
 	}
 	.excerpt_whole_container{
-		width: 99%;
+		width: 100%;
 		float: left;
 		display: block;
-		margin-left: 3px;
 		background-color: rgb(240, 240, 240);
-		outline: 3px solid rgb(190, 190, 190);
+		border-top: 3px solid rgb(190, 190, 190);
 	}
 
 	.clip-circle{
@@ -216,9 +217,9 @@
 
 	.circle_containter{
 		width: 30%;
-		margin-left: 10px;
+		margin-left: 20px;
 		padding-top: 10px;
-		float: left;
+		float: center;
 		display: block;
 	}
 
@@ -279,7 +280,7 @@
 	}
 
 	.long_container {
-		width: 90%;
+		width: 100%;
 		padding-right: 10px;
 		float: left;
 		display: block;
@@ -288,7 +289,7 @@
 	}
 
 	.whole_container {
-		width: 90%;
+		width: 100%;
 		padding-right: 20px;
 		margin-bottom: 20px;
 		float: left;
@@ -299,7 +300,7 @@
 	}
 
 	.whole_container_flex {
-		width: 90%;
+		width: 100%;
 		padding-right: 20px;
 		margin-top: 10px;
 		margin-bottom: 10px;
@@ -310,9 +311,10 @@
 		outline: 3px solid rgb(190, 190, 190);
 	}
 	.whole_container_justified {
-		width: 90%;
+		width: 100%;
 		padding-top: 20px;
 		margin-top: 10px;
+		padding-left: 10px;
 		float: left;
 		display: flex;
 		flex-wrap: wrap;
@@ -323,7 +325,7 @@
 	}
 
 	.whole_container_version {
-		width: 90%;
+		width: 100%;
 		padding-right: 20px;
 		float: left;
 		display: block;

@@ -171,8 +171,10 @@ function format_review_excerpt($userInfo, $userName, $qs_and_ans){
     $testimony_populated = false;
     foreach($testimonyQuestions as $arr){
         if ($arr['question'] == 'Reviewer Feedback'){
-            $personal_testimony = $arr;
-            $testimony_populated = true;
+            if($arr['answer'] != ''){
+                $personal_testimony = $arr;
+                $testimony_populated = true;
+            }
         }
     }
     $height = esc_html((int)($userInfo->height / 12)) . "' ". esc_html($userInfo->height % 12) . '"';
@@ -189,10 +191,14 @@ function format_review_excerpt($userInfo, $userName, $qs_and_ans){
             </div>';
         return $html;
     }else{
-        $html = '<div id= "userName" class = "userInfo">Reviewer: '.esc_html($userName).'</div>
-            <div id= "userHeight" class = "userInfo">Height: '.$height.'</div>
-            <div id "userWeight" class = "userInfo">Weight: '.$weight.'</div>
-            <div id= "userAbility" class = "userInfo">Reviewer Ability: '.esc_html($userInfo->skiAbility).'</div>';
+        $html = '<div id = "excerpt_container" class = "excerpt_whole_container">
+            <div id = "excerpt_attribute_container" class = "excerpt_long_container">
+            <div id= "userName" class = "userInfo">Reviewer: '.esc_html($userName).'</div>
+            <div id= "userHeight" class = "userInfo">Height: '.esc_html($userInfo->heightFeet).' ft, '.esc_html($userInfo->heightInches).' in</div>
+            <div id "userWeight" class = "userInfo">Weight: '.esc_html($userInfo->weight).' lbs</div>
+            <div id= "userAbility" class = "userInfo">Reviewer Ability: '.esc_html($userInfo->skiAbility). '</div> 
+            </div>
+            </div>';
         return $html;
     }
 }
@@ -207,9 +213,9 @@ foreach($title_arr as $arr){
     }
     else{
         if($arr['id'] == 3){
-            $str.=$arr["answer"] . 'cm ';
+            $str.= ', ' . $arr["answer"] . 'cm ';
         }else{
-            $str.=$arr["answer"] . ' ';  
+            $str.= ' ' .$arr["answer"];  
         }  
     }
 }

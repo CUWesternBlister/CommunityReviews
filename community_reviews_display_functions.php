@@ -135,13 +135,16 @@ function bcr_community_reviews_display_pagination($pages) {
 function bcr_display_posts( $query ) {
     if ( $query->have_posts() ) {
         echo '<div class="community-reviews-all-excerpts">';
+        global $post;
         while ( $query->have_posts() ) {
             $query->the_post();
             echo '<div class="community_review_excerpt">';
             echo '<a href=' . get_the_permalink() . '>';
-            echo '<div class="excerpt_title">' . get_the_title() . '</div>';
+            echo '<div class="excerpt_title">' . get_the_title() . ' </div>';
+            echo '<div class="excerpt_category"> Category:  '. get_post_meta($post->ID,'category')[0] .'</div>'; 
             echo '<div class="community_review_postdate">' . get_the_date() . '</div>';
             echo '<div class="excerpt_content">' . get_the_excerpt() . '</div>';
+            echo '<div class="excerpt_read_more"> Read Review... </div>';
             echo '</a>';
             echo '</div>';
         }
