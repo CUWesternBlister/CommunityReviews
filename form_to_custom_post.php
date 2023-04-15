@@ -5,42 +5,6 @@ require 'table_writing_functions.php';
 require 'table_reading_functions.php';
 require 'insert_custom_post.php';
 
-function profile_info_sub( $record, $ajax_handler ){
-    global $wpdb;
-    $user_table_name = $wpdb->prefix . "bcr_users";
-    $form_name = $record->get_form_settings( 'form_name' );
-    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
-    $file = fopen($file_path, "w") or die('fopen failed');
-    $fields = [];
-    if($form_name == 'Profile Builder') {
-        $userID = get_current_userID($file);
-        $fields['userID'] = $userID;
-        $raw_fields = $record->get('fields');
-        $fields['heightFeet'] = $raw_fields["height_feet"]['value'];
-        $fields['heightInches'] = $raw_fields["height_inches"]['value'];
-        $fields['weight'] = $raw_fields["weight"]['value'];
-        $fields['skiAbility'] = $raw_fields["user_experience"]['value'];
-
-        $q = $wpdb->prepare("SELECT userID FROM $user_table_name WHERE userID = %s;", $userID);
-        $res = $wpdb->query($q);
-
-        if($res){
-            $output['success'] = $wpdb->update($user_table_name, $fields, array("userID"=>$userID));
-        }else {
-            $output['success'] = $wpdb->insert($user_table_name, $fields);
-        }
-        $ajax_handler->add_response_data(true, $output);
-    }
-    fclose($file);
-
-    session_start();
-
-    $prev_url = isset($_SESSION['prev_url']) ? $_SESSION['prev_url'] : '';
-
-    $redirect_to = $record->replace_setting_shortcodes( $prev_url );
-
-	$ajax_handler->add_response_data( 'redirect_url', $redirect_to );
-}
 
 function fluent_summit_review_from_sub($entryId, $formData, $form) {
     global $wpdb;

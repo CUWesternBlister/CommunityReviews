@@ -154,14 +154,8 @@ function gen_HTML_for_testimony_qs($testimony, $formName){
 }
 
 function format_reviewerInfo($userInfo, $userName){
-    if ($userInfo->unit_preference == "imperial"){
-        $height = esc_html((int)($userInfo->height / 12)) . "' ". esc_html($userInfo->height % 12) . '"';
-        $weight = esc_html($userInfo->weight) . " lbs";
-    }
-    else{
-        $height = esc_html(round(2.54 * $userInfo->height)) . " cm";
-        $weight = esc_html(round(.4536 * $userInfo->weight)) . " kg";
-    }
+    $height = esc_html((int)($userInfo->height / 12)) . "' ". esc_html($userInfo->height % 12) . '"';
+    $weight = esc_html($userInfo->weight) . " lbs";
     $html = '<div id = "reviewerInfoContainer" class = "whole_container_flex">
         <div id= " userName" class = "short_container_no_float">Reviewer: '.esc_html($userName). '</div>
         <div id= "userHeight" class = "short_container_no_float">Height: '.$height.'</div>
@@ -181,14 +175,8 @@ function format_review_excerpt($userInfo, $userName, $qs_and_ans){
             $testimony_populated = true;
         }
     }
-    if ($userInfo->unit_preference == "imperial"){
-        $height = esc_html((int)($userInfo->height / 12)) . "' ". esc_html($userInfo->height % 12) . '"';
-        $weight = esc_html($userInfo->weight) . " lbs";
-    }
-    else{
-        $height = esc_html(round(2.54 * $userInfo->height)) . " cm";
-        $weight = esc_html(round(.4536 * $userInfo->weight)) . " kg";
-    }
+    $height = esc_html((int)($userInfo->height / 12)) . "' ". esc_html($userInfo->height % 12) . '"';
+    $weight = esc_html($userInfo->weight) . " lbs";
     if($testimony_populated == true){
         $html = '<div id = "excerpt_container" class = "excerpt_whole_container">
             <div id = "excerpt_testimony_container" class = "excerpt_long_container">'.esc_html($personal_testimony['answer']).'</div>
