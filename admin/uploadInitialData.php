@@ -28,7 +28,7 @@ function bcr_init_tables() {
     $addedFlag = bcr_update_reviews_with_flag();
 }
 /**
- *UPdates the reviews table to have attribute FlaggedForReview
+ *UPdates the reviews table to have attribute FlaggedForReview (REMOVE BEFORE FINAL RELEASE)
  * 
  * 
  * 
