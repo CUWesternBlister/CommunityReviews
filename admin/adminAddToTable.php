@@ -12,7 +12,7 @@ function bcr_flagged_reviews_callback() {
             
             $review_meta_data = get_flagged_review_meta_data($review_id);
             //$str = print_r($review_meta_data, true);
-            $str = "Review ID: $review_id, Post ID: $review_meta_data[id], Category: $review_meta_data[category], Brand: $review_meta_data[brand], Product: $review_meta_data[product], URL: $review_meta_data[url]";
+            $str = "Review ID: $review_id, Post ID: $review_meta_data[post_id], Category: $review_meta_data[category], Brand: $review_meta_data[brand], Product: $review_meta_data[product], URL: $review_meta_data[url]";
             $flagged_reviews_arr[$review_id] = $review_meta_data;
             
         }
