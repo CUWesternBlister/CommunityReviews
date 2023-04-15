@@ -280,6 +280,10 @@ add_action( 'wp_enqueue_scripts', 'bcr_load_filter_widget_css' );
  * @return  void
  */
 function bcr_load_filter_widget_js() {
+    if( !is_page('read-community-reviews') ) {
+        return;
+    }
+
     wp_enqueue_script( 'filter_widget_js', plugin_dir_url( __FILE__ ) . '/widgets/scripts.js', array( 'jquery' ), 1.1, true);
 }
 
