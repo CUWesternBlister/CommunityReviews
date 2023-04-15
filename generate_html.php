@@ -154,10 +154,12 @@ function gen_HTML_for_testimony_qs($testimony, $formName){
 }
 
 function format_reviewerInfo($userInfo, $userName){
+    $height = esc_html((int)($userInfo->height / 12)) . "' ". esc_html($userInfo->height % 12) . '"';
+    $weight = esc_html($userInfo->weight) . " lbs";
     $html = '<div id = "reviewerInfoContainer" class = "whole_container_flex">
         <div id= " userName" class = "short_container_no_float">Reviewer: '.esc_html($userName). '</div>
-        <div id= "userHeight" class = "short_container_no_float">Height: '.esc_html($userInfo->heightFeet).' ft, '.esc_html($userInfo->heightInches).' in</div>
-        <div id "userWeight" class = "short_container_no_float">Weight: '.esc_html($userInfo->weight).' lbs</div>
+        <div id= "userHeight" class = "short_container_no_float">Height: '.$height.'</div>
+        <div id "userWeight" class = "short_container_no_float">Weight: '.$weight.'</div>
         <div id= "userAbility" class = "short_container_no_float">Ability: '.esc_html($userInfo->skiAbility).'</div>
         </div>';
     return $html;
@@ -175,20 +177,20 @@ function format_review_excerpt($userInfo, $userName, $qs_and_ans){
             }
         }
     }
-
+    $height = esc_html((int)($userInfo->height / 12)) . "' ". esc_html($userInfo->height % 12) . '"';
+    $weight = esc_html($userInfo->weight) . " lbs";
     if($testimony_populated == true){
         $html = '<div id = "excerpt_container" class = "excerpt_whole_container">
             <div id = "excerpt_testimony_container" class = "excerpt_long_container">'.esc_html($personal_testimony['answer']).'</div>
             <div id = "excerpt_attributes_container" class = "excerpt_short_container">
             <div id= "userName" class = "userInfo">Reviewer: '.esc_html($userName).'</div>
-            <div id= "userHeight" class = "userInfo">Height: '.esc_html($userInfo->heightFeet).' ft, '.esc_html($userInfo->heightInches).' in</div>
-            <div id "userWeight" class = "userInfo">Weight: '.esc_html($userInfo->weight).' lbs</div>
+            <div id= "userHeight" class = "userInfo">Height: '.$height.'</div>
+            <div id "userWeight" class = "userInfo">Weight: '.$weight.'</div>
             <div id= "userAbility" class = "userInfo">Reviewer Ability: '.esc_html($userInfo->skiAbility).'</div>
             </div>
             </div>';
         return $html;
     }else{
-
         $html = '<div id = "excerpt_container" class = "excerpt_whole_container">
             <div id = "excerpt_attribute_container" class = "excerpt_long_container">
             <div id= "userName" class = "userInfo">Reviewer: '.esc_html($userName).'</div>
@@ -198,7 +200,6 @@ function format_review_excerpt($userInfo, $userName, $qs_and_ans){
             </div>
             </div>';
         return $html;
-
     }
 }
 

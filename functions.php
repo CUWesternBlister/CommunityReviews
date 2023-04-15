@@ -1,7 +1,7 @@
 <?php
 add_action( 'elementor_pro/forms/new_record', 'elementor_summit_review_from_sub', 10, 2);
 add_action( 'elementor_pro/forms/new_record', 'profile_info_sub', 10, 2);
-add_action('fluentform_submission_inserted', 'fluent_summit_review_from_sub', 20, 3);
+add_action('fluentform_submission_inserted', 'fluent_summit_review_form_sub', 20, 3);
 
 //BASIC INITIAL KNOW THYSELF POST
 
@@ -78,35 +78,22 @@ function get_record_from_form_submissions($atts) {
 add_shortcode( 'form_submissions', 'get_record_from_form_submissions' );
 
 function display_user_info($atts){
-    $userEntry = get_bcr_user();
+    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
+    $myfile = fopen($file_path, "a") or die('fopen failed');
+    $userEntry = get_user_information($myfile);
     if ( $userEntry ) {
-        $heightF = array_map(
-            function( $form_sub_object ) {
-                return $form_sub_object->heightFeet;
-            },
-            $userEntry
-        );
-        $heightI = array_map(
-            function( $form_sub_object ) {
-                return $form_sub_object->heightInches;
-            },
-            $userEntry
-        );
-        $weight = array_map(
-            function( $form_sub_object ) {
-                return $form_sub_object->weight;
-            },
-            $userEntry
-        );
-        $ability = array_map(
-            function( $form_sub_object ) {
-                return $form_sub_object->skiAbility;
-            },
-            $userEntry
-        );
-        return "User Height: ".esc_html(implode( '  ', $heightF)) ."' ".esc_html(implode( '  ', $heightI)) .'"'.
-            "<br><br>User Weight: ".esc_html(implode('  ', $weight))." lbs".
-            "<br><br>User Experience: ".esc_html(implode('  ', $ability));
+        $measurement = $userEntry->unit_preference;
+        if ($measurement == 'imperial'){
+            $Height = esc_html((int)($userEntry->height / 12)) . "' ". esc_html($userEntry->height % 12) . '"';
+            $Weight = esc_html($userEntry->weight)." lbs";
+        }
+        else{
+            $Height = esc_html(round(2.54*$userEntry->height)) . " cm";
+            $Weight = esc_html(round(0.4536*$userEntry->weight))." kg";
+        }
+        return "User Height: ".$Height.
+            "<br><br>User Weight: ".$Weight.
+            "<br><br>User Experience: ".esc_html($userEntry->skiAbility);
     }
     return '';
 }

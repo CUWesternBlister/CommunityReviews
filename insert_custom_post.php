@@ -22,6 +22,16 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
     $title_arr = $header["questions_and_answers"]["title"];
     
     $postTitle = get_post_title($title_arr);
+    
+    $years = "";
+    foreach($title_arr as $key => $arr){
+        if($arr['id'] == 9){
+            $years = $arr['answer'];
+            break;
+        }
+    }
+    $years_arr = explode("-", $years);
+    $year = $years_arr[0];
 
 
     //$str = print_r($title_arr, true);
@@ -39,7 +49,6 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
     $years_arr = explode("-", $years);
     $year = $years_arr[0];
 
-    $height = intval($userInfo->heightFeet) * 12 + intval($userInfo->heightInches);
 
     $ski_review = array(
                         'post_title' => wp_strip_all_tags($postTitle), 
@@ -49,7 +58,7 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
                                                 'formID'        => $form_id,
                                                 'userID'        => $userInfo->userID,
                                                 'userName'      => $userName,
-                                                'height'        => $height,
+                                                'height'        => $userInfo->height,
                                                 'weight'        => $userInfo->weight,
                                                 'skiAbility'    => $userInfo->skiAbility,
                                                 'product_tested'=> $header['productName'],
@@ -68,8 +77,6 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
                         );
     wp_insert_post( $ski_review );     
 }
-
-
 
 function get_answer_and_question_content($record,$file){
     global $wpdb;
@@ -100,7 +107,6 @@ function get_answer_and_question_content($record,$file){
         $return_array[$type][] = $obj;
         $answer_arr_i += 1;
     }
-   
     return $return_array;
 }
 ?>
