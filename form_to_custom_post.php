@@ -6,7 +6,7 @@ require 'table_reading_functions.php';
 require 'insert_custom_post.php';
 
 
-function fluent_summit_review_from_sub($entryId, $formData, $form) {
+function fluent_summit_review_form_sub($entryId, $formData, $form) {
     global $wpdb;
     $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt'; 
     $file = fopen($file_path, "w") or die('fopen failed');
@@ -16,7 +16,8 @@ function fluent_summit_review_from_sub($entryId, $formData, $form) {
     
     $current_form_id = $form->id;
 
-    $qs_and_as = fluent_get_fields_array($formData, $file);
+    //$qs_and_as = fluent_get_fields_array_formData($formData, $file);
+    $qs_and_as = fluent_get_fields_array_form($form, $formData);
     
     if(in_array($current_form_name, $existing_form_names)){
         //-----------------write to tables (table_writing_functions)-----------------------------
@@ -28,7 +29,7 @@ function fluent_summit_review_from_sub($entryId, $formData, $form) {
     fclose($file);
 }
 
-function fluent_get_fields_array($formData, $file){
+function fluent_get_fields_array_formData($formData, $file){
     $formData = array_slice($formData, 3, sizeof($formData)-1, $preserve_keys = true);
     $return_array = [];
     foreach($formData as $key => $value){
@@ -39,6 +40,39 @@ function fluent_get_fields_array($formData, $file){
             $return_array[$key] = implode(", ", $value);
         }else{
            $return_array[$key] = $value; 
+        }
+    }
+    return $return_array;
+}
+
+function fluent_get_fields_array_form($form, $formData){
+    // echo "Fields: <br>".var_dump($formData)."<br><br>";
+    // echo "------------------------------------------------------------<br>";
+    // echo "Fields: <br>".var_dump($form)."<br><br>";
+    // echo "------------------------------------------------------------<br>";
+    $fields = json_decode($form->form_fields)->fields;
+    // echo "Fields: <br>".var_dump($fields)."<br><br>";
+    // echo "------------------------------------------------------------<br>";
+    $return_array = [];
+    foreach($fields as $id => $obj){
+        $settings = $obj->settings;
+        $attributes = $obj->attributes;
+        $name =  $attributes->name;
+        $id = intval(preg_replace('/\D/', '',$settings->admin_field_label));
+        $answer = $formData[$name];
+        if(($id == 1 || $id == 2) && (str_contains(strtolower($answer), "other") || str_contains(strtolower($answer), "not listed"))){ $answer = null;}
+        if(gettype($answer) == "array"){ $answer = implode(", ", $answer); }
+        // echo "Name Attribute: $name<br>";
+        // echo "Answer: <br>".$answer."<br>";
+        // echo "Admin ID: <br>".strval($id)."<br>";
+        // echo "------------------------------------------------------------<br>";
+        if(!array_key_exists($id, $return_array) || $return_array[$id] == null){
+            $return_array[$id] = $answer;
+        }
+    }
+    foreach ($return_array as $key => $value) {
+        if ($value === null) {
+            unset($return_array[$key]);
         }
     }
     return $return_array;

@@ -1,63 +1,63 @@
 <?php
 
-	function check_for_product($product_name){
-		//echo "check_for_product()<br>";
-		global $wpdb;
-		$prod_table = $wpdb->prefix . "bcr_products";
-		$sql = $wpdb->prepare("SELECT * FROM $prod_table WHERE productName = '$product_name';");
-		//echo "SELECT * FROM $prod_table WHERE productName = $product_name;<br>";
-		$res = $wpdb->get_row($sql);
-		//echo print_r($res, true)."<br>";
-		if ($res) {
-			//echo "returning  prod ture<br>";
-			return true;
-		} else {
-			//echo "returning prod false<br>";
-			return false;
-		}
+function check_for_product($product_name){
+	//echo "check_for_product()<br>";
+	global $wpdb;
+	$prod_table = $wpdb->prefix . "bcr_products";
+	$sql = $wpdb->prepare("SELECT * FROM $prod_table WHERE productName = '$product_name';");
+	//echo "SELECT * FROM $prod_table WHERE productName = $product_name;<br>";
+	$res = $wpdb->get_row($sql);
+	//echo print_r($res, true)."<br>";
+	if ($res) {
+		//echo "returning  prod ture<br>";
+		return true;
+	} else {
+		//echo "returning prod false<br>";
+		return false;
 	}
-	function check_for_brand($brand_name){
-		//echo "check_for_brand()<br>";
-		global $wpdb;
-		$brand_table = $wpdb->prefix . "bcr_brands";
-		$sql = $wpdb->prepare("SELECT * FROM $brand_table WHERE brandName = '$brand_name';");
-		//echo "SELECT * FROM $brand_table WHERE brandName = $brand_name;<br>"; 
-		$res = $wpdb->get_row($sql);
-		//echo print_r($res, true)."<br>";
-		if ($res) {
-			//echo "returning brand true<br>";
-			return true;
-		} else {
-			//echo "returning brand false<br>";
-			return false;
-		}
+}
+function check_for_brand($brand_name){
+	//echo "check_for_brand()<br>";
+	global $wpdb;
+	$brand_table = $wpdb->prefix . "bcr_brands";
+	$sql = $wpdb->prepare("SELECT * FROM $brand_table WHERE brandName = '$brand_name';");
+	//echo "SELECT * FROM $brand_table WHERE brandName = $brand_name;<br>"; 
+	$res = $wpdb->get_row($sql);
+	//echo print_r($res, true)."<br>";
+	if ($res) {
+		//echo "returning brand true<br>";
+		return true;
+	} else {
+		//echo "returning brand false<br>";
+		return false;
 	}
-	// function check_for_category($category_name){
-	// 	global $wpdb;
-	// 	$categories_table = $wpdb->prefix . "bcr_categories";
-	// 	$sql = $wpdb->prepare("SELECT * FROM $categories_table WHERE productName = $category_name;");
-	// 	$res = $wpdb->query($sql);
-	// 	if ($res == 0 || !$res ) {
-	// 		//echo "returning false<br>";
-	// 		return false;
-	// 	} else {
-	// 		//echo "returning true<br>";
-	// 		return true;
-	// 	}
-	// }
-	// function check_for_sport($sport_name){
-	// 	global $wpdb;
-	// 	$categories_table = $wpdb->prefix . "bcr_categories";
-	// 	$sql = $wpdb->prepare("SELECT * FROM $categories_table WHERE categoryName = $sport_name;");
-	// 	$res = $wpdb->query($sql);
-	// 	if ($res == 0 || !$res ) {
-	// 		//echo "returning false<br>";
-	// 		return false;
-	// 	} else {
-	// 		//echo "returning true<br>";
-	// 		return true;
-	// 	}
-	// }
+}
+// function check_for_category($category_name){
+// 	global $wpdb;
+// 	$categories_table = $wpdb->prefix . "bcr_categories";
+// 	$sql = $wpdb->prepare("SELECT * FROM $categories_table WHERE productName = $category_name;");
+// 	$res = $wpdb->query($sql);
+// 	if ($res == 0 || !$res ) {
+// 		//echo "returning false<br>";
+// 		return false;
+// 	} else {
+// 		//echo "returning true<br>";
+// 		return true;
+// 	}
+// }
+// function check_for_sport($sport_name){
+// 	global $wpdb;
+// 	$categories_table = $wpdb->prefix . "bcr_categories";
+// 	$sql = $wpdb->prepare("SELECT * FROM $categories_table WHERE categoryName = $sport_name;");
+// 	$res = $wpdb->query($sql);
+// 	if ($res == 0 || !$res ) {
+// 		//echo "returning false<br>";
+// 		return false;
+// 	} else {
+// 		//echo "returning true<br>";
+// 		return true;
+// 	}
+// }
 
 function get_current_userID($file){
 	global $wpdb;
