@@ -49,7 +49,6 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
     $years_arr = explode("-", $years);
     $year = $years_arr[0];
 
-    $height = intval($userInfo->heightFeet) * 12 + intval($userInfo->heightInches);
 
     $ski_review = array(
                         'post_title' => wp_strip_all_tags($postTitle), 
@@ -59,7 +58,7 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
                                                 'formID'        => $form_id,
                                                 'userID'        => $userInfo->userID,
                                                 'userName'      => $userName,
-                                                'height'        => $height,
+                                                'height'        => $userInfo->height,
                                                 'weight'        => $userInfo->weight,
                                                 'skiAbility'    => $userInfo->skiAbility,
                                                 'product_tested'=> $header['productName'],
