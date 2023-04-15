@@ -24,7 +24,27 @@ function bcr_init_tables() {
     dbDelta($brands_sql);
     dbDelta($products_sql);
     dbDelta($questions_sql);
+
+    $addedFlag = bcr_update_reviews_with_flag();
 }
+/**
+ *UPdates the reviews table to have attribute FlaggedForReview
+ * 
+ * 
+ * 
+ * @return boolean s$uccess 
+ */
+function bcr_update_reviews_with_flag(){
+    global $wpdb;
+    $reviews_table_name = $wpdb->prefix . "bcr_reviews";
+
+    $sql = "ALTER TABLE $reviews_table_name ADD COLUMN FlaggedForReview INT DEFAULT 0;";
+
+    $res = $wpdb->get_results($sql);
+    return $res;
+}
+
+
 /**
  *Creates prepares the sql command, takes in file path to gzipped sql file 
  * 
