@@ -79,7 +79,11 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
 }
 
 function get_answer_and_question_content($record,$file){
-    global $wpdb;
+    // echo "Sorted qs and as:<br>";
+    // echo var_dump($return_array)."<br><br>";
+    // echo "------------------------------------------------------------<br>";
+
+    // global $wpdb;
     $return_array = array(
         'title' => array(),
         'testingConditions' => array(),
@@ -87,26 +91,31 @@ function get_answer_and_question_content($record,$file){
         'testimony' => array()
     );
 
-    $answer_content = array_values($record);
-    $question_ids = array_keys($record);   
-    $question_table = $wpdb->prefix . "bcr_questions";
+    // $answer_content = array_values($record);
+    // $question_ids = array_keys($record);   
+    // $question_table = $wpdb->prefix . "bcr_questions";
 
-    $answer_arr_i = 0;
-    foreach($question_ids as $id){
-        $q_content = get_question_read_content($id);
-        $type = "";
-        if(is_null($q_content->questionType) == false){
-            $type = $q_content->questionType;
-        }
-        $display = "";
-        if(is_null($q_content->questionDisplayContent) == false){
-            $display = $q_content->questionDisplayContent;
-        }
-        $answer = $answer_content[$answer_arr_i];
-        $obj = ["id" => $id, "question" => $display, "answer" => $answer];
-        $return_array[$type][] = $obj;
-        $answer_arr_i += 1;
-    }
-    return $return_array;
+    // $answer_arr_i = 0;
+    // foreach($question_ids as $id){
+    //     $q_content = get_question_read_content($id);
+    //     $type = "";
+    //     if(is_null($q_content->questionType) == false){
+    //         $type = $q_content->questionType;
+    //     }
+    //     $display = "";
+    //     if(is_null($q_content->questionDisplayContent) == false){
+    //         $display = $q_content->questionDisplayContent;
+    //     }
+    //     $answer = $answer_content[$answer_arr_i];
+    //     $obj = ["id" => $id, "question" => $display, "answer" => $answer];
+    //     $return_array[$type][] = $obj;
+    //     $answer_arr_i += 1;
+    // }
+    // //////////////////////////////////////////////////////////////
+    // echo "Sorted qs and as:<br>";
+    // echo var_dump($return_array)."<br><br>";
+    // echo "------------------------------------------------------------<br>";
+    //return $return_array;
+    wp_die();
 }
 ?>
