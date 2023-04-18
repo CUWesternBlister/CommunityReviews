@@ -46,9 +46,9 @@ function fluent_get_fields_array_formData($formData, $file){
 }
 
 function fluent_get_fields_array_form($form, $formData){
-    echo "Formdata: <br>";
-    echo var_dump($formData)."<br><br>";
-    echo "------------------------------------------------------------<br>";
+    // echo "Formdata: <br>";
+    // echo var_dump($formData)."<br><br>";
+    // echo "------------------------------------------------------------<br>";
     // echo "Form: <br>";
     // echo var_dump($form)."<br><br>";
     // echo "------------------------------------------------------------<br>";
@@ -150,13 +150,13 @@ function summit_form_submission_custom_post_content($current_review_id, $current
     $first_two_elements = array_slice($record['title'], 0, 2);
     $new_keys = array('0', '1');
     $first_two_elements = array_combine($new_keys, $first_two_elements);
-    echo "first two elements: <br>";
-    echo var_dump($first_two_elements)."<br><br>";
-    echo "------------------------------------------------------------<br>";
+    // echo "first two elements: <br>";
+    // echo var_dump($first_two_elements)."<br><br>";
+    // echo "------------------------------------------------------------<br>";
     $product_name = $first_two_elements[1]['answer'];
-    echo "product: ".$product_name."<br><br>";
+    // echo "product: ".$product_name."<br><br>";
     $brand_name = $first_two_elements[0]['answer'];
-    echo "brand: ".$brand_name."<br>";
+    // echo "brand: ".$brand_name."<br>";
     $category_info = get_category_info($current_form_id, $file);
 
     $sport_info = get_sport_info($category_info->categoryName);
@@ -164,7 +164,7 @@ function summit_form_submission_custom_post_content($current_review_id, $current
     // echo "record: <br>";
     // echo var_dump($record)."<br><br>";
     // echo "------------------------------------------------------------<br>";
-    $q_and_a_content = get_answer_and_question_content($record,$file);
+    $q_and_a_content = $record;#get_answer_and_question_content($record,$file);
     
     $user_info = get_user_information($file);
 
