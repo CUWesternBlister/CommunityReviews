@@ -1,0 +1,920 @@
+productID,categoryID,brandID,productName
+1,4,1,Hoji
+2,4,1,Inthayne
+3,4,1,MSP 107
+4,4,1,MSP 91
+5,4,1,MSP 99
+6,4,1,MSP CC
+7,4,1,Raven
+8,4,1,Renegade
+9,4,1,Switch
+10,4,1,Devastator
+11,4,30,Backland 100
+12,4,30,Backland 107
+13,4,30,Backland 107 W
+14,4,30,Backland 117
+15,4,30,Backland 78
+16,4,30,Backland 78 W
+17,4,30,Backland 85 UL
+19,4,30,Backland 85 W
+20,4,30,Backland 95
+21,4,30,Backland 98 W
+22,4,30,Bent 100
+23,4,30,Bent 110
+24,4,30,Bent 90
+25,4,30,Bent Chetler 120
+26,4,30,Maven 86
+27,4,30,Maven 86 C
+28,4,30,Maven 93 C
+29,4,30,Maverick 100 Ti
+30,4,30,Maverick 86 C
+31,4,30,Maverick 88 Ti
+32,4,30,Maverick 95 Ti
+33,4,2,Black Pearl 82
+34,4,2,Black Pearl 88
+35,4,2,Black Pearl 97
+36,4,2,Bonafide 97
+37,4,2,Brahma 82
+38,4,2,Brahma 88
+39,4,2,Cochise 106
+40,4,2,Rustler 10
+41,4,2,Rustler 11
+42,4,2,Rustler 9
+43,4,2,Sheeva 9
+44,4,2,Hustle 10 
+45,4,2,Hustle 11
+46,4,2,Sheeva 10
+47,4,2,Sheeva 11
+48,4,31,CRSP 83
+49,4,31,CRSP 88
+50,4,31,CRSP 92
+51,4,31,CRSP 104
+52,4,31,CRSP 114
+53,4,31,CRSP 120
+54,4,32,Acute v1.1
+55,4,32,Ballistic v2.2
+56,4,32,Ellipse v2.3
+57,4,32,Function v3.2
+58,4,32,Limit v3.2
+59,4,32,LP 100 v1.0
+60,4,32,LP 90 v2.0
+61,4,32,Mode 102 v1.1
+62,4,32,Mode 112 v3.1
+63,4,32,Radian v1.1
+64,4,4,Foundation 100 RP
+65,4,4,Foundation 106 C2
+66,4,4,Foundation 112 RP
+67,4,4,Kaizen 100
+68,4,4,Kaizen 105
+69,4,4,Koala 103
+70,4,4,Koala 111
+71,4,4,Koala 118
+72,4,4,Lotus 117
+73,4,4,Lotus 124
+74,4,4,Pagoda 100 RP
+75,4,4,Pagoda 106 C2
+76,4,4,Pagoda 112 RP
+77,4,4,Pagoda 90 RP
+78,4,4,Pagoda 94 C2
+79,4,4,Pagoda Tour 100 RP
+80,4,4,Pagoda Tour 106 C2
+81,4,4,Pagoda Tour 90 RP
+82,4,4,Pagoda Tour 94 C2
+83,4,4,Kaizen 112
+84,4,5,Blacklight 88
+85,4,5,Blacklight 88 W
+86,4,5,Blacklight 95
+87,4,5,Blacklight Pro
+88,4,5,Mezzalama
+89,4,5,Radical 107
+90,4,5,Radical 88
+91,4,5,Radical 88 W
+92,4,5,Radical 97
+93,4,5,Radical 97 W
+94,4,5,Seven Summits
+95,4,5,Seven Summits W
+96,4,5,Tigard 114
+97,4,29,E-Pro 85
+98,4,29,E-Pro 90
+99,4,29,E-Pro 99
+100,4,29,E-Tour 86
+101,4,29,E-Tour 90
+102,4,29,M-Cross 78
+103,4,29,M-Cross 82
+104,4,29,M-Cross 88
+105,4,29,M-Free 108
+106,4,29,M-Free 118
+107,4,29,M-Free 99
+108,4,29,M-Pro 108
+109,4,29,M-Pro 85
+110,4,29,M-Pro 90
+111,4,29,M-Pro 99
+112,4,29,M-Tour 108
+113,4,29,M-Tour 90
+114,4,29,M-Tour 99
+115,4,29,Menace 90
+116,4,6,Playmaker 91
+117,4,6,Ripstick 102 W
+118,4,6,Ripstick 106
+119,4,6,Ripstick 106 Black Edition
+120,4,6,Ripstick 116
+121,4,6,Ripstick 88
+122,4,6,Ripstick 88 W
+123,4,6,Ripstick 94 W
+124,4,6,Ripstick 94 W Black Edition
+125,4,6,Ripstick 96
+126,4,6,Ripstick 96 Black Edition
+127,4,6,Wildcat 76 C Black Edition
+128,4,6,Playmaker 101
+129,4,6,Ripstick Tour 104
+130,4,6,Ripstick Tour 88
+131,4,6,Ripstick Tour 88 W
+132,4,6,Ripstick Tour 94 
+133,4,6,Ripstick Tour 94 W
+134,4,6,Wildcat 76
+135,4,6,Wildcat 82 C
+136,4,6,Wildcat 82 CX
+137,4,6,Wildcat 86 C Black Edition
+138,4,6,Wildcat 86 CX
+139,4,6,Wingman 76 C
+140,4,6,Wingman 78 C
+141,4,6,Wingman 78 Ti
+142,4,6,Wingman 82 CTi
+143,4,6,Wingman 82 Ti
+144,4,6,Wingman 86 CTi
+145,4,6,Wingman 86 Ti
+146,4,33,Agent 1
+147,4,33,Agent 1X
+148,4,33,Agent 2
+149,4,33,Agent 2X
+150,4,33,Agent 3
+151,4,33,Agent 3X
+152,4,33,Agent 4
+153,4,33,Dancer 1
+154,4,33,Dancer 1X
+155,4,33,Dancer 2
+156,4,33,Dancer 2X
+157,4,33,Dancer 3
+158,4,33,Dancer 3X
+159,4,33,Dancer 4
+160,4,33,La Machine 1 Micro
+161,4,33,La Machine 2 Mini
+162,4,33,La Machine 3 Mega
+163,4,33,La Machine 5 Max
+164,4,33,Le Mono
+165,4,33,Mana 2
+166,4,33,Mana 2X
+167,4,33,Mana 3
+168,4,33,Mana 3X
+169,4,33,Mana 4
+170,4,33,Prodigy 0
+171,4,33,Prodigy 0X
+172,4,33,Prodigy 1
+173,4,33,Prodigy 1X
+174,4,33,Prodigy 2
+175,4,33,Prodigy 2X
+176,4,33,Prodigy 3
+177,4,33,Prodigy 3X
+178,4,33,Prodigy 4
+179,4,7,Hannibal 106 Carbon
+180,4,7,Hannibal 96 Carbon
+181,4,7,Ranger 102 
+182,4,7,Ranger 108
+183,4,7,Ranger 116
+184,4,7,Ranger 90
+185,4,7,Ranger 96
+186,4,7,RC One 74
+187,4,7,RC One 78 GT
+188,4,7,RC One 82 GT
+189,4,7,RC One 86 GT
+190,4,7,RC4 RCS
+191,4,7,RC4 The Curv
+192,4,7,The Curv DTi
+193,4,7,The Curv DTX
+194,4,7,The Curv GT
+195,4,7,Transalp 82 Carbon
+196,4,7,Transalp 86 Carbon
+197,4,7,Transalp 90 Carbon
+198,4,9,Cash 106
+199,4,9,Cash 117
+200,4,9,Completo 100
+201,4,9,Completo 105
+202,4,9,Completo 113
+203,4,9,G-Wagon
+204,4,9,Primary 104
+205,4,9,Primary 110
+206,4,9,Primary 95
+207,4,9,Rad Dad
+208,4,9,Rapture
+209,4,9,Spar 78
+210,4,9,Spar 88
+211,4,9,Spar Turbo
+212,4,9,TRN TEK
+213,4,9,Trophy 115
+214,4,9,Cash 93
+215,4,11,Absolut Joy
+216,4,11,Easy Joy
+217,4,11,Epic Joy
+218,4,11,Kore 103 W
+219,4,11,Kore 105
+220,4,11,Kore 111
+221,4,11,Kore 117
+222,4,11,Kore 85 W
+223,4,11,Kore 87 
+224,4,11,Kore 87 Tour
+225,4,11,Kore 91 W
+226,4,11,Kore 93 Tour
+227,4,11,Kore 97 W
+228,4,11,Kore 99
+229,4,11,Kore 99 Tour
+230,4,11,Oblivion 102
+231,4,11,Oblivion 116
+232,4,11,Oblivion 79
+233,4,11,Oblivion 84
+234,4,11,Oblivion 94
+235,4,11,Power Joy
+236,4,11,Real Joy
+237,4,11,Shape e-V10
+238,4,11,Shape e-V5
+239,4,11,Shape e-V8
+240,4,11,Shape V2
+241,4,11,Super Joy
+242,4,11,Supershape e-Magnum
+243,4,11,Supershape e-Original
+244,4,11,Supershape e-Rally
+245,4,11,Supershape e-Speed
+246,4,11,Supershape e-Titan
+247,4,11,Total Joy
+248,4,11,Kore 93
+249,4,12,Maiden 101
+250,4,12,Maiden 111
+251,4,12,Maiden 91
+252,4,12,Maiden Lite
+253,4,12,Mystic 107
+254,4,12,Mystic 97
+255,4,12,Natural 101
+256,4,12,Natural 111
+257,4,12,Nia Pro 105
+258,4,12,Nomad 105
+259,4,12,Nomad 115
+260,4,12,Nomad 95
+261,4,12,Nomad Lite
+262,4,12,Pioneer 109
+263,4,12,Pioneer 86
+264,4,12,Pioneer 96
+265,4,12,Riveter 104
+266,4,12,Riveter 85
+267,4,12,Riveter 95
+268,4,12,Saba Pro 107
+269,4,12,Saba Pro 117
+270,4,13,Dispatch 101
+271,4,13,Dispatch 110
+272,4,13,Dispatch 120
+273,4,13,Disruption 76C
+274,4,13,Disruption 78C
+275,4,13,Disruption 78Ti
+276,4,13,Disruption 82Ti
+277,4,13,Disruption MTi
+278,4,13,Disruption MTi W
+279,4,13,Disruption SC
+280,4,13,Crescendo
+281,4,13,Mindbender 96 C
+282,4,13,Mindbender 106 C 
+283,4,13,Mindbender 108Ti
+284,4,13,Mindbender 115 C W
+285,4,13,Mindbender 116 C
+286,4,13,Mindbender 89Ti
+287,4,13,Mindbender 99Ti
+288,4,13,Mindbender 99Ti W
+289,4,13,Poacher
+290,4,13,Reckoner 102
+291,4,13,Reckoner 112
+292,4,13,Reckoner 122
+293,4,13,Sight
+294,4,13,Wayback 80
+295,4,13,Wayback 84
+296,4,13,Wayback 88
+297,4,13,Wayback 96
+298,4,13,Wayback 106
+299,4,14,Bacon 108
+300,4,14,Bacon 115
+301,4,14,Blade
+302,4,14,Blade Optic 92
+303,4,14,Blade Optic 96
+304,4,14,Blade Optic 104
+305,4,14,Blade Optic 114
+306,4,14,Blend
+307,4,14,Chronic 94
+308,4,14,Chronic 101
+309,4,14,Pandora 84
+310,4,14,Pandora 94
+311,4,14,Pandora 104
+312,4,14,Pandora 110
+313,4,14,Pescado
+314,4,14,Sakana
+315,4,14,Tom Wallisch Pro
+316,4,14,Vision 98
+317,4,14,Vision 108
+318,4,14,Vision 118
+319,4,15,Dirty Bear Pro
+320,4,15,Dirty Bear XL
+321,4,15,Havoc Carbon
+322,4,15,Havoc Ti
+323,4,15,Supernova
+324,4,15,Supernova Carbon
+325,4,15,Superpatrol
+326,4,15,Superpatrol Carbon
+327,4,15,Superscout
+328,4,15,Superscout Carbon
+329,4,15,Superwolf
+330,4,15,Superwolf Carbon
+331,4,15,Vadera Carbon
+332,4,15,Vadera Ti
+333,4,15,Vanguard Carbon
+334,4,15,Vanguard Ti
+335,4,15,Vesper
+336,4,15,Vestal
+337,4,16,Annie Oakley
+338,4,16,Bangtail
+339,4,16,Big Hoss
+340,4,16,BNK
+341,4,16,Calamity Jane
+342,4,16,Claim Jumper
+343,4,16,Crosscut BC
+344,4,16,The Doc
+345,4,16,Eureka
+346,4,16,High Noon
+347,4,16,Homegrown
+348,4,16,The Leeper
+349,4,16,Mustang
+350,4,16,Mustang Sally
+351,4,16,Prospector 96
+352,4,16,Quickdraw
+353,4,16,Strata
+354,4,16,Wild Bill
+355,4,16,Wrangler
+356,4,17,Bella
+357,4,17,Bella Tour
+358,4,17,Chipotle Banana
+359,4,17,Commander 108
+360,4,17,Commander 98
+361,4,17,Commander Tour
+362,4,17,Deathwish 104
+363,4,17,Deathwish 112
+364,4,17,Deathwish Tour
+365,4,17,Frankenski
+366,4,17,Meridian
+367,4,17,Sierra
+368,4,17,Sierra Tour
+369,4,17,Wildcat
+370,4,17,Wildcat 101
+371,4,17,Wildcat 108
+372,4,17,Wildcat Tour
+373,4,17,Wildcat Tour 108
+374,4,34,Enforcer 88
+375,4,34,Enforcer 94
+376,4,34,Enforcer 100
+377,4,34,Enforcer 104 Free
+378,4,34,Enforcer 110 Free
+379,4,34,Enforcer 115 Free
+380,4,34,Santa Ana 88
+381,4,34,Santa Ana 93
+382,4,34,Santa Ana 98
+383,4,34,Santa Ana 104 Free
+384,4,34,Santa Ana 110 Free
+385,4,34,Steadfast 75
+386,4,34,Steadfast 80
+387,4,34,Steadfast 85
+388,4,34,Unleashed 90
+389,4,34,Unleashed 98
+390,4,34,Unleashed 108
+391,4,34,Unleashed 114
+392,4,34,Unlimited 88
+393,4,34,Unlimited 94
+394,4,34,Unlimited 104
+395,4,34,Wild Belle 74
+396,4,34,Wild Belle 78
+397,4,34,Wild Belle 84
+398,4,19,Peak 88
+399,4,19,Peak 98
+400,4,19,Peak 104
+401,4,19,Peak 110
+402,4,19,Peak 98 SC
+403,4,19,Peak 104 SC
+404,4,21,Atlas 80
+405,4,21,Citadel 106
+406,4,21,Earhart 88
+407,4,21,Endurance 88
+408,4,21,Endurance 98
+409,4,22,Blackops 92
+410,4,22,Blackops 98
+411,4,22,Blackops 118
+412,4,22,Essential Ski
+413,4,22,Experience 78 Carbon
+414,4,22,Experience 80 Carbon
+415,4,22,Experience 82 Basalt
+416,4,22,Experience 82 Ti
+417,4,22,Experience 86 Basalt
+418,4,22,Experience 86 Ti
+419,4,22,Forza 20 V
+420,4,22,Forza 40 V-CA
+421,4,22,Forza 60 V-Ti
+422,4,22,Forza 70 V-Ti Master
+423,4,22,Rallybird 92
+424,4,22,Rallybird 102
+425,4,22,Rallybird 104 Ti
+426,4,22,Sender 90
+427,4,22,Sender 94 Ti
+428,4,22,Sender 104 Ti
+429,4,22,Sender 106 Ti+
+430,4,22,Sender Free 110
+431,4,22,Sender Squad
+432,4,23,MTN 80 Pro
+433,4,23,MTN 86 Pro
+434,4,23,MTN 96 Carbon
+435,4,23,QST 92
+436,4,23,QST Lux 92
+437,4,23,QST 98
+438,4,23,QST Lumen 98
+439,4,23,QST 106 
+440,4,23,QST Stella 106
+441,4,23,QST Blank
+442,4,23,QST Echo 106
+443,4,23,S-Force SX
+444,4,23,S-Force FX.76
+445,4,23,S-Force FX.80
+446,4,23,S-Force Ti.76
+447,4,23,S-Force Ti.80
+448,4,23,Stance 84
+449,4,23,Stance 88 W
+450,4,23,Stance 90
+451,4,23,Stance 94 W
+452,4,23,Stance 96
+453,4,23,Stance 102
+454,4,24,Pure Piste 77Ti
+455,4,24,Pure Free 90Ti
+456,4,24,Pure Mission 98Ti
+457,4,24,Pure Pro 109Ti
+458,4,24,Pure Pow 115Ti
+459,4,24,Superguide 88
+460,4,24,Superguide 95
+461,4,24,Superguide LT 95
+462,4,24,Superguide Freetour
+463,4,35,Edge 88
+464,4,35,Edge FT
+465,4,35,Laser CX
+466,4,35,Laser GS
+467,4,35,Laser SC
+468,4,35,Laser SL
+469,4,35,Laser SX
+470,4,35,Laser WRT
+471,4,35,Laser WRT Pro
+472,4,35,Monetero AR
+473,4,35,Montero AS
+474,4,35,Montero AW
+475,4,35,Monetero AX
+476,4,35,Stormrider 88
+477,4,35,Stormrider 95
+478,4,35,Stormrider 102
+479,4,36,Blaze 82
+480,4,36,Blaze 86
+481,4,36,Blaze 94
+482,4,36,Blaze 106
+483,4,36,Blaze 114
+484,4,36,Deacon 72
+485,4,36,Deacon 76
+486,4,36,Deacon 79
+487,4,36,Deacon 80
+488,4,36,Deacon 84
+489,4,36,Deacon X
+490,4,36,Deacon XT
+491,4,36,Flair 72
+492,4,36,Flair 76
+493,4,36,Flair 79
+494,4,36,Flair SC Carbon
+495,4,36,Kanjo 84
+496,4,36,Kendo 88
+497,4,36,M6 Mantra
+498,4,36,Mantra 102
+499,4,36,Katana 108
+500,4,36,Yumi 80
+501,4,36,Yumi 84
+502,4,36,Kenja 88
+503,4,36,Secret 96
+504,4,36,Secret 102
+505,4,36,Mantra V.Werks
+506,4,36,Katana V.Werks
+507,4,36,Revolt 90
+508,4,36,Revolt 96
+509,4,36,Revolt 104
+510,4,36,Revolt 114
+511,4,36,Revolt 121
+512,4,36,Rise Above 88
+513,4,36,Rise Beyond 96
+514,4,26,Summit 91
+515,4,26,Summit 97
+516,4,26,Summit 105
+517,4,26,Summit 106
+518,4,26,Summit 107
+519,4,26,Summit 109
+520,4,27,Vital 100 Camber
+521,4,27,Vital 100 Reverse Camber
+522,4,27,Intention 108 Camber
+523,4,27,Intention 108 Reverse Camber
+524,4,27,Reason 120 Camber
+525,4,27,Reason 120 Reverse Camber
+526,2,30,Hawx Ultra XTD 130 CT GW
+527,2,30,Hawx Ultra XTD 120 CT GW
+528,2,30,Hawx Prime XTD 130 CT GW
+529,2,30,Hawx Prime XTD 120 CT GW
+530,2,30,Hawx Prime XTD 110 CT GW
+531,2,30,Hawx Prime XTD 100 CT GW
+532,2,30,Hawx Prime XTD 80 CT GW
+533,2,30,Hawx Ultra 130 Professional GW
+534,2,30,Hawx Ultra 130 S GW
+535,2,30,Hawx Ultra 120 S GW
+536,2,30,Hawx Ultra 110 S GW
+537,2,30,Hawx Ultra 100
+538,2,30,Hawx Prime 130 S GW
+539,2,30,Hawx Prime 120 S GW
+540,2,30,Hawx Prime 110 S GW
+541,2,30,Hawx Prime 100 GW
+542,2,30,Hawx Prime 90
+543,2,30,Hawx Prime
+544,2,30,Hawx Magna 130 S GW
+545,2,30,Hawx Magna 120 S GW
+546,2,30,Hawx Magna 110 S GW
+547,2,30,Hawx Magna 110 GW
+548,2,30,Hawx Magna 100
+549,2,30,Hawx Magna 80
+550,2,30,Redster.....
+551,2,37,Pantera 130 ID
+552,2,37,Pantera 120 ID
+553,2,37,Pantera 120 IF
+554,2,37,Pantera 105 W ID GW
+555,2,37,Pantera 100 GW
+556,2,37,Pantera 95 W GW
+557,2,37,Pantera 95 W ID
+558,2,37,Pantera 90 GW
+559,2,37,Pantera 85 W GW
+560,2,37,Pantera 75 W GW
+561,2,37,Quantum Free A. Factory 130
+562,2,37,Quantum Free 110
+563,2,37,Quantum Free 105 W
+564,2,37,Quantum Lite
+565,2,37,Lupo Pro HD
+566,2,37,Lupo AX HD
+567,2,37,Lupo AX 120
+568,2,37,Lupo AX 100
+569,2,37,Lupo AX 100 W
+570,2,37,Krypton 130 ID T.I.
+571,2,37,Chakra Elevate115
+572,2,37,Krypton AX T.I.
+573,2,37,Chakra AX T.I
+574,2,37,Boss 110
+575,2,37,Il Moro MX 90
+576,2,37,Jakk
+577,2,37,Il Moro
+578,2,37,DS Asolo Factory 115 W GW
+579,2,37,DS Asolo Factory 95 W GW
+580,2,37,Veloce 130 GW 
+581,2,37,Veloce 120 GW 
+582,2,37,Veloce 110 GW 
+583,2,37,Veloce 105 GW 
+584,2,37,Veloce 100 GW 
+585,2,37,Veloce 95 W GW 
+586,2,37,Veloce 85 W GW 
+587,2,37,DS AX 120 GW
+588,2,37,DS AX 90 GW
+589,2,5,Tigard 130
+590,2,5,Blacklight
+591,2,5,TLT X
+592,2,5,Hoji Free 110
+593,2,5,Radical
+594,2,5,Speed
+595,2,5,Mezzalama
+596,2,5,DNA
+597,2,5,TLT Speedfit Pro
+598,2,5,Radical Pro
+599,2,5,Hoji Free 130
+600,2,5,DNA Pintec
+601,2,5,DNA by PG**
+602,2,5,TLT X W
+603,2,5,Radical Pro W
+604,2,5,Radical W
+605,2,5,Blacklight W
+606,2,5,Hoji Pro Tour W
+607,2,5,TLT Speedfit
+608,2,7,The Curv GT 130 Vac GW
+609,2,7,The Curv GT 120 Vac GW
+610,2,7,The Curv GT 115 Vac GW
+611,2,7,The Curv GT 105 Vac GW
+612,2,7,The Curv GT 95 Vac GW
+613,2,7,The Curv 130 Vac GW
+614,2,7,The Curv 120 Vac GW
+615,2,7,The Curv 110 Vac GW
+616,2,7,The Curv 95 Vac GW
+617,2,7,RC One 120 Vac GW
+618,2,7,RC One 110 Vac GW
+619,2,7,RC One 100 Vac GW
+620,2,7,RC One 95 Vac GW
+621,2,7,RC One 90
+622,2,7,RC One 85
+623,2,7,Ranger Pro 130 GW DYN
+624,2,7,Ranger 120 GW DYN
+625,2,7,Ranger 115 GW DYN
+626,2,7,Ranger 110 GW DYN
+627,2,7,Ranger 105 GW DYN
+628,2,7,Ranger One 130 Vac GW DYN
+629,2,7,Ranger One 120 Vac GW
+630,2,7,Ranger One 115 Vac GW DYN
+631,2,7,Ranger One 110 Vac GW
+632,2,7,Ranger One 95 Vac GW
+633,2,7,Transalp Pro
+634,2,7,Transalp Tour WS
+635,2,7,Transalp TS
+636,2,7,Travers CS
+637,2,7,Travers GR
+638,2,7,Travers GR WS
+639,2,7,Travers TS
+640,2,7,Travers TS WS
+641,2,11,Formula RS 130 GW
+642,2,11,Formula RS 120 GW
+643,2,11,Formula RS 110 GW
+644,2,11,Formula 130 GW
+645,2,11,Formula 120 GW
+646,2,11,Formula 110 GW
+647,2,11,Formula 100
+648,2,11,Nexo LYT 130 GW
+649,2,11,Nexo LYT 120 GW
+650,2,11,Nexo LYT 110 GW
+651,2,11,Edge LYT 130 GW
+652,2,11,Edge LYT 110 GW
+653,2,11,Edge LYT 100 GW
+654,2,11,Edge LYT 90 GW
+655,2,11,Edge LYT 80 GW
+656,2,11,Edge LYT 130 GW
+657,2,11,Formula RS 105 W GW
+658,2,11,Formula RS 95 W GW
+659,2,11,Formula 105 W GW
+660,2,11,Formula 95 W GW
+661,2,11,Formula 85 W GW
+662,2,11,Edge LYT 100 W GW
+663,2,11,Edge LYT 90 W
+664,2,11,Edge LYT 80 W
+665,2,11,Nexo LYT 100 W
+666,2,11,Kore RS 130 GW
+667,2,11,Kore RS 120 GW
+668,2,11,Kore RS 110 GW
+669,2,11,Kore RS 105 W GW
+670,2,11,Kore RS 95 W GW
+671,2,13,Recon 120 Boa
+672,2,13,Anthem 95 Boa
+673,2,13,Mindbender Team
+674,2,13,Mindbender 130
+675,2,13,Mindbender 120
+676,2,13,Mindbender 100
+677,2,13,Mindbender Team W
+678,2,13,Mindbender 115 W
+679,2,13,Mindbender 95 W
+680,2,13,Recon Team
+681,2,13,Recon Pro
+682,2,13,Recon 130
+683,2,13,Recon 120
+684,2,13,Recon 120 Heat
+685,2,13,Recon 100
+686,2,13,Recon 90
+687,2,13,Anthem Team W
+688,2,13,Anthem Pro W
+689,2,13,Anthem 115 W
+690,2,13,Anthem 105 W
+691,2,13,Anthem 105 Heat W
+692,2,13,Anthem 85 W
+693,2,13,Anthem 75 W
+694,2,13,Dispatch Pro
+695,2,13,Dispatch LT
+696,2,13,Dispatch
+697,2,13,Dispatch LT W
+698,2,13,Dispatch W
+699,2,13,BFC 120
+700,2,13,BFC 100
+701,2,13,BFC 100 Heat
+702,2,13,BFC 90
+703,2,13,BFC 80
+704,2,13,BFC W 105 W
+705,2,13,BFC W 95 W
+706,2,13,BFC W 95 Heat W
+707,2,13,BFC W 85 W
+708,2,13,BFC W 75 W
+709,2,13,Revolver TW
+710,2,13,Revolver Team
+711,2,13,Revolver Pro
+712,2,13,Revolver
+713,2,13,Method B & E
+714,2,13,Method Pro
+715,2,13,Method
+716,2,13,Diverge LT
+717,2,13,Diverge SC
+718,2,13,Revolver TBL W
+719,2,13,Revolver Team W
+720,2,13,Revolver Pro W
+721,2,13,Revolver W
+722,2,13,Method W
+723,2,13,Method Pro W
+724,2,13,Diverge LT W
+725,2,13,Diverge W
+726,2,34,Dobbermann GP 130
+727,2,34,Dobbermann GP 110
+728,2,34,Pro Machine 130 GW
+729,2,34,Pro Machine 120 GW
+730,2,34,Pro Machine 110 GW
+731,2,34,Pro Machine 100 GW
+732,2,34,Speed Machine 3 130 GW
+733,2,34,Speed Machine 3 120 GW
+734,2,34,Speed Machine 3 110 GW
+735,2,34,Speed Machine 3 100 GW
+736,2,34,Speed Machine 3 90 GW
+737,2,34,Sport Machine 3 130 GW
+738,2,34,Sport Machine 3 120 GW
+739,2,34,Sport Machine 3 110 GW
+740,2,34,Sport Machine 3 100 GW
+741,2,34,Sport Machine 3 90
+742,2,34,Sport Machine 3 80
+743,2,34,Stryder Elite 130 DYN
+744,2,34,Stryder Pro 130 DYN
+745,2,34,Stryder 120 DYN
+746,2,34,The Cruise 120
+747,2,34,The Cruise 90
+748,2,34,The Cruise 70
+749,2,34,Dobermann WC
+750,2,34,Dobbermann GP 130 W
+751,2,34,Dobbermann GP 110 W
+752,2,34,Pro Machine 115 GW W
+753,2,34,Pro Machine 105 GW W
+754,2,34,Pro Machine 95 GW W
+755,2,34,Pro Machine 85 GW W
+756,2,34,Speed Machine 3 115 GW W
+757,2,34,Speed Machine 3 105 GW W
+758,2,34,Speed Machine 3 95 GW W
+759,2,34,Speed Machine 3 85 GW W
+760,2,34,Sport Machine 3 95 GW W
+761,2,34,Sport Machine 3 85 GW W
+762,2,34,Sport Machine 3 75 W
+763,2,34,Sport Machine 3 65 W
+764,2,34,HF Elite Heat W
+765,2,34,HF 85 W GW
+766,2,34,HF 75 W
+767,2,34,Stryder 115 DYN W
+768,2,34,Stryder 95 DYN W
+769,2,34,The Cruise 85 W
+770,2,34,The Cruise 75 W
+771,2,34,The Cruise 65 W
+772,2,34,The Cruise S W
+773,2,22,Hi-Speed Elite 130 Car LV GW
+774,2,22,Hi-Speed Elite 120 Car LV GW
+775,2,22,Hi-Speed Elite 110 Car LV GW
+776,2,22,Hi-Speed Pro Heat MV GW
+777,2,22,Hi-Speed Pro 130 Ca MV GW
+778,2,22,Hi-Speed Pro 120 MV GW
+779,2,22,Hi-Speed Pro 110 MV GW
+780,2,22,Hi-Speed Pro 100 MV GW
+781,2,22,Hi-Speed 130 HV GW
+782,2,22,Hi-Speed 120 HV GW
+783,2,22,Hi-Speed 100 HV GW
+784,2,22,Hi-Speed 80 HV GW
+785,2,22,Speed 120
+786,2,22,Speed 100
+787,2,22,Speed 80
+788,2,22,Evo 70
+789,2,22,Pure Elite 120 GW W
+790,2,22,Pure Elite 90 GW W
+791,2,22,Pure Elite 70 GW W
+792,2,22,Pure Pro Heat GW W
+793,2,22,Pure Pro 100 GW W
+794,2,22,Pure Pro 90 GW W
+795,2,22,Pure Pro 80 GW W
+796,2,22,Pure Heat GW W
+797,2,22,Pure 80 W
+798,2,22,Pure 70 W
+799,2,22,Pure Comfort 60 W
+800,2,22,Alltrack Pro 130 GW
+801,2,22,Alltrack Pro 120 GW
+802,2,22,Alltrack Pro 100 GW
+803,2,22,Alltrack 130 GW
+804,2,22,Alltrack 110 GW
+805,2,22,Alltrack 90 GW
+806,2,22,Track 130 GW
+807,2,22,Track 110
+808,2,22,Track 90
+809,2,22,Alltrack Elite 110 GW W
+810,2,22,Alltrack Elite 90 GW W
+811,2,22,Alltrack Pro 100 W
+812,2,22,Alltrack Pro 80 W
+813,2,22,Alltrack 80 W
+814,2,22,Alltrack 70 W
+815,2,22,Track 70 W
+816,2,22,Alltrack Elite 130 LT
+817,2,22,Alltrack Pro 120 LT
+818,2,22,Alltrack Pro 110 LT
+819,2,22,Alltrack Elite 110 LT W GW
+820,2,22,Alltrack Elite 90 LT W
+821,2,23,Shift Pro 130 AT
+822,2,23,Shift Pro 120 AT
+823,2,23,Shift Pro 110 AT
+824,2,23,Shift Pro 110 AT W
+825,2,23,Shift Pro 100 AT
+826,2,23,Shift Pro 100 AT W
+827,2,23,Shift Pro 90 AT W
+828,2,23,QST Access 70 W
+829,2,23,QST Access 80
+830,2,23,QST Access 70
+831,2,23,QST Access R80
+832,2,23,QST Access 60 W
+833,2,23,S/Pro Supra Boa 120
+834,2,23,S/Pro Supra Boa 105 W
+835,2,23,S/Pro MV 90 CS
+836,2,23,S/Pro MV 80 CS W
+837,2,23,S/Lab MTN Summit
+838,2,23,S/Lab MTN
+839,2,23,MTN Summit Pro
+840,2,23,MTN Summit Pro W
+841,2,23,MTN Summit Pure
+842,2,23,MTN Summit Pure W
+843,7,32,Digit v1.1
+844,7,32,Fission v2.0
+845,7,32,Joule v3.0
+846,7,32,Moment Generator v3.1
+847,7,32,Outlier v4.0
+848,7,32,Prime v3.0
+849,7,32,Wave Length v1.1
+850,7,22,After Hours
+851,7,22,Airis
+852,7,22,Diva
+853,7,22,Jibsaw
+854,7,22,Juggernaut
+855,7,22,Meraki
+856,7,22,One
+857,7,22,Resurgence
+858,7,22,Revenant
+859,7,22,Sawblade
+860,7,22,XV
+861,7,22,XV Sashimi
+862,7,22,XV Sushi
+863,7,27,BelleAir
+864,7,27,BelleTour
+865,3,8,Albert Jacket
+866,3,8,Lab Coat
+867,3,8,Malone Jacket
+868,3,8,Kane Jacket
+869,3,8,Colt Down Jacket
+870,3,8,Quantum Pro Jacket
+871,3,8,Crowe Jacket
+872,3,8,Generals Down Jacket
+873,3,8,Dante Jacket
+874,3,8,Roswell Jacket
+875,3,8,Knight Jacket
+876,3,8,Patrol Jacket
+877,3,8,Knight Anorak
+878,3,8,Baker Bib
+879,3,8,Baker Perm Bib
+880,3,8,Compound Bib
+881,3,8,Smythe Bib
+882,3,8,Magnum Pant
+883,3,8,Chemical Pant
+884,3,8,Tannen Bib
+885,3,8,Snowman Bib
+886,3,8,Patrol Pant
+887,3,8,Firebird Bib
+888,3,8,Cage Pant
+889,3,8,Snowman Insulated Pant
+890,3,18,Swisswool Piz Boe Jacket
+891,3,18,Swisswool Piz Boe Vest
+892,3,18,3L Ortler Jacket
+893,3,18,Berrino Hooded Jacket
+894,3,18,Swisswool Becchei Hybrid Jacket
+895,3,18,Col Becchei Jacket
+896,3,8,Domino Jacket
+897,3,8,Avery Jacket
+898,3,8,Billie Coat
+899,3,8,Katinka Hoody
+900,3,8,Lucy Jacket
+901,3,8,Betty Down Jacket
+902,3,8,Mia Jacket
+903,3,8,Clypso Jacket
+904,3,8,Laurel Vest
+905,3,8,Kenzie Jacket
+906,3,8,Sarah Jacket
+907,3,8,Sarah Anorak
+908,3,8,Veronica Jacket
+909,3,8,Carla Jacket
+910,3,8,Puma Jacket
+911,3,8,Davis Jacket
+912,3,8,Siren Bib
+913,3,8,Moxie Bib
+914,3,8,Foxy Bib
+915,3,8,Sphynx Bib
+916,3,8,Nina Pant
+917,3,8,Daisy Insulated Pant
+918,3,8,Fae Insulated Pant
+919,3,8,Kimberly Bib
+920,3,8,Hyde Pant

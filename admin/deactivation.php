@@ -8,7 +8,7 @@
  */
 function bcr_uninstall() {
     //bcr_remove_tables();
-    bcr_drop_product_table();
+    //bcr_drop_product_table();
 }
 
 /**
