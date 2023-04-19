@@ -44,9 +44,9 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
     $length = "";
     $ski_boot_size = "";
     foreach($ordered_title_arr as $key => $arr){
-        if($arr['question']=='Model-Year'){$years = $arr['answer'];}
-        else if($arr['question']=='Ski Length'){$length = intval($arr['answer']);}
-        else if($arr['question']=='Boot Size'){$ski_boot_size = intval($arr['answer']);}
+        if(strtolower($arr['question'])=='model-year'){$years = $arr['answer'];}
+        else if(strtolower($arr['question'])=='ski length'){$length = intval($arr['answer']);}
+        else if(strtolower($arr['question'])=='ski boot size'){$ski_boot_size = intval($arr['answer']);}
     }
 
     $years_arr = explode("-", $years);
