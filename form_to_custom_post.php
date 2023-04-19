@@ -67,13 +67,14 @@ function fluent_get_fields_array_form($form, $formData){
         // echo "------------------------------------------------------------<br>";
         $settings = $obj->settings;
         $questionContent = $settings->label;
-        $type = $settings->admin_field_label;
-        $title_arr = explode("_", $type, -1);
+        $questionDisplayContent = $settings->admin_field_label;
+        $type = $settings->container_class;
+        $title_arr = explode("_", $type);
         $title_order = "";
-        if(!empty($title_arr)){
+        if(!($title_arr[0] == "")){
             $type = $title_arr[0];
             $title_order = $title_arr[1];
-            echo "title arr: ".print_r($title_arr,true)."<br>";
+            //echo "title arr: ".print_r($title_arr,true)."<br>";
         }
         
         $attributes = $obj->attributes;
@@ -91,9 +92,9 @@ function fluent_get_fields_array_form($form, $formData){
             // echo "answer: ".$answer."<br>";
             // echo "------------------------------------------------------------<br>";
             if($title_order !== ""){
-                $return_array[$type][$name] = ["question" => $questionContent, "answer" => $answer, "title_order" => $title_order];
+                $return_array[$type][$name] = ["question" => $questionDisplayContent, "answer" => $answer, "title_order" => $title_order, 'name_attribute' => $name];
             }else{
-                $return_array[$type][$name] = ["question" => $questionContent, "answer" => $answer];
+                $return_array[$type][$name] = ["question" => $questionDisplayContent, "answer" => $answer, 'name_attribute' => $name];
             }  
         }
     }

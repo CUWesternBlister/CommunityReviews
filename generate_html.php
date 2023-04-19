@@ -77,53 +77,53 @@ function gen_HTML_for_multiple_choice_qs($mulipleChoiceQs, $formName){
     $html = '<div id = "multipleChoice" class = "whole_container_justified">';
     foreach($mulipleChoiceQs as $arr){  
             if ($arr['answer'] == 'Terrible'){
-                $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['id']).'" class = circle_container">
-                    <div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
-                    <div id = "circle1'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
-                    <div id = "circle2'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
-                    <div id = "circle3'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
-                    <div id = "circle4'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
-                    <div id = "circle5'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
+                $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = circle_container">
+                    <div id = "'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
+                    <div id = "circle1'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle"></div>
+                    <div id = "circle2'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle-grey"></div>
+                    <div id = "circle3'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle-grey"></div>
+                    <div id = "circle4'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle-grey"></div>
+                    <div id = "circle5'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle-grey"></div>
                     </div>';
             } 
             if ($arr['answer'] == 'Not very good'){
-                $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['id']).'" class = circle_container">
-                    <div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
-                    <div id = "circle1'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
-                    <div id = "circle2'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
-                    <div id = "circle3'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
-                    <div id = "circle4'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
-                    <div id = "circle5'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
+                $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = circle_container">
+                    <div id = "'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
+                    <div id = "circle1'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle"></div>
+                    <div id = "circle2'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle"></div>
+                    <div id = "circle3'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle-grey"></div>
+                    <div id = "circle4'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle-grey"></div>
+                    <div id = "circle5'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle-grey"></div>
                     </div>';
             } 
             if ($arr['answer'] == 'Average / Okay'){
-                $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['id']).'" class = circle_container"> 
-                    <div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
-                    <div id = "circle1'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
-                    <div id = "circle2'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
-                    <div id = "circle3'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
-                    <div id = "circle4'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
-                    <div id = "circle5'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
+                $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = circle_container"> 
+                    <div id = "'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
+                    <div id = "circle1'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle"></div>
+                    <div id = "circle2'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle"></div>
+                    <div id = "circle3'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle"></div>
+                    <div id = "circle4'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle-grey"></div>
+                    <div id = "circle5'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle-grey"></div>
                     </div>';
             } 
             if ($arr['answer'] == 'Pretty good'){
-                $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['id']).'" class = circle_container">
-                    <div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
-                    <div id = "circle1'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
-                    <div id = "circle2'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
-                    <div id = "circle3'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
-                    <div id = "circle4'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
-                    <div id = "circle5'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle-grey"></div>
+                $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = circle_container">
+                    <div id = "'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
+                    <div id = "circle1'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle"></div>
+                    <div id = "circle2'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle"></div>
+                    <div id = "circle3'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle"></div>
+                    <div id = "circle4'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle"></div>
+                    <div id = "circle5'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle-grey"></div>
                     </div>';
             } 
             if ($arr['answer'] == 'Excellent'){
-                $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['id']).'" class = circle_container">
-                    <div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
-                    <div id = "circle1'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
-                    <div id = "circle2'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
-                    <div id = "circle3'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
-                    <div id = "circle4'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
-                    <div id = "circle5'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "clip-circle"></div>
+                $html.= '<div id = circleContainter"'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = circle_container">
+                    <div id = "'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "question_title_no_padding">'.esc_html($arr['question']).'</div>
+                    <div id = "circle1'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle"></div>
+                    <div id = "circle2'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle"></div>
+                    <div id = "circle3'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle"></div>
+                    <div id = "circle4'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle"></div>
+                    <div id = "circle5'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "clip-circle"></div>
                     </div>';
             } 
 
@@ -135,8 +135,8 @@ function gen_HTML_for_multiple_choice_qs($mulipleChoiceQs, $formName){
 function gen_HTML_for_testing_conditions_qs($testingConditions, $formName){
     $html = '<div id = "testingConditions" class = "short_container">';
     foreach($testingConditions as $arr){
-            $html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
-                    <div id = "'.esc_html($formName).'_answer_'.esc_html($arr['id']).'" class = "answer">'.esc_html($arr['answer']).'</div>';    
+            $html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "question_title">'.esc_html($arr['question']).'</div>
+                    <div id = "'.esc_html($formName).'_answer_'.esc_html($arr['name_attribute']).'" class = "answer">'.esc_html($arr['answer']).'</div>';    
     }
     return $html.'</div>';
 }
@@ -146,8 +146,8 @@ function gen_HTML_for_testimony_qs($testimony, $formName){
     $reversed_list = array_reverse($testimony, true);
     foreach($reversed_list as $arr){
         if($arr['answer'] != ""){
-            $html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['id']).'" class = "question_title">'.esc_html($arr['question']).'</div>
-                    <div id = "'.esc_html($formName).'_answer_'.esc_html($arr['id']).'" class = "answer">'.esc_html($arr['answer']).'</div>';    
+            $html.='<div id = "'.esc_html($formName).'_'.esc_html($arr['name_attribute']).'" class = "question_title">'.esc_html($arr['question']).'</div>
+                    <div id = "'.esc_html($formName).'_answer_'.esc_html($arr['name_attribute']).'" class = "answer">'.esc_html($arr['answer']).'</div>';    
         }
     }
     return $html.'</div>';
@@ -208,11 +208,11 @@ $str = "";
 $year = "";
 $html = "";
 foreach($title_arr as $arr){
-    if($arr['id'] == 9){
+    if($arr['name_attribute'] == 9){
             $year .= $arr["answer"] . ' ';
     }
     else{
-        if($arr['id'] == 3){
+        if($arr['name_attribute'] == 3){
             $str.= ', ' . $arr["answer"] . 'cm ';
         }else{
             $str.= ' ' .$arr["answer"];  

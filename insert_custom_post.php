@@ -20,18 +20,21 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
     $html = $user_info_html . $html;
 
     $title_arr = $header["questions_and_answers"]["title"];
+    $ordered_title_arr = make_ordered_title_arr($title_arr);
+    // echo "title arr: <br>";
+    // echo var_dump($ordered_title_arr)."<br>";
+    // echo "------------------------------------------------------------<br>";
+    $postTitle = get_post_title($ordered_title_arr);
     
-    $postTitle = get_post_title($title_arr);
-    
-    $years = "";
-    foreach($title_arr as $key => $arr){
-        if($arr['id'] == 9){
-            $years = $arr['answer'];
-            break;
-        }
-    }
-    $years_arr = explode("-", $years);
-    $year = $years_arr[0];
+    // $years = "";
+    // foreach($title_arr as $key => $arr){
+    //     if($arr['id'] == 9){
+    //         $years = $arr['answer'];
+    //         break;
+    //     }
+    // }
+    // $years_arr = explode("-", $years);
+    // $year = $years_arr[0];
 
 
     //$str = print_r($title_arr, true);
@@ -40,10 +43,10 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
     $years = "";
     $length = "";
     $ski_boot_size = "";
-    foreach($title_arr as $key => $arr){
-        if($arr['id']==9){$years = $arr['answer'];}
-        else if($arr['id']==3){$length = intval($arr['answer']);}
-        else if($arr['id']==22){$ski_boot_size = intval($arr['answer']);}
+    foreach($ordered_title_arr as $key => $arr){
+        if($arr['question']=='Model-Year'){$years = $arr['answer'];}
+        else if($arr['question']=='Ski Length'){$length = intval($arr['answer']);}
+        else if($arr['question']=='Boot Size'){$ski_boot_size = intval($arr['answer']);}
     }
 
     $years_arr = explode("-", $years);
@@ -77,6 +80,15 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
                         );
     wp_insert_post( $ski_review );     
 }
+
+function make_ordered_title_arr($originalArray) {
+    $indexedArray = array();
+    foreach ($originalArray as $key => $value) {
+      $indexedArray[$value['title_order']] = $value;
+    }
+    ksort($indexedArray);
+    return $indexedArray;
+  }
 
 // function get_answer_and_question_content($record,$file){
 //     // echo "Sorted qs and as:<br>";
