@@ -185,7 +185,7 @@ function format_review_excerpt($userInfo, $userName, $qs_and_ans){
             <div id = "excerpt_attributes_container" class = "excerpt_short_container">
             <div id= "userName" class = "userInfo">Reviewer: '.esc_html($userName).'</div>
             <div id= "userHeight" class = "userInfo">Height: '.$height.'</div>
-            <div id "userWeight" class = "userInfo">Weight: '.$weight.'</div>
+            <div id= "userWeight" class = "userInfo">Weight: '.$weight.'</div>
             <div id= "userAbility" class = "userInfo">Reviewer Ability: '.esc_html($userInfo->skiAbility).'</div>
             </div>
             </div>';
