@@ -17,7 +17,7 @@ function bcr_init_tables() {
 
     $product_table_update_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_product_table_update.csv';
 
-    bcr_update_products_table($product_table_update_file);
+    bcr_update_products_table($product_table_update_file, $file);
 
     $categories_sql = bcr_prepare_sql($categories_table_file);
     $brands_sql = bcr_prepare_sql($brands_table_file);
@@ -42,9 +42,11 @@ function bcr_init_tables() {
  * 
  * @return boolean success 
  */
-function bcr_update_products_table($csvFile){
+function bcr_update_products_table($csvFile, $testFile){
     global $wpdb;
     $csv = array_map('str_getcsv', file($csvFile));
+
+
 
     $header = array_shift($csv);
 
@@ -54,34 +56,55 @@ function bcr_update_products_table($csvFile){
     $sql = "INSERT INTO $products_table_name (`productID`, `categoryID`, `brandID`, `productName`) VALUES";
 
     $csvLength = count($csv);
+    $numProductsToEnter = 0;
     $count = 1;
     $runQuery = FALSE;
 
+    $productsToEnter = array();
+
     foreach ($csv as $row){
-        $productID = $row[0];
-        $categoryID = $row[1];
-        $brandID = $row[2];
+    
         $productName = $row[3];
 
         $check = "SELECT CASE WHEN EXISTS (
             SELECT * FROM wp_bcr_products
             WHERE productName = '$productName'
         ) THEN 'True' ELSE 'False' END AS product_exists;";
-        $wpdb->get_results($check);
+        $checkRes = $wpdb->get_results($check);
 
-        if(!($check->product_exists)){
-            $runQuery = TRUE;
-            if($count != $csvLength){
+        $productInTableArr = $checkRes[0];
+        $productInTable = $productInTableArr->product_exists;
+
+        //fwrite($testFile, "Before if statement, productInTable = $productInTable\n");
+        if($productInTable == "False"){
+            //fwrite($testFile, "Reached inside if statement. row: $row, numProductsToEnter: $numProductsToEnter\n");
+            $productsToEnter[$numProductsToEnter] = $row;
+            $numProductsToEnter = $numProductsToEnter+1;
+        }
+
+        //fwrite($testFile, "product_exists: $productInTable. productName: $productName\n");
+    }
+
+    if($numProductsToEnter != 0){
+        $runQuery = TRUE;
+        foreach ($productsToEnter as $row){
+
+            $productID = $row[0];
+            $categoryID = $row[1];
+            $brandID = $row[2];
+            $productName = $row[3];
+
+            if($count != $numProductsToEnter){
                 $concatString = "($productID, $categoryID, $brandID, '$productName'),";
                 $sql = $sql . "\n" . $concatString;
             }else{
                 $concatString = "($productID, $categoryID, $brandID, '$productName');";
                 $sql = $sql . "\n" . $concatString;
             }
-        }
 
-        $count = $count+1;
-        //fwrite($testFile, "sql string: $sql\n");
+            $count = $count+1;
+            //fwrite($testFile, "sql string(inner loop): $sql\n");
+        }
     }
 
     if($runQuery){
