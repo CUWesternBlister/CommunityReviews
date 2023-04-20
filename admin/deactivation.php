@@ -7,25 +7,11 @@
  * @return void
  */
 function bcr_uninstall() {
-    //bcr_remove_tables();
-    //bcr_drop_product_table();
+    //enter functions in here for deactivation
 }
 
 /**
- * Drop products table from the database (REMOVE AFTER VERSION 3.5.1)
- * 
- * @return void
- */
-function bcr_drop_product_table() {
-    global $wpdb;
-    
-    $products_table_name = $wpdb->prefix . "bcr_products";
-    $sql = "DROP TABLE IF EXISTS $products_table_name";
-    $wpdb->query($sql);
-}
-
-/**
- * Drop all custom tables from database
+ * Drop all custom tables from database 
  * 
  * @return void
  */
