@@ -83,7 +83,7 @@ function fluent_get_fields_array_form($form, $formData){
         $id = intval(preg_replace('/\D/', '',$type));
         $answer = $formData[$name];
 
-        if(($id == 1 || $id == 2) && (str_contains(strtolower($answer), "other") || str_contains(strtolower($answer), "not listed"))){ $answer = null;}
+        if((strtolower($questionDisplayContent) == 'brand' || strtolower($questionDisplayContent) == 'product') && (str_contains(strtolower($answer), "other") || str_contains(strtolower($answer), "not listed"))){ $answer = null;}
         if(gettype($answer) == "array"){ $answer = implode(", ", $answer); }
         
         if(!is_null($answer)){ 
@@ -187,7 +187,12 @@ function summit_form_submission_custom_post_content($current_review_id, $current
         'sportName' => $sport_info->categoryName,
         'flagForReview' => $flagForReview
     );
-    
+    echo "Header: <br>";
+    echo var_dump($header)."<br>";
+    echo "------------------------------------------------------------<br><br>";
+    echo "record: <br>";
+    echo var_dump($record)."<br><br>";
+    echo "------------------------------------------------------------<br>";
     return $header;
 }
 

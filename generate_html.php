@@ -204,22 +204,15 @@ function format_review_excerpt($userInfo, $userName, $qs_and_ans){
 }
 
 function get_post_title($title_arr){
-$str = "";
-$year = "";
-$html = "";
-foreach($title_arr as $arr){
-    if($arr['name_attribute'] == 9){
-            $year .= $arr["answer"] . ' ';
+    $html = "";
+    foreach($title_arr as $arr){
+            if($arr['question'] == 'length'){
+                $html.= $arr["answer"] . 'cm ';
+            }else{
+                $html.= $arr["answer"].' ';  
+            }  
     }
-    else{
-        if($arr['name_attribute'] == 3){
-            $str.= ', ' . $arr["answer"] . 'cm ';
-        }else{
-            $str.= ' ' .$arr["answer"];  
-        }  
-    }
-}
-$html = $str . $year; 
-return $html;
+    echo $html."<br>";
+    return $html;
 }
 ?>
