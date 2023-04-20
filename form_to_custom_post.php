@@ -21,7 +21,8 @@ function fluent_summit_review_form_sub($entryId, $formData, $form) {
     
     if(in_array($current_form_name, $existing_form_names)){
         //-----------------write to tables (table_writing_functions)-----------------------------
-        $review_id = summit_form_submission_write_to_tables($current_form_id, $qs_and_as, $file);
+        $review_id = -1;
+        //summit_form_submission_write_to_tables($current_form_id, $qs_and_as, $file);
         //---------------create custom post (insert_custom_post)-----------------------------------
         $header = summit_form_submission_custom_post_content($review_id, $current_form_id, $qs_and_as, $file);
         insert_into_ski_review($header, $file, $current_form_name, $current_form_id);
@@ -120,11 +121,11 @@ function elementor_summit_review_from_sub( $record, $ajax_handler ) {
 
     if(in_array($current_form_name, $existing_form_names)){
     	//-----------------write to tables----------------------------
-        $review_id = summit_form_submission_write_to_tables($current_form_id, $qs_and_as, $file);
-
+        //$review_id = summit_form_submission_write_to_tables($current_form_id, $qs_and_as, $file);
+        $review_id = -1;
         //---------------create custom post-----------------------------------
         $header = summit_form_submission_custom_post_content($review_id, $current_form_id, $qs_and_as, $file);
-    	insert_into_ski_review($header, $file, $current_form_name);
+    	//insert_into_ski_review($header, $file, $current_form_name);
 	}
     fclose($file);
 }

@@ -1,25 +1,34 @@
 <?php
 //require plugin_dir_path( __FILE__ )."table_reading_functions.php";
 function bcr_flagged_reviews_callback() {
-    //echo "bcr_flagged_reviews_callback<br>";
-    $flagged_reviews = get_flagged_reviews();
-    $file = "";
-    $flagged_reviews_arr = array();
-    if ($flagged_reviews) {
-        //echo "flagged reviews: $flagged_reviews <br>";
-        foreach ($flagged_reviews as $review) {
-            $review_id = $review->reviewID;
-            
-            $review_meta_data = get_flagged_review_meta_data($review_id);
-            //$str = print_r($review_meta_data, true);
-            $str = "Review ID: $review_id, Post ID: $review_meta_data[post_id], Category: $review_meta_data[category], Brand: $review_meta_data[brand], Product: $review_meta_data[product], URL: $review_meta_data[url]";
-            $flagged_reviews_arr[$review_id] = $review_meta_data;
-            
+    $query = get_flagged_reviews_cp();
+    $flagged_reviews_arr_2 = array();
+    if ( $query->have_posts() ) {
+        while ( $query->have_posts() ) {
+            $query->the_post();
+            $brand = get_post_meta( get_the_ID(), 'brand', true );
+            $product = get_post_meta( get_the_ID(), 'product_tested', true );
+            $category = get_post_meta( get_the_ID(), 'category', true );
+            $sport = get_post_meta( get_the_ID(), 'sport', true );
+            $url = get_the_guid(get_the_ID());
+            $title = get_the_title(get_the_ID());
+            $id = get_the_ID();
+
+            $postArr = array(
+                'brand' => $brand,
+                'product' => $product,
+                'category' => $category,
+                'sport' => $sport,
+                'url' => $url,
+                'title' => $title,
+                'post_id' => $id
+            );
+            $flagged_reviews_arr_2[$id] = $postArr;
         }
     }else{
-        echo "no flagged reviews found";
-    }
-    display($flagged_reviews_arr);
+        echo "<b>No Flagged Reviews Found</b> <br><br>";
+    }    
+    display($flagged_reviews_arr_2);
 }
 
 
@@ -38,57 +47,6 @@ function display($flaggedReviews){
         <div class="community-reviews-admin-display" id="community-reviews-admin-display">
         <div class="community-reviews-add-remove-dropdown">
         <div class="community-reviews-display-title">Add/Remove Product or Brand:</div>
-        <!--
-                        <strong>Sport:</strong>
-                        <select id="community-reviews-display-sport-dropdown" class="select2">
-                        
-                       <?/*$sport_selected = "Ski";
-                            echo '<option value="' . esc_html($sport_selected) . '">' . esc_html($sport_selected) . '</option>';
-            
-                                global $wpdb;
-
-                                $sport_table_name = $wpdb->prefix . "bcr_categories";
-                                $zero = 0;
-                                $sql = $wpdb->prepare("SELECT categoryName FROM $sport_table_name WHERE parentID=0");
-                                
-                                $results  = $wpdb->get_results($sql);
-                                //$str = print_r($results, true);
-                                
-                                
-                                
-                                foreach ($results as $id => $sport_obj) {
-                                    $sport_name = $sport_obj->categoryName;
-                                    if($sport_name != $sport_selected){
-                                        echo '<option value="' . esc_html($sport_name) . '">' . esc_html($sport_name) . '</option>';
-                                    }
-                                }
-                            */?>
-                        </select>
-                        <strong>Category:</strong>
-                        <select id="community-reviews-display-category-dropdown" class="select2">
-                        
-                        <?/*$category_selected = "Skis";
-                            echo '<option value="' . esc_html($category_selected) . '">' . esc_html($category_selected) . '</option>';
-            
-                                global $wpdb;
-
-                                $categories_table_name = $wpdb->prefix . "bcr_categories";
-                                $zero = 0;
-                                $sql = $wpdb->prepare("SELECT categoryName FROM $categories_table_name WHERE parentID!=0");
-                                
-                                $results  = $wpdb->get_results($sql);
-                                //$str = print_r($results, true);
-                                
-                                
-                                
-                                foreach ($results as $id => $category_obj) {
-                                    $category_name = $category_obj->categoryName;
-                                    if($category_name != $category_selected){
-                                        echo '<option value="' . esc_html($category_name) . '">' . esc_html($category_name) . '</option>';
-                                    }
-                                }
-                            */?>
-                        </select> -->
                         <strong>Brand:</strong>
                         <select id="community-reviews-display-brand-dropdown" class="select2">
                         
@@ -146,9 +104,9 @@ function display($flaggedReviews){
                         <?php foreach ($flaggedReviews as $key => $arr) : ?>
                             <?php 
                             if($arr['sport']){
-                                $str = "Review ID: $key, Post ID: $arr[post_id], Sport: $arr[sport], Category: $arr[category], Brand: $arr[brand], Product: $arr[product]";
+                                $str = "Review Post ID: $arr[post_id], Sport: $arr[sport], Category: $arr[category], Brand: $arr[brand], Product: $arr[product]";
                             } else{
-                                $str = "Review ID: $key, Post ID: $arr[post_id], Sport: $arr[category], Category: $arr[category], Brand: $arr[brand], Product: $arr[product]";
+                                $str = "Review Post ID: $arr[post_id], Sport: $arr[category], Category: $arr[category], Brand: $arr[brand], Product: $arr[product]";
                             }
                             ?>
                             <br>
@@ -162,7 +120,7 @@ function display($flaggedReviews){
                                 //echo $myArrJson;
                             ?>
                             <input type="hidden" id="myArr" value='<?php echo strval($myArrJson);?>'>
-                            <button type="submit" id="submit-button" onclick="submitButtonClicked()" >Submit</button>
+                            <button type="submit" id="submit-button" onclick="submitButtonClicked()" >Load Flagged Review</button>
                         </div>
                         
                 </div>
@@ -204,15 +162,15 @@ function display($flaggedReviews){
             const approveButton = document.getElementById('approve-button');
             const myArrJson = document.getElementById('myArr').value;
             const myArr = JSON.parse(myArrJson);
-            console.log(myArr);
-            const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1]);
+            //console.log(myArr);
+            const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review Post ID: (\d+)/)[1]);
             prodArr = myArr[reviewId];
-            console.log(prodArr);
+            //console.log(prodArr);
             const productElement = document.getElementById("community-reviews-display-product-dropdown");
             const brandElement = document.getElementById("community-reviews-display-brand-dropdown");
-            console.log(productElement.value, brandElement.value, prodArr['category'], prodArr['sport'], prodArr['post_id']);
+            //console.log(productElement.value, brandElement.value, prodArr['category'], prodArr['sport'], prodArr['post_id']);
             addRow(productElement.value, brandElement.value, prodArr['category'], prodArr['sport'], prodArr['post_id']);
-            console.log(`These are the values in the dropdown: product-"${productElement.value}" brand-"${brandElement.value}"`);
+            //console.log(`These are the values in the dropdown: product-"${productElement.value}" brand-"${brandElement.value}"`);
             removeValueFromRadio(reviewId, 0,prodArr['post_id']);
         }
 
@@ -229,7 +187,7 @@ function display($flaggedReviews){
                     postID: postID
                 },
                 success: function(result) {
-                    console.log(JSON.stringify(result));
+                    //console.log(result);
                     //location.reload();
                 }
             });
@@ -240,9 +198,9 @@ function display($flaggedReviews){
             const denyButton = document.getElementById('deny-button');
             const myArrJson = document.getElementById('myArr').value;
             const myArr = JSON.parse(myArrJson);
-            const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1]);
-            const postID = Number(selectedRadio.nextElementSibling.textContent.match(/Post ID: (\d+)/)[1]);
-            removeValueFromRadio(reviewId, 2, postID);
+            const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review Post ID: (\d+)/)[1]);
+            //const postID = Number(selectedRadio.nextElementSibling.textContent.match(/Review Post ID: (\d+)/)[1]);
+            removeValueFromRadio(reviewId, 2, reviewId);
         }
 
         
@@ -258,8 +216,8 @@ function display($flaggedReviews){
                 },
                 success: function(result) {
                         //console.log(`Successfully changed the flag on the approved/denied review`);
-                        console.log(JSON.stringify(result));
-                        //location.reload();
+                        //console.log(result);
+                        location.reload();
                 }
             });
         }
@@ -310,7 +268,7 @@ function display($flaggedReviews){
 
                     const selectedValue = selectedRadio.value;
                     console.log(`Selected value: ${selectedValue}`);
-                    const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review ID: (\d+)/)[1]);
+                    const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review Post ID: (\d+)/)[1]);
                     const flagged_review_arr = myArr[reviewId];
                     console.log(`flagged review arr category : ${flagged_review_arr['category']}`);
                     //set defualt values for each drop down based off id
@@ -388,7 +346,7 @@ function get_flagged_review_meta_data($review_id){
         );
 
 
-            // Do something with the custom meta value
+            
         //}
     }else{
         //echo "query was empty no post found with this id<br>";
@@ -397,6 +355,29 @@ function get_flagged_review_meta_data($review_id){
     wp_reset_postdata();
     return $retArr;
 }
+
+
+function get_flagged_reviews_cp(){
+    $args = array(
+      'post_type' => 'Community Reviews',
+      'posts_per_page' => -1,
+      'orderby' => 'post_date',
+      'order' => 'DESC',
+      'meta_query' => array(
+        array(
+          'key' => 'FlaggedForReview',
+          'value' => '1',
+          'compare' => '=='
+        )
+      )
+    );
+  
+    $query = new WP_Query( $args );
+    // echo "Query :<br>";
+    // echo var_dump($query)."<br>";
+    // echo "------------------------------------------------------------<br>";
+    return $query;
+  }
 
 function add_bcr_flagged_reviews_submenu_page() {
     $args = array(
