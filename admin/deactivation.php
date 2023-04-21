@@ -7,11 +7,11 @@
  * @return void
  */
 function bcr_uninstall() {
-    //bcr_remove_tables();
+    //enter functions in here for deactivation
 }
 
 /**
- * Drop all custom tables from database
+ * Drop all custom tables from database 
  * 
  * @return void
  */

@@ -7,41 +7,163 @@
 require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
 function bcr_init_tables() {
-    $categories_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_categories.sql.gz';
-    $brands_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_brands.sql.gz';
-    $products_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_products.sql.gz';
-    $questions_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_questions.sql.gz';
-
-    $categories_sql = bcr_prepare_sql($categories_table_file);
-    $brands_sql = bcr_prepare_sql($brands_table_file);
-    $products_sql = bcr_prepare_sql($products_table_file);
-    $questions_sql = bcr_prepare_sql($questions_table_file);
 
     $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
     $file = fopen($file_path, "w") or die('fopen failed');
-    fwrite($file, "questions_sql: \n".$questions_sql."\n\n");
+
+    $brand_table_update_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_brands_table_init.csv';
+    $product_table_update_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_products_table_init.csv';
+    
+    bcr_update_brands_table($brand_table_update_file, $file);
+    bcr_update_products_table($product_table_update_file, $file);
+    
+
+    $categories_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_categories.sql.gz';
+    $categories_sql = bcr_prepare_sql($categories_table_file);
     dbDelta($categories_sql);
-    dbDelta($brands_sql);
-    dbDelta($products_sql);
-    dbDelta($questions_sql);
-
-    $addedFlag = bcr_update_reviews_with_flag();
 }
+
 /**
- *UPdates the reviews table to have attribute FlaggedForReview (REMOVE BEFORE FINAL RELEASE)
+ *Updates the product table with the passed in .csv for values
  * 
  * 
  * 
- * @return boolean s$uccess 
+ * @return boolean success 
  */
-function bcr_update_reviews_with_flag(){
+function bcr_update_products_table($csvFile, $testFile){
     global $wpdb;
-    $reviews_table_name = $wpdb->prefix . "bcr_reviews";
 
-    $sql = "ALTER TABLE $reviews_table_name ADD COLUMN FlaggedForReview INT DEFAULT 0;";
+    $csv = array_map('str_getcsv', file($csvFile));
 
-    $res = $wpdb->get_results($sql);
-    return $res;
+    $header = array_shift($csv);
+
+    $products_table_name = $wpdb->prefix . "bcr_products";
+    $sql = "INSERT INTO $products_table_name (`categoryID`, `brandID`, `productName`) VALUES";
+
+    $csvLength = count($csv);
+    $numProductsToEnter = 0;
+    $count = 1;
+    $runQuery = FALSE;
+
+    $productsToEnter = array();
+
+    foreach ($csv as $row){
+    
+        $productName = $row[3];
+
+        $check = "SELECT CASE WHEN EXISTS (
+            SELECT * FROM $products_table_name
+            WHERE productName = '$productName'
+        ) THEN 'True' ELSE 'False' END AS product_exists;";
+        $checkRes = $wpdb->get_results($check);
+
+        $productInTableArr = $checkRes[0];
+        $productInTable = $productInTableArr->product_exists;
+
+        if($productInTable == "False"){
+            $productsToEnter[$numProductsToEnter] = $row;
+            $numProductsToEnter = $numProductsToEnter+1;
+        }
+    }
+
+    if($numProductsToEnter != 0){
+        $runQuery = TRUE;
+        foreach ($productsToEnter as $row){
+
+            $categoryID = $row[1];
+            $brandID = $row[2];
+            $productName = $row[3];
+
+            if($count != $numProductsToEnter){
+                $concatString = "($categoryID, $brandID, '$productName'),";
+                $sql = $sql . "\n" . $concatString;
+            }else{
+                $concatString = "($categoryID, $brandID, '$productName');";
+                $sql = $sql . "\n" . $concatString;
+            }
+
+            $count = $count+1;
+        }
+    }
+
+    if($runQuery){
+        $success = $wpdb->get_results($sql);
+    } else{
+        $success = FALSE;
+    }
+    return $success;
+
+}
+
+/**
+ *Updates the brand table with the passed in .csv for values
+ * 
+ * 
+ * 
+ * @return boolean success 
+ */
+function bcr_update_brands_table($csvFile, $testFile){
+    global $wpdb;
+
+    $csv = array_map('str_getcsv', file($csvFile));
+
+    $header = array_shift($csv);
+
+    $brands_table_name = $wpdb->prefix . "bcr_brands";
+    $sql = "INSERT INTO $brands_table_name (`brandName`) VALUES";
+
+    $csvLength = count($csv);
+    $numBrandsToEnter = 0;
+    $count = 1;
+    $runQuery = FALSE;
+
+    $brandsToEnter = array();
+
+    foreach ($csv as $row){
+    
+        $brandName = $row[1];
+
+        $check = "SELECT CASE WHEN EXISTS (
+            SELECT * FROM $brands_table_name
+            WHERE brandName = '$brandName'
+        ) THEN 'True' ELSE 'False' END AS brand_exists;";
+        $checkRes = $wpdb->get_results($check);
+
+        $brandInTableArr = $checkRes[0];
+        $brandInTable = $brandInTableArr->brand_exists;
+
+        if($brandInTable == "False"){
+            $brandsToEnter[$numBrandsToEnter] = $row;
+            $numBrandsToEnter = $numBrandsToEnter+1;
+        }
+    }
+
+    if($numBrandsToEnter != 0){
+        $runQuery = TRUE;
+        foreach ($brandsToEnter as $row){
+
+            $brandID = $row[1];
+
+            if($count != $numBrandsToEnter){
+                $concatString = "('$brandID'),";
+                $sql = $sql . "\n" . $concatString;
+            }else{
+                $concatString = "('$brandID');";
+                $sql = $sql . "\n" . $concatString;
+            }
+
+            $count = $count+1;
+        }
+    }
+
+    if($runQuery){
+        $success = $wpdb->get_results($sql);
+    } else{
+        $success = FALSE;
+    }
+    fwrite($testFile, "sql string: $sql\n");
+    return $success;
+
 }
 
 
@@ -63,63 +185,6 @@ function bcr_prepare_sql($fileName){
     $sql_command = str_replace("wp8o_", $wpdb->prefix, $sql_command);
 
     return $sql_command;
-}
-
-/**
- * Add brands to brands table from csv
- * 
- * @return void
- */
-function bcr_create_brands() {
-    global $wpdb;
-
-    $brands_table_name = $wpdb->prefix . "bcr_brands";
-
-    if(($brands_file = fopen(plugin_dir_path( __FILE__ ) . 'brands.csv', "r")) !== FALSE) {
-        while(($row = fgetcsv($brands_file, 1000, ",")) !== FALSE) {
-            $wpdb->insert($brands_table_name, array("brandName" => $row[0]));
-        }
-    }
-    fclose($brands_file);
-}
-
-/**
- * Add Skis to products table from csv
- * 
- * @return void
- */
-function bcr_create_skis() {
-    global $wpdb;
-
-    $categories_table_name = $wpdb->prefix . "bcr_categories";
-    $products_table_name = $wpdb->prefix . "bcr_products";
-
-    $wpdb->insert($categories_table_name, array('categoryName' => "Skis", 'sportID' => 2));
-
-    if(($skis_file = fopen(plugin_dir_path( __FILE__ ) . 'skiProducts.csv', "r")) !== FALSE) {
-        while(($row = fgetcsv($skis_file, 1000, ",")) !== FALSE) {
-            $wpdb->insert($products_table_name, array("productName" => $row[1], 'categoryID' => $row[0], 'brandID' => $row[2]));
-        }
-    }
-    fclose($skis_file);
-}
-
-/**
- * Add questions to table from csv
- * 
- * @return void
- */
-function bcr_create_questions() {
-    global $wpdb;
-
-    $questions_table_name = $wpdb->prefix . "bcr_questions";
-
-    if(($questions_file = fopen(plugin_dir_path( __FILE__ ) . 'questions.csv', "r")) !== FALSE) {
-        while(($row = fgetcsv($questions_file, 1000, ",")) !== FALSE) {
-            $wpdb->insert($questions_table_name, array("questionID" => $row[0], "questionContent" => $row[1], "questionDisplayContent" => $row[2]));
-        }
-    }
-    fclose($questions_file);
 }
 
 bcr_init_tables();
