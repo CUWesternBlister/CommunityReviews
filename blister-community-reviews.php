@@ -50,6 +50,7 @@ function bcr_include() {
     require_once( plugin_dir_path( __FILE__ ) . 'community_reviews_display_functions.php');
     require_once( plugin_dir_path( __FILE__ ) . 'fluent_form_functions.php');
     require_once( plugin_dir_path( __FILE__ ) . 'fluent_forms_scripts.php');
+    require_once(plugin_dir_path( __FILE__ ) . '/admin/adminAddFromCSV.php');
 }
 
 add_action( 'plugins_loaded', 'bcr_include');
