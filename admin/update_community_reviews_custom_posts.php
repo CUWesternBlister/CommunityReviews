@@ -207,7 +207,6 @@ function updatePostMetaDataCall(){
   header('Access-Control-Allow-Origin: *');
   $postID = intval($_POST['postID']);
   $meta = $_POST['metaData'];
-  //echo strval($postID)."<br><br>".print_r($meta)."<br>";
   $args = array(
     'post_type' => 'Community Reviews', 
     'p' => intval($postID) 
@@ -217,11 +216,7 @@ function updatePostMetaDataCall(){
   $result = [];
   if ($query->have_posts()) {
     foreach($meta as $key => $value){
-      //if(metadata_exists( 'post', $postID, $key)){
         update_post_meta( $postID, $key, $value);
-      // }else{
-      //   update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' );
-      // }
     }
     $result['type'] = "success";
     $result['metaData'] = get_post_meta( $postID, '', false);
@@ -234,6 +229,7 @@ function updatePostMetaDataCall(){
 add_action( 'wp_ajax_updatePostMetaDataCall', 'updatePostMetaDataCall' );
 add_action( 'wp_ajax_nopriv_updatePostMetaDataCall', 'updatePostMetaDataCall' );
 
+
 function getPostMetaDataCall(){
   header('Access-Control-Allow-Origin: *');
    
@@ -245,19 +241,11 @@ function getPostMetaDataCall(){
       'p' => intval($postID) 
     );
     $query = new WP_Query($args);
-    // $file = fopen('testfile.txt', "w");
-    // fwrite($file, "hello world\n");
-    // fclose($file);
     $result = [];
     if ($query->have_posts()) {
       $meta_data = get_post_meta( $postID, '', false);
-      //if($meta_data){
-        $result['type'] = "success";
-        $result['metaData'] = $meta_data;
-      // }else{
-      //   $result['type'] = "fail";
-      //   $result['metaData'] = -1;
-      // }
+      $result['type'] = "success";
+      $result['metaData'] = $meta_data;
       $result = json_encode($meta_data);
       echo $result;
     }
@@ -273,7 +261,7 @@ function get_reviews(){
     'post_type' => 'Community Reviews',
     'posts_per_page' => -1,
     'orderby' => 'post_date',
-    'order' => 'ASC',
+    'order' => 'DESC',
     'meta_query' => array(
       'relation' => 'OR',
       array(
