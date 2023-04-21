@@ -73,7 +73,7 @@ function fluent_get_fields_array_form($form, $formData){
             $type = $settings->container_class;
             $title_arr = explode("_", $type);
             $title_order = "";
-            if(!($title_arr[0] == "")){
+            if(count($title_arr)>1){
                 $type = $title_arr[0];
                 $title_order = $title_arr[1];
                 //echo "title arr: ".print_r($title_arr,true)."<br>";
