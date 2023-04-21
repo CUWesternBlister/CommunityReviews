@@ -212,7 +212,7 @@ function get_post_title($title_arr){
                 $html.= $arr["answer"].' ';  
             }  
     }
-    echo $html."<br>";
+    //echo $html."<br>";
     return $html;
 }
 ?>

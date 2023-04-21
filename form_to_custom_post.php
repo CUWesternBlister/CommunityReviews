@@ -187,12 +187,12 @@ function summit_form_submission_custom_post_content($current_review_id, $current
         'sportName' => $sport_info->categoryName,
         'flagForReview' => $flagForReview
     );
-    echo "Header: <br>";
-    echo var_dump($header)."<br>";
-    echo "------------------------------------------------------------<br><br>";
-    echo "record: <br>";
-    echo var_dump($record)."<br><br>";
-    echo "------------------------------------------------------------<br>";
+    // echo "Header: <br>";
+    // echo var_dump($header)."<br>";
+    // echo "------------------------------------------------------------<br><br>";
+    // echo "record: <br>";
+    // echo var_dump($record)."<br><br>";
+    // echo "------------------------------------------------------------<br>";
     return $header;
 }
 
