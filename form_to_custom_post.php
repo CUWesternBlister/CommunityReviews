@@ -47,9 +47,9 @@ function fluent_get_fields_array_formData($formData, $file){
 }
 
 function fluent_get_fields_array_form($form, $formData){
-    echo "Formdata: <br>";
-    echo var_dump($formData)."<br><br>";
-    echo "------------------------------------------------------------<br>";
+    //echo "Formdata: <br>";
+    //echo var_dump($formData)."<br><br>";
+    //echo "------------------------------------------------------------<br>";
     // echo "Form: <br>";
     // echo var_dump($form)."<br><br>";
     // echo "------------------------------------------------------------<br>";
@@ -63,9 +63,9 @@ function fluent_get_fields_array_form($form, $formData){
         'testimony' => array()
     );
     foreach($fields as $id => $obj){
-        echo "Field:".strval($id)."<br>";
-        echo var_dump($obj)."<br><br>";
-        echo "------------------------------------------------------------<br>";
+        //echo "Field:".strval($id)."<br>";
+        //echo var_dump($obj)."<br><br>";
+        //echo "------------------------------------------------------------<br>";
         $ignore_fields = ['section_break', 'form_step', 'custom_submit_button'];
         if(!in_array($obj->element, $ignore_fields)){
             $settings = $obj->settings;
