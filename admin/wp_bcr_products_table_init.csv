@@ -1,5 +1,4 @@
-productID,categoryID,brandID,productName
-1,4,1,TESTING
+﻿1,4,1,Hoji
 2,4,1,Inthayne
 3,4,1,MSP 107
 4,4,1,MSP 91
@@ -56,8 +55,8 @@ productID,categoryID,brandID,productName
 56,4,32,Ellipse v2.3
 57,4,32,Function v3.2
 58,4,32,Limit v3.2
-59,4,32,LP 100 v1.0
-60,4,32,LP 90 v2.0
+59,4,32,"LP 100 v1.0"
+60,4,32,"LP 90 v2.0"
 61,4,32,Mode 102 v1.1
 62,4,32,Mode 112 v3.1
 63,4,32,Radian v1.1
@@ -442,9 +441,9 @@ productID,categoryID,brandID,productName
 442,4,23,QST Echo 106
 443,4,23,S-Force SX
 444,4,23,S-Force FX.76
-445,4,23,S-Force FX.80
+445,4,23,"S-Force FX.80"
 446,4,23,S-Force Ti.76
-447,4,23,S-Force Ti.80
+447,4,23,"S-Force Ti.80"
 448,4,23,Stance 84
 449,4,23,Stance 88 W
 450,4,23,Stance 90
@@ -841,11 +840,11 @@ productID,categoryID,brandID,productName
 841,2,23,MTN Summit Pure
 842,2,23,MTN Summit Pure W
 843,7,32,Digit v1.1
-844,7,32,Fission v2.0
-845,7,32,Joule v3.0
+844,7,32,"Fission v2.0"
+845,7,32,"Joule v3.0"
 846,7,32,Moment Generator v3.1
-847,7,32,Outlier v4.0
-848,7,32,Prime v3.0
+847,7,32,"Outlier v4.0"
+848,7,32,"Prime v3.0"
 849,7,32,Wave Length v1.1
 850,7,22,After Hours
 851,7,22,Airis
@@ -918,3 +917,4 @@ productID,categoryID,brandID,productName
 918,3,8,Fae Insulated Pant
 919,3,8,Kimberly Bib
 920,3,8,Hyde Pant
+922,4,1,TESTING
