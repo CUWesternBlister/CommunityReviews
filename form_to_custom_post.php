@@ -47,9 +47,9 @@ function fluent_get_fields_array_formData($formData, $file){
 }
 
 function fluent_get_fields_array_form($form, $formData){
-    // echo "Formdata: <br>";
-    // echo var_dump($formData)."<br><br>";
-    // echo "------------------------------------------------------------<br>";
+    echo "Formdata: <br>";
+    echo var_dump($formData)."<br><br>";
+    echo "------------------------------------------------------------<br>";
     // echo "Form: <br>";
     // echo var_dump($form)."<br><br>";
     // echo "------------------------------------------------------------<br>";
@@ -63,40 +63,46 @@ function fluent_get_fields_array_form($form, $formData){
         'testimony' => array()
     );
     foreach($fields as $id => $obj){
-        // echo "Field:".strval($id)."<br>";
-        // echo var_dump($obj)."<br><br>";
-        // echo "------------------------------------------------------------<br>";
-        $settings = $obj->settings;
-        $questionContent = $settings->label;
-        $questionDisplayContent = $settings->admin_field_label;
-        $type = $settings->container_class;
-        $title_arr = explode("_", $type);
-        $title_order = "";
-        if(!($title_arr[0] == "")){
-            $type = $title_arr[0];
-            $title_order = $title_arr[1];
-            //echo "title arr: ".print_r($title_arr,true)."<br>";
-        }
-        
-        $attributes = $obj->attributes;
-        $name =  $attributes->name;
-        $id = intval(preg_replace('/\D/', '',$type));
-        $answer = $formData[$name];
+        echo "Field:".strval($id)."<br>";
+        echo var_dump($obj)."<br><br>";
+        echo "------------------------------------------------------------<br>";
+        $ignore_fields = ['section_break', 'form_step', 'custom_submit_button'];
+        if(!in_array($obj->element, $ignore_fields)){
+            $settings = $obj->settings;
+            $questionDisplayContent = $settings->admin_field_label;
+            $type = $settings->container_class;
+            $title_arr = explode("_", $type);
+            $title_order = "";
+            if(!($title_arr[0] == "")){
+                $type = $title_arr[0];
+                $title_order = $title_arr[1];
+                //echo "title arr: ".print_r($title_arr,true)."<br>";
+            }
+            
+            $attributes = $obj->attributes;
+            $name =  $attributes->name;
+            $id = intval(preg_replace('/\D/', '',$type));
+            $answer = null;
+            if(array_key_exists($name, $formData)){
+                $answer = $formData[$name];
+            }
+            
 
-        if((strtolower($questionDisplayContent) == 'brand' || strtolower($questionDisplayContent) == 'product') && (str_contains(strtolower($answer), "other") || str_contains(strtolower($answer), "not listed"))){ $answer = null;}
-        if(gettype($answer) == "array"){ $answer = implode(", ", $answer); }
-        
-        if(!is_null($answer)){ 
-            // echo "Name: ".$name."<br>";
-            // echo "Type: ".$type."<br>";
-            // echo "questionContent: ".$questionContent."<br>";
-            // echo "answer: ".$answer."<br>";
-            // echo "------------------------------------------------------------<br>";
-            if($title_order !== ""){
-                $return_array[$type][$name] = ["question" => $questionDisplayContent, "answer" => $answer, "title_order" => $title_order, 'name_attribute' => $name];
-            }else{
-                $return_array[$type][$name] = ["question" => $questionDisplayContent, "answer" => $answer, 'name_attribute' => $name];
-            }  
+            if((strtolower($questionDisplayContent) == 'brand' || strtolower($questionDisplayContent) == 'product') && (str_contains(strtolower($answer), "other") || str_contains(strtolower($answer), "not listed"))){ $answer = null;}
+            if(gettype($answer) == "array"){ $answer = implode(", ", $answer); }
+            
+            if(!is_null($answer)){ 
+                // echo "Name: ".$name."<br>";
+                // echo "Type: ".$type."<br>";
+                // echo "questionContent: ".$questionContent."<br>";
+                // echo "answer: ".$answer."<br>";
+                // echo "------------------------------------------------------------<br>";
+                if($title_order !== ""){
+                    $return_array[$type][$name] = ["question" => $questionDisplayContent, "answer" => $answer, "title_order" => $title_order, 'name_attribute' => $name];
+                }else{
+                    $return_array[$type][$name] = ["question" => $questionDisplayContent, "answer" => $answer, 'name_attribute' => $name];
+                }  
+            }
         }
     }
     // echo "return array: <br>";
