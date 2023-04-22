@@ -180,11 +180,14 @@ function bcr_display_CSV_file_upload(){
         function bcr_uploadBrandButtonClicked(){
             const brandCSVField = document.getElementById('brandFileUpload');
             const brandCSV = brandCSVField.value;
+            var stringData;
             console.log(`this is file: ${file}`);
             Papa.parse(file, {
                 complete: function(results) {
                     for (let i = 0; i < results.data.length; i++) {
-                        console.log(results.data[i]);
+                        console.log(results.data);
+                        stringData = JSON.stringify(results.data);
+                        console.log(`stringData: ${stringData}\n`);
                     }
                 }
             });
@@ -194,7 +197,8 @@ function bcr_display_CSV_file_upload(){
                 method: 'POST',
                 data: {
                     action: 'adminUploadBrandCSV',
-                    brandCSV: file
+                    brandCSV: file,
+                    stringData: stringData
                 },
                 success: function(result){
                     console.log(result);
@@ -234,13 +238,17 @@ function adminUploadBrandCSV(){
     $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
     $file = fopen($file_path, "w") or die('fopen failed');
 
+    $stringData = $_POST['stringData'];
+
     fwrite($file, "entered UploadBrandCSV ajax funciton.\n");
+    fwrtie($file, "string data in adminUploadBrandCSV: ");
 
     $brandCSV = $_POST['brandCSV'];
 
     fwrite($file, "after getting brandCSV\n");
     require_once( plugin_dir_path( __FILE__ ) . 'uploadInitialData.php');
-    $result = bcr_update_brands_table($brandCSV);
+    //$result = bcr_update_brands_table($brandCSV);
+    $result = FALSE;
 
     fwrite($file, "after brand csv funciton call\n");
 

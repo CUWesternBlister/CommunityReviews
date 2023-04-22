@@ -11,6 +11,8 @@ function bcr_init_tables() {
     $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
     $file = fopen($file_path, "w") or die('fopen failed');
 
+    fwrite($file, "bcr_init_tables\n");
+
     $brand_table_update_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_brands_table_init.csv';
     $product_table_update_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_products_table_init.csv';
     
@@ -87,10 +89,6 @@ function bcr_update_products_table($csvFile){
             $count = $count+1;
         }
     }
-    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
-    $file = fopen($file_path, "w") or die('fopen failed');
-
-    fwrite($file, "sql in productaddfromCSV function: $sql\n");
 
     if($runQuery){
         $success = $wpdb->get_results($sql);
@@ -132,6 +130,11 @@ function bcr_update_brands_table($csvFile){
 
     fwrite($file, "before array_map() call in upload brandCSV function\n");
 
+    $typeFile = gettype($csvFile);
+
+    fwrite($file, "Type of csvFile: $typeFile\n");
+    fwrite($file, "this is the string csvFile: $csv\n");
+    
     $csv = array_map('str_getcsv', file($csvFile));
 
     fwrite($file, "csv: $csv after array_map call\n");
