@@ -1,4 +1,7 @@
 jQuery( document ).ready( function( $ ) {
+    if (! $( '.communityreviews' ).length ) {
+        return;
+    }
     var post_and_id = $( '.communityreviews' ).attr('id');
     var post_id = post_and_id.split('-')[1];
     $.ajax( {
