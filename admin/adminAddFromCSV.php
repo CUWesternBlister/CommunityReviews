@@ -18,7 +18,7 @@ function bcr_add_products_callback(){
 function displayCSVMenu(){
     ?>
     <head>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     </head>
 
     <div class="CSV-table-upload-admin-display">
@@ -164,16 +164,37 @@ function bcr_display_CSV_file_upload(){
         </div>
     </div>
     <script>
+        var file;
+
+        // Get the file input element
+        const fileInput = document.getElementById('brandFileUpload');
+
+        // Add an event listener to the file input element
+        fileInput.addEventListener('change', handleFileSelect, false);
+
+        function handleFileSelect(event){
+            window.file = event.target.files[0];
+            console.log(file);
+        }
+
         function bcr_uploadBrandButtonClicked(){
             const brandCSVField = document.getElementById('brandFileUpload');
             const brandCSV = brandCSVField.value;
+            console.log(`this is file: ${file}`);
+            Papa.parse(file, {
+                complete: function(results) {
+                    for (let i = 0; i < results.data.length; i++) {
+                        console.log(results.data[i]);
+                    }
+                }
+            });
             console.log(brandCSV);
             jQuery.ajax({
                 url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
                 method: 'POST',
                 data: {
                     action: 'adminUploadBrandCSV',
-                    brandCSV: brandCSV
+                    brandCSV: file
                 },
                 success: function(result){
                     console.log(result);
