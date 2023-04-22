@@ -269,7 +269,26 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 							<div class ="community-reviews-unit-label">in</div>
 						
 							<div class="community-reviews-unit-toggle">
-								<input class="community-reviews-toggle" id="community-reviews-toggle-height" type="checkbox">
+								<input class="community-reviews-toggle" id="community-reviews-toggle-height" type="checkbox" <?php
+									if(is_user_logged_in()) {
+										if ( function_exists( 'get_current_user_id' ) ) {
+											$uid = get_current_user_id();
+
+											global $wpdb;
+
+											$user_table_name = $wpdb->prefix . "bcr_users";
+
+											$sql = $wpdb->prepare("SELECT unit_preference FROM $user_table_name WHERE userID = %s;", $uid);
+
+											$unit_preference = $wpdb->get_var($sql, 0, 0);
+
+											if($unit_preference == 'metric') {
+												echo 'checked';
+											}
+										}
+									}
+										
+								?>>
 								<label class="community-reviews-toggle-label" for="community-reviews-toggle-height"></label>
 							</div>
 
@@ -286,7 +305,26 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						
 						<div class="community-reviews-display-mobile-center">
 							<div class="community-reviews-unit-toggle">
-								<input class="community-reviews-toggle" id="community-reviews-toggle-height-mobile" type="checkbox">
+								<input class="community-reviews-toggle" id="community-reviews-toggle-height-mobile" type="checkbox" <?php
+									if(is_user_logged_in()) {
+										if ( function_exists( 'get_current_user_id' ) ) {
+											$uid = get_current_user_id();
+
+											global $wpdb;
+
+											$user_table_name = $wpdb->prefix . "bcr_users";
+
+											$sql = $wpdb->prepare("SELECT unit_preference FROM $user_table_name WHERE userID = %s;", $uid);
+
+											$unit_preference = $wpdb->get_var($sql, 0, 0);
+
+											if($unit_preference == 'metric') {
+												echo 'checked';
+											}
+										}
+									}
+										
+								?>>
 								<label class="community-reviews-toggle-label" for="community-reviews-toggle-height-mobile"></label>
 							</div>
 						</div>
@@ -312,7 +350,26 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 
 							<div class="community-reviews-unit-toggle-container">
 								<div class="community-reviews-unit-toggle">
-									<input class="community-reviews-toggle" id="community-reviews-toggle-weight" type="checkbox">
+									<input class="community-reviews-toggle" id="community-reviews-toggle-weight" type="checkbox" <?php
+									if(is_user_logged_in()) {
+										if ( function_exists( 'get_current_user_id' ) ) {
+											$uid = get_current_user_id();
+
+											global $wpdb;
+
+											$user_table_name = $wpdb->prefix . "bcr_users";
+
+											$sql = $wpdb->prepare("SELECT unit_preference FROM $user_table_name WHERE userID = %s;", $uid);
+
+											$unit_preference = $wpdb->get_var($sql, 0, 0);
+
+											if($unit_preference == 'metric') {
+												echo 'checked';
+											}
+										}
+									}
+										
+								?>>
 									<label class="community-reviews-toggle-label" for="community-reviews-toggle-weight"></label>
 								</div>
 							</div>
@@ -330,7 +387,26 @@ class Community_Reviews_Display extends \Elementor\Widget_Base {
 						
 						<div class="community-reviews-display-mobile-center">
 							<div class="community-reviews-unit-toggle">
-								<input class="community-reviews-toggle" id="community-reviews-toggle-weight-mobile" type="checkbox">
+								<input class="community-reviews-toggle" id="community-reviews-toggle-weight-mobile" type="checkbox" <?php
+									if(is_user_logged_in()) {
+										if ( function_exists( 'get_current_user_id' ) ) {
+											$uid = get_current_user_id();
+
+											global $wpdb;
+
+											$user_table_name = $wpdb->prefix . "bcr_users";
+
+											$sql = $wpdb->prepare("SELECT unit_preference FROM $user_table_name WHERE userID = %s;", $uid);
+
+											$unit_preference = $wpdb->get_var($sql, 0, 0);
+
+											if($unit_preference == 'metric') {
+												echo 'checked';
+											}
+										}
+									}
+										
+								?>>
 								<label class="community-reviews-toggle-label" for="community-reviews-toggle-weight-mobile"></label>
 							</div>
 						</div>

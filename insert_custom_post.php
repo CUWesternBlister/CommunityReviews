@@ -36,10 +36,6 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
     // $years_arr = explode("-", $years);
     // $year = $years_arr[0];
 
-
-    //$str = print_r($title_arr, true);
-    //echo $str."<br>";
-
     $years = "";
     $length = "";
     $ski_boot_size = "";
