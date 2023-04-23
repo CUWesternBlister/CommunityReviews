@@ -133,9 +133,11 @@ function bcr_update_brands_table($csvFile){
     $typeFile = gettype($csvFile);
 
     fwrite($file, "Type of csvFile: $typeFile\n");
-    fwrite($file, "this is the string csvFile: $csv\n");
+    fwrite($file, "this is the string csvFile: $csvFile\n");
+
     
     $csv = array_map('str_getcsv', file($csvFile));
+   
 
     fwrite($file, "csv: $csv after array_map call\n");
 

@@ -182,29 +182,41 @@ function bcr_display_CSV_file_upload(){
             const brandCSV = brandCSVField.value;
             var stringData;
             console.log(`this is file: ${file}`);
-            Papa.parse(file, {
-                complete: function(results) {
-                    for (let i = 0; i < results.data.length; i++) {
-                        console.log(results.data);
+
+            return new Promise((resolve, reject) => {
+                Papa.parse(file, {
+                    complete: function(results) {
                         stringData = JSON.stringify(results.data);
                         console.log(`stringData: ${stringData}\n`);
+                        console.log(`stringData[1]: ${stringData[1]}\n`);
+                        console.log(`stringData[2]: ${stringData[2]}\n`);
+                        resolve(stringData);
+                    },
+                    error: function(error){
+                        reject(error);
                     }
-                }
-            });
-            console.log(brandCSV);
-            jQuery.ajax({
-                url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
-                method: 'POST',
-                data: {
-                    action: 'adminUploadBrandCSV',
-                    brandCSV: file,
-                    stringData: stringData
-                },
-                success: function(result){
-                    console.log(result);
-                }
-            });
-            console.log("post Ajax call");
+                });
+            })
+            .then((stringData) => {
+                console.log(`stringData outside of Papa call: ${stringData}\n`);
+                console.log(brandCSV);
+                jQuery.ajax({
+                    url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
+                    method: 'POST',
+                    data: {
+                        action: 'adminUploadBrandCSV',
+                        brandCSV: brandCSV,
+                        stringData: stringData
+                    },
+                    success: function(result){
+                        console.log(result);
+                    }
+                });
+                console.log("post Ajax call");
+            })
+            .catch((error) => {
+                console.log(`Error: ${error}\n`);
+            })
         }
     
     </script>
@@ -241,16 +253,16 @@ function adminUploadBrandCSV(){
     $stringData = $_POST['stringData'];
 
     fwrite($file, "entered UploadBrandCSV ajax funciton.\n");
-    fwrtie($file, "string data in adminUploadBrandCSV: ");
+    fwrite($file, "string data in adminUploadBrandCSV: $stringData.\n");
 
-    $brandCSV = $_POST['brandCSV'];
+    //$brandCSV = $_POST['brandCSV'];
 
     fwrite($file, "after getting brandCSV\n");
     require_once( plugin_dir_path( __FILE__ ) . 'uploadInitialData.php');
-    //$result = bcr_update_brands_table($brandCSV);
+    $result = bcr_update_brands_table($stringData);
     $result = FALSE;
 
-    fwrite($file, "after brand csv funciton call\n");
+    //fwrite($file, "after brand csv funciton call\n");
 
     echo $result;
     wp_die();
