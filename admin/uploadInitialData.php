@@ -11,11 +11,13 @@ function bcr_init_tables() {
     $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
     $file = fopen($file_path, "w") or die('fopen failed');
 
+    fwrite($file, "bcr_init_tables\n");
+
     $brand_table_update_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_brands_table_init.csv';
     $product_table_update_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_products_table_init.csv';
     
-    bcr_update_brands_table($brand_table_update_file, $file);
-    bcr_update_products_table($product_table_update_file, $file);
+    bcr_update_brands_table($brand_table_update_file);
+    bcr_update_products_table($product_table_update_file);
     
 
     $categories_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_categories.sql.gz';
@@ -30,10 +32,16 @@ function bcr_init_tables() {
  * 
  * @return boolean success 
  */
-function bcr_update_products_table($csvFile, $testFile){
+function bcr_update_products_table($csvFile){
     global $wpdb;
 
-    $csv = array_map('str_getcsv', file($csvFile));
+    $typeFile = gettype($csvFile);
+
+    if($typeFile=="string"){
+        $csv = array_map('str_getcsv', file($csvFile));
+    } else{
+        $csv = $csvFile;
+    }
 
     $header = array_shift($csv);
 
@@ -71,8 +79,10 @@ function bcr_update_products_table($csvFile, $testFile){
         foreach ($productsToEnter as $row){
 
             $categoryID = $row[1];
-            $brandID = $row[2];
+            $brandName = $row[2];
             $productName = $row[3];
+
+            $brandID = getBrandID($brandName);
 
             if($count != $numProductsToEnter){
                 $concatString = "($categoryID, $brandID, '$productName'),";
@@ -94,6 +104,23 @@ function bcr_update_products_table($csvFile, $testFile){
     return $success;
 
 }
+/**
+ *Gets the brandID associated with the brandName passed in
+ * 
+ * 
+ * 
+ * @return int brandID
+ */
+function getBrandID($brandName){
+    global $wpdb;
+
+    $brandTableName = $wpdb->prefix . "bcr_brands";
+    $sql = "SELECT brandID FROM $brandTableName WHERE brandName='$brandName';";
+    $res = $wpdb->get_row($sql);
+
+    return $res->brandID;
+}
+
 
 /**
  *Updates the brand table with the passed in .csv for values
@@ -102,10 +129,16 @@ function bcr_update_products_table($csvFile, $testFile){
  * 
  * @return boolean success 
  */
-function bcr_update_brands_table($csvFile, $testFile){
+function bcr_update_brands_table($csvFile){
     global $wpdb;
 
-    $csv = array_map('str_getcsv', file($csvFile));
+    $typeFile = gettype($csvFile);
+
+    if($typeFile=="string"){
+        $csv = array_map('str_getcsv', file($csvFile));
+    } else{
+        $csv = $csvFile;
+    }
 
     $header = array_shift($csv);
 
@@ -161,11 +194,9 @@ function bcr_update_brands_table($csvFile, $testFile){
     } else{
         $success = FALSE;
     }
-    fwrite($testFile, "sql string: $sql\n");
     return $success;
 
 }
-
 
 /**
  *Creates prepares the sql command, takes in file path to gzipped sql file 
@@ -187,5 +218,5 @@ function bcr_prepare_sql($fileName){
     return $sql_command;
 }
 
-bcr_init_tables();
+//bcr_init_tables();
 ?>

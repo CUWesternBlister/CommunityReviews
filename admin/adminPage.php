@@ -114,15 +114,28 @@ function bcr_run_table_structure_update() {
             if(array_key_exists("table_structure_update_button", $_POST)) {
                 global $wpdb;
                 $result = [];
-                $reviews_table_name = $wpdb->prefix . "bcr_users";
-                $sql1 = "ALTER TABLE wp_bcr_users DROP COLUMN heightFeet;";
+
+                $ra_name = $wpdb->prefix . 'bcr_reviews_answers'; // replace 'bcr_users' with your table name
+                $result['drop review answers'] = $wpdb->query("DROP TABLE IF EXISTS $ra_name;");
+                $r_name = $wpdb->prefix . 'bcr_reviews'; // replace 'bcr_users' with your table name
+                $result['drop reviews'] = $wpdb->query("DROP TABLE IF EXISTS $r_name;");
+                $a_name = $wpdb->prefix . 'bcr_answers'; // replace 'bcr_users' with your table name
+                $result['drop answers'] = $wpdb->query("DROP TABLE IF EXISTS $a_name;");
+                // $q_name = $wpdb->prefix . 'wp_bcr_questions'; // replace 'bcr_users' with your table name
+                // $result['drop questions'] = $wpdb->query("DROP TABLE IF EXISTS $q_name;");
+
+
+                $table_name = $wpdb->prefix . "bcr_users";
+                $sql1 = "ALTER TABLE $table_name DROP COLUMN heightFeet;";
                 $result[1] = $wpdb->query( $sql1 );
-                $sql2 = "ALTER TABLE wp_bcr_users DROP COLUMN heightInches;";
+                $sql2 = "ALTER TABLE $table_name DROP COLUMN heightInches;";
                 $result[2] = $wpdb->query( $sql2 );
-                $sql3 = "ALTER TABLE wp_bcr_users ADD COLUMN unit_preference VARCHAR(512);";
+                $sql3 = "ALTER TABLE $table_name ADD COLUMN unit_preference VARCHAR(512);";
                 $result[3] = $wpdb->query( $sql3 );
-                $sql4 = "ALTER TABLE wp_bcr_users ADD COLUMN height INT(9);";
+                $sql4 = "ALTER TABLE $table_name ADD COLUMN height INT(9);";
                 $result[4] = $wpdb->query( $sql4 );
+                $sql5 = "TRUNCATE TABLE $table_name;";
+                $result[5] = $wpdb->query($sql5);
                 // echo "Result Array: <br>";
                 // echo var_dump($result)."<br>";
             }
@@ -130,7 +143,7 @@ function bcr_run_table_structure_update() {
            ?>
             <div id="table_update">
                 <form method="post">
-                    <input id="myButton" type="submit" name="table_structure_update_button" class="button" value="Update Users Table Structure"/>
+                    <input id="myButton" type="submit" name="table_structure_update_button" class="button" value="Remove Review Tables & Update User Table"/>
                 </form>
             </div>
             <!-- <script>
