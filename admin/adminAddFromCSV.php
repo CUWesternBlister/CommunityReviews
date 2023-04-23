@@ -33,7 +33,7 @@ function displayCSVMenu(){
             );
 
             bcr_display_CSV_file_upload();
-            bcr_display_category_text_field_upload();
+            //bcr_display_category_text_field_upload();
             
 
             foreach($table_names_array as $table_name) {
@@ -49,7 +49,7 @@ function displayCSVMenu(){
 }
 
 /** 
- * Displays a text field for entering a category
+ * Displays a text field for entering a category (NOT USED CURRENTLY BC CATEGORY NEEDS TO BE CREATED WITH A FORM)
  * 
  * @return void
  */
@@ -71,7 +71,6 @@ function bcr_display_category_text_field_upload(){
             const categoryNameField = document.getElementById('categoryName');
             const parentID = parentIDField.value;
             const categoryName = categoryNameField.value;
-            console.log(parentID, categoryName);
             jQuery.ajax({
                 url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
                 method: 'POST',
@@ -167,29 +166,24 @@ function bcr_display_CSV_file_upload(){
         var file;
 
         // Get the file input element
-        const fileInput = document.getElementById('brandFileUpload');
+        const fileInputBrand = document.getElementById('brandFileUpload');
 
         // Add an event listener to the file input element
-        fileInput.addEventListener('change', handleFileSelect, false);
+        fileInputBrand.addEventListener('change', handleFileSelectBrand, false);
 
-        function handleFileSelect(event){
+        function handleFileSelectBrand(event){
             window.file = event.target.files[0];
-            console.log(file);
         }
 
         function bcr_uploadBrandButtonClicked(){
             const brandCSVField = document.getElementById('brandFileUpload');
             const brandCSV = brandCSVField.value;
             var stringData;
-            console.log(`this is file: ${file}`);
 
             return new Promise((resolve, reject) => {
                 Papa.parse(file, {
                     complete: function(results) {
-                        stringData = JSON.stringify(results.data);
-                        console.log(`stringData: ${stringData}\n`);
-                        console.log(`stringData[1]: ${stringData[1]}\n`);
-                        console.log(`stringData[2]: ${stringData[2]}\n`);
+                        stringData = results.data;
                         resolve(stringData);
                     },
                     error: function(error){
@@ -198,8 +192,6 @@ function bcr_display_CSV_file_upload(){
                 });
             })
             .then((stringData) => {
-                console.log(`stringData outside of Papa call: ${stringData}\n`);
-                console.log(brandCSV);
                 jQuery.ajax({
                     url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
                     method: 'POST',
@@ -210,9 +202,9 @@ function bcr_display_CSV_file_upload(){
                     },
                     success: function(result){
                         console.log(result);
+                        location.reload();
                     }
                 });
-                console.log("post Ajax call");
             })
             .catch((error) => {
                 console.log(`Error: ${error}\n`);
@@ -230,13 +222,54 @@ function bcr_display_CSV_file_upload(){
         </div>
     </div>
     <script>
+        var file;
+
+        // Get the file input element
+        const fileInputProduct = document.getElementById('productFileUpload');
+
+        // Add an event listener to the file input element
+        fileInputProduct.addEventListener('change', handleFileSelectProduct, false);
+
+        function handleFileSelectProduct(event){
+            window.file = event.target.files[0];
+        }
 
         function bcr_uploadProductButtonClicked(){
             const productCSVField = document.getElementById('productFileUpload');
             const productCSV = productCSVField.value;
-            console.log(productCSV);
-        }
+            var stringData;
 
+            return new Promise((resolve, reject) => {
+                Papa.parse(file, {
+                    complete: function(results) {
+                        stringData = results.data;
+                        resolve(stringData);
+                    },
+                    error: function(error){
+                        reject(error);
+                    }
+                });
+            })
+            .then((stringData) => {
+                jQuery.ajax({
+                    url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
+                    method: 'POST',
+                    data: {
+                        action: 'adminUploadProductCSV',
+                        productCSV: productCSV,
+                        stringData: stringData
+                    },
+                    success: function(result){
+                        console.log(result);
+                        location.reload();
+                    }
+                });
+            })
+            .catch((error) => {
+                console.log(`Error: ${error}\n`);
+            })
+        }
+    
     </script>
     <?php
 }
@@ -247,22 +280,10 @@ function bcr_display_CSV_file_upload(){
  * @return void
  */
 function adminUploadBrandCSV(){
-    $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
-    $file = fopen($file_path, "w") or die('fopen failed');
-
     $stringData = $_POST['stringData'];
 
-    fwrite($file, "entered UploadBrandCSV ajax funciton.\n");
-    fwrite($file, "string data in adminUploadBrandCSV: $stringData.\n");
-
-    //$brandCSV = $_POST['brandCSV'];
-
-    fwrite($file, "after getting brandCSV\n");
     require_once( plugin_dir_path( __FILE__ ) . 'uploadInitialData.php');
     $result = bcr_update_brands_table($stringData);
-    $result = FALSE;
-
-    //fwrite($file, "after brand csv funciton call\n");
 
     echo $result;
     wp_die();
@@ -270,6 +291,24 @@ function adminUploadBrandCSV(){
 
 add_action( 'wp_ajax_adminUploadBrandCSV', 'adminUploadBrandCSV' );
 add_action( 'wp_ajax_nopriv_adminUploadBrandCSV', 'adminUploadBrandCSV' );
+
+/** 
+ * Upload product CSV to product table
+ * 
+ * @return void
+ */
+function adminUploadProductCSV(){
+    $stringData = $_POST['stringData'];
+
+    require_once( plugin_dir_path( __FILE__ ) . 'uploadInitialData.php');
+    $result = bcr_update_products_table($stringData);
+
+    echo $result;
+    wp_die();
+}
+
+add_action( 'wp_ajax_adminUploadProductCSV', 'adminUploadProductCSV' );
+add_action( 'wp_ajax_nopriv_adminUploadProductCSV', 'adminUploadProductCSV' );
 
 
 
