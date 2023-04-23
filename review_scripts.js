@@ -2,8 +2,10 @@ jQuery( document ).ready( function( $ ) {
     if (! $( '.communityreviews' ).length ) {
         return;
     }
-    var post_and_id = $( '.communityreviews' ).attr('id');
-    var post_id = post_and_id.split('-')[1];
+    var post_and_id = $( '#content' ).attr('class');
+    const match = post_and_id.match(/\d+/);
+    const post_id = match ? match[0] : null;
+    console.log("post id: "+post_id);
     $.ajax( {
         url: ajax_object.ajax_url,
         method: 'POST',

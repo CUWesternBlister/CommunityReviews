@@ -16,6 +16,9 @@ function insert_into_ski_review($header, $file, $formName, $form_id) {
     $html = format_questions_answers_post_content($header["questions_and_answers"],$formName,$file);
     
     $user_html = format_review_excerpt($userInfo, $userName, $header["questions_and_answers"]);
+    echo "user info: <br>";
+    echo var_dump($userInfo)."<br>";
+    echo "------------------------------------------------------------<br>";
     $user_info_html = format_reviewerInfo($userInfo, $userName);
     $html = $user_info_html . $html;
 
