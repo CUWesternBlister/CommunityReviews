@@ -32,19 +32,21 @@ function check_for_brand($brand_name){
 		return false;
 	}
 }
-// function check_for_category($category_name){
-// 	global $wpdb;
-// 	$categories_table = $wpdb->prefix . "bcr_categories";
-// 	$sql = $wpdb->prepare("SELECT * FROM $categories_table WHERE productName = $category_name;");
-// 	$res = $wpdb->query($sql);
-// 	if ($res == 0 || !$res ) {
-// 		//echo "returning false<br>";
-// 		return false;
-// 	} else {
-// 		//echo "returning true<br>";
-// 		return true;
-// 	}
-// }
+
+function check_for_category($category_name){
+ 	global $wpdb;
+ 	$categories_table = $wpdb->prefix . "bcr_categories";
+ 	$sql = $wpdb->prepare("SELECT * FROM $categories_table WHERE categoryName = $category_name;");
+	$res = $wpdb->get_row($sql);
+ 	if ($res) {
+ 		//echo "returning true<br>";
+ 		return true;
+ 	} else {
+ 		//echo "returning false<br>";
+		return false;
+ 	}
+}
+
 // function check_for_sport($sport_name){
 // 	global $wpdb;
 // 	$categories_table = $wpdb->prefix . "bcr_categories";

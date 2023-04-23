@@ -7,6 +7,7 @@
 function bcr_activate() {
     //add function calls to perform on plugin activation here
     require_once( plugin_dir_path( __FILE__ ) . 'uploadInitialData.php');
+    bcr_init_tables();
     require_once( plugin_dir_path( __FILE__ ) . 'align_form_ids.php');
 }
 
