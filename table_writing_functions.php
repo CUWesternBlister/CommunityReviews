@@ -40,12 +40,12 @@ function insert_into_review_table($RF_id, $product_name, $brand_name, $file){
         }
 
         $fields_review['userID'] = $current_userID;
-        
+
         $fields_review['reviewFormID'] = $RF_id;
 
-        
+
         $output2['success'] = $wpdb->insert($review_table, $fields_review);
-        $last_review_id = $wpdb->insert_id; 
+        $last_review_id = $wpdb->insert_id;
         return $last_review_id;
 }
 

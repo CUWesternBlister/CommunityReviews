@@ -3,14 +3,14 @@
 jQuery( document ).ready( function( $ ) {
     $( 'select' ).on( 'change', function() {
         const selector_name = $( this ).attr( 'id' );
-        if(selector_name.split('_')[2] != '1' || selector_name.split('_')[3] != 1) {
+        if( !(selector_name.split('_')[2] == 'dropdown' && selector_name.split('_').length == 3) ) {
             return;
         }
 
         const current_form_id = selector_name.split('_')[1];
 
-        const brand_selector_name = '#ff_' + current_form_id + '_1_1';
-        const product_selector_name = '#ff_' + current_form_id + '_2';
+        const brand_selector_name = '#ff_' + current_form_id + '_dropdown';
+        const product_selector_name = '#ff_' + current_form_id + '_dropdown_1';
 
         var brand_selected = $( brand_selector_name ).val();
 
