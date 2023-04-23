@@ -112,40 +112,36 @@ function bcr_display_user_reset() {
 function bcr_run_table_structure_update() {
 
             if(array_key_exists("table_structure_update_button", $_POST)) {
-                echo "here1<br>";
                 global $wpdb;
-                $reviews_table_name = $wpdb->prefix . "bcr_reviews";
-                $flagged_col = "FlaggedForReview";
-
-                $sql = "ALTER TABLE $reviews_table_name
-                        ADD FlaggedForReview tinyint(1) DEFAULT 0 NOT NULL;";
-
-                // $sql = "ALTER TABLE `{$reviews_table_name}`
-                //         ADD `FlaggedForReview` VARCHAR(20) tinyint(1) DEFAULT 0 NOT NULL;";
-
-                $query_result = $wpdb->query( $sql );
-                echo $query_result."<br>";
-                // $sql = "IF NOT EXISTS (
-                //     SELECT *
-                //     FROM INFORMATION_SCHEMA.COLUMNS
-                //     WHERE TABLE_NAME = $reviews_table_name AND COLUMN_NAME = $flagged_col
-                // ) 
-                // THEN
-                //     ALTER $reviews_table_name
-                //     ADD $flagged_col tinyint(1) NOT NULL DEFAULT '0';
-                // END IF;";
-
-                //require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-                //dbDelta( $sql );
-                echo "here2<br>";
+                $result = [];
+                $reviews_table_name = $wpdb->prefix . "bcr_users";
+                $sql1 = "ALTER TABLE wp_bcr_users DROP COLUMN heightFeet;";
+                $result[1] = $wpdb->query( $sql1 );
+                $sql2 = "ALTER TABLE wp_bcr_users DROP COLUMN heightInches;";
+                $result[2] = $wpdb->query( $sql2 );
+                $sql3 = "ALTER TABLE wp_bcr_users ADD COLUMN unit_preference VARCHAR(512);";
+                $result[3] = $wpdb->query( $sql3 );
+                $sql4 = "ALTER TABLE wp_bcr_users ADD COLUMN height INT(9);";
+                $result[4] = $wpdb->query( $sql4 );
+                // echo "Result Array: <br>";
+                // echo var_dump($result)."<br>";
             }
 
            ?>
             <div id="table_update">
                 <form method="post">
-                    <input type="submit" name="table_structure_update_button" class="button" value="Update Table Structure" />
+                    <input id="myButton" type="submit" name="table_structure_update_button" class="button" value="Update Users Table Structure"/>
                 </form>
             </div>
+            <!-- <script>
+                function disableButton() {
+                    // Disable the button after it is clicked
+                    document.getElementById("myButton").disabled = true;
+
+                    // Alternatively, remove the button from the HTML
+                    //document.getElementById("myButton").remove();
+                }
+            </script> -->
            <?php
 }
 
