@@ -213,7 +213,7 @@ function display($flaggedReviews){
                 success: function(result) {
                         //console.log(`Successfully changed the flag on the approved/denied review`);
                         console.log(result);
-                       //location.reload();
+                       location.reload();
                 }
             });
         }
@@ -258,12 +258,12 @@ function display($flaggedReviews){
             var label = document.querySelector(selector);
             var text = label.innerHTML;
             
-            const match1 = text.match(/Brand:\s([\w\s]+)/);
+            const match1 = text.match(/Brand:\s(.+?),/);///Brand:\s([\w\s]+)/);
             
             const brand = match1 ? match1[1] : null;
             
             
-            const match2 = text.match(/Product:\s([\w\s]+)/);
+            const match2 = text.match(/Product:\s(.+?),/);///Product:\s([\w\s]+)/);
             
             const product = match2 ? match2[1] : null;
             
@@ -290,23 +290,6 @@ function display($flaggedReviews){
                     console.log('No radio button selected');
                 }
         }
-
-
-        // function get_selected_review(id){
-        //     jQuery.ajax({
-        //         url: '<?php //echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
-        //         method: 'POST',
-        //         data: {
-        //             action: 'get_meta',
-        //             reviewID: reviewId,
-        //         },
-        //         success: function(result) {
-        //                 //console.log(`Successfully changed the flag on the approved/denied review`);
-        //                 //console.log(result);
-        //                 location.reload();
-        //         }
-        //     });
-        // }
     </script>
     <?
 }
@@ -330,24 +313,14 @@ function get_flagged_review_meta_data($review_id){
     $query = new WP_Query( $args );
 
     if ( $query->have_posts() ) {
-        //while ( $query->have_posts() ) {
         $query->the_post();
         $brand = get_post_meta( get_the_ID(), 'brand', true );
-        //echo "$custom_meta_value brand name<br>";
         $product = get_post_meta( get_the_ID(), 'product_tested', true );
-        //echo "$custom_meta_value product name<br>";
         $category = get_post_meta( get_the_ID(), 'category', true );
         $sport = get_post_meta( get_the_ID(), 'sport', true );
         $url = get_the_guid(get_the_ID());
         $title = get_the_title(get_the_ID());
         $id = get_the_ID();
-        //echo "$title<br>";
-
-        /*
-        
-        could all be replaced with get_post_meta, to get all meta data
-        
-        */
 
         $retArr = array(
             'brand' => $brand,
@@ -358,10 +331,6 @@ function get_flagged_review_meta_data($review_id){
             'title' => $title,
             'post_id' => $id
         );
-
-
-            
-        //}
     }else{
         //echo "query was empty no post found with this id<br>";
     }
@@ -387,9 +356,6 @@ function get_flagged_reviews_cp(){
     );
   
     $query = new WP_Query( $args );
-    // echo "Query :<br>";
-    // echo var_dump($query)."<br>";
-    // echo "------------------------------------------------------------<br>";
     return $query;
   }
 
@@ -410,7 +376,6 @@ function add_bcr_flagged_reviews_submenu_page() {
     if ( $query->have_posts() ) {
         $notification_count = $query->found_posts;
     }    
-    //echo "num found posts: ".strval($query->found_posts)."<br>";
     add_submenu_page(
         'edit.php?post_type=communityreviews', // The parent menu slug
         'BCR Flagged Reviews', // The page title
