@@ -115,11 +115,7 @@ function display($flaggedReviews){
                             <a href="<?php echo  $arr['url']?>"><?php echo "URL: BCR Post $arr[post_id]"?></a>
                         <?php endforeach ?>
                         <div>
-                            <?php
-                                $myArrJson = json_encode($flaggedReviews);
-                                //echo $myArrJson;
-                            ?>
-                            <input type="hidden" id="myArr" value='<?php echo strval($myArrJson);?>'>
+                            
                             <button type="submit" id="submit-button" onclick="submitButtonClicked()" >Load Flagged Review</button>
                         </div>
                         
@@ -160,21 +156,25 @@ function display($flaggedReviews){
         function approveButtonClicked(){
             const selectedRadio = document.querySelector('input[name="flagged_review"]:checked');
             const approveButton = document.getElementById('approve-button');
-            const myArrJson = document.getElementById('myArr').value;
-            const myArr = JSON.parse(myArrJson);
-            //console.log(myArr);
             const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review Post ID: (\d+)/)[1]);
-            prodArr = myArr[reviewId];
-            //console.log(prodArr);
+            const radio_id = selectedRadio.id;
+            var selector = 'label[for=' + radio_id + ']';
+            var label = document.querySelector(selector);
+            var text = label.innerHTML;
+            
+            const match1 = text.match(/Category:\s([\w\s]+)/);
+            
+            const category = match1 ? match1[1] : null;
+            
             const productElement = document.getElementById("community-reviews-display-product-dropdown");
             const brandElement = document.getElementById("community-reviews-display-brand-dropdown");
             //console.log(productElement.value, brandElement.value, prodArr['category'], prodArr['sport'], prodArr['post_id']);
-            addRow(productElement.value, brandElement.value, prodArr['category'], prodArr['sport'], prodArr['post_id']);
+            addRow(productElement.value, brandElement.value, category, reviewId);
             //console.log(`These are the values in the dropdown: product-"${productElement.value}" brand-"${brandElement.value}"`);
-            removeValueFromRadio(reviewId, 0,prodArr['post_id']);
+            removeValueFromRadio(reviewId, 0, reviewId);
         }
 
-        function addRow(product, brand, category, sport, postID){
+        function addRow(product, brand, category, postID){
             jQuery.ajax({
                 url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
                 method: 'POST',
@@ -183,11 +183,10 @@ function display($flaggedReviews){
                     product: product,
                     brand: brand,
                     category: category,
-                    sport: sport,
                     postID: postID
                 },
                 success: function(result) {
-                    //console.log(result);
+                    console.log(result);
                     //location.reload();
                 }
             });
@@ -195,9 +194,6 @@ function display($flaggedReviews){
 
         function denyButtonClicked(){
             const selectedRadio = document.querySelector('input[name="flagged_review"]:checked');
-            const denyButton = document.getElementById('deny-button');
-            const myArrJson = document.getElementById('myArr').value;
-            const myArr = JSON.parse(myArrJson);
             const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review Post ID: (\d+)/)[1]);
             //const postID = Number(selectedRadio.nextElementSibling.textContent.match(/Review Post ID: (\d+)/)[1]);
             removeValueFromRadio(reviewId, 2, reviewId);
@@ -216,8 +212,8 @@ function display($flaggedReviews){
                 },
                 success: function(result) {
                         //console.log(`Successfully changed the flag on the approved/denied review`);
-                        //console.log(result);
-                        location.reload();
+                        console.log(result);
+                       //location.reload();
                 }
             });
         }
@@ -255,44 +251,62 @@ function display($flaggedReviews){
     
         function submitButtonClicked() { 
             const submitButton = document.getElementById('submit-button');
-            const myArrJson = document.getElementById('myArr').value;
-            const myArr = JSON.parse(myArrJson);
-            console.log(`JSON: ${myArr}`);
-            //submitButton.addEventListener('click', update_dropdowns(myArr));
-            update_dropdowns(myArr);
+            const selectedRadio = document.querySelector('input[name="flagged_review"]:checked');
+            const radio_id = selectedRadio.id;
+            
+            var selector = 'label[for=' + radio_id + ']';
+            var label = document.querySelector(selector);
+            var text = label.innerHTML;
+            
+            const match1 = text.match(/Brand:\s([\w\s]+)/);
+            
+            const brand = match1 ? match1[1] : null;
+            
+            
+            const match2 = text.match(/Product:\s([\w\s]+)/);
+            
+            const product = match2 ? match2[1] : null;
+            
+            update_dropdowns(brand, product);
         }
 
-        function update_dropdowns(myArr){
+        function update_dropdowns(brand, product){
                 const selectedRadio = document.querySelector('input[name="flagged_review"]:checked');
                 if (selectedRadio) {
 
                     const selectedValue = selectedRadio.value;
                     console.log(`Selected value: ${selectedValue}`);
                     const reviewId = Number(selectedRadio.nextElementSibling.textContent.match(/Review Post ID: (\d+)/)[1]);
-                    const flagged_review_arr = myArr[reviewId];
-                    console.log(`flagged review arr category : ${flagged_review_arr['category']}`);
-                    //set defualt values for each drop down based off id
-                    /*const categoryElement = document.getElementById("community-reviews-display-category-dropdown");
-                    var $categoryText = document.getElementById("select2-community-reviews-display-category-dropdown-container");
-                    updateDropdown(categoryElement, $categoryText, flagged_review_arr['category']);*/
+                    
                     const brandElement = document.getElementById("community-reviews-display-brand-dropdown");
                     var $brandText = document.getElementById("select2-community-reviews-display-brand-dropdown-container");
-                    updateDropdown(brandElement, $brandText, flagged_review_arr['brand']);
+                    updateDropdown(brandElement, $brandText, brand);
                     const productElement = document.getElementById("community-reviews-display-product-dropdown");
                     var $productText = document.getElementById("select2-community-reviews-display-product-dropdown-container");
-                    updateDropdown(productElement, $productText, flagged_review_arr['product']);
-                    /*const sportElement = document.getElementById("community-reviews-display-sport-dropdown");
-                    var $sportText = document.getElementById("select2-community-reviews-display-sport-dropdown-container");
-                    if(flagged_review_arr['sport']){
-                        updateDropdown(sportElement, $sportText, flagged_review_arr['sport']);
-                    } else{
-                        updateDropdown(sportElement, $sportText, flagged_review_arr['category']);
-                    }*/
+                    updateDropdown(productElement, $productText,product);
+                    
 
                 } else {
                     console.log('No radio button selected');
                 }
         }
+
+
+        // function get_selected_review(id){
+        //     jQuery.ajax({
+        //         url: '<?php //echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
+        //         method: 'POST',
+        //         data: {
+        //             action: 'get_meta',
+        //             reviewID: reviewId,
+        //         },
+        //         success: function(result) {
+        //                 //console.log(`Successfully changed the flag on the approved/denied review`);
+        //                 //console.log(result);
+        //                 location.reload();
+        //         }
+        //     });
+        // }
     </script>
     <?
 }

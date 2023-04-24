@@ -46,7 +46,6 @@ function addRow(){
     $product = $_POST['product'];
     $brand = $_POST['brand'];
     $category = $_POST['category'];
-    $sport = $_POST['sport'];
     $postID = $_POST['postID'];
 
     $args = array(
@@ -54,6 +53,9 @@ function addRow(){
         'p' => intval($postID) 
     );
     $query = new WP_Query($args);
+    // if($query){
+    //     get_meta
+    // }
 
     $result = [];
     $result['post id'] = $postID;
