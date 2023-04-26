@@ -3,17 +3,15 @@ function bcr_change_height_units() {
     $post_id = $_POST['post_id'];//intval( sanitize_text_field(  ) );
 
     $height_in_inches = get_post_meta($post_id, 'height', true );
-    // $file = fopen("testfile.txt", "a");
-    // fwrite($file, "height_in_inches:".strval($height_in_inches));
-    // fclose($file);
+    $cat_str = "height in inches: $height_in_inches ";
 
     $feet = floor($height_in_inches/12);
     $inches = $height_in_inches % 12;
-
     $display_height = strval($feet) . "' " . strval($inches) . '"';
-
+    $cat_str.="| display FI height: $display_height ";
     if(is_user_logged_in()) {
         if ( function_exists( 'get_current_user_id' ) ) {
+
             $uid = get_current_user_id();
 
             global $wpdb;
@@ -23,14 +21,17 @@ function bcr_change_height_units() {
             $sql = $wpdb->prepare("SELECT unit_preference FROM $user_table_name WHERE userID = %s;", $uid);
 
             $unit_preference = $wpdb->get_var($sql, 0, 0);
+            $cat_str.="| user pref: $unit_preference ";
 
             if($unit_preference == "metric") {
                 $height_cm = floor($height_in_inches * 2.54);
 
                 $display_height = strval($height_cm) . " cm";
+                $cat_str.="| display CM height: $display_height ";
             }
         }
     }
+    $cat_str.="| display FINAL height: $display_height ";
     echo "Height: " . esc_html($display_height);
 
     wp_die();

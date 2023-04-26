@@ -2,9 +2,10 @@ jQuery( document ).ready( function( $ ) {
     if (! $( '.communityreviews' ).length ) {
         return;
     }
-    var post_and_id = $( '#content' ).attr('class');
-    const match = post_and_id.match(/\d+/);
-    const post_id = match ? match[0] : null;
+    var post_and_id = document.body.className;
+    console.log(post_and_id);
+    const match = post_and_id.match(/postid-(\d+)/);
+    const post_id = match ? match[1] : null;
     console.log("post id: "+post_id);
     $.ajax( {
         url: ajax_object.ajax_url,
