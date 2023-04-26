@@ -155,7 +155,6 @@ function gen_HTML_for_testimony_qs($testimony, $formName){
 
 function format_reviewerInfo($userInfo, $userName){
     $height = esc_html((int)(intval($userInfo->height) / 12)) . "' ". esc_html(intval($userInfo->height) % 12) . '"';
-    echo strval($height)."<br>";
     $weight = esc_html(intval($userInfo->weight)) . " lbs";
     $html = '<div id = "reviewerInfoContainer" class = "whole_container_flex">
         <div id= " userName" class = "short_container_no_float">Reviewer: '.esc_html($userName). '</div>
@@ -213,7 +212,7 @@ function get_post_title($title_arr){
                 $html.= $arr["answer"].' ';  
             }  
     }
-    //echo $html."<br>";
+
     return $html;
 }
 ?>

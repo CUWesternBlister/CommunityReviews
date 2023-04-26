@@ -31,7 +31,6 @@ function bcr_change_height_units() {
             }
         }
     }
-    echo "Height: " . esc_html($display_height);
 
     wp_die();
 }
@@ -65,8 +64,6 @@ function bcr_change_weight_units() {
             }
         }
     }
-
-    echo "Weight: " . esc_html($display_height);
 
     wp_die();
 }

@@ -47,15 +47,8 @@ function fluent_get_fields_array_formData($formData, $file){
 }
 
 function fluent_get_fields_array_form($form, $formData){
-    //echo "Formdata: <br>";
-    //echo var_dump($formData)."<br><br>";
-    //echo "------------------------------------------------------------<br>";
-    // echo "Form: <br>";
-    // echo var_dump($form)."<br><br>";
-    // echo "------------------------------------------------------------<br>";
+    
     $fields = json_decode($form->form_fields)->fields;
-    // echo "Fields: <br>".var_dump($fields)."<br><br>";
-    // echo "------------------------------------------------------------<br>";
     $return_array = array(
         'title' => array(),
         'testingConditions' => array(),
@@ -63,9 +56,6 @@ function fluent_get_fields_array_form($form, $formData){
         'testimony' => array()
     );
     foreach($fields as $id => $obj){
-        //echo "Field:".strval($id)."<br>";
-        //echo var_dump($obj)."<br><br>";
-        //echo "------------------------------------------------------------<br>";
         $ignore_fields = ['section_break', 'form_step', 'custom_submit_button'];
         if(!in_array($obj->element, $ignore_fields)){
             $settings = $obj->settings;
@@ -76,7 +66,6 @@ function fluent_get_fields_array_form($form, $formData){
             if(count($title_arr)>1){
                 $type = $title_arr[0];
                 $title_order = $title_arr[1];
-                //echo "title arr: ".print_r($title_arr,true)."<br>";
             }
             
             $attributes = $obj->attributes;
@@ -92,11 +81,7 @@ function fluent_get_fields_array_form($form, $formData){
             if(gettype($answer) == "array"){ $answer = implode(", ", $answer); }
             
             if(!is_null($answer)){ 
-                // echo "Name: ".$name."<br>";
-                // echo "Type: ".$type."<br>";
-                // echo "questionContent: ".$questionContent."<br>";
-                // echo "answer: ".$answer."<br>";
-                // echo "------------------------------------------------------------<br>";
+                
                 if($title_order !== ""){
                     $return_array[$type][$name] = ["question" => $questionDisplayContent, "answer" => $answer, "title_order" => $title_order, 'name_attribute' => $name];
                 }else{
@@ -105,9 +90,7 @@ function fluent_get_fields_array_form($form, $formData){
             }
         }
     }
-    // echo "return array: <br>";
-    // echo var_dump($return_array)."<br><br>";
-    // echo "------------------------------------------------------------<br>";
+
     return $return_array;
 }
 
@@ -158,20 +141,16 @@ function summit_form_submission_custom_post_content($current_review_id, $current
     $first_two_elements = array_slice($record['title'], 0, 2);
     $new_keys = array('0', '1');
     $first_two_elements = array_combine($new_keys, $first_two_elements);
-    // echo "first two elements: <br>";
-    // echo var_dump($first_two_elements)."<br><br>";
-    // echo "------------------------------------------------------------<br>";
+    
     $product_name = $first_two_elements[1]['answer'];
-    // echo "product: ".$product_name."<br><br>";
+    
     $brand_name = $first_two_elements[0]['answer'];
-    // echo "brand: ".$brand_name."<br>";
+   
     $category_info = get_category_info($current_form_id, $file);
 
     $sport_info = get_sport_info($category_info->categoryName);
 
-    // echo "record: <br>";
-    // echo var_dump($record)."<br><br>";
-    // echo "------------------------------------------------------------<br>";
+    
     $q_and_a_content = $record;#get_answer_and_question_content($record,$file);
     
     $user_info = get_user_information($file);
@@ -179,7 +158,7 @@ function summit_form_submission_custom_post_content($current_review_id, $current
     $flagForReview = 0;
     if((!check_for_brand($brand_name)) || (!check_for_product($product_name))){
         $flagForReview = 1;
-        //echo "review flagged<br>";
+        
     }
 
     $header = array(
@@ -193,12 +172,7 @@ function summit_form_submission_custom_post_content($current_review_id, $current
         'sportName' => $sport_info->categoryName,
         'flagForReview' => $flagForReview
     );
-    // echo "Header: <br>";
-    // echo var_dump($header)."<br>";
-    // echo "------------------------------------------------------------<br><br>";
-    // echo "record: <br>";
-    // echo var_dump($record)."<br><br>";
-    // echo "------------------------------------------------------------<br>";
+  
     return $header;
 }
 
