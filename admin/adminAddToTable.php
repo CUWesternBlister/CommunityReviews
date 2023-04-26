@@ -35,7 +35,6 @@ function bcr_flagged_reviews_callback() {
 
 function display($flaggedReviews){
     // $str = print_r($flaggedReviews, true);
-    // echo "flagged reviews: ". $str;
     ?>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -295,7 +294,7 @@ function display($flaggedReviews){
 }
 
 function get_flagged_review_meta_data($review_id){
-    //echo "get_flagged_review_post<br>";
+  
     $args = array(
         'post_type' => 'Community Reviews',
         'posts_per_page' => 1,
