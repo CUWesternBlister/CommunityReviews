@@ -20,7 +20,6 @@ function bcr_admin_page() {
         'bcr_commuinty_reviews',
         'BCR Update Custom Posts',
         'BCR Update Custom Posts',
-        'tech_admin',
         'manage_options',
         'bcr_admin_update_custom_post_submenu_page',
         'bcr_admin_update_custom_post_submenu_page_callback'
