@@ -209,9 +209,11 @@ function bcr_prepare_sql($fileName){
     global $wpdb;
     $sql_command = "";
     $lines = gzfile($fileName);
+    
     foreach($lines as $key => $line ){
         $sql_command.= $line;
     }
+    
     $sql_command = str_replace("wp_", $wpdb->prefix, $sql_command);
     $sql_command = str_replace("wp8o_", $wpdb->prefix, $sql_command);
 
