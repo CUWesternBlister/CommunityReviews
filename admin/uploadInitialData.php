@@ -17,9 +17,21 @@ function bcr_init_tables() {
     $product_table_update_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_products_table_init.csv';
     
 
-    $categories_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_categories.sql.gz';
-    $categories_sql = bcr_prepare_sql($categories_table_file);
-    dbDelta($categories_sql);
+    // $categories_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_categories.sql.gz';
+    // $categories_sql = bcr_prepare_sql($categories_table_file);
+    $cat_table = $wpdb->prefix."bcr_categories";
+    $query = $wpdb->prepare( "SELECT COUNT(*) FROM $cat_table WHERE categoryID IS NOT NULL");
+    if ($wpdb->get_var( $query ) == $cat_table && ! $wpdb->get_var($query) == 0) {
+        $categories_sql="INSERT INTO `$cat_table` (`categoryID`, `parentID`, `categoryName`) VALUES
+        (1, 0, 'Ski'),
+        (2, 1, 'Ski Boots'),
+        (3, 0, 'Apparel'),
+        (4, 1, 'Skis'),
+        (5, 1, 'Climbing Skins'),
+        (6, 0, 'Snowboard'),
+        (7, 6, 'Snowboards')";
+        dbDelta($categories_sql);
+    }
 
     bcr_update_brands_table($brand_table_update_file);
     bcr_update_products_table($product_table_update_file);
@@ -209,14 +221,19 @@ function bcr_prepare_sql($fileName){
     global $wpdb;
     $sql_command = "";
     $lines = gzfile($fileName);
-    
+    $file = fopen('testfile.txt', 'a');
+    // fwrite($file, print_r($lines, true));
     foreach($lines as $key => $line ){
+        // fwrite($file, "key: ".gettype($key)."\n");
+        // fwrite($file, "line: ".$line."\n");
         $sql_command.= $line;
     }
     
     $sql_command = str_replace("wp_", $wpdb->prefix, $sql_command);
     $sql_command = str_replace("wp8o_", $wpdb->prefix, $sql_command);
+    fwrite($file, $sql_command."\n");
 
+    fclose($file);
     return $sql_command;
 }
 
