@@ -16,13 +16,13 @@ function bcr_init_tables() {
     $brand_table_update_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_brands_table_init.csv';
     $product_table_update_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_products_table_init.csv';
     
-    bcr_update_brands_table($brand_table_update_file);
-    bcr_update_products_table($product_table_update_file);
-    
 
     $categories_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_categories.sql.gz';
     $categories_sql = bcr_prepare_sql($categories_table_file);
     dbDelta($categories_sql);
+
+    bcr_update_brands_table($brand_table_update_file);
+    bcr_update_products_table($product_table_update_file);
 }
 
 /**
