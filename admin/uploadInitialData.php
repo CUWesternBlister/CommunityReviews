@@ -20,7 +20,7 @@ function bcr_init_tables() {
     // $categories_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_categories.sql.gz';
     // $categories_sql = bcr_prepare_sql($categories_table_file);
     $cat_table = $wpdb->prefix."bcr_categories";
-    $query = $wpdb->prepare( "SELECT COUNT(*) FROM $cat_table WHERE categoryID IS NOT NULL");
+    $query = "SELECT COUNT(*) FROM $cat_table WHERE categoryID IS NOT NULL";
     if ($wpdb->get_var( $query ) == $cat_table && ! $wpdb->get_var($query) == 0) {
         $categories_sql="INSERT INTO `$cat_table` (`categoryID`, `parentID`, `categoryName`) VALUES
         (1, 0, 'Ski'),
