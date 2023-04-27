@@ -14,7 +14,7 @@ jQuery( document ).ready( function( $ ) {
             post_id: post_id
         },
         success: function( data ) {
-            $( '#userHeight' ).html( data );
+            /*$( '#userHeight' ).html( data );*/
         },
         error: function( xhr, status, error ) {
             console.error( xhr, status, error );
@@ -29,11 +29,11 @@ jQuery( document ).ready( function( $ ) {
             post_id: post_id
         },
         success: function( data ) {
-            if( $( '#userWeight' ).length ) {
+            /*if( $( '#userWeight' ).length ) {
                 $( '#userWeight' ).html( data );
             } else {
                 $( '#reviewerInfoContainer div:nth-child(3)' ).html( data );
-            }
+            }*/
         },
         error: function( xhr, status, error ) {
             console.error( xhr, status, error );
