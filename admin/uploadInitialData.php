@@ -7,7 +7,7 @@
 require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
 function bcr_init_tables() {
-
+    global $wpdb;
     $file_path = plugin_dir_path( __FILE__ ) . '/testfile.txt';
     $file = fopen($file_path, "w") or die('fopen failed');
 
