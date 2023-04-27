@@ -6,6 +6,7 @@
  */
 function bcr_activate() {
     //add function calls to perform on plugin activation here
+    bcr_setup_tables();
     require_once( plugin_dir_path( __FILE__ ) . 'uploadInitialData.php');
     bcr_init_tables();
     require_once( plugin_dir_path( __FILE__ ) . 'align_form_ids.php');
@@ -37,16 +38,16 @@ function bcr_setup_tables() {
         ) $charset_collate;";
     dbDelta($sql);
 
-    $q = $wpdb->prepare("SELECT heightFeet FROM $user_table_name");
-    $res = $wpdb->query($q);
-    if ($res){
-        $sql = "UPDATE $user_table_name SET height = (12*heightFeet + heightInches) WHERE height = 0;";
-        $wpdb->query($sql);
-        $sql = "ALTER TABLE $user_table_name 
-        DROP COLUMN heightFeet,
-        DROP COLUMN heightInches;";
-        $wpdb->query($sql);
-    }
+    // $q = $wpdb->prepare("SELECT heightFeet FROM $user_table_name");
+    // $res = $wpdb->query($q);
+    // if ($res){
+    //     $sql = "UPDATE $user_table_name SET height = (12*heightFeet + heightInches) WHERE height = 0;";
+    //     $wpdb->query($sql);
+    //     $sql = "ALTER TABLE $user_table_name 
+    //     DROP COLUMN heightFeet,
+    //     DROP COLUMN heightInches;";
+    //     $wpdb->query($sql);
+    // }
 
     
     //Create Question table
