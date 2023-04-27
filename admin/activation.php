@@ -37,16 +37,16 @@ function bcr_setup_tables() {
         ) $charset_collate;";
     dbDelta($sql);
 
-    $q = $wpdb->prepare("SELECT heightFeet FROM $user_table_name");
-    $res = $wpdb->query($q);
-    if ($res){
-        $sql = "UPDATE $user_table_name SET height = (12*heightFeet + heightInches) WHERE height = 0;";
-        $wpdb->query($sql);
-        $sql = "ALTER TABLE $user_table_name 
-        DROP COLUMN heightFeet,
-        DROP COLUMN heightInches;";
-        $wpdb->query($sql);
-    }
+    // $q = $wpdb->prepare("SELECT heightFeet FROM $user_table_name");
+    // $res = $wpdb->query($q);
+    // if ($res){
+    //     $sql = "UPDATE $user_table_name SET height = (12*heightFeet + heightInches) WHERE height = 0;";
+    //     $wpdb->query($sql);
+    //     $sql = "ALTER TABLE $user_table_name 
+    //     DROP COLUMN heightFeet,
+    //     DROP COLUMN heightInches;";
+    //     $wpdb->query($sql);
+    // }
 
     
     //Create Question table
