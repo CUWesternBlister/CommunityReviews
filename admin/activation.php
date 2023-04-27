@@ -36,7 +36,11 @@ function bcr_setup_tables() {
         skiAbility varchar(512) DEFAULT '' NOT NULL,
         PRIMARY KEY  (userID)
         ) $charset_collate;";
-    dbDelta($sql);
+    $query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $user_table_name ) );
+
+    if ( ! $wpdb->get_var( $query ) == $user_table_name ) {
+        dbDelta($sql);
+    }
 
     // $q = $wpdb->prepare("SELECT heightFeet FROM $user_table_name");
     // $res = $wpdb->query($q);
@@ -61,7 +65,11 @@ function bcr_setup_tables() {
         PRIMARY KEY  (questionID)
         ) $charset_collate;";
 
-    dbDelta($sql);
+    $query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $questions_table_name ) );
+
+    if ( ! $wpdb->get_var( $query ) == $questions_table_name ) {
+        dbDelta($sql);
+    }
     
     //Create Answer table
     $answers_table_name = $wpdb->prefix . "bcr_answers";
@@ -75,7 +83,11 @@ function bcr_setup_tables() {
         FOREIGN KEY  (questionID) REFERENCES $questions_table_name(questionID)
         ) $charset_collate;";
 
-    dbDelta($sql);
+    $query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $answers_table_name ) );
+
+    if ( ! $wpdb->get_var( $query ) == $answers_table_name ) {
+        dbDelta($sql);
+    }
 
     //Create Category table
     $categories_table_name = $wpdb->prefix . "bcr_categories";
@@ -87,7 +99,11 @@ function bcr_setup_tables() {
         PRIMARY KEY  (categoryID)
         ) $charset_collate;";
 
-    dbDelta($sql);
+    $query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $categories_table_name ) );
+
+    if ( ! $wpdb->get_var( $query ) == $categories_table_name ) {
+        dbDelta($sql);
+    }
     
     //Create Brands table
     $brands_table_name = $wpdb->prefix . "bcr_brands";
@@ -98,7 +114,11 @@ function bcr_setup_tables() {
         PRIMARY KEY  (brandID)
         ) $charset_collate;";
 
-    dbDelta($sql);
+    $query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $brands_table_name ) );
+
+    if ( ! $wpdb->get_var( $query ) == $brands_table_name ) {
+        dbDelta($sql);
+    }
 
     //Create Product table
     $products_table_name = $wpdb->prefix . "bcr_products";
@@ -113,7 +133,11 @@ function bcr_setup_tables() {
         FOREIGN KEY  (brandID) REFERENCES $brands_table_name(brandID)
         ) $charset_collate;";
 
-    dbDelta($sql);
+    $query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $products_table_name ) );
+
+    if ( ! $wpdb->get_var( $query ) == $products_table_name ) {
+        dbDelta($sql);
+    }
 
     //Create Review Forms table
     $review_forms_table_name = $wpdb->prefix . "bcr_review_forms";
@@ -126,7 +150,11 @@ function bcr_setup_tables() {
         FOREIGN KEY  (categoryID) REFERENCES $categories_table_name(categoryID)
         ) $charset_collate;";
 
-    dbDelta($sql);
+    $query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $review_forms_table_name ) );
+
+    if ( ! $wpdb->get_var( $query ) == $review_forms_table_name ) {
+        dbDelta($sql);
+    }
 
     //Create Review table
     $reviews_table_name = $wpdb->prefix . "bcr_reviews";
@@ -141,7 +169,11 @@ function bcr_setup_tables() {
         FOREIGN KEY  (userID) REFERENCES $user_table_name(userID)
         ) $charset_collate;";
 
-    dbDelta($sql);
+    $query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $reviews_table_name ) );
+
+    if ( ! $wpdb->get_var( $query ) == $reviews_table_name ) {
+        dbDelta($sql);
+    }
 
     //Create Review Answers association table
     $review_answers_table_name = $wpdb->prefix . "bcr_reviews_answers";
@@ -154,7 +186,11 @@ function bcr_setup_tables() {
         FOREIGN KEY  (answerID) REFERENCES $answers_table_name(answerID)
         ) $charset_collate;";
 
-    dbDelta($sql);
+    $query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $review_answers_table_name ) );
+
+    if ( ! $wpdb->get_var( $query ) == $review_answers_table_name ) {
+        dbDelta($sql);
+    }
 }
 
 //Execute activation
