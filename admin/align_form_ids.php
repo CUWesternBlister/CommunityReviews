@@ -25,7 +25,11 @@ function align_form_ids() {
             $category = 1;
         }
 
-        $wpdb->insert($review_forms_table_name, array("reviewFormID" => $form->id, "reviewFormName" => $form->title, "categoryID" => $category));
+        $num_existing = $wpdb->get_results("SELECT * FROM $review_forms_table_name WHERE reviewFormID LIKE '%" . $form->$id . "%' ");
+
+        if($num_existing == 0) {
+            $wpdb->insert($review_forms_table_name, array("reviewFormID" => $form->id, "reviewFormName" => $form->title, "categoryID" => $category));
+        }
     }
 }
 
