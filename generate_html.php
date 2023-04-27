@@ -154,11 +154,11 @@ function gen_HTML_for_testimony_qs($testimony, $formName){
 }
 
 function format_reviewerInfo($userInfo, $userName){
-    $height = esc_html((int)($userInfo->height / 12)) . "' ". esc_html($userInfo->height % 12) . '"';
-    $weight = esc_html($userInfo->weight) . " lbs";
+    $height = esc_html((int)(intval($userInfo->height) / 12)) . "' ". esc_html(intval($userInfo->height) % 12) . '"';
+    $weight = esc_html(intval($userInfo->weight)) . " lbs";
     $html = '<div id = "reviewerInfoContainer" class = "whole_container_flex">
         <div id= " userName" class = "short_container_no_float">Reviewer: '.esc_html($userName). '</div>
-        <div id= "userHeight" class = "short_container_no_float">Height: '.$height.'</div>
+        <div id= "userHeight" class = "short_container_no_float">Height: '.esc_html($height).'</div>
         <div id "userWeight" class = "short_container_no_float">Weight: '.$weight.'</div>
         <div id= "userAbility" class = "short_container_no_float">Ability: '.esc_html($userInfo->skiAbility).'</div>
         </div>';
@@ -212,7 +212,7 @@ function get_post_title($title_arr){
                 $html.= $arr["answer"].' ';  
             }  
     }
-    //echo $html."<br>";
+
     return $html;
 }
 ?>

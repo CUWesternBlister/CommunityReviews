@@ -1,8 +1,11 @@
 <?php
 function bcr_change_height_units() {
-    $post_id = intval( sanitize_text_field( $_POST['post_id'] ) );
+    $post_id = $_POST['post_id'];//intval( sanitize_text_field(  ) );
 
-    $height_in_inches = get_post_meta($post_id, 'height')[0];
+    $height_in_inches = get_post_meta($post_id, 'height', true );
+    // $file = fopen("testfile.txt", "a");
+    // fwrite($file, "height_in_inches:".strval($height_in_inches));
+    // fclose($file);
 
     $feet = floor($height_in_inches/12);
     $inches = $height_in_inches % 12;
@@ -29,8 +32,6 @@ function bcr_change_height_units() {
         }
     }
 
-    echo "Height: " . esc_html($display_height);
-
     wp_die();
 }
 
@@ -40,7 +41,7 @@ add_action( 'wp_ajax_nopriv_bcr_bcr_change_height_units', 'bcr_change_height_uni
 function bcr_change_weight_units() {
     $post_id = intval( sanitize_text_field( $_POST['post_id'] ) );
 
-    $weight_in_pounds = get_post_meta($post_id, 'weight')[0];
+    $weight_in_pounds = get_post_meta($post_id, 'weight', true );
 
     $display_height = strval($weight_in_pounds) . " lbs";
 
@@ -63,8 +64,6 @@ function bcr_change_weight_units() {
             }
         }
     }
-
-    echo "Weight: " . esc_html($display_height);
 
     wp_die();
 }

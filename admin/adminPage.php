@@ -136,8 +136,7 @@ function bcr_run_table_structure_update() {
                 $result[4] = $wpdb->query( $sql4 );
                 $sql5 = "TRUNCATE TABLE $table_name;";
                 $result[5] = $wpdb->query($sql5);
-                // echo "Result Array: <br>";
-                // echo var_dump($result)."<br>";
+        
             }
 
            ?>
@@ -146,15 +145,7 @@ function bcr_run_table_structure_update() {
                     <input id="myButton" type="submit" name="table_structure_update_button" class="button" value="Remove Review Tables & Update User Table"/>
                 </form>
             </div>
-            <!-- <script>
-                function disableButton() {
-                    // Disable the button after it is clicked
-                    document.getElementById("myButton").disabled = true;
-
-                    // Alternatively, remove the button from the HTML
-                    //document.getElementById("myButton").remove();
-                }
-            </script> -->
+            
            <?php
 }
 
