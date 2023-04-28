@@ -5,8 +5,6 @@
  * @return void
  */
 function bcr_add_products_callback(){
-
-
     displayCSVMenu();
 }
 
@@ -32,11 +30,13 @@ function displayCSVMenu(){
                 $wpdb->prefix . "bcr_products"
             );
 
+            //display csv upload file inputs
             bcr_display_CSV_file_upload();
             //bcr_display_category_text_field_upload();
             
 
             foreach($table_names_array as $table_name) {
+                //display all of the current tables for the admin to reference while creating .csv files to upload
                 bcr_display_table_contents($table_name);
             }
         ?>

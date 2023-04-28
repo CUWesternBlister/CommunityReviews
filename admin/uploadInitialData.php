@@ -37,14 +37,17 @@ function bcr_update_products_table($csvFile){
 
     $typeFile = gettype($csvFile);
 
+    // if statement to distinguish between when function is called with a file that exists in the plugin folders vs. uploaded file
     if($typeFile=="string"){
         $csv = array_map('str_getcsv', file($csvFile));
     } else{
         $csv = $csvFile;
     }
 
+    // create array from csv file input
     $header = array_shift($csv);
 
+    // initial sql query string
     $products_table_name = $wpdb->prefix . "bcr_products";
     $sql = "INSERT INTO $products_table_name (`categoryID`, `brandID`, `productName`) VALUES";
 
@@ -55,6 +58,7 @@ function bcr_update_products_table($csvFile){
 
     $productsToEnter = array();
 
+    // Trim products array down to only contain products that don't already exist
     foreach ($csv as $row){
     
         $productName = $row[3];
@@ -74,6 +78,7 @@ function bcr_update_products_table($csvFile){
         }
     }
 
+    //Add lines to the sql query for each product that doesn't already exist in the tables
     if($numProductsToEnter != 0){
         $runQuery = TRUE;
         foreach ($productsToEnter as $row){
@@ -82,6 +87,7 @@ function bcr_update_products_table($csvFile){
             $brandName = $row[2];
             $productName = $row[3];
 
+            //get brandID based on the brandName
             $brandID = getBrandID($brandName);
 
             if($count != $numProductsToEnter){
@@ -96,6 +102,7 @@ function bcr_update_products_table($csvFile){
         }
     }
 
+    // Run the sql query if there are products to enter
     if($runQuery){
         $success = $wpdb->get_results($sql);
     } else{
@@ -104,6 +111,7 @@ function bcr_update_products_table($csvFile){
     return $success;
 
 }
+
 /**
  *Gets the brandID associated with the brandName passed in
  * 
