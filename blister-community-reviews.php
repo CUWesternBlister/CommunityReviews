@@ -3,7 +3,7 @@
  * Plugin Name: Blister Community Reviews
  * Description: A plugin to facilitate Blister community created reviews.
  * Author: Gunnar Marquardt, Jayden Omi, Izak Litte, Jacob Vogel, Tristan Riggan
- * Version: 1.4.7
+ * Version: 1.4.8
  */
 
 // Exit if accessed directily
