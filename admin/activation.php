@@ -10,6 +10,7 @@ function bcr_activate() {
     require_once( plugin_dir_path( __FILE__ ) . 'uploadInitialData.php');
     bcr_init_tables();
     require_once( plugin_dir_path( __FILE__ ) . 'align_form_ids.php');
+    align_form_ids();
 }
 
 /**

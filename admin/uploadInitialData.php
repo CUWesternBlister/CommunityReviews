@@ -20,16 +20,18 @@ function bcr_init_tables() {
     // $categories_table_file = plugin_dir_path( __FILE__ ) . 'wp_bcr_categories.sql.gz';
     // $categories_sql = bcr_prepare_sql($categories_table_file);
     $cat_table = $wpdb->prefix."bcr_categories";
-    $query = "SELECT COUNT(*) FROM $cat_table WHERE categoryID IS NOT NULL";
-    if ($wpdb->get_var( $query ) == $cat_table && ! $wpdb->get_var($query) == 0) {
-        $categories_sql="INSERT INTO `$cat_table` (`categoryID`, `parentID`, `categoryName`) VALUES
+    $query_check_for_empty = "SELECT COUNT(*) FROM $cat_table WHERE categoryID IS NOT NULL";
+    $query_check_for_table = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $cat_table) );
+
+    if ($wpdb->get_var($query_check_for_table) == $cat_table && $wpdb->get_var($query_check_for_empty) == 0) {
+        $categories_sql = "INSERT INTO `$cat_table` (`categoryID`, `parentID`, `categoryName`) VALUES
         (1, 0, 'Ski'),
         (2, 1, 'Ski Boots'),
         (3, 0, 'Apparel'),
         (4, 1, 'Skis'),
         (5, 1, 'Climbing Skins'),
         (6, 0, 'Snowboard'),
-        (7, 6, 'Snowboards')";
+        (7, 6, 'Snowboards');";
         dbDelta($categories_sql);
     }
 

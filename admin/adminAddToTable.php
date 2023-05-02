@@ -33,14 +33,14 @@ function bcr_flagged_reviews_callback() {
 
 
 
-function display($flaggedReviews){
+function display($flaggedReviews) {
     // $str = print_r($flaggedReviews, true);
     ?>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
         <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-</head>
+    </head>
 
     <div class="flagged-community-reviews-admin-display">
         <div class="community-reviews-admin-display" id="community-reviews-admin-display">
@@ -49,7 +49,8 @@ function display($flaggedReviews){
                         <strong>Brand:</strong>
                         <select id="community-reviews-display-brand-dropdown" class="select2">
                         
-                        <?$brand_selected =  "K2";
+                        <?php 
+                        $brand_selected =  "K2";
                             echo '<option value="' . esc_html($brand_selected) . '">' . esc_html($brand_selected) . '</option>';
             
                                 global $wpdb;
@@ -66,13 +67,14 @@ function display($flaggedReviews){
                                         echo '<option value="' . esc_html($brand_name) . '">' . esc_html($brand_name) . '</option>';
                                     }
                                 }
-                            ?>
+                        ?>
                         </select>
                         <!--<div class="community-reviews-display-title">Product:</div>-->
                         <strong>Product:</strong>
                         <select id="community-reviews-display-product-dropdown" class="select2">
                         
-                        <?$product_selected = "Brahma 88";
+                        <?php
+                            $product_selected = "Brahma 88";
                             echo '<option value="' . esc_html($product_selected) . '">' . esc_html($product_selected) . '</option>';
             
                                 //global $wpdb;
@@ -290,7 +292,7 @@ function display($flaggedReviews){
                 }
         }
     </script>
-    <?
+    <?php
 }
 
 function get_flagged_review_meta_data($review_id){
