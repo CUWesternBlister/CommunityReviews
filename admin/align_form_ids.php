@@ -33,5 +33,5 @@ function align_form_ids() {
     }
 }
 
-align_form_ids();
+//align_form_ids();
 ?>
